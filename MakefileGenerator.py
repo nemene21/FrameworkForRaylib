@@ -65,11 +65,7 @@ def generate_makefile():
 
 def make():
     result = subprocess.run("make", shell=True, cwd="build")
-
-    if result:
-        print("Make failed :(")
-    else:
-        print("Project sucessfully build! :)")
+    print("Make done?")
     print("")
 
 def run():
