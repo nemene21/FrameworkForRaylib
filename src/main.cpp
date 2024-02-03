@@ -1,7 +1,6 @@
 #include <iostream>
 #include <raylib.h>
 #include <raymath.h>
-#include <test.h>
 
 int main() {
     std::cout << "Lorem ipsum" << std::endl;
@@ -19,9 +18,6 @@ int main() {
 
         EndDrawing();
     }
-
-    VERYCOOLFUNCTION(50);
-    std::cout << "me when" << std::endl;
 
     CloseWindow();
 
