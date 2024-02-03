@@ -1,25 +1,22 @@
-#pragma once
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include <iostream>
 #include <map>
-#include "include/raylib.h"
-#include "component.cpp"
+#include <raylib.h>
+#include <component.h>
 
 class Entity {
 protected:
     std::map<ComponentType, Component*> components;
 
-    void process_components(float delta) {
-        for (const auto& pair: components) {
-            
-            Component* component = pair.second;
-            component->process(delta);
-        }
-    }
+    void process_components(float delta);
 
 public:
-    Entity(): components {} {}
+    Entity();
 
-    virtual void process(float delta) {}
-    virtual void draw   (float delta) {}
+    virtual void process(float delta);
+    virtual void draw(float delta);
 };
+
+#endif

@@ -1,6 +1,3 @@
-
-#pragma once
-
 #include <iostream>
 #include <vector>
 #include <functional>
@@ -8,6 +5,26 @@
 
 template<typename Type>
 using SignalFunction = std::function<void(Type)>;
+
+enum class ComponentType;
+class Component;
+
+// <Component Namespace Declaration>
+namespace Components {
+    extern std::map<ComponentType, std::vector<Component*>> component_types;
+
+    void add_component(Component *component);
+
+    void remove_component(Component *component);
+
+    std::vector<Component*> query_components(ComponentType type);
+
+    Component *query_component(ComponentType type, int index);
+
+    int component_type_count(ComponentType type);
+
+    int component_count();
+}
 
 // <Signals>
 template<typename Type>
