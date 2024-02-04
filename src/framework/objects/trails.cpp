@@ -7,14 +7,29 @@ Trail::Trail(
         width {width},
         max_points {max_points},
         color {color},
-        fade_color {fade_color} {
+        fade_color {fade_color},
+        tick {.025},
+        timer {0} {
             if (fade_color == WHITE)
                 fade_color = color;
         }
-    
-void Trail::process() {
-    Vector2 new_point = position;
+
+void Trail::spawn_point() {
+    Vector2 offset {(float)GetRandomValue(0, random_offset), 0};
+    offset = Vector2Rotate(offset, RandF() * PI * 2);
+
+    Vector2 new_point = Vector2Add(position, offset);
     points.push(new_point);
+}
+
+void Trail::process() {
+
+    timer -= GetFrameTime();
+    if (timer < .0) {
+        timer = tick;
+
+        spawn_point();
+    }
 
     if ((int)points.size() > max_points) {
         points.pop();
@@ -36,7 +51,7 @@ void Trail::draw() {
 
             Color color_calc = Lerp(fade_color, color, anim);
 
-            DrawLineEx(first_point, other_point, width * anim, color_calc);
+            DrawLineEx(first_point, other_point, width*anim, color_calc);
             // DrawCircleV(first_point, width*anim * .5, color_calc);
         }
     }

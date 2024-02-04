@@ -13,3 +13,7 @@ Color Lerp(Color a, Color b, float c) {
     color.a = Lerp(a.a, b.a, c);
     return color;
 }
+
+float RandF() {
+    return rand() % 1000 * .001;
+}

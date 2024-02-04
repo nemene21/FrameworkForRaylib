@@ -8,7 +8,8 @@ int main() {
     const int window_width = 1920*.5, window_height = 1080*.5;
     InitWindow(window_width, window_height, "Raylib Window!");
 
-    Trail trail = Trail({0, 0}, 12, 128, WHITE, BLACK);
+    Trail trail = Trail({0, 0}, 12, 16, WHITE, BLACK);
+    trail.random_offset = 8;
 
     while (!WindowShouldClose()) {
         BeginDrawing();

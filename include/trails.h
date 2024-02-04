@@ -13,7 +13,7 @@ public:
     Vector2 position;
     std::queue<Vector2> points;
 
-    float width;
+    float width, random_offset, tick, timer;
     int max_points;
     Color color, fade_color;
 
@@ -23,6 +23,9 @@ public:
         Color color=WHITE,
         Color fade_color=WHITE
     );
+    void spawn_point();
+
+    void set_tick(float tick);
 
     void process();
 
