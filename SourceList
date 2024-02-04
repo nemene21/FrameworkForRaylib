@@ -1,3 +1,6 @@
 main
-entity
-component
+
+framework/entity
+framework/component
+
+framework/objects/trails

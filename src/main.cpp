@@ -1,23 +1,23 @@
 #include <iostream>
 #include <raylib.h>
 #include <raymath.h>
+#include <trails.h>
 
 int main() {
-    std::cout << "Lorem ipsum" << std::endl;
-
-    const int window_width = 1920, window_height = 1080;
+    const int window_width = 1920*.5, window_height = 1080*.5;
     InitWindow(window_width, window_height, "Raylib Window!");
 
-    ToggleFullscreen();
-
-    float pressed = .0;
+    Trail trail = Trail({0, 0}, 12, 128, WHITE);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        pressed = Lerp(pressed, float(IsMouseButtonDown(MOUSE_BUTTON_LEFT)), 0.02);
 
-        unsigned char color_intensity = pressed * 255.;
-        ClearBackground(Color{0, color_intensity, color_intensity, 255});
+        ClearBackground(BLACK);
+
+        trail.position = GetMousePosition();
+        trail.process();
+
+        trail.draw();
 
         EndDrawing();
     }

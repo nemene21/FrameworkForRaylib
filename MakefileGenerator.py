@@ -27,7 +27,11 @@ def generate_makefile():
 
     print("Starting...")
     source_list_file = open("SourceList", "r")
-    source_files = source_list_file.read().split("\n")
+    source_files = []
+
+    for source in source_list_file.read().split("\n"):
+        if source != "":
+            source_files.append(source)
 
     source_list_file.close()
     print("Opened Source List...")
@@ -38,7 +42,7 @@ def generate_makefile():
     next(2)
 
     for source in source_files:
-        add(f"{OBJ_DIR}/{source}.o: {SRC_DIR}/{source}.cpp")
+        add(f"{OBJ_DIR}/{get_filename(source)}.o: {SRC_DIR}/{source}.cpp")
         next(); tab()
 
         add(f"{COMPILER} {CFLAGS} -c {SRC_DIR}/{source}.cpp -o $(@)")
@@ -46,12 +50,12 @@ def generate_makefile():
 
     add("Build.exe: ")
     for source in source_files:
-        add(OBJ_DIR + "/" + source + ".o ")
+        add(OBJ_DIR + "/" + get_filename(source) + ".o ")
 
     next(); tab()
     add(f"{COMPILER} -o Build.exe ")
     for source in source_files:
-        add(OBJ_DIR + "/" + source + ".o ")
+        add(OBJ_DIR + "/" + get_filename(source) + ".o ")
 
     add(LDFLAGS + " " + LDLIBS)
 
@@ -67,6 +71,9 @@ def make():
     result = subprocess.run("make", shell=True, cwd="build")
     print("Make done?")
     print("")
+
+def get_filename(string):
+    return string.split("/")[-1]
 
 def run():
     result = subprocess.run("Build.exe", shell=True, cwd="build")
