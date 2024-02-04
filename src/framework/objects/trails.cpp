@@ -52,7 +52,7 @@ void Trail::draw() {
             Color color_calc = Lerp(fade_color, color, anim);
 
             DrawLineEx(first_point, other_point, width*anim, color_calc);
-            // DrawCircleV(first_point, width*anim * .5, color_calc);
+            DrawCircleV(first_point, width*anim * .5, color_calc);
         }
     }
 }
