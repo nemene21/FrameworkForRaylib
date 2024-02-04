@@ -6,6 +6,7 @@
 #include <raymath.h>
 #include <queue>
 #include <iostream>
+#include <misc.h>
 
 class Trail {
 public:
@@ -14,9 +15,14 @@ public:
 
     float width;
     int max_points;
-    Color color;
+    Color color, fade_color;
 
-    Trail(Vector2 position, float width, int max_points, Color color);
+    Trail(Vector2 position=Vector2{0, 0},
+        float width=0,
+        int max_points=16,
+        Color color=WHITE,
+        Color fade_color=WHITE
+    );
 
     void process();
 

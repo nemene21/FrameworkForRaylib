@@ -9,8 +9,11 @@ object_files/entity.o: ../src/framework/entity.cpp
 object_files/component.o: ../src/framework/component.cpp
 	g++ -O1 -Wall -Wno-missing-braces -I../include/ -c ../src/framework/component.cpp -o $(@)
 
+object_files/misc.o: ../src/framework/misc.cpp
+	g++ -O1 -Wall -Wno-missing-braces -I../include/ -c ../src/framework/misc.cpp -o $(@)
+
 object_files/trails.o: ../src/framework/objects/trails.cpp
 	g++ -O1 -Wall -Wno-missing-braces -I../include/ -c ../src/framework/objects/trails.cpp -o $(@)
 
-Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/trails.o 
-	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/trails.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o 
+	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm

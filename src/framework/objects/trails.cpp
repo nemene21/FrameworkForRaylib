@@ -1,15 +1,16 @@
 #include <trails.h>
 
 Trail::Trail(
-        Vector2 position=Vector2{0, 0},
-        float width=0,
-        int max_points=16,
-        Color color=WHITE
+        Vector2 position, float width, int max_points, Color color, Color fade_color
     ):
         position {position},
         width {width},
         max_points {max_points},
-        color {color} {}
+        color {color},
+        fade_color {fade_color} {
+            if (fade_color == WHITE)
+                fade_color = color;
+        }
     
 void Trail::process() {
     Vector2 new_point = position;
@@ -32,8 +33,11 @@ void Trail::draw() {
 
         if (i != point_count-1) {
             float anim = i/(float)point_count;
-            DrawLineEx(first_point, other_point, width * anim, color);
-            DrawCircleV(first_point, width*anim * .5, color);
+
+            Color color_calc = Lerp(fade_color, color, anim);
+
+            DrawLineEx(first_point, other_point, width * anim, color_calc);
+            // DrawCircleV(first_point, width*anim * .5, color_calc);
         }
     }
 }

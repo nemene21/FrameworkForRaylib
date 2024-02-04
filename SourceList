@@ -2,5 +2,6 @@ main
 
 framework/entity
 framework/component
+framework/misc
 
 framework/objects/trails
