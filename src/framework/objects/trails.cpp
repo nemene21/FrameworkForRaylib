@@ -1,34 +1,72 @@
 #include <trails.h>
 
 Trail::Trail(
-        Vector2 position, float width, int max_points, Color color, Color fade_color
-    ):
-        position {position},
-        width {width},
-        max_points {max_points},
-        color {color},
-        fade_color {fade_color},
-        tick {.025},
-        timer {0} {
-            if (fade_color == WHITE)
-                fade_color = color;
-        }
+    Vector2 position, float width, int max_points, Color color, Color fade_color
+):
+    position {position},
+    width {width},
+    max_points {max_points},
+    color {color},
+    fade_color {fade_color},
+    tick {.025},
+    timer {0}
+{
+    if (fade_color == WHITE)
+        fade_color = color;
+}
+
+void Trail::add_force(Vector2 new_force) {
+    force = Vector2Add(force, new_force);
+}
+
+void Trail::remove_force(Vector2 force_removing) {
+    force = Vector2Subtract(force, force_removing);
+}
+
+void Trail::set_tick(float new_tick) {
+    tick = new_tick;
+}
 
 void Trail::spawn_point() {
+    TrailPoint new_point;
+
     Vector2 offset {(float)GetRandomValue(0, random_offset), 0};
     offset = Vector2Rotate(offset, RandF() * PI * 2);
 
-    Vector2 new_point = Vector2Add(position, offset);
+    new_point.position = Vector2Add(position, offset);
+    new_point.velocity = Vector2{.0, .0};
+
     points.push(new_point);
 }
 
-void Trail::process() {
+void Trail::process_point(TrailPoint& point, float delta) {
+    point.velocity = Vector2Add(point.velocity,
+        Vector2Multiply(force, Vector2{delta, delta})
+    );
+
+    point.position = Vector2Add(point.position,
+        Vector2Multiply(point.velocity, Vector2{delta, delta})
+    );
+}
+
+void Trail::process(Vector2 new_position) {
+    position = new_position;
 
     timer -= GetFrameTime();
     if (timer < .0) {
         timer = tick;
 
         spawn_point();
+    }
+
+    float delta = GetFrameTime();
+    for (int i = 0; i < (int)points.size(); i++) {
+
+        auto& point = points.front();
+        process_point(point, delta);
+        
+        points.pop();
+        points.push(point);
     }
 
     if ((int)points.size() > max_points) {
@@ -40,10 +78,10 @@ void Trail::draw() {
     int point_count = points.size();
 
     for (int i = 0; i < point_count; i++) {
-        Vector2& first_point = points.front();
+        TrailPoint& first_point = points.front();
         points.pop();
 
-        Vector2& other_point = points.front();
+        TrailPoint& other_point = points.front();
         points.push(first_point);
 
         if (i != point_count-1) {
@@ -51,8 +89,12 @@ void Trail::draw() {
 
             Color color_calc = Lerp(fade_color, color, anim);
 
-            DrawLineEx(first_point, other_point, width*anim, color_calc);
-            DrawCircleV(first_point, width*anim * .5, color_calc);
+            DrawLineEx(
+                first_point.position,
+                other_point.position,
+                width*anim, color_calc
+            );
+            DrawCircleV(first_point.position, width*anim * .5, color_calc);
         }
     }
 }

@@ -10,6 +10,7 @@ int main() {
 
     Trail trail = Trail({0, 0}, 12, 16, WHITE, BLACK);
     trail.random_offset = 8;
+    trail.add_force(Vector2{-300., 0.});
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -21,8 +22,7 @@ int main() {
         const char* fps_cstring = fps_string.c_str();
         SetWindowTitle(fps_cstring);
 
-        trail.position = GetMousePosition();
-        trail.process();
+        trail.process(GetMousePosition());
 
         trail.draw();
 
