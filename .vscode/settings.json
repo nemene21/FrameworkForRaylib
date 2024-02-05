@@ -52,6 +52,7 @@
         "queue": "cpp",
         "algorithm": "cpp",
         "deque": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "unordered_set": "cpp"
     }
 }
