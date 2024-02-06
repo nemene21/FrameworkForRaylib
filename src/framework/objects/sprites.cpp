@@ -7,8 +7,8 @@ float ShaderManager::tick  = 100.0f;
 
 // Load shader and put it's smart pointer into the shader map (it's path is the key)
 void ShaderManager::load(std::string name) {
-    shader_map[SHADER_DIR name] = std::make_shared<Texture2D>(
-        LoadShader(NULL, name.c_str())
+    shader_map[SHADER_DIR name] = std::make_shared<Shader>(
+        LoadShader(NULL, (SHADER_DIR name).c_str())
     );
 }
 
@@ -53,8 +53,8 @@ float TextureManager::timer = 0.0f;
 float TextureManager::tick  = 100.0f;
 
 void TextureManager::load(std::string name) {
-    texture_map[TEXTURE_DIR  name] = std::make_shared<Texture2D>(
-        LoadTexture(name.c_str())
+    texture_map[TEXTURE_DIR name] = std::make_shared<Texture2D>(
+        LoadTexture((TEXTURE_DIR name).c_str())
     );
 }
 
@@ -120,6 +120,10 @@ void Sprite::draw() {
     float width  = texture_ptr->width  * scale.x,
           height = texture_ptr->height * scale.y;
 
+    Shader* shader_ptr = shader.get();
+    if (shader_ptr != nullptr)
+        BeginShaderMode(*shader_ptr);
+
     DrawTexturePro(
         *texture_ptr,
         Rectangle{
@@ -136,6 +140,9 @@ void Sprite::draw() {
         rotation,
         tint
     );
+
+    if (shader_ptr != nullptr)
+        EndShaderMode();
 
     // DrawCircleV(position, 6, RED);
 }

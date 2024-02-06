@@ -8,8 +8,8 @@
 #include <string>
 #include <memory>
 
-#define TEXTURE_DIR (std::string)"assets/images/"+
-#define SHADER_DIR  (std::string)"assets/shaders/"+
+#define TEXTURE_DIR (std::string)("assets/images/") +
+#define SHADER_DIR  (std::string)("assets/shaders/") +
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 

@@ -16,6 +16,8 @@ int main() {
         35
     );
 
+    sprite.set_shader("test.glsl");
+
     while (!WindowShouldClose()) {
         BeginDrawing();
 
