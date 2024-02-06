@@ -5,6 +5,7 @@ bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
 }
 
+// Lerp for colors
 Color Lerp(Color a, Color b, float c) {
     Color color;
     color.r = Lerp(a.r, b.r, c);
@@ -14,6 +15,7 @@ Color Lerp(Color a, Color b, float c) {
     return color;
 }
 
+// Random float from 0 to 1
 float RandF() {
     return rand() % 1000 * .001;
 }

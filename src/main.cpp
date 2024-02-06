@@ -35,6 +35,10 @@ int main() {
         sprite.set_position(GetMousePosition());
         sprite.draw();
 
+        TextureManager::unload_check();
+        ShaderManager::unload_check();
+        ShaderManager::update_uniforms();
+
         EndDrawing();
     }
 

@@ -29,6 +29,8 @@ public:
 
     static void unload_check();
     static void unload_unused();
+
+    static void update_uniforms();
 };
 
 
