@@ -1,25 +1,73 @@
 #include <sprites.h>
 
+// <Shader Manager>
+std::map<std::string, ShaderPtr> ShaderManager::shader_map;
+float ShaderManager::timer = 0.0f;
+float ShaderManager::tick  = 100.0f;
+
+// Load shader and put it's smart pointer into the shader map (it's path is the key)
+void ShaderManager::load(std::string name) {
+    shader_map[SHADER_DIR name] = std::make_shared<Texture2D>(
+        LoadShader(NULL, name.c_str())
+    );
+}
+
+// Get shader from shader map by file path (loads the shader if it doesn't exist)
+ShaderPtr ShaderManager::get(std::string name) {
+    if (shader_map.find(SHADER_DIR name) != shader_map.end())
+        return shader_map[SHADER_DIR name];
+
+    load(name);
+    return shader_map[SHADER_DIR name];
+}
+
+// Unloads shader
+void ShaderManager::unload(std::string name) {
+    shader_map.erase(SHADER_DIR name);
+}
+
+// Unloads all shaders which aren't being referanced
+void ShaderManager::unload_unused() {
+    for (auto& texture_pair: shader_map) {
+
+        if (texture_pair.second.use_count() == 1) {
+            unload(texture_pair.first);
+        }
+    }
+}
+
+// Ticks down timer which will call "unload_unused()" after "tick" seconds
+void ShaderManager::unload_check() {
+    timer -= GetFrameTime();
+
+    if (timer < .0) {
+        timer = tick;
+
+        unload_unused();
+    }
+}
+
+// <Texture Manager>
 std::map<std::string, TexturePtr> TextureManager::texture_map;
 float TextureManager::timer = 0.0f;
 float TextureManager::tick  = 100.0f;
 
 void TextureManager::load(std::string name) {
-    texture_map[name] = std::make_shared<Texture2D>(
+    texture_map[TEXTURE_DIR  name] = std::make_shared<Texture2D>(
         LoadTexture(name.c_str())
     );
 }
 
 TexturePtr TextureManager::get(std::string name) {
-    if (texture_map.find(name) != texture_map.end())
-        return texture_map[name];
+    if (texture_map.find(TEXTURE_DIR name) != texture_map.end())
+        return texture_map[TEXTURE_DIR name];
 
     load(name);
-    return texture_map[name];
+    return texture_map[TEXTURE_DIR  name];
 }
 
 void TextureManager::unload(std::string name) {
-    texture_map.erase(name);
+    texture_map.erase(TEXTURE_DIR name);
 }
 
 void TextureManager::unload_unused() {
@@ -31,7 +79,6 @@ void TextureManager::unload_unused() {
     }
 }
 
-
 void TextureManager::unload_check() {
     timer -= GetFrameTime();
 
@@ -41,6 +88,7 @@ void TextureManager::unload_check() {
         unload_unused();
     }
 }
+
 
 Sprite::Sprite(
         std::string texture_path,
@@ -52,6 +100,10 @@ Sprite::Sprite(
     {
         texture = TextureManager::get(texture_path);
     }
+
+void Sprite::set_shader(std::string shader_name) {
+    shader = ShaderManager::get(shader_name);
+}
 
 Vector2 Sprite::get_position() {
     return position;

@@ -10,7 +10,7 @@ int main() {
     trail.random_offset = 8;
     trail.add_force(Vector2{-300., 0.});
 
-    Sprite sprite = Sprite(IMGDIR "test.png",
+    Sprite sprite = Sprite("test.png",
         Vector2{100, 100},
         Vector2{1, .5},
         35
