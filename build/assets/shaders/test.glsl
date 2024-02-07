@@ -12,6 +12,6 @@ void main()
         abs(sin(time*5)),
         abs(sin(time*4+1)),
         abs(sin(time*4+2)),
-        1
+        1.0
     );
 }

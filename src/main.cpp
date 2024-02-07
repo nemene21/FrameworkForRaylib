@@ -39,6 +39,11 @@ int main() {
         ShaderManager::unload_check();
         ShaderManager::update_uniforms();
 
+        if (IsKeyPressed(KEY_R) && IsKeyDown(KEY_LEFT_CONTROL)) {
+            TextureManager::reload();
+            ShaderManager::reload();
+        }
+
         EndDrawing();
     }
 

@@ -29,6 +29,7 @@ public:
 
     static void unload_check();
     static void unload_unused();
+    static void reload();
 
     static void update_uniforms();
 };
@@ -52,6 +53,7 @@ public:
 
     static void unload_check();
     static void unload_unused();
+    static void reload();
 };
 
 class Sprite {
