@@ -1,4 +1,3 @@
-
 #include <misc.h>
 
 bool operator==(Color first, Color other) {
@@ -18,4 +17,8 @@ Color Lerp(Color a, Color b, float c) {
 // Random float from 0 to 1
 float RandF() {
     return rand() % 1000 * .001;
+}
+
+bool TryingToHotReload() {
+    return IsKeyPressed(KEY_R) && IsKeyDown(KEY_LEFT_CONTROL);
 }

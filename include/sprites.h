@@ -11,6 +11,32 @@
 #define TEXTURE_DIR (std::string)("assets/images/") +
 #define SHADER_DIR  (std::string)("assets/shaders/") +
 
+void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale={1, 1}, float angle=0, Color tint=WHITE) {
+    // Draw texture
+    float width  = texture_ptr->width  * scale.x,
+        height = texture_ptr->height * scale.y;
+
+    DrawTexturePro(
+        *texture_ptr,
+
+        Rectangle{
+            0, 0,
+            (float)texture_ptr->width,
+            (float)texture_ptr->height
+        },
+
+        Rectangle{
+            position.x, position.y,
+            width,
+            height
+        },
+            
+        Vector2{width * .5f, height * .5f},
+        angle,
+        tint
+    );
+}
+
 typedef std::shared_ptr<Shader> ShaderPtr;
 
 class ShaderManager {

@@ -15,6 +15,8 @@ int main() {
         35
     );
 
+    ParticleSystem particle_sys = ParticleSystem("test.json");
+
     sprite.set_shader("test.glsl");
 
     while (!WindowShouldClose()) {
@@ -38,7 +40,7 @@ int main() {
         ShaderManager::unload_check();
         ShaderManager::update_uniforms();
 
-        if (IsKeyPressed(KEY_R) && IsKeyDown(KEY_LEFT_CONTROL)) {
+        if (TryingToHotReload()) {
             TextureManager::reload();
             ShaderManager::reload();
         }

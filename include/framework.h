@@ -8,6 +8,7 @@
 
 #include <sprites.h>
 #include <trails.h>
+#include <particles.h>
 
 #include <component.h>
 #include <entity.h>

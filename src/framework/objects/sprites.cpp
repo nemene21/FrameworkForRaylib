@@ -74,14 +74,14 @@ std::map<std::string, TexturePtr> TextureManager::texture_map;
 float TextureManager::timer = 0.0f;
 float TextureManager::tick  = 100.0f;
 
-// Load texture and put it's smart pointer into the texture map (it's path is the key)
+// Load a texture and put it's smart pointer into the texture map (it's path is the key)
 void TextureManager::load(std::string name) {
     texture_map[name] = std::make_shared<Texture2D>(
         LoadTexture((TEXTURE_DIR name).c_str())
     );
 }
 
-// Returns texture smart pointer and loads the texture if required
+// Returns a texture smart pointer and loads the texture if required
 TexturePtr TextureManager::get(std::string name) {
     if (texture_map.find(name) != texture_map.end())
         return texture_map[name];
@@ -90,7 +90,7 @@ TexturePtr TextureManager::get(std::string name) {
     return texture_map[name];
 }
 
-// Unloads texture
+// Unloads a texture
 void TextureManager::unload(std::string name) {
     texture_map.erase(name);
 }

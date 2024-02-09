@@ -11,4 +11,6 @@ Color Lerp(Color a, Color b, float c);
 
 float RandF();
 
+bool TryingToHotReload();
+
 #endif
