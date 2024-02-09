@@ -69,27 +69,9 @@ void ParticleSystem::reload_data() {
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
 
-        // Draw texture
-        Texture2D* texture_ptr = texture.get();
-        float width  = texture_ptr->width  * particle.scale,
-            height = texture_ptr->height * particle.scale;
-
-        DrawTexturePro(
-            *texture_ptr,
-
-            Rectangle{
-                0, 0,
-                (float)texture_ptr->width,
-                (float)texture_ptr->height
-            },
-            Rectangle{
-
-                particle.position.x, particle.position.y,
-                width,
-                height
-            },
-            
-            Vector2{width * .5f, height * .5f},
+        DrawTextureCentered(texture.get(),
+            particle.position,
+            {particle.scale, particle.scale},
             particle.angle,
             particle.tint
         );

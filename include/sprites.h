@@ -11,31 +11,7 @@
 #define TEXTURE_DIR (std::string)("assets/images/") +
 #define SHADER_DIR  (std::string)("assets/shaders/") +
 
-void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale={1, 1}, float angle=0, Color tint=WHITE) {
-    // Draw texture
-    float width  = texture_ptr->width  * scale.x,
-        height = texture_ptr->height * scale.y;
-
-    DrawTexturePro(
-        *texture_ptr,
-
-        Rectangle{
-            0, 0,
-            (float)texture_ptr->width,
-            (float)texture_ptr->height
-        },
-
-        Rectangle{
-            position.x, position.y,
-            width,
-            height
-        },
-            
-        Vector2{width * .5f, height * .5f},
-        angle,
-        tint
-    );
-}
+void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale={1, 1}, float angle=0, Color tint=WHITE);
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 
@@ -85,14 +61,14 @@ public:
 class Sprite {
 protected:
     Vector2 position, scale;
-    float rotation;
+    float angle;
 
     ShaderPtr shader;
     TexturePtr texture;
     Color tint;
     
 public:
-    Sprite(std::string texture_name, Vector2 position={0,0}, Vector2 scale={1,1}, float rotation=0);
+    Sprite(std::string texture_name, Vector2 position={0,0}, Vector2 scale={1,1}, float angle=0);
 
     void set_shader(std::string shader_name);
 

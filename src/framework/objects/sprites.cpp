@@ -1,5 +1,31 @@
 #include <sprites.h>
 
+// Draws a centered texture, you should basically always use this when drawing a texture
+void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale, float angle, Color tint) {
+    float width  = texture_ptr->width  * scale.x,
+        height = texture_ptr->height * scale.y;
+
+    DrawTexturePro(
+        *texture_ptr,
+
+        Rectangle{
+            0, 0,
+            (float)texture_ptr->width,
+            (float)texture_ptr->height
+        },
+
+        Rectangle{
+            position.x, position.y,
+            width,
+            height
+        },
+            
+        Vector2{width * .5f, height * .5f},
+        angle,
+        tint
+    );
+}
+
 // <Shader Manager>
 std::map<std::string, ShaderPtr> ShaderManager::shader_map;
 float ShaderManager::timer = 0.0f;
@@ -127,9 +153,9 @@ Sprite::Sprite(
         std::string texture_path,
         Vector2 position,
         Vector2 scale,
-        float rotation
+        float angle
     ):
-        position {position}, scale {scale}, rotation {rotation}, tint {WHITE}
+        position {position}, scale {scale}, angle {angle}, tint {WHITE}
     {
         texture = TextureManager::get(texture_path);
     }
@@ -153,30 +179,12 @@ void Sprite::translate(Vector2 adding) {
 }
 // Draws the transformed texture with the shader (if it has one)
 void Sprite::draw() {
-    Texture2D *texture_ptr = texture.get();
-    float width  = texture_ptr->width  * scale.x,
-          height = texture_ptr->height * scale.y;
 
     Shader* shader_ptr = shader.get();
     if (shader_ptr != nullptr)
         BeginShaderMode(*shader_ptr);
 
-    DrawTexturePro(
-        *texture_ptr,
-        Rectangle{
-            0, 0,
-            (float)texture_ptr->width,
-            (float)texture_ptr->height
-        },
-        Rectangle{
-            position.x, position.y,
-            width,
-            height
-        },
-        Vector2{width * .5f, height * .5f},
-        rotation,
-        tint
-    );
+    DrawTextureCentered(texture.get(), position, scale, angle, tint);
 
     if (shader_ptr != nullptr)
         EndShaderMode();

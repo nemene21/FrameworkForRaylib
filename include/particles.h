@@ -7,6 +7,8 @@
 #include <raylib.h>
 #include <raymath.h>
 
+#include <sprites.h>
+
 #include <json.hpp>
 #include <memory>
 #include <fstream>

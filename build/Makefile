@@ -18,5 +18,8 @@ object_files/trails.o: ../src/framework/objects/trails.cpp
 object_files/sprites.o: ../src/framework/objects/sprites.cpp
 	g++ -O1 -Wall -Wno-missing-braces -I../include/ -c ../src/framework/objects/sprites.cpp -o $(@)
 
-Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o object_files/sprites.o 
-	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o object_files/sprites.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+object_files/particles.o: ../src/framework/objects/particles.cpp
+	g++ -O1 -Wall -Wno-missing-braces -I../include/ -c ../src/framework/objects/particles.cpp -o $(@)
+
+Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o object_files/sprites.o object_files/particles.o 
+	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o object_files/sprites.o object_files/particles.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
