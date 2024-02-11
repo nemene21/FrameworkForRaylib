@@ -16,6 +16,7 @@ int main() {
     );
 
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
+    particle_sys.add_force({0, -300});
 
     sprite.set_shader("test.glsl");
 

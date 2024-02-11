@@ -68,6 +68,8 @@ void ParticleSystem::reload_data() {
     angle_randomness = data["angle_randomness"];
 
     scale = data["scale"];
+    scale_randomness = data["scale_randomness"];
+    
     velocity = data["velocity"];
     shot_angle = data["shot_angle"];
     spread = data["spread"];
@@ -93,7 +95,7 @@ void ParticleSystem::spawn_particle() {
 
     Particle new_particle;
     new_particle.position = position;
-    new_particle.scale = scale;
+    new_particle.scale = scale + (scale_randomness*.5 * RandF2());
     new_particle.angle = angle + (angle_randomness*.5 * RandF2());
     new_particle.tint  = tint;
 
