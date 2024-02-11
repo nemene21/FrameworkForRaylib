@@ -78,6 +78,9 @@ public:
     void add_force(Vector2 adding);
     void remove_force(Vector2 removing);
 
+    void set_position(Vector2 position);
+    Vector2 get_position();
+
     void reload_data();
 
     void process(float delta);

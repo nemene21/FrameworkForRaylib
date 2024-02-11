@@ -60,6 +60,24 @@ void ParticleDataManager::reload() {
     }
 }
 
+// <Particle System>
+
+void ParticleSystem::set_position(Vector2 new_position) {
+    position = new_position;
+}
+
+Vector2 ParticleSystem::get_position() {
+    return position;
+}
+
+void ParticleSystem::add_force(Vector2 adding) {
+    force = Vector2Add(force, adding);
+}
+
+void ParticleSystem::remove_force(Vector2 removing) {
+    force = Vector2Subtract(force, removing);
+}
+
 void ParticleSystem::reload_data() {
     json data = *particle_data.get();
 
@@ -116,6 +134,10 @@ void ParticleSystem::process(float delta) {
     }
 
     for (auto& particle: particles) {
+        particle.velocity = Vector2Add(particle.velocity,
+            Vector2Multiply(force, {delta, delta})
+        );
+
         particle.position = Vector2Add(particle.position,
             Vector2Multiply(particle.velocity, {delta, delta})
         );

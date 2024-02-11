@@ -16,7 +16,7 @@ int main() {
     );
 
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
-    particle_sys.add_force({0, -300});
+    particle_sys.add_force({0, 300});
 
     sprite.set_shader("test.glsl");
 
@@ -30,6 +30,7 @@ int main() {
         const char* fps_cstring = fps_string.c_str();
         SetWindowTitle(fps_cstring);
 
+        particle_sys.set_position(GetMousePosition());
         particle_sys.process(delta);
         particle_sys.draw();
 

@@ -2,7 +2,7 @@
     "texture": "particle_test.png",
     "lifetime": 0.3, "lifetime_randomness": 0.5,
 
-    "firerate": 4.0, "firerate_randomness": 0.5,
+    "firerate": 12.0, "firerate_randomness": 0.5,
 
     "scale": 1.2, "scale_randomness": 1,
 
