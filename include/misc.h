@@ -10,6 +10,7 @@ bool operator==(Color first, Color other);
 Color Lerp(Color a, Color b, float c);
 
 float RandF();
+float RandF2();
 
 bool TryingToHotReload();
 

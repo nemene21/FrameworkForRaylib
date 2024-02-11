@@ -18,6 +18,9 @@ Color Lerp(Color a, Color b, float c) {
 float RandF() {
     return rand() % 1000 * .001;
 }
+float RandF2() {
+    return RandF() * 2.0 - 1.0;
+}
 
 bool TryingToHotReload() {
     return IsKeyPressed(KEY_R) && IsKeyDown(KEY_LEFT_CONTROL);
