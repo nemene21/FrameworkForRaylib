@@ -64,7 +64,7 @@ protected:
     float lifetime, lifetime_randomness;
     float angle, angle_randomness;
     float angular_velocity, angular_velocity_randomness;
-    float velocity, velocity_randomness, velocity_angle, spread;
+    float velocity, velocity_randomness, shot_angle, spread;
     float scale, scale_randomness;
     float firerate, firerate_randomness;
     Color tint; float tint_randomness;

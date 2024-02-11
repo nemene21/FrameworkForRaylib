@@ -4,9 +4,9 @@
 
     "firerate": 4.0, "firerate_randomness": 0.5,
 
-    "scale": 1, "scale_randomness": 0.5,
+    "scale": 2, "scale_randomness": 1,
 
-    "angle": 0, "angle_randomness": 0,
+    "angle": 0, "angle_randomness": 360,
 
     "angular_velocity": 0,
     "angular_velocity_randomness": 0,
@@ -14,5 +14,5 @@
     "tint": [255, 255, 255], "tint_randomness": 0,
 
     "velocity": 100, "velocity_randomness": 0.5,
-    "shoot_angle": 0, "spread": 15
+    "shot_angle": 0, "spread": 15
 }

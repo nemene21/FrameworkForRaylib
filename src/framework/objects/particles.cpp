@@ -61,15 +61,31 @@ void ParticleDataManager::reload() {
 }
 
 void ParticleSystem::reload_data() {
-    texture = TextureManager::get((*particle_data.get())["texture"]);
+    json data = *particle_data.get();
+
+    texture = TextureManager::get(data["texture"]);
+    angle = data["angle"];
+    angle_randomness = data["angle_randomness"];
+
+    scale = data["scale"];
+    velocity = data["velocity"];
+    shot_angle = data["shot_angle"];
+    spread = data["spread"];
+    firerate = data["firerate"];
+    
+    tint = Color{
+        (unsigned char)(data["tint"][0]),
+        (unsigned char)(data["tint"][1]),
+        (unsigned char)(data["tint"][2])
+    };
+
+    tint = WHITE;
 }
 
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
     
     particle_data = ParticleDataManager::get(data_filename);
     reload_data();
-
-    firerate = .2;
 }
 
 void ParticleSystem::spawn_particle() {
@@ -78,10 +94,13 @@ void ParticleSystem::spawn_particle() {
     Particle new_particle;
     new_particle.position = position;
     new_particle.scale = scale;
-    new_particle.angle = angle;
+    new_particle.angle = angle + (angle_randomness*.5 * RandF2());
     new_particle.tint  = tint;
 
-    new_particle.velocity = Vector2Rotate({velocity, 0}, velocity_angle + RandF2() * spread*.5);
+    new_particle.lifetime_max = lifetime;
+    new_particle.lifetime     = lifetime;
+
+    new_particle.velocity = Vector2Rotate({velocity, 0}, shot_angle + RandF2() * spread*.5);
 
     particles.push_back(new_particle);
 }
@@ -90,27 +109,25 @@ void ParticleSystem::process(float delta) {
     spawn_timer -= delta;
 
     if (spawn_timer <= 0) {
-        std::cout << "tryna spawn.. ";
         spawn_timer = 1.0 / firerate;
         spawn_particle();
-        std::cout << "spawned!" << std::endl;
     }
 
-    std::cout << "processed!" << std::endl;
+    for (auto& particle: particles) {
+        particle.position = Vector2Add(particle.position,
+            Vector2Multiply(particle.velocity, {delta, delta})
+        );
+    }
 }
 
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
 
-        std::cout << "tryna draw.. ";
         DrawTextureCentered(texture.get(),
             particle.position,
             {particle.scale, particle.scale},
             particle.angle,
             particle.tint
         );
-        std::cout << "drawn!" << std::endl;
     }
-
-    std::cout << "Drawn all!" << std::endl;
 }
