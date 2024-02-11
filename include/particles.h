@@ -8,6 +8,7 @@
 #include <raymath.h>
 
 #include <sprites.h>
+#include <misc.h>
 
 #include <json.hpp>
 #include <memory>
@@ -50,18 +51,20 @@ protected:
 
     ParticleDataPtr particle_data;
 
+    void spawn_particle();
     void process_particle(Particle& particle);
 
     typedef std::vector<Particle> ParticleList;
     ParticleList particles;
 
-    Vector2 force;
+    Vector2 position, force;
+    float spawn_timer;
 
     // All particle system properties (loaded from a JSON file)
     float lifetime, lifetime_randomness;
     float angle, angle_randomness;
     float angular_velocity, angular_velocity_randomness;
-    float velocity, velocity_randomness, spread;
+    float velocity, velocity_randomness, velocity_angle, spread;
     float scale, scale_randomness;
     float firerate, firerate_randomness;
     Color tint; float tint_randomness;
@@ -70,14 +73,14 @@ protected:
     
 
 public:
-    ParticleSystem(std::string data_filename);
+    ParticleSystem(std::string data_filename, Vector2 position={0, 0});
 
     void add_force(Vector2 adding);
     void remove_force(Vector2 removing);
 
     void reload_data();
 
-    void process();
+    void process(float delta);
     void draw();
 };
 

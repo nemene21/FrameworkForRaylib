@@ -15,19 +15,22 @@ int main() {
         35
     );
 
-    ParticleSystem particle_sys = ParticleSystem("test.json");
+    ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
 
     sprite.set_shader("test.glsl");
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-
         ClearBackground(BLACK);
 
-        std::string fps_string = std::to_string(GetFPS());
+        float delta = GetFrameTime();
 
+        std::string fps_string = std::to_string(GetFPS());
         const char* fps_cstring = fps_string.c_str();
         SetWindowTitle(fps_cstring);
+
+        particle_sys.process(delta);
+        particle_sys.draw();
 
         trail.process(GetMousePosition());
 

@@ -14,5 +14,5 @@
     "tint": [255, 255, 255], "tint_randomness": 0,
 
     "velocity": 100, "velocity_randomness": 0.5,
-    "spread": 15
+    "shoot_angle": 0, "spread": 15
 }

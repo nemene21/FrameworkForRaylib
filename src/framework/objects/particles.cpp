@@ -2,15 +2,19 @@
 
 // <Particle Data Manager>
 std::map<std::string, ParticleDataPtr> ParticleDataManager::particle_data_map;
-float ParticleDataManager::timer = 0.0f;
+float ParticleDataManager::timer = 1.0f;
 float ParticleDataManager::tick  = 100.0f;
 
 // Load particle data and put it's smart pointer into the particle data map (it's path is the key)
 void ParticleDataManager::load(std::string name) {
     std::ifstream f(PARTICLE_DIR name);
 
+    if (!f.is_open())
+        std::cerr << "Can't open file " + PARTICLE_DIR name + " :(" << std::endl;
+
+    json data = json::parse(f);
     particle_data_map[name] = std::make_shared<json>(
-        json::parse(f)
+        data
     );
 }
 
@@ -56,24 +60,57 @@ void ParticleDataManager::reload() {
     }
 }
 
-ParticleSystem::ParticleSystem(std::string data_filename) {
-    particle_data = ParticleDataManager::get(data_filename);
-
-    reload_data();
+void ParticleSystem::reload_data() {
+    texture = TextureManager::get((*particle_data.get())["texture"]);
 }
 
-void ParticleSystem::reload_data() {
+ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
     
+    particle_data = ParticleDataManager::get(data_filename);
+    reload_data();
+
+    firerate = .2;
+}
+
+void ParticleSystem::spawn_particle() {
+    json data = *particle_data.get();
+
+    Particle new_particle;
+    new_particle.position = position;
+    new_particle.scale = scale;
+    new_particle.angle = angle;
+    new_particle.tint  = tint;
+
+    new_particle.velocity = Vector2Rotate({velocity, 0}, velocity_angle + RandF2() * spread*.5);
+
+    particles.push_back(new_particle);
+}
+
+void ParticleSystem::process(float delta) {
+    spawn_timer -= delta;
+
+    if (spawn_timer <= 0) {
+        std::cout << "tryna spawn.. ";
+        spawn_timer = 1.0 / firerate;
+        spawn_particle();
+        std::cout << "spawned!" << std::endl;
+    }
+
+    std::cout << "processed!" << std::endl;
 }
 
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
 
+        std::cout << "tryna draw.. ";
         DrawTextureCentered(texture.get(),
             particle.position,
             {particle.scale, particle.scale},
             particle.angle,
             particle.tint
         );
+        std::cout << "drawn!" << std::endl;
     }
+
+    std::cout << "Drawn all!" << std::endl;
 }
