@@ -93,13 +93,18 @@ void ParticleSystem::reload_data() {
     spread = data["spread"];
     firerate = data["firerate"];
     
+    tint_randomness = data["tint_randomness"];
+
+    int r = data["tint"][0], g = data["tint"][1], b = data["tint"][2], a = data["tint"][3];
+
     tint = Color{
-        (unsigned char)(data["tint"][0]),
-        (unsigned char)(data["tint"][1]),
-        (unsigned char)(data["tint"][2])
+        static_cast<unsigned char>(r),
+        static_cast<unsigned char>(g),
+        static_cast<unsigned char>(b),
+        static_cast<unsigned char>(a)
     };
 
-    tint = WHITE;
+    // tint = WHITE;
 }
 
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
@@ -115,7 +120,12 @@ void ParticleSystem::spawn_particle() {
     new_particle.position = position;
     new_particle.scale = scale + (scale_randomness*.5 * RandF2());
     new_particle.angle = angle + (angle_randomness*.5 * RandF2());
-    new_particle.tint  = tint;
+    new_particle.tint  = Color{
+        static_cast<unsigned char>(tint.r + tint_randomness*.5 * RandF2()),
+        static_cast<unsigned char>(tint.g + tint_randomness*.5 * RandF2()),
+        static_cast<unsigned char>(tint.b + tint_randomness*.5 * RandF2()),
+        tint.a
+    };
 
     new_particle.lifetime_max = lifetime;
     new_particle.lifetime     = lifetime;

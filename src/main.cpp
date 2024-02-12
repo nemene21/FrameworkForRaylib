@@ -1,7 +1,10 @@
 #include <iostream>
+#include <time.h>
 #include <framework.h>
 
 int main() {
+    srand(time(NULL));
+
     const int window_width = 1920*.5, window_height = 1080*.5;
     InitWindow(window_width, window_height, "Raylib Window!");
 
