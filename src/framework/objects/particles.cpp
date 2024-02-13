@@ -85,6 +85,9 @@ void ParticleSystem::reload_data() {
     angle = data["angle"];
     angle_randomness = data["angle_randomness"];
 
+    angular_velocity = data["angular_velocity"];
+    angular_velocity_randomness = data["angular_velocity_randomness"];
+
     scale = data["scale"];
     scale_randomness = data["scale_randomness"];
     
@@ -119,7 +122,10 @@ void ParticleSystem::spawn_particle() {
     Particle new_particle;
     new_particle.position = position;
     new_particle.scale = scale + (scale_randomness*.5 * RandF2());
+
     new_particle.angle = angle + (angle_randomness*.5 * RandF2());
+    new_particle.angular_velocity = angular_velocity  + (angular_velocity_randomness*.5 * RandF2());
+
     new_particle.tint  = Color{
         static_cast<unsigned char>(tint.r + tint_randomness*.5 * RandF2()),
         static_cast<unsigned char>(tint.g + tint_randomness*.5 * RandF2()),
@@ -151,6 +157,8 @@ void ParticleSystem::process(float delta) {
         particle.position = Vector2Add(particle.position,
             Vector2Multiply(particle.velocity, {delta, delta})
         );
+
+        particle.angle += particle.angular_velocity * delta;
     }
 }
 

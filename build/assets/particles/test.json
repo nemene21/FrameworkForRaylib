@@ -8,8 +8,8 @@
 
     "angle": 0, "angle_randomness": 360,
 
-    "angular_velocity": 360,
-    "angular_velocity_randomness": 0,
+    "angular_velocity": 0,
+    "angular_velocity_randomness": 360,
 
     "tint": [255, 0, 0, 255], "tint_randomness": 255,
 
