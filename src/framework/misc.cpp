@@ -16,10 +16,10 @@ Color Lerp(Color a, Color b, float c) {
 
 // Random float from 0 to 1
 float RandF() {
-    return rand() % 1000 * .001;
+    return rand() % 1000 * .001f;
 }
 float RandF2() {
-    return RandF() * 2.0 - 1.0;
+    return RandF() * 2.0f - 1.0f;
 }
 
 bool TryingToHotReload() {

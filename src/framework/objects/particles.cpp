@@ -92,6 +92,8 @@ void ParticleSystem::reload_data() {
     scale_randomness = data["scale_randomness"];
     
     velocity = data["velocity"];
+    velocity_randomness = data["velocity_randomness"];
+
     shot_angle = data["shot_angle"];
     spread = data["spread"];
     firerate = data["firerate"];
@@ -136,7 +138,7 @@ void ParticleSystem::spawn_particle() {
     new_particle.lifetime_max = lifetime;
     new_particle.lifetime     = lifetime;
 
-    new_particle.velocity = Vector2Rotate({velocity, 0}, shot_angle + RandF2() * spread*.5);
+    new_particle.velocity = Vector2Rotate({velocity + velocity_randomness*.5f * RandF2(), 0}, shot_angle + RandF2() * spread*.5);
 
     particles.push_back(new_particle);
 }
