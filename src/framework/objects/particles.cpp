@@ -85,6 +85,9 @@ void ParticleSystem::reload_data() {
     angle = data["angle"];
     angle_randomness = data["angle_randomness"];
 
+    lifetime = data["lifetime"];
+    lifetime_randomness = data["lifetime_randomness"];
+
     angular_velocity = data["angular_velocity"];
     angular_velocity_randomness = data["angular_velocity_randomness"];
 
@@ -97,6 +100,7 @@ void ParticleSystem::reload_data() {
     shot_angle = data["shot_angle"];
     spread = data["spread"];
     firerate = data["firerate"];
+    firerate_randomness = data["firerate_randomness"];
     
     tint_randomness = data["tint_randomness"];
 
@@ -116,6 +120,8 @@ ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): pos
     
     particle_data = ParticleDataManager::get(data_filename);
     reload_data();
+
+    force = Vector2{0, 0};
 }
 
 void ParticleSystem::spawn_particle() {
@@ -135,8 +141,8 @@ void ParticleSystem::spawn_particle() {
         tint.a
     };
 
-    new_particle.lifetime_max = lifetime;
-    new_particle.lifetime     = lifetime;
+    new_particle.lifetime_max = lifetime + lifetime_randomness*.5f * RandF2();
+    new_particle.lifetime     = new_particle.lifetime_max;
 
     new_particle.velocity = Vector2Rotate({velocity + velocity_randomness*.5f * RandF2(), 0}, shot_angle + RandF2() * spread*.5);
 
@@ -147,10 +153,13 @@ void ParticleSystem::process(float delta) {
     spawn_timer -= delta;
 
     if (spawn_timer <= 0) {
-        spawn_timer = 1.0 / firerate;
+        spawn_timer = 1.0 / (firerate + firerate_randomness*.5f * RandF2());
         spawn_particle();
     }
 
+    std::vector<int> kill_queue {};
+
+    int i = 0;
     for (auto& particle: particles) {
         particle.velocity = Vector2Add(particle.velocity,
             Vector2Multiply(force, {delta, delta})
@@ -161,15 +170,26 @@ void ParticleSystem::process(float delta) {
         );
 
         particle.angle += particle.angular_velocity * delta;
+
+        particle.lifetime -= delta;
+        if (particle.lifetime <= 0)
+            kill_queue.push_back(i);
+
+        i++;
+    }
+
+    for (int i = 0; i < kill_queue.size(); i++) {
+        particles.erase(particles.begin() + kill_queue[kill_queue.size()-1 - i]);
     }
 }
 
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
+        float anim = particle.lifetime / particle.lifetime_max;
 
         DrawTextureCentered(texture.get(),
             particle.position,
-            {particle.scale, particle.scale},
+            {particle.scale * anim, particle.scale * anim},
             particle.angle,
             particle.tint
         );
