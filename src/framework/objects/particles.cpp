@@ -82,38 +82,45 @@ void ParticleSystem::reload_data() {
     json data = *particle_data.get();
 
     texture = TextureManager::get(data["texture"]);
+    
+    easing_function_name = (std::string)(data["easing_function"]);
+    
+    // Angle
     angle = data["angle"];
     angle_randomness = data["angle_randomness"];
-
-    lifetime = data["lifetime"];
-    lifetime_randomness = data["lifetime_randomness"];
 
     angular_velocity = data["angular_velocity"];
     angular_velocity_randomness = data["angular_velocity_randomness"];
 
+    // Lifetime
+    lifetime = data["lifetime"];
+    lifetime_randomness = data["lifetime_randomness"];
+
+    // Scale
     scale = data["scale"];
     scale_randomness = data["scale_randomness"];
     
+    // Velocity
     velocity = data["velocity"];
     velocity_randomness = data["velocity_randomness"];
 
     shot_angle = data["shot_angle"];
     spread = data["spread"];
+
+    // Firerate
     firerate = data["firerate"];
     firerate_randomness = data["firerate_randomness"];
     
+    // Color
     tint_randomness = data["tint_randomness"];
 
     int r = data["tint"][0], g = data["tint"][1], b = data["tint"][2], a = data["tint"][3];
-
     tint = Color{
         static_cast<unsigned char>(r),
         static_cast<unsigned char>(g),
         static_cast<unsigned char>(b),
         static_cast<unsigned char>(a)
     };
-
-    // tint = WHITE;
 }
 
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
@@ -128,12 +135,15 @@ void ParticleSystem::spawn_particle() {
     json data = *particle_data.get();
 
     Particle new_particle;
+
+    // Transform
     new_particle.position = position;
     new_particle.scale = scale + (scale_randomness*.5 * RandF2());
 
     new_particle.angle = angle + (angle_randomness*.5 * RandF2());
     new_particle.angular_velocity = angular_velocity  + (angular_velocity_randomness*.5 * RandF2());
 
+    // Color
     new_particle.tint  = Color{
         static_cast<unsigned char>(tint.r + tint_randomness*.5 * RandF2()),
         static_cast<unsigned char>(tint.g + tint_randomness*.5 * RandF2()),
@@ -141,15 +151,21 @@ void ParticleSystem::spawn_particle() {
         tint.a
     };
 
+    // Lifetime
     new_particle.lifetime_max = lifetime + lifetime_randomness*.5f * RandF2();
     new_particle.lifetime     = new_particle.lifetime_max;
 
+    // Velocity
     new_particle.velocity = Vector2Rotate({velocity + velocity_randomness*.5f * RandF2(), 0}, shot_angle + RandF2() * spread*.5);
 
     particles.push_back(new_particle);
 }
 
 void ParticleSystem::process(float delta) {
+    if (TryingToHotReload())
+        reload_data();
+    
+    // Spawn particles when timer runs out
     spawn_timer -= delta;
 
     if (spawn_timer <= 0) {
@@ -157,20 +173,25 @@ void ParticleSystem::process(float delta) {
         spawn_particle();
     }
 
+    // Loop trough particles and queue dead ones before drawing
     std::vector<int> kill_queue {};
 
     int i = 0;
     for (auto& particle: particles) {
+        // Add force
         particle.velocity = Vector2Add(particle.velocity,
             Vector2Multiply(force, {delta, delta})
         );
 
+        // Add velocity
         particle.position = Vector2Add(particle.position,
             Vector2Multiply(particle.velocity, {delta, delta})
         );
 
+        // Add angular velocity
         particle.angle += particle.angular_velocity * delta;
 
+        // Lower lifetime and queue particles deletion if needed
         particle.lifetime -= delta;
         if (particle.lifetime <= 0)
             kill_queue.push_back(i);
@@ -178,6 +199,7 @@ void ParticleSystem::process(float delta) {
         i++;
     }
 
+    // Remove all dead particles
     for (int i = 0; i < kill_queue.size(); i++) {
         particles.erase(particles.begin() + kill_queue[kill_queue.size()-1 - i]);
     }
@@ -185,11 +207,17 @@ void ParticleSystem::process(float delta) {
 
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
-        float anim = particle.lifetime / particle.lifetime_max;
+
+        // Calculate animation value (0 - 1) based on a custom easing function
+        float anim = 1.0f - Easing::easing_functions[easing_function_name](
+            1.0f - particle.lifetime / particle.lifetime_max
+        );
+
+        float calc_scale = particle.scale * anim;
 
         DrawTextureCentered(texture.get(),
             particle.position,
-            {particle.scale * anim, particle.scale * anim},
+            {calc_scale, calc_scale},
             particle.angle,
             particle.tint
         );

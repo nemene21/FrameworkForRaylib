@@ -68,6 +68,7 @@ protected:
     float scale, scale_randomness;
     float firerate, firerate_randomness;
     Color tint; float tint_randomness;
+    std::string easing_function_name;
 
     std::shared_ptr<Texture2D> texture;
     
