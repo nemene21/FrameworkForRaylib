@@ -51,7 +51,7 @@ void ParticleDataManager::unload_check() {
         unload_unused();
     }
 }
-
+// Hot reloading
 void ParticleDataManager::reload() {
     for (auto& particle_pair: particle_data_map) {
 
@@ -62,6 +62,7 @@ void ParticleDataManager::reload() {
 
 // <Particle System>
 
+// Position setter and getter
 void ParticleSystem::set_position(Vector2 new_position) {
     position = new_position;
 }
@@ -70,10 +71,12 @@ Vector2 ParticleSystem::get_position() {
     return position;
 }
 
+// Forces
 void ParticleSystem::add_force(Vector2 adding) {
     force = Vector2Add(force, adding);
 }
 
+// Constructor
 void ParticleSystem::remove_force(Vector2 removing) {
     force = Vector2Subtract(force, removing);
 }
@@ -99,10 +102,12 @@ void ParticleSystem::reload_data() {
     // Scale
     scale = data["scale"];
     scale_randomness = data["scale_randomness"];
-    
+    scale_end = data["scale_end"];
+
     // Velocity
     velocity = data["velocity"];
     velocity_randomness = data["velocity_randomness"];
+    velocity_end = data["velocity_end"];
 
     shot_angle = data["shot_angle"];
     spread = data["spread"];
@@ -121,10 +126,17 @@ void ParticleSystem::reload_data() {
         static_cast<unsigned char>(b),
         static_cast<unsigned char>(a)
     };
+
+    tint_end = Color{
+        static_cast<unsigned char>(data["tint_end"][0]),
+        static_cast<unsigned char>(data["tint_end"][1]),
+        static_cast<unsigned char>(data["tint_end"][2]),
+        static_cast<unsigned char>(data["tint_end"][3])
+    };
 }
 
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
-    
+    // Load data
     particle_data = ParticleDataManager::get(data_filename);
     reload_data();
 
@@ -139,16 +151,28 @@ void ParticleSystem::spawn_particle() {
     // Transform
     new_particle.position = position;
     new_particle.scale = scale + (scale_randomness*.5 * RandF2());
+    new_particle.scale_end = scale_end * new_particle.scale;
 
     new_particle.angle = angle + (angle_randomness*.5 * RandF2());
     new_particle.angular_velocity = angular_velocity  + (angular_velocity_randomness*.5 * RandF2());
 
     // Color
-    new_particle.tint  = Color{
-        static_cast<unsigned char>(tint.r + tint_randomness*.5 * RandF2()),
-        static_cast<unsigned char>(tint.g + tint_randomness*.5 * RandF2()),
-        static_cast<unsigned char>(tint.b + tint_randomness*.5 * RandF2()),
+    int rand_r = tint_randomness*.5 * RandF2(),
+        rand_g = tint_randomness*.5 * RandF2(),
+        rand_b = tint_randomness*.5 * RandF2();
+
+    new_particle.tint = Color{
+        static_cast<unsigned char>(tint.r + rand_r),
+        static_cast<unsigned char>(tint.g + rand_g),
+        static_cast<unsigned char>(tint.b + rand_b),
         tint.a
+    };
+
+    new_particle.tint_end = Color{
+        static_cast<unsigned char>(tint_end.r + rand_r),
+        static_cast<unsigned char>(tint_end.g + rand_g),
+        static_cast<unsigned char>(tint_end.b + rand_b),
+        tint_end.a
     };
 
     // Lifetime
@@ -178,6 +202,11 @@ void ParticleSystem::process(float delta) {
 
     int i = 0;
     for (auto& particle: particles) {
+        // Calculate animation value
+        float anim = Easing::easing_functions[easing_function_name](
+            1.0f - particle.lifetime / particle.lifetime_max
+        );
+
         // Add force
         particle.velocity = Vector2Add(particle.velocity,
             Vector2Multiply(force, {delta, delta})
@@ -185,7 +214,11 @@ void ParticleSystem::process(float delta) {
 
         // Add velocity
         particle.position = Vector2Add(particle.position,
-            Vector2Multiply(particle.velocity, {delta, delta})
+            Vector2Multiply(Lerp(
+                particle.velocity,
+                {particle.velocity.x * velocity_end, particle.velocity.y * velocity_end},
+                anim
+            ), {delta, delta})
         );
 
         // Add angular velocity
@@ -209,17 +242,18 @@ void ParticleSystem::draw() {
     for (auto& particle: particles) {
 
         // Calculate animation value (0 - 1) based on a custom easing function
-        float anim = 1.0f - Easing::easing_functions[easing_function_name](
+        float anim = Easing::easing_functions[easing_function_name](
             1.0f - particle.lifetime / particle.lifetime_max
         );
 
-        float calc_scale = particle.scale * anim;
+        float calc_scale = Lerp(particle.scale, particle.scale_end, anim);
+        Color calc_tint = Lerp(particle.tint, particle.tint_end, anim);
 
         DrawTextureCentered(texture.get(),
             particle.position,
             {calc_scale, calc_scale},
             particle.angle,
-            particle.tint
+            calc_tint
         );
     }
 }

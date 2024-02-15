@@ -44,8 +44,8 @@ class ParticleSystem {
 protected:
     typedef struct {
         Vector2 position, velocity;
-        float lifetime, lifetime_max, angle, angular_velocity, scale;
-        Color tint;
+        float lifetime, lifetime_max, angle, angular_velocity, scale, scale_end;
+        Color tint, tint_end;
 
     } Particle;
 
@@ -64,10 +64,10 @@ protected:
     float lifetime, lifetime_randomness;
     float angle, angle_randomness;
     float angular_velocity, angular_velocity_randomness;
-    float velocity, velocity_randomness, shot_angle, spread;
-    float scale, scale_randomness;
+    float velocity, velocity_randomness, velocity_end, shot_angle, spread;
+    float scale, scale_randomness, scale_end;
     float firerate, firerate_randomness;
-    Color tint; float tint_randomness;
+    Color tint, tint_end; float tint_randomness;
     std::string easing_function_name;
 
     std::shared_ptr<Texture2D> texture;
