@@ -23,3 +23,13 @@ object_files/particles.o: ../src/framework/objects/particles.cpp
 
 Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o object_files/sprites.o object_files/particles.o 
 	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/misc.o object_files/trails.o object_files/sprites.o object_files/particles.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+
+.PHONY: clean
+clean:
+	del object_files/main.o 
+	del object_files/entity.o 
+	del object_files/component.o 
+	del object_files/misc.o 
+	del object_files/trails.o 
+	del object_files/sprites.o 
+	del object_files/particles.o 

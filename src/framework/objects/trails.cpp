@@ -1,5 +1,6 @@
 #include <trails.h>
 
+// Trail constructor
 Trail::Trail(
     Vector2 position, float width, int max_points, Color color, Color fade_color
 ):
@@ -11,10 +12,11 @@ Trail::Trail(
     tick {.025},
     timer {0}
 {
-    if (fade_color == WHITE)
+    if (fade_color == WHITE) // Defaults the fade color to no fade
         fade_color = color;
 }
 
+// For adders
 void Trail::add_force(Vector2 new_force) {
     force = Vector2Add(force, new_force);
 }
@@ -23,10 +25,21 @@ void Trail::remove_force(Vector2 force_removing) {
     force = Vector2Subtract(force, force_removing);
 }
 
+// Tick setter
 void Trail::set_tick(float new_tick) {
     tick = new_tick;
 }
 
+// Position setter and getter
+void Trail::set_position(Vector2 new_pos) {
+    position = new_pos;
+}
+
+Vector2 Trail::get_position() {
+    return position;
+}
+
+// Spawns new point at the end of the trail
 void Trail::spawn_point() {
     TrailPoint new_point;
 
@@ -39,6 +52,7 @@ void Trail::spawn_point() {
     points.push(new_point);
 }
 
+// Processes a point
 void Trail::process_point(TrailPoint& point, float delta) {
     point.velocity = Vector2Add(point.velocity,
         Vector2Multiply(force, Vector2{delta, delta})
@@ -49,17 +63,18 @@ void Trail::process_point(TrailPoint& point, float delta) {
     );
 }
 
-void Trail::process(Vector2 new_position) {
-    position = new_position;
+// Processes the trail object
+void Trail::process(float delta) {
 
-    timer -= GetFrameTime();
+    // New point timer
+    timer -= delta;
     if (timer < .0) {
         timer = tick;
 
         spawn_point();
     }
 
-    float delta = GetFrameTime();
+    // Process all points
     for (int i = 0; i < (int)points.size(); i++) {
 
         auto& point = points.front();
@@ -69,6 +84,7 @@ void Trail::process(Vector2 new_position) {
         points.push(point);
     }
 
+    // Remove point if the point amount is too large
     if ((int)points.size() > max_points) {
         points.pop();
     }
@@ -78,16 +94,19 @@ void Trail::draw() {
     int point_count = points.size();
 
     for (int i = 0; i < point_count; i++) {
+
+        // Get points
         TrailPoint& first_point = points.front();
         points.pop();
 
         TrailPoint& other_point = points.front();
         points.push(first_point);
 
+        // Draw line and circle if its not the last point
         if (i != point_count-1) {
             float anim = i/(float)point_count;
 
-            Color color_calc = Lerp(fade_color, color, anim);
+            Color color_calc = Lerp(fade_color, color, anim); // Get animated color
 
             DrawLineEx(
                 first_point.position,

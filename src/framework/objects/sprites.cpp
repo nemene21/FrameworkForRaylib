@@ -73,6 +73,7 @@ void ShaderManager::unload_check() {
     }
 }
 
+// Updates uniforms global for all shaders (like time)
 void ShaderManager::update_uniforms() {
     float time = GetTime();
 
@@ -89,6 +90,7 @@ void ShaderManager::update_uniforms() {
     }
 }
 
+// Reloads all shaders
 void ShaderManager::reload() {
     for (auto& shader_pair: shader_map) {
         *shader_pair.second.get() = LoadShader(NULL, (SHADER_DIR shader_pair.first).c_str());
@@ -141,6 +143,7 @@ void TextureManager::unload_check() {
     }
 }
 
+// Reloads all textures
 void TextureManager::reload() {
     for (auto& texture_pair: texture_map) {
         *texture_pair.second.get() = LoadTexture((TEXTURE_DIR texture_pair.first).c_str());

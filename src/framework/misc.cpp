@@ -78,6 +78,7 @@ float Easing::elastic_out(float x) {
     : pow(2.f, -10.f * x) * sin((x * 10.f - 0.75f) * c4) + 1.f;
 }
 
+// Initialise ease function map (used for eg. by the particle animation)
 void Easing::InitEasingFuncs() {
     easing_functions.emplace("ease_in_out", ease_in_out);
     easing_functions.emplace("ease_out", ease_out);

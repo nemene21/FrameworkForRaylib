@@ -59,6 +59,17 @@ def generate_makefile():
 
     add(LDFLAGS + " " + LDLIBS)
 
+    next(2)
+    add(".PHONY: clean")
+    next()
+    add("clean:")
+    next()
+
+    for source in source_files:
+        tab()
+        add("del " + OBJ_DIR + "/" + get_filename(source) + ".o ")
+        next()
+
     print("Generated...")
 
     file = open("build/Makefile", "w")

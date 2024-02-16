@@ -43,7 +43,10 @@ public:
     void spawn_point();
     void process_point(TrailPoint& point, float delta);
 
-    void process(Vector2 new_position);
+    void set_position(Vector2 new_pos);
+    Vector2 get_position();
+
+    void process(float delta);
     void draw();
 };
 

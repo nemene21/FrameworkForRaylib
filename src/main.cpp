@@ -46,8 +46,8 @@ int main() {
         particle_sys.process(delta);
         particle_sys.draw();
 
-        trail.process(GetMousePosition());
-
+        trail.set_position(GetMousePosition());
+        trail.process(delta);
         trail.draw();
 
         sprite.set_position(GetMousePosition());
