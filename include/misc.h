@@ -27,6 +27,9 @@ public:
     > easing_functions;
 
     static float ease_in_out(float x);
+    static float ease_out(float x);
+    static float ease_in(float x);
+    
     static float bounce_out(float x);
     static float elastic_out(float x);
 

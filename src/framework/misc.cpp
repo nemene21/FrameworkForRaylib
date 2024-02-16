@@ -45,6 +45,14 @@ float Easing::ease_in_out(float x) {
     return x < .5f ? 2.f * x * x : 1.f - pow(-2.f * x + 2.f, 2.f) * .5f;
 }
 
+float Easing::ease_out(float x) {
+    return 1.f - (1.f - x) * (1.f - x);
+}
+
+float Easing::ease_in(float x) {
+    return x * x * x;
+}
+
 float Easing::bounce_out(float x) {
     const float n1 = 7.5625f;
     const float d1 = 2.75f;
@@ -72,6 +80,9 @@ float Easing::elastic_out(float x) {
 
 void Easing::InitEasingFuncs() {
     easing_functions.emplace("ease_in_out", ease_in_out);
+    easing_functions.emplace("ease_out", ease_out);
+    easing_functions.emplace("ease_in", ease_in);
+
     easing_functions.emplace("bounce_out", bounce_out);
     easing_functions.emplace("elastic_out", elastic_out);
 }

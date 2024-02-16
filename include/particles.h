@@ -69,10 +69,12 @@ protected:
     float scale, scale_randomness, scale_end;
     float firerate, firerate_randomness;
     Color tint, tint_end; float tint_randomness;
-    std::string easing_function_name;
+    
+    std::string velocity_ease_name;
+    std::string scale_ease_name;
+    std::string tint_ease_name;
 
     std::shared_ptr<Texture2D> texture;
-    
 
 public:
     ParticleSystem(std::string data_filename, Vector2 position={0, 0});

@@ -86,8 +86,6 @@ void ParticleSystem::reload_data() {
 
     texture = TextureManager::get(data["texture"]);
     
-    easing_function_name = (std::string)(data["easing_function"]);
-    
     // Angle
     angle = data["angle"];
     angle_randomness = data["angle_randomness"];
@@ -105,12 +103,14 @@ void ParticleSystem::reload_data() {
     scale = data["scale"];
     scale_randomness = data["scale_randomness"];
     scale_end = data["scale_end"];
+    scale_ease_name = (std::string)(data["scale_ease"]);
 
     // Velocity
     velocity = data["velocity"];
     velocity_randomness = data["velocity_randomness"];
     velocity_end = data["velocity_end"];
-
+    velocity_ease_name = (std::string)(data["velocity_ease"]);
+    
     shot_angle = data["shot_angle"];
     spread = data["spread"];
 
@@ -119,6 +119,8 @@ void ParticleSystem::reload_data() {
     firerate_randomness = data["firerate_randomness"];
     
     // Color
+    tint_ease_name = (std::string)(data["tint_ease"]);
+
     tint_randomness = data["tint_randomness"];
 
     int r = data["tint"][0], g = data["tint"][1], b = data["tint"][2], a = data["tint"][3];
@@ -205,7 +207,7 @@ void ParticleSystem::process(float delta) {
     int i = 0;
     for (auto& particle: particles) {
         // Calculate animation value
-        float anim = Easing::easing_functions[easing_function_name](
+        float velocity_anim = Easing::easing_functions[velocity_ease_name](
             1.0f - particle.lifetime / particle.lifetime_max
         );
 
@@ -219,7 +221,7 @@ void ParticleSystem::process(float delta) {
             Vector2Multiply(Lerp(
                 particle.velocity,
                 {particle.velocity.x * velocity_end, particle.velocity.y * velocity_end},
-                anim
+                velocity_anim
             ), {delta, delta})
         );
 
@@ -246,13 +248,17 @@ void ParticleSystem::process(float delta) {
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
 
-        // Calculate animation value (0 - 1) based on a custom easing function
-        float anim = Easing::easing_functions[easing_function_name](
+        // Calculate animation values (0 - 1) based on custom easing functions
+        float scale_anim = Easing::easing_functions[scale_ease_name](
             1.0f - particle.lifetime / particle.lifetime_max
         );
 
-        float calc_scale = Lerp(particle.scale, particle.scale_end, anim);
-        Color calc_tint = Lerp(particle.tint, particle.tint_end, anim);
+        float tint_anim = Easing::easing_functions[tint_ease_name](
+            1.0f - particle.lifetime / particle.lifetime_max
+        );
+
+        float calc_scale = Lerp(particle.scale, particle.scale_end, scale_anim);
+        Color calc_tint = Lerp(particle.tint, particle.tint_end, tint_anim);
 
         DrawTextureCentered(texture.get(),
             particle.position,
