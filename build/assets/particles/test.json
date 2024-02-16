@@ -10,6 +10,7 @@
     "scale_end": 0.15,
 
     "angle": 0, "angle_randomness": 360,
+    "velocity_angle": true,
 
     "angular_velocity": 0,
     "angular_velocity_randomness": 360,

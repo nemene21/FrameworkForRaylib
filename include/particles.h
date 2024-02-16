@@ -63,6 +63,7 @@ protected:
     // All particle system properties (loaded from a JSON file)
     float lifetime, lifetime_randomness;
     float angle, angle_randomness;
+    bool rotate_to_velocity;
     float angular_velocity, angular_velocity_randomness;
     float velocity, velocity_randomness, velocity_end, shot_angle, spread;
     float scale, scale_randomness, scale_end;

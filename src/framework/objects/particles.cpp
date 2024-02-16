@@ -95,6 +95,8 @@ void ParticleSystem::reload_data() {
     angular_velocity = data["angular_velocity"];
     angular_velocity_randomness = data["angular_velocity_randomness"];
 
+    rotate_to_velocity = data["velocity_angle"];
+
     // Lifetime
     lifetime = data["lifetime"];
     lifetime_randomness = data["lifetime_randomness"];
@@ -224,6 +226,9 @@ void ParticleSystem::process(float delta) {
         // Add angular velocity
         particle.angle += particle.angular_velocity * delta;
 
+        if (rotate_to_velocity)
+            particle.angle = atan2(particle.velocity.y, particle.velocity.x) * RAD2DEG;
+
         // Lower lifetime and queue particles deletion if needed
         particle.lifetime -= delta;
         if (particle.lifetime <= 0)
@@ -233,7 +238,7 @@ void ParticleSystem::process(float delta) {
     }
 
     // Remove all dead particles
-    for (int i = 0; i < kill_queue.size(); i++) {
+    for (size_t i = 0; i < kill_queue.size(); i++) {
         particles.erase(particles.begin() + kill_queue[kill_queue.size()-1 - i]);
     }
 }
