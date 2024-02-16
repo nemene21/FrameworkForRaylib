@@ -27,10 +27,14 @@ public:
     > easing_functions;
 
     static float ease_in_out(float x);
+    static float ease_in (float x);
     static float ease_out(float x);
-    static float ease_in(float x);
+
+    static float back_in (float x);
+    static float back_out(float x);
+    static float back_in_out(float x);
     
-    static float bounce_out(float x);
+    static float bounce_out (float x);
     static float elastic_out(float x);
 
     static void InitEasingFuncs();

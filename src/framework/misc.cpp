@@ -78,12 +78,39 @@ float Easing::elastic_out(float x) {
     : pow(2.f, -10.f * x) * sin((x * 10.f - 0.75f) * c4) + 1.f;
 }
 
+float Easing::back_in(float x) {
+    float const c1 = 1.70158f;
+    float const c3 = c1 + 1.f;
+
+    return c3 * x * x * x - c1 * x * x;
+}
+
+float Easing::back_out(float x) {
+    float const c1 = 1.70158f;
+    float const c3 = c1 + 1.f;
+
+    return 1 + c3 * pow(x - 1.f, 3.f) + c1 * pow(x - 1.f, 2.f);
+}
+
+float Easing::back_in_out(float x) {
+    float const c1 = 1.70158f;
+    float const c2 = c1 * 1.525f;
+
+    return x < 0.5f
+        ? (pow(2.f * x, 2.f) * ((c2 + 1.f) * 2.f * x - c2)) * .5f
+        : (pow(2.f * x - 2.f, 2.f) * ((c2 + 1.f) * (x * 2.f - 2.f) + c2) + 2.f) * .5f;
+}
+
 // Initialise ease function map (used for eg. by the particle animation)
 void Easing::InitEasingFuncs() {
     easing_functions.emplace("ease_in_out", ease_in_out);
     easing_functions.emplace("ease_out", ease_out);
-    easing_functions.emplace("ease_in", ease_in);
+    easing_functions.emplace("ease_in",  ease_in);
 
-    easing_functions.emplace("bounce_out", bounce_out);
+    easing_functions.emplace("bounce_out",  bounce_out);
     easing_functions.emplace("elastic_out", elastic_out);
+
+    easing_functions.emplace("back_in",  back_in);
+    easing_functions.emplace("back_out", back_out);
+    easing_functions.emplace("back_in_out", back_in_out);
 }
