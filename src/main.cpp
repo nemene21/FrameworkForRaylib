@@ -9,6 +9,7 @@ int main() {
     InitWindow(window_width, window_height, "Raylib Window!");
     // SetTargetFPS(60);
 
+    // Test data
     Easing::InitEasingFuncs();
 
     Trail trail = Trail({0, 0}, 12, 16, WHITE, Color{255, 255, 255, 0});
@@ -32,16 +33,25 @@ int main() {
 
         float delta = GetFrameTime();
 
+        // FPS counter
         std::string fps_string = std::to_string(GetFPS());
         const char* fps_cstring = fps_string.c_str();
         SetWindowTitle(fps_cstring);
 
+        // Processing data managers
+        TextureManager::unload_check();
+        ParticleDataManager::unload_check();
+        ShaderManager::unload_check();
+        ShaderManager::update_uniforms();
+
+        // Hot reloading
         if (TryingToHotReload()) {
             TextureManager::reload();
             ShaderManager::reload();
             ParticleDataManager::reload();
         }
 
+        // Object testing
         particle_sys.set_position(GetMousePosition());
         particle_sys.process(delta);
         particle_sys.draw();
@@ -52,10 +62,6 @@ int main() {
 
         sprite.set_position(GetMousePosition());
         sprite.draw();
-
-        TextureManager::unload_check();
-        ShaderManager::unload_check();
-        ShaderManager::update_uniforms();
 
         EndDrawing();
     }
