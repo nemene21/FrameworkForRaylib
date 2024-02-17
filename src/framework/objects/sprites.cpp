@@ -1,4 +1,4 @@
-#include <sprites.h>
+#include <sprites.hpp>
 
 // Draws a centered texture, you should basically always use this when drawing a texture
 void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale, float angle, Color tint) {

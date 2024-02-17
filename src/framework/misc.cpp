@@ -1,4 +1,4 @@
-#include <misc.h>
+#include <misc.hpp>
 
 bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;

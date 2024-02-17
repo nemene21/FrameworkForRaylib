@@ -1,4 +1,4 @@
-#include <trails.h>
+#include <trails.hpp>
 
 // Trail constructor
 Trail::Trail(

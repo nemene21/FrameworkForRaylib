@@ -1,4 +1,4 @@
-#include <particles.h>
+#include <particles.hpp>
 
 // <Particle Data Manager>
 std::map<std::string, ParticleDataPtr> ParticleDataManager::particle_data_map;

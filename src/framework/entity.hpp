@@ -4,7 +4,7 @@
 #include <iostream>
 #include <map>
 #include <raylib.h>
-#include <component.h>
+#include <component.hpp>
 #include <unordered_set>
 
 class Entity {

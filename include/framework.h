@@ -4,13 +4,13 @@
 #include <raylib.h>
 #include <raymath.h>
 
-#include <misc.h>
+#include <misc.hpp>
 
-#include <objects/sprites.h>
-#include <objects/trails.h>
-#include <objects/particles.h>
+#include <objects/sprites.hpp>
+#include <objects/trails.hpp>
+#include <objects/particles.hpp>
 
-#include <component.h>
-#include <entity.h>
+#include <component.hpp>
+#include <entity.hpp>
 
 #endif

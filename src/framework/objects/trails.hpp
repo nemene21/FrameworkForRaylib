@@ -4,10 +4,12 @@
 
 #include <raylib.h>
 #include <raymath.h>
-#include <queue>
+
+#include <misc.hpp>
+
 #include <iostream>
-#include <misc.h>
 #include <vector>
+#include <queue>
 
 class Trail {
 protected:
