@@ -7,7 +7,7 @@ int main() {
 
     const int window_width = 1920*.5, window_height = 1080*.5;
     InitWindow(window_width, window_height, "Raylib Window!");
-    // SetTargetFPS(60);
+    // SetTargetFPS(120);
 
     // Test data
     Easing::InitEasingFuncs();
@@ -23,7 +23,7 @@ int main() {
     );
 
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
-    particle_sys.add_force({-1600, 0});
+    // particle_sys.add_force({0, 1000});
 
     sprite.set_shader("test.glsl");
 

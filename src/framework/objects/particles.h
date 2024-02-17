@@ -68,6 +68,7 @@ protected:
     float velocity, velocity_randomness, velocity_end, shot_angle, spread;
     float scale, scale_randomness, scale_end;
     float firerate, firerate_randomness;
+    int amount;
     Color tint, tint_end; float tint_randomness;
     
     std::string velocity_ease_name;

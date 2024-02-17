@@ -114,10 +114,12 @@ void ParticleSystem::reload_data() {
     shot_angle = data["shot_angle"];
     spread = data["spread"];
 
-    // Firerate
+    // Shooting
     firerate = data["firerate"];
     firerate_randomness = data["firerate_randomness"];
     
+    amount = data["amount"];
+
     // Color
     tint_ease_name = (std::string)(data["tint_ease"]);
 
@@ -198,7 +200,9 @@ void ParticleSystem::process(float delta) {
 
     if (spawn_timer <= 0) {
         spawn_timer = 1.0 / (firerate + firerate_randomness*.5f * RandF2());
-        spawn_particle();
+
+        for (int i = 0; i < amount; i++)
+            spawn_particle();
     }
 
     // Loop trough particles and queue dead ones before drawing
@@ -259,6 +263,8 @@ void ParticleSystem::draw() {
 
         float calc_scale = Lerp(particle.scale, particle.scale_end, scale_anim);
         Color calc_tint = Lerp(particle.tint, particle.tint_end, tint_anim);
+
+        calc_scale = std::max(calc_scale, 0.f);
 
         DrawTextureCentered(texture.get(),
             particle.position,
