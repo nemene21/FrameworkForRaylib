@@ -23,6 +23,7 @@ int main() {
     );
 
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
+    // particle_sys.left_to_spawn = 0;
     // particle_sys.add_force({0, 1000});
 
     sprite.set_shader("test.glsl");
@@ -56,6 +57,11 @@ int main() {
         particle_sys.process(delta);
         particle_sys.draw();
 
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            particle_sys.left_to_spawn = 10;
+            std::cout << "fire in the hole!!!" << std::endl;
+        }
+        
         trail.set_position(GetMousePosition());
         trail.process(delta);
         trail.draw();

@@ -78,6 +78,8 @@ protected:
     std::shared_ptr<Texture2D> texture;
 
 public:
+    int left_to_spawn;
+    
     ParticleSystem(std::string data_filename, Vector2 position={0, 0});
 
     void add_force(Vector2 adding);
