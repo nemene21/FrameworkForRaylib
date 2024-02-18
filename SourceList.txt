@@ -4,6 +4,8 @@ framework/entity
 framework/component
 framework/misc
 
+framework/components/health_component
+
 framework/objects/trails
 framework/objects/sprites
 framework/objects/particles

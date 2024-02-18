@@ -10,10 +10,10 @@
     "scale_ease": "bounce_out",
 
     "angle": 0, "angle_randomness": 360,
-    "velocity_angle": true,
+    "velocity_angle": false,
 
     "angular_velocity": 0,
-    "angular_velocity_randomness": 360,
+    "angular_velocity_randomness": 2000,
 
     "tint": [255, 0, 0, 255], "tint_randomness": 255,
     "tint_end": [255, 0, 0, 0],

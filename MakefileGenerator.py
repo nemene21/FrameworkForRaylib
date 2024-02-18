@@ -26,7 +26,7 @@ def generate_makefile():
     global makefile
 
     print("Starting...")
-    source_list_file = open("SourceList", "r")
+    source_list_file = open("SourceList.txt", "r")
     source_files = []
 
     for source in source_list_file.read().split("\n"):
