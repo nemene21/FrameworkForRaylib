@@ -59,6 +59,7 @@ protected:
 
     Vector2 position, force;
     float spawn_timer;
+    int left;
 
     // All particle system properties (loaded from a JSON file)
     float lifetime, lifetime_randomness;
@@ -85,6 +86,9 @@ public:
 
     void set_position(Vector2 position);
     Vector2 get_position();
+
+    void set_left(int new_left);
+    int get_left();
 
     void reload_data();
 

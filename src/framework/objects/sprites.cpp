@@ -47,8 +47,10 @@ ShaderPtr ShaderManager::get(std::string name) {
     return shader_map[name];
 }
 
-// Unloads shader
+// Unloads shade
 void ShaderManager::unload(std::string name) {
+    UnloadShader(*shader_map[name].get());
+
     shader_map.erase(name);
 } 
 
@@ -93,6 +95,8 @@ void ShaderManager::update_uniforms() {
 // Reloads all shaders
 void ShaderManager::reload() {
     for (auto& shader_pair: shader_map) {
+
+        UnloadShader(*shader_pair.second.get());
         *shader_pair.second.get() = LoadShader(NULL, (SHADER_DIR shader_pair.first).c_str());
     }
 }
@@ -120,6 +124,8 @@ TexturePtr TextureManager::get(std::string name) {
 
 // Unloads a texture
 void TextureManager::unload(std::string name) {
+
+    UnloadTexture(*texture_map[name].get());
     texture_map.erase(name);
 }
 
@@ -146,6 +152,8 @@ void TextureManager::unload_check() {
 // Reloads all textures
 void TextureManager::reload() {
     for (auto& texture_pair: texture_map) {
+
+        UnloadTexture(*texture_pair.second.get());
         *texture_pair.second.get() = LoadTexture((TEXTURE_DIR texture_pair.first).c_str());
     }
 }

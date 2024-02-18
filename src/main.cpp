@@ -14,7 +14,6 @@ int main() {
 
     Trail trail = Trail({0, 0}, 12, 16, WHITE, Color{255, 255, 255, 0});
     trail.random_offset = 8;
-    trail.add_force(Vector2{-1600., 0.});
 
     Sprite sprite = Sprite("test.png",
         Vector2{100, 100},
@@ -23,7 +22,6 @@ int main() {
     );
 
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
-    // particle_sys.add_force({0, 1000});
 
     sprite.set_shader("test.glsl");
 

@@ -76,11 +76,19 @@ void ParticleSystem::add_force(Vector2 adding) {
     force = Vector2Add(force, adding);
 }
 
-// Constructor
 void ParticleSystem::remove_force(Vector2 removing) {
     force = Vector2Subtract(force, removing);
 }
 
+// Left setter and getter
+void ParticleSystem::set_left(int new_left) {
+    left = new_left;
+}
+int ParticleSystem::get_left() {
+    return left;
+}
+
+// Reload particle system object from it's json object
 void ParticleSystem::reload_data() {
     json data = *particle_data.get();
 
@@ -141,12 +149,14 @@ void ParticleSystem::reload_data() {
     };
 }
 
+// Constructor
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
     // Load data
     particle_data = ParticleDataManager::get(data_filename);
     reload_data();
 
     force = Vector2{0, 0};
+    left = -1;
 }
 
 void ParticleSystem::spawn_particle() {
@@ -198,8 +208,10 @@ void ParticleSystem::process(float delta) {
     // Spawn particles when timer runs out
     spawn_timer -= delta;
 
-    if (spawn_timer <= 0) {
+    if (spawn_timer <= 0 && left != 0) {
         spawn_timer = 1.0 / (firerate + firerate_randomness*.5f * RandF2());
+
+        left--;
 
         for (int i = 0; i < amount; i++)
             spawn_particle();
