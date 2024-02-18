@@ -2,25 +2,25 @@
 #define COMPONENT_H
 
 #include <iostream>
-#include <vector>
+#include <set>
 #include <functional>
 #include <map>
+#include <vector>
+#include <set>
 
 class Entity;
 
-template<typename Type>
-using SignalFunction = std::function<void(Type)>;
+using SignalFunction = std::function<void(Entity*)>;
 
 // <Signals>
-template<typename Type>
 class Signal {
-private:
-    std::vector<SignalFunction<Type>> connected;
+protected:
+    std::vector<SignalFunction> callers;
 
 public:
-    void connect(const SignalFunction<Type>& function);
+    void connect(const SignalFunction& function);
 
-    void emit();
+    void emit(Entity* parent);
 };
 
 // <Component Superclass>
@@ -33,49 +33,35 @@ enum class ComponentType {
 
 class Component {
 public:
-    const Entity *entity;
     const ComponentType type;
+    Entity *entity;
 
     Component(ComponentType type, Entity *entity);
-
     ~Component();
 
-    virtual void process(float delta);
-};
-
-// <Health Component>
-
-class HealthComponent: public Component {
-private:
-    float hp, max_hp;
-
-public:
-    HealthComponent(Entity *entity, float hp, float max_hp);
-
-    const Signal<HealthComponent*> signal_died;
-
-    void hurt(float damage);
-
-    void heal(float add);
-
-    bool is_dead();
+    virtual void process(float delta) = 0;
 };
 
 // <Component Namespace>
-namespace Components {
-    extern std::map<ComponentType, std::vector<Component*>> component_types;
+typedef std::set<Component*> ComponentSet;
 
-    void add_component(Component *component);
+typedef std::map<ComponentType, ComponentSet>
+    ComponentMap;
 
-    void remove_component(Component *component);
+class ComponentManager {
+protected:
+    static ComponentMap component_map;
 
-    std::vector<Component*> query_components(ComponentType type);
+public:
+    static void add_component(Component *comp);
 
-    Component *query_component(ComponentType type, int index);
+    static void remove_component(Component *comp);
 
-    int component_type_count(ComponentType type);
+    static ComponentSet query_components(ComponentType type);
 
-    int component_count();
-}
+    static int component_type_count(ComponentType type);
+
+    static int component_count();
+};
 
 #endif
