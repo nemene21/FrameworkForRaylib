@@ -75,14 +75,6 @@ void ShaderManager::unload_check() {
     }
 }
 
-// Unload all shaders
-void ShaderManager::unload_all() {
-
-    for (auto& shader_pair: shader_map) {
-        unload(shader_pair.first);
-    }
-}
-
 // Updates uniforms global for all shaders (like time)
 void ShaderManager::update_uniforms() {
     float time = GetTime();
@@ -135,14 +127,6 @@ void TextureManager::unload(std::string name) {
 
     UnloadTexture(*texture_map[name].get());
     texture_map.erase(name);
-}
-
-// Unload all textures
-void TextureManager::unload_all() {
-
-    for (auto& texture_pair: texture_map) {
-        unload(texture_pair.first);
-    }
 }
 
 // Unloads all textures that aren't being referanced 

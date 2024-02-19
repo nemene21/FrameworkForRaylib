@@ -31,7 +31,6 @@ public:
 
     static void unload_check();
     static void unload_unused();
-    static void unload_all();
     static void reload();
 
     static void update_uniforms();
@@ -56,7 +55,6 @@ public:
 
     static void unload_check();
     static void unload_unused();
-    static void unload_all();
     static void reload();
 };
 

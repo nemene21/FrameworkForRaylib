@@ -10,7 +10,6 @@ Trail::Trail(
     color {color},
     fade_color {fade_color},
     tick {.025},
-    force {0, 0},
     timer {0}
 {
     if (fade_color == WHITE) // Defaults the fade color to no fade

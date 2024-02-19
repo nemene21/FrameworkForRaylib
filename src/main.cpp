@@ -33,30 +33,12 @@ int main() {
     RenderTexture2D foreground  = LoadRenderTexture(1920, 1080);
     RenderTexture2D composition = LoadRenderTexture(1920, 1080);
     // ToggleFullscreen();
-    SetTargetFPS(120);
-
-    typedef struct {
-        Vector2 pos;
-        int r, g, b, radius;
-    } Light;
-
-    Shader lighting_shader = LoadShader(NULL, "assets/shaders/lighting.glsl");
-    std::vector<Light> lights;
-    
-    Image light_data = GenImageColor(96*2, 1, BLACK);
-
-    lights.push_back(
-        Light{0, 0, 255, 255, 255, 20}
-    );
-
-    lights.push_back(
-        Light{200, 200, 255, 0, 0, 20}
-    );
+    // SetTargetFPS(120);
 
     Easing::InitEasingFuncs();
 
     // Test data
-    Trail trail = Trail({1920*.5, 1080*.5}, 12, 16, WHITE, Color{255, 255, 255, 0});
+    Trail trail = Trail({0, 0}, 12, 16, WHITE, Color{255, 255, 255, 0});
     trail.random_offset = 8;
 
     Sprite sprite = Sprite("test.png",
@@ -65,8 +47,6 @@ int main() {
         35
     );
     sprite.set_shader("test.glsl");
-
-    Sprite bg = Sprite("concept2.png", {1920*.5, 1080*.5});
 
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
 
@@ -97,11 +77,6 @@ int main() {
         ClearBackground({0, 0, 0, 0});
 
         // Object drawing test
-
-        EndShaderMode();
-
-        bg.draw();
-
         particle_sys.draw();
 
         trail.draw();
@@ -120,27 +95,6 @@ int main() {
             WHITE
         );
 
-        BeginShaderMode(lighting_shader);
-
-        for (size_t i = 0; i < lights.size(); i++) {
-            size_t ofst = i*8;
-
-            ((unsigned char*)light_data.data)[ofst    ] = (unsigned char)(lights[i].pos.x  / 1920.0 * 255.0);
-            ((unsigned char*)light_data.data)[ofst + 1] = (unsigned char)(lights[i].pos.y  / 1080.0 * 255.0);
-            ((unsigned char*)light_data.data)[ofst + 2] = (unsigned char)(lights[i].radius / 1920.0 * 255.0);
-        
-            ((unsigned char*)light_data.data)[ofst + 4] = (unsigned char)(lights[i].r);
-            ((unsigned char*)light_data.data)[ofst + 5] = (unsigned char)(lights[i].g);
-            ((unsigned char*)light_data.data)[ofst + 6] = (unsigned char)(lights[i].b);
-        }
-
-        Texture light_data_texture = LoadTextureFromImage(light_data);
-        SetShaderValue(lighting_shader, GetShaderLocation(lighting_shader, "lights"), &light_data_texture, SHADER_UNIFORM_SAMPLER2D);
-        UnloadTexture(light_data_texture);
-
-        int num_lights = lights.size();
-        SetShaderValue(lighting_shader, GetShaderLocation(lighting_shader, "num_lights"), &num_lights, SHADER_UNIFORM_INT);
-
         DrawTexturePro(foreground.texture,
             {0, 0, 1920, 1080},
             {0, 0, 1920, 1080},
@@ -148,7 +102,6 @@ int main() {
             0,
             WHITE
         );
-        EndShaderMode();
 
         EndTextureMode();
 
@@ -169,9 +122,10 @@ int main() {
     }
 
     // Unload remaining assets
-    TextureManager::unload_all();
-    ParticleDataManager::unload_all();
-    ShaderManager::unload_all();
+    TextureManager::unload_check();
+    ParticleDataManager::unload_check();
+    ShaderManager::unload_check();
+    ShaderManager::update_uniforms();
 
     CloseWindow();
 
