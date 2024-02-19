@@ -10,7 +10,7 @@
     "scale_ease": "bounce_out",
 
     "angle": 0, "angle_randomness": 360,
-    "velocity_angle": false,
+    "velocity_angle": true,
 
     "angular_velocity": 0,
     "angular_velocity_randomness": 2000,

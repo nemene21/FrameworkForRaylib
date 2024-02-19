@@ -338,7 +338,6 @@ RMAPI float Vector2LineAngle(Vector2 start, Vector2 end)
 {
     float result = 0.0f;
 
-    // TODO(10/9/2023): Currently angles move clockwise, determine if this is wanted behavior
     result = -atan2f(end.y - start.y, end.x - start.x);
 
     return result;

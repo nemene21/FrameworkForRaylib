@@ -33,9 +33,11 @@ int main() {
     RenderTexture2D foreground  = LoadRenderTexture(1920, 1080);
     RenderTexture2D composition = LoadRenderTexture(1920, 1080);
     // ToggleFullscreen();
-    // SetTargetFPS(120);
+    SetTargetFPS(120);
 
     Easing::InitEasingFuncs();
+
+    Shader post_processing = LoadShader(NULL, "assets/shaders/post_processing.glsl"); 
 
     // Test data
     Trail trail = Trail({0, 0}, 12, 16, WHITE, Color{255, 255, 255, 0});
@@ -48,10 +50,11 @@ int main() {
     );
     sprite.set_shader("test.glsl");
 
+    Sprite bg = Sprite{"concept2.png", Vector2{1920*.5, 1080*.5}};
+
     ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
 
     while (!WindowShouldClose()) {
-
         float delta = GetFrameTime();
 
         // Object processing test
@@ -69,7 +72,7 @@ int main() {
         BeginDrawing();
         BeginTextureMode(background);
 
-        ClearBackground(BLACK);
+        ClearBackground(Color{0, 0, 0, 255});
 
         EndTextureMode();
 
@@ -77,6 +80,9 @@ int main() {
         ClearBackground({0, 0, 0, 0});
 
         // Object drawing test
+        EndShaderMode();
+        bg.draw();
+
         particle_sys.draw();
 
         trail.draw();
@@ -100,18 +106,20 @@ int main() {
             {0, 0, 1920, 1080},
             {0, 0},
             0,
-            WHITE
+            Color{255, 255, 255, (unsigned char)(150)}
         );
 
         EndTextureMode();
-
+        
+        BeginShaderMode(post_processing);
         DrawTexturePro(composition.texture,
             {0, 0, 1920, 1080},
             {0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
             {0, 0},
             0,
-            WHITE
+            Color{255, 255, 255}
         );
+        EndShaderMode();
 
         EndDrawing();
 
