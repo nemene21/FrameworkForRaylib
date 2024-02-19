@@ -11,6 +11,11 @@ const float warp = 1.0;
 uniform sampler2D texture0;
 uniform float time;
 
+uniform sampler2D noise_texture;
+const float noise_zoom = 0.5;
+const float noise_strength = 0.0075;
+const float noise_anim_speed = 6.0;
+
 out vec4 FragColor;
 
 float rand(vec2 co){
@@ -40,6 +45,11 @@ void main() {
     vignette = pow(vignette * vignette_multiplier, vignette_exp);
     vignette = max(min(vignette, 1.0), 0.0);
 
+    // -- Noise offset
+    float noise_anim = floor(time * noise_anim_speed);
+    vec2 noise_ofst = texture(noise_texture, fragTexCoord * noise_zoom + rand(vec2(noise_anim, noise_anim))).rg * noise_strength;
+
+    warped_uv += noise_ofst;
     vec4 pixel = texture(texture0, warped_uv);
     pixel.rgb *= vignette;
 

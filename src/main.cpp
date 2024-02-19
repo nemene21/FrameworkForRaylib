@@ -38,6 +38,7 @@ int main() {
     Easing::InitEasingFuncs();
 
     Shader post_processing = LoadShader(NULL, "assets/shaders/post_processing.glsl"); 
+    Texture2D noise_texture = LoadTexture("assets/images/noise.png");
 
     // Test data
     Trail trail = Trail({0, 0}, 12, 16, WHITE, Color{255, 255, 255, 0});
@@ -85,6 +86,8 @@ int main() {
 
         particle_sys.draw();
 
+        DrawTextureCentered(&noise_texture, {200, 200});
+
         trail.draw();
 
         sprite.draw();
@@ -110,8 +113,13 @@ int main() {
         );
 
         EndTextureMode();
+
+        float timer = GetTime();
+        SetShaderValue(post_processing, GetShaderLocation(post_processing, "time"), &timer, SHADER_UNIFORM_FLOAT);
         
         BeginShaderMode(post_processing);
+        SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), noise_texture);
+    
         DrawTexturePro(composition.texture,
             {0, 0, 1920, 1080},
             {0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
@@ -134,6 +142,8 @@ int main() {
     ParticleDataManager::unload_check();
     ShaderManager::unload_check();
     ShaderManager::update_uniforms();
+
+    UnloadTexture(noise_texture);
 
     CloseWindow();
 
