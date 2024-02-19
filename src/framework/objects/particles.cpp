@@ -51,6 +51,15 @@ void ParticleDataManager::unload_check() {
         unload_unused();
     }
 }
+
+// Unloads all shaders
+void ParticleDataManager::unload_all() {
+
+    for (auto& particle_pair: particle_data_map) {
+        unload(particle_pair.first);
+    }
+}
+
 // Hot reloading
 void ParticleDataManager::reload() {
     for (auto& particle_pair: particle_data_map) {
