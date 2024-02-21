@@ -67,7 +67,7 @@ def generate_makefile():
 
     for source in source_files:
         tab()
-        add("del " + OBJ_DIR + "/" + get_filename(source) + ".o ")
+        add("del /S /Q " + OBJ_DIR + "\\" + get_filename(source) + ".o")
         next()
 
     print("Generated...")
