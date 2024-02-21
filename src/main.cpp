@@ -2,9 +2,7 @@
 #include <time.h>
 #include <framework.h>
 
-void process() {
-    float delta = GetFrameTime();
-
+void process(float delta) {
     // Processing data managers
     TextureManager::unload_check();
     ParticleDataManager::unload_check();
@@ -17,10 +15,17 @@ void process() {
         ShaderManager::reload();
         ParticleDataManager::reload();
     }
+
+    SceneManager::scene_on->process(delta);
+    SceneManager::scene_on->process_entities(delta);
 }
 
-void draw() {
+void draw_background(float delta) {
+    SceneManager::scene_on->draw_entities(delta);
+}
 
+void draw_foreground(float delta) {
+    SceneManager::scene_on->draw_entities(delta);
 }
 
 int main() {
@@ -50,18 +55,20 @@ int main() {
         float delta = GetFrameTime();
 
         // Object processing test
-        SceneManager::scene_on->process(delta);
-        SceneManager::scene_on->process_entities(delta);
-        process();
+        process(delta);
 
         // Drawing start
         BeginDrawing();
+
+        // Background
         BeginTextureMode(background);
 
         ClearBackground(Color{0, 0, 0, 255});
+        draw_background(delta);
 
         EndTextureMode();
 
+        // Foreground
         BeginTextureMode(foreground);
         ClearBackground({0, 0, 0, 0});
 
@@ -69,9 +76,9 @@ int main() {
         EndShaderMode();
         bg.draw();
 
-        DrawCircle(100, 100, 40, WHITE);
+        draw_foreground(delta);
 
-        SceneManager::scene_on->draw_entities(delta);
+        DrawCircle(100, 100, 40, WHITE);
 
         EndTextureMode();
         BeginTextureMode(composition);
