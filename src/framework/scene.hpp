@@ -6,7 +6,9 @@
 
 class Scene {
 public:
-    Scene();
+    std::string name;
+
+    Scene(std::string name);
 
     virtual void process(float delta);
 
@@ -23,6 +25,19 @@ class TestScene: public Scene {
 public:
     TestScene();
     void restart();
+};
+
+typedef std::map<std::string, Scene*> SceneMap;
+class SceneManager {
+public:
+    static SceneMap scene_map;
+    static Scene* scene_on;
+
+    static void setup_scene(Scene* scene);
+    static void unload(std::string name);
+    static void unload_all();
+
+    static void set_scene(std::string name);
 };
 
 #endif

@@ -60,6 +60,14 @@ void ParticleDataManager::reload() {
     }
 }
 
+// Unloads all particle data objects
+void ParticleDataManager::unload_all() {
+    for (auto& particle_pair: particle_data_map) {
+
+        unload(particle_pair.first);
+    }
+}
+
 // <Particle System>
 
 // Position setter and getter

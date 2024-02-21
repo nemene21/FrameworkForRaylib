@@ -4,9 +4,7 @@ TestEntity::TestEntity():
     sprite {Sprite("test.png")},
     particle_sys {ParticleSystem("test.json")}
 {
-    std::cout << "test test" << std::endl;
     trail_vfx = Trail({0, 0}, 24, 24, WHITE, {255, 255, 255, 0});
-    std::cout << "???" << std::endl;
 
     add_component(
         new TransformComponent(this)

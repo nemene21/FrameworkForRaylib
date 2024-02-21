@@ -101,6 +101,14 @@ void ShaderManager::reload() {
     }
 }
 
+// Unloads all particle data objects
+void ShaderManager::unload_all() {
+    for (auto& shader_pair: shader_map) {
+
+        unload(shader_pair.first);
+    }
+}
+
 // <Texture Manager>
 std::map<std::string, TexturePtr> TextureManager::texture_map;
 float TextureManager::timer = 0.0f;
@@ -157,6 +165,15 @@ void TextureManager::reload() {
         *texture_pair.second.get() = LoadTexture((TEXTURE_DIR texture_pair.first).c_str());
     }
 }
+
+// Unloads all textures
+void TextureManager::unload_all() {
+    for (auto& texture_pair: texture_map) {
+
+        unload(texture_pair.first);
+    }
+}
+
 // <Sprite Class>
 
 // Sprite class constructor

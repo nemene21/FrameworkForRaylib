@@ -56,6 +56,6 @@ void main() {
     FragColor = pixel;
 
     if (warped_uv.y > 1.0 || warped_uv.x < 0.0 || warped_uv.x > 1.0 || warped_uv.y < 0.0) {
-        FragColor = vec4(.0, .0, .0,1.0);
+        FragColor = vec4(.0, .0, .0, 1.);
     }
 }

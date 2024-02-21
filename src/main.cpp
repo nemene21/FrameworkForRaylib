@@ -37,9 +37,10 @@ int main() {
 
     Easing::InitEasingFuncs();
 
-    TestScene test_scene;
+    SceneManager::setup_scene(new TestScene());
+    SceneManager::set_scene("test_scene");
 
-    Shader post_processing = LoadShader(NULL, "assets/shaders/post_processing.glsl"); 
+    ShaderPtr post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     Texture2D noise_texture = LoadTexture("assets/images/noise.png");
 
     // Test data
@@ -49,7 +50,8 @@ int main() {
         float delta = GetFrameTime();
 
         // Object processing test
-        test_scene.process_entities(delta);
+        SceneManager::scene_on->process(delta);
+        SceneManager::scene_on->process_entities(delta);
         process();
 
         // Drawing start
@@ -67,7 +69,9 @@ int main() {
         EndShaderMode();
         bg.draw();
 
-        test_scene.draw_entities(delta);
+        DrawCircle(100, 100, 40, WHITE);
+
+        SceneManager::scene_on->draw_entities(delta);
 
         EndTextureMode();
         BeginTextureMode(composition);
@@ -85,12 +89,13 @@ int main() {
             {0, 0, 1920, 1080},
             {0, 0},
             0,
-            Color{255, 255, 255, (unsigned char)(150)}
+            WHITE
         );
 
         EndTextureMode();
 
         float timer = GetTime();
+        Shader post_processing = *post_processing_ptr.get();
         SetShaderValue(post_processing, GetShaderLocation(post_processing, "time"), &timer, SHADER_UNIFORM_FLOAT);
         
         BeginShaderMode(post_processing);
@@ -114,10 +119,10 @@ int main() {
     }
 
     // Unload remaining assets
-    TextureManager::unload_check();
-    ParticleDataManager::unload_check();
-    ShaderManager::unload_check();
-    ShaderManager::update_uniforms();
+    TextureManager::unload_all();
+    ParticleDataManager::unload_all();
+    ShaderManager::unload_all();
+    SceneManager::unload_all();
 
     UnloadTexture(noise_texture);
 

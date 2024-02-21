@@ -38,14 +38,14 @@ Build.exe: object_files/main.o object_files/entity.o object_files/component.o ob
 
 .PHONY: clean
 clean:
-	del object_files/main.o 
-	del object_files/entity.o 
-	del object_files/component.o 
-	del object_files/scene.o 
-	del object_files/misc.o 
-	del object_files/health_component.o 
-	del object_files/transform_component.o 
-	del object_files/trails.o 
-	del object_files/sprites.o 
-	del object_files/particles.o 
-	del object_files/test_entity.o 
+	del /S /Q object_files\main.o
+	del /S /Q object_files\entity.o
+	del /S /Q object_files\component.o
+	del /S /Q object_files\scene.o
+	del /S /Q object_files\misc.o
+	del /S /Q object_files\health_component.o
+	del /S /Q object_files\transform_component.o
+	del /S /Q object_files\trails.o
+	del /S /Q object_files\sprites.o
+	del /S /Q object_files\particles.o
+	del /S /Q object_files\test_entity.o

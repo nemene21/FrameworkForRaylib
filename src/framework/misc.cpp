@@ -4,6 +4,11 @@ bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
 }
 
+std::ostream& operator<<(std::ostream& str, Vector2& vec) {
+    str << "vec(" << vec.x << ", " << vec.y << ")"; 
+    return str;
+}
+
 // Lerps
 Color Lerp(Color a, Color b, float c) {
     Color color;

@@ -10,6 +10,7 @@ Trail::Trail(
     color {color},
     fade_color {fade_color},
     tick {.025},
+    force {0, 0},
     timer {0}
 {
     if (fade_color == WHITE) // Defaults the fade color to no fade
@@ -47,18 +48,21 @@ void Trail::spawn_point() {
     offset = Vector2Rotate(offset, RandF() * PI * 2);
 
     new_point.position = Vector2Add(position, offset);
-    new_point.velocity = Vector2{.0, .0};
+    new_point.velocity = Vector2{0.f, 0.f};
 
     points.push(new_point);
 }
 
 // Processes a point
 void Trail::process_point(TrailPoint& point, float delta) {
-    point.velocity = Vector2Add(point.velocity,
+
+    point.velocity = Vector2Add(
+        point.velocity,
         Vector2Multiply(force, Vector2{delta, delta})
     );
 
-    point.position = Vector2Add(point.position,
+    point.position = Vector2Add(
+        point.position,
         Vector2Multiply(point.velocity, Vector2{delta, delta})
     );
 }

@@ -95,6 +95,15 @@ def run():
         print("Game didnt' Run :(")
     print("")
 
+def clean():
+    result = subprocess.run("make clean", shell=True, cwd="build")
+
+    if result:
+        print("Cleaned!")
+    else:
+        print("Cleanedn't :(")
+    print("")
+
 window = tkinter.Tk()
 window.configure(bg='#333333')
 window.geometry("512x512")
@@ -110,5 +119,8 @@ make_button.place(x = 16, y = 16 + 80)
 
 run_button = tkinter.Button(window, text="Run", command=run, font=font)
 run_button.place(x = 16, y = 16 + 160)
+
+clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
+clean_button.place(x = 16, y = 16 + 418)
 
 window.mainloop()

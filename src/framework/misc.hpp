@@ -11,6 +11,8 @@
 
 bool operator==(Color first, Color other);
 
+std::ostream& operator<<(std::ostream& str, Vector2& vec);
+
 Color Lerp(Color a, Color b, float c);
 Vector2 Lerp(Vector2 a, Vector2 b, float c);
 
