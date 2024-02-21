@@ -37,37 +37,20 @@ int main() {
 
     Easing::InitEasingFuncs();
 
+    TestScene test_scene;
+
     Shader post_processing = LoadShader(NULL, "assets/shaders/post_processing.glsl"); 
     Texture2D noise_texture = LoadTexture("assets/images/noise.png");
 
     // Test data
-    Trail trail = Trail({0, 0}, 12, 16, WHITE, Color{255, 255, 255, 0});
-    trail.random_offset = 8;
-
-    Sprite sprite = Sprite("test.png",
-        Vector2{100, 100},
-        Vector2{1, .5},
-        35
-    );
-    sprite.set_shader("test.glsl");
-
     Sprite bg = Sprite{"concept2.png", Vector2{1920*.5, 1080*.5}};
-
-    ParticleSystem particle_sys = ParticleSystem("test.json", {200, 200});
 
     while (!WindowShouldClose()) {
         float delta = GetFrameTime();
 
         // Object processing test
+        test_scene.process_entities(delta);
         process();
-
-        particle_sys.set_position(GetMousePosition());
-        particle_sys.process(delta);
-
-        trail.set_position(GetMousePosition());
-        trail.process(delta);
-
-        sprite.set_position(GetMousePosition());
 
         // Drawing start
         BeginDrawing();
@@ -84,14 +67,7 @@ int main() {
         EndShaderMode();
         bg.draw();
 
-        particle_sys.draw();
-
-        DrawTextureCentered(&noise_texture, {200, 200});
-
-        trail.draw();
-
-        sprite.draw();
-        draw();
+        test_scene.draw_entities(delta);
 
         EndTextureMode();
         BeginTextureMode(composition);

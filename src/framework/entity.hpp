@@ -9,19 +9,25 @@
 
 class Entity {
 protected:
-    std::map<ComponentType, Component*> components;
+    std::map<ComponentType, Component*> comps;
     std::unordered_set<std::string> groups;
 
-    virtual void process_components(float delta);
+    bool death_queued;
 
 public:
     Entity();
+    virtual ~Entity();
+
+    virtual void process_components(float delta);
  
     virtual void join_group(std::string group);
     virtual void leave_group(std::string group);
     virtual bool is_in_group(std::string group);
 
-    virtual void add_component(Component &comp);
+    virtual void queue_free();
+    virtual bool is_death_queued();
+
+    virtual void add_component(Component* comp);
     virtual void remove_component(ComponentType type);
 
     virtual void process(float delta) = 0;

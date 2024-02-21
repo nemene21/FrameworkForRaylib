@@ -1,6 +1,5 @@
-
-#ifndef TRAILS_H
-#define TRAILS_H
+#ifndef TRAILS_HEADER
+#define TRAILS_HEADER
 
 #include <raylib.h>
 #include <raymath.h>

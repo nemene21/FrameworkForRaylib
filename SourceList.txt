@@ -2,10 +2,14 @@ main
 
 framework/entity
 framework/component
+framework/scene
 framework/misc
 
 framework/components/health_component
+framework/components/transform_component
 
 framework/objects/trails
 framework/objects/sprites
 framework/objects/particles
+
+framework/entities/test_entity

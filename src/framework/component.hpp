@@ -24,12 +24,14 @@ public:
 };
 
 // <Component Superclass>
-enum class ComponentType {
+enum ComponentType {
     TRANSFORM,
     VELOCITY,
     HEALTH,
     COUNT,
 };
+
+typedef ComponentType CompType;
 
 class Component {
 public:
@@ -39,7 +41,7 @@ public:
     Component(ComponentType type, Entity *entity);
     ~Component();
 
-    virtual void process(float delta) = 0;
+    virtual void process(float delta);
 };
 
 // <Component Namespace>

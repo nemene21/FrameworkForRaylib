@@ -24,6 +24,8 @@ Component::~Component() {
     ComponentManager::remove_component(this);
 }
 
+void Component::process(float delta) {}
+
 // <Component manager>
 ComponentMap ComponentManager::component_map {};
 

@@ -188,6 +188,15 @@ void Sprite::set_position(Vector2 new_pos) {
 void Sprite::translate(Vector2 adding) {
     position = Vector2Add(position, adding);
 }
+
+// Scale setter/getter
+void Sprite::set_scale(Vector2 new_scale) {
+    scale = new_scale;
+}
+Vector2 Sprite::get_scale() {
+    return scale;
+}
+
 // Draws the transformed texture with the shader (if it has one)
 void Sprite::draw() {
 

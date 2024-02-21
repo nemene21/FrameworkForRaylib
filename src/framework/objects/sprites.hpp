@@ -59,15 +59,10 @@ public:
 };
 
 class Sprite {
-protected:
+public:
     Vector2 position, scale;
     float angle;
 
-    ShaderPtr shader;
-    TexturePtr texture;
-    Color tint;
-    
-public:
     Sprite(std::string texture_name, Vector2 position={0,0}, Vector2 scale={1,1}, float angle=0);
 
     void set_shader(std::string shader_name);
@@ -76,7 +71,15 @@ public:
     void set_position(Vector2 new_pos);
     void translate(Vector2 adding);
 
+    Vector2 get_scale();
+    void set_scale(Vector2 new_scale);
+
     void draw();
+    
+protected:
+    ShaderPtr shader;
+    TexturePtr texture;
+    Color tint;
 };
 
 #endif
