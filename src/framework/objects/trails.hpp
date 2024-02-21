@@ -34,7 +34,7 @@ public:
         float width=0,
         int max_points=16,
         Color color=WHITE,
-        Color fade_color=WHITE
+        Color fade_color={0, 0, 0, 0}
     );
     void set_tick(float tick);
 

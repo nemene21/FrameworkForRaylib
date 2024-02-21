@@ -8,7 +8,6 @@
 #include <map>
 #include <functional>
 
-
 bool operator==(Color first, Color other);
 
 std::ostream& operator<<(std::ostream& str, Vector2& vec);

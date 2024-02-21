@@ -2,9 +2,9 @@
 
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
-    particle_sys {ParticleSystem("test.json")}
+    particle_sys {ParticleSystem("test.json")},
+    trail_vfx {Trail({0, 0}, 24, 24, RED)}
 {
-    trail_vfx = Trail({0, 0}, 24, 24, WHITE, {255, 255, 255, 0});
 
     add_component(
         new TransformComponent(this)

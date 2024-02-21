@@ -8,14 +8,11 @@ Trail::Trail(
     width {width},
     max_points {max_points},
     color {color},
-    fade_color {fade_color},
+    fade_color {0, 0, 0, 0},
     force {0, 0},
     tick {.025},
     timer {0}
-{
-    if (fade_color == WHITE) // Defaults the fade color to no fade
-        fade_color = color;
-}
+    {}
 
 // For adders
 void Trail::add_force(Vector2 new_force) {
@@ -69,15 +66,6 @@ void Trail::process_point(TrailPoint& point, float delta) {
 
 // Processes the trail object
 void Trail::process(float delta) {
-
-    // New point timer
-    timer -= delta;
-    if (timer < .0) {
-        timer = tick;
-
-        spawn_point();
-    }
-
     // Process all points
     for (int i = 0; i < (int)points.size(); i++) {
 
@@ -86,6 +74,14 @@ void Trail::process(float delta) {
         
         points.pop();
         points.push(point);
+    }
+
+    // New point timer
+    timer -= delta;
+    if (timer < .0) {
+        timer = tick;
+
+        spawn_point();
     }
 
     // Remove point if the point amount is too large
@@ -106,18 +102,19 @@ void Trail::draw() {
         TrailPoint& other_point = points.front();
         points.push(first_point);
 
+        // Animation and drawing calculations
+        float anim = i/(float)point_count;
+        Color color_calc = Lerp(fade_color, color, anim); // Get animated color
+
         // Draw line and circle if its not the last point
         if (i != point_count-1) {
-            float anim = i/(float)point_count;
-
-            Color color_calc = Lerp(fade_color, color, anim); // Get animated color
 
             DrawLineEx(
                 first_point.position,
                 other_point.position,
                 width*anim, color_calc
             );
-            DrawCircleV(first_point.position, width*anim * .5, color_calc);
         }
+        DrawCircleV(first_point.position, width*anim * .5, color_calc);
     }
 }
