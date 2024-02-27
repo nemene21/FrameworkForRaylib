@@ -29,6 +29,8 @@ public:
 
     virtual void add_component(Component* comp);
     virtual void remove_component(ComponentType type);
+    virtual bool has_component(ComponentType type);
+    virtual Component *get_component(ComponentType type);
 
     virtual void process(float delta) = 0;
     virtual void draw(float delta) = 0;

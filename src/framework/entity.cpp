@@ -44,3 +44,11 @@ void Entity::add_component(Component *comp) {
 void Entity::remove_component(ComponentType type) {
     comps.erase(type);
 }
+
+bool Entity::has_component(ComponentType type) {
+    return (comps.find(type) != comps.end());
+}
+
+Component *Entity::get_component(ComponentType type) {
+    return comps[type];
+}
