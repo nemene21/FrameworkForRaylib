@@ -23,3 +23,7 @@ void TransformComponent::translate_y(float adding) {
 void TransformComponent::process(float delta) {
     position = Vector2Add(position, Vector2Multiply(velocity, {delta, delta}));
 }
+
+void TransformComponent::interpolate_velocity(Vector2 to, float speed) {
+    velocity = Lerpi(velocity, to, speed);
+}

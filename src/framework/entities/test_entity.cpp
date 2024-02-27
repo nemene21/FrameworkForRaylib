@@ -25,10 +25,12 @@ void TestEntity::process(float delta) {
     trail_vfx.process(delta);
 
     TransformComponent *transform_comp = (TransformComponent*)comps[CompType::TRANSFORM];
-    transform_comp->velocity = Vector2Multiply({
-        float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A)),
-        float(IsKeyDown(KEY_S)) - float(IsKeyDown(KEY_W))
-    }, {300, 300});
+    transform_comp->interpolate_velocity(
+        Vector2Multiply({
+            float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A)),
+            float(IsKeyDown(KEY_S)) - float(IsKeyDown(KEY_W))
+        }, {700, 700}
+    ), 15);
 
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);

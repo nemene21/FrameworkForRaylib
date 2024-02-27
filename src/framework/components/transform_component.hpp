@@ -4,6 +4,7 @@
 #include <component.hpp>
 #include <raylib.h>
 #include <raymath.h>
+#include <misc.hpp>
 
 class TransformComponent: public Component {
 public:
@@ -15,6 +16,8 @@ public:
     void translate(Vector2 adding);
     void translate_x(float adding);
     void translate_y(float adding);
+
+    void interpolate_velocity(Vector2 to, float speed);
 
     void process(float delta);
 };

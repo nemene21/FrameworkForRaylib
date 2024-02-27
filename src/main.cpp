@@ -72,8 +72,9 @@ int main() {
         BeginTextureMode(foreground);
         ClearBackground({0, 0, 0, 0});
 
-        if (camera != nullptr)
+        if (camera != nullptr) {
             BeginMode2D(*camera);
+        }
 
         // Object drawing test
         EndShaderMode();
@@ -105,10 +106,22 @@ int main() {
 
         float timer = GetTime();
         Shader post_processing = *post_processing_ptr.get();
+        BeginShaderMode(post_processing);
+
         SetShaderValue(post_processing, GetShaderLocation(post_processing, "time"), &timer, SHADER_UNIFORM_FLOAT);
         
-        BeginShaderMode(post_processing);
         SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), noise_texture);
+
+        if (camera != nullptr) {
+            Vector2 camera_offset = Vector2Divide(camera->target, res);
+
+            SetShaderValue(
+                post_processing,
+                GetShaderLocation(post_processing, "camera_offset"),
+                &camera_offset,
+                SHADER_ATTRIB_VEC2
+            );
+        }
     
         DrawTexturePro(composition.texture,
             {0, 0, res.x, res.y},

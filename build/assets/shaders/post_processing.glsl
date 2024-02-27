@@ -13,8 +13,10 @@ uniform float time;
 
 uniform sampler2D noise_texture;
 const float noise_zoom = 0.5;
-const float noise_strength = 0.0075;
+const float noise_strength = 0.009;
 const float noise_anim_speed = 6.0;
+
+uniform vec2 camera_offset = vec2(0, 0);
 
 out vec4 FragColor;
 
@@ -47,7 +49,11 @@ void main() {
 
     // -- Noise offset
     float noise_anim = floor(time * noise_anim_speed);
-    vec2 noise_ofst = texture(noise_texture, fragTexCoord * noise_zoom + rand(vec2(noise_anim, noise_anim))).rg * noise_strength;
+     
+    vec2 noise_ofst = texture(noise_texture,
+        (fragTexCoord + camera_offset) * noise_zoom + rand(vec2(noise_anim, noise_anim))
+
+    ).rg * noise_strength;
 
     warped_uv += noise_ofst;
     vec4 pixel = texture(texture0, warped_uv);

@@ -16,7 +16,7 @@ CameraComponent::CameraComponent(Entity *entity, Vector2 position):
     desired_position {position},
     position {position},
     offset {0, 0},
-    smoothing_speed {5}
+    smoothing_speed {10}
 {
     camera.offset = position;
 }
