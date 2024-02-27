@@ -7,7 +7,7 @@
 
 class TransformComponent: public Component {
 public:
-    Vector2 position, scale;
+    Vector2 position, scale, velocity;
     float angle;
 
     TransformComponent(Entity *entity, Vector2 position = {0, 0}, Vector2 scale = {1, 1}, float angle = 0);
@@ -15,6 +15,8 @@ public:
     void translate(Vector2 adding);
     void translate_x(float adding);
     void translate_y(float adding);
+
+    void process(float delta);
 };
 
 #endif

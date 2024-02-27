@@ -1,5 +1,8 @@
 #include <misc.hpp>
 
+const Vector2 res {1920, 1080};
+const Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
+
 bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
 }
@@ -24,6 +27,12 @@ Vector2 Lerp(Vector2 a, Vector2 b, float c) {
         Lerp(a.x, b.x, c),
         Lerp(a.y, b.y, c)
     };
+}
+
+Vector2 Lerpi(Vector2 a, Vector2 b, float speed) {
+    float blend = pow(GetFrameTime() * speed, .5f);
+
+    return Lerp(b, a, blend);
 }
 
 // Random float from 0 to 1

@@ -21,7 +21,7 @@ void process(float delta) {
 }
 
 void draw_background(float delta) {
-    SceneManager::scene_on->draw_entities(delta);
+
 }
 
 void draw_foreground(float delta) {
@@ -32,11 +32,11 @@ int main() {
     srand(time(NULL));
 
     // Rendering init
-    InitWindow(1920, 1080, "Raylib Window!");
+    InitWindow(res.x, res.y, "Raylib Window!");
 
-    RenderTexture2D background  = LoadRenderTexture(1920, 1080);
-    RenderTexture2D foreground  = LoadRenderTexture(1920, 1080);
-    RenderTexture2D composition = LoadRenderTexture(1920, 1080);
+    RenderTexture2D background  = LoadRenderTexture(res.x, res.y);
+    RenderTexture2D foreground  = LoadRenderTexture(res.x, res.y);
+    RenderTexture2D composition = LoadRenderTexture(res.x, res.y);
     // ToggleFullscreen();
     SetTargetFPS(120);
 
@@ -49,11 +49,11 @@ int main() {
     Texture2D noise_texture = LoadTexture("assets/images/noise.png");
 
     // Test data
-    Sprite bg = Sprite{"concept2.png", Vector2{1920*.5, 1080*.5}};
+    Sprite bg = Sprite{"concept2.png", Vector2{0, 0}};
 
     while (!WindowShouldClose()) {
         float delta = GetFrameTime();
-
+  
         // Object processing test
         process(delta);
 
@@ -72,28 +72,30 @@ int main() {
         BeginTextureMode(foreground);
         ClearBackground({0, 0, 0, 0});
 
+        if (camera != nullptr)
+            BeginMode2D(*camera);
+
         // Object drawing test
         EndShaderMode();
         bg.draw();
 
         draw_foreground(delta);
 
-        DrawCircle(100, 100, 40, WHITE);
-
+        EndMode2D();        
         EndTextureMode();
         BeginTextureMode(composition);
 
         DrawTexturePro(background.texture,
-            {0, 0, 1920, 1080},
-            {0, 0, 1920, 1080},
+            {0, 0, res.x, res.y},
+            {0, 0, res.x, res.y},
             {0, 0},
             0,
             WHITE
         );
 
         DrawTexturePro(foreground.texture,
-            {0, 0, 1920, 1080},
-            {0, 0, 1920, 1080},
+            {0, 0, res.x, res.y},
+            {0, 0, res.x, res.y},
             {0, 0},
             0,
             WHITE
@@ -109,7 +111,7 @@ int main() {
         SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), noise_texture);
     
         DrawTexturePro(composition.texture,
-            {0, 0, 1920, 1080},
+            {0, 0, res.x, res.y},
             {0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
             {0, 0},
             0,

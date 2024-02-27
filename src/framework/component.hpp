@@ -28,6 +28,7 @@ enum ComponentType {
     TRANSFORM,
     VELOCITY,
     HEALTH,
+    CAMERA,
     COUNT,
 };
 
@@ -39,7 +40,7 @@ public:
     Entity *entity;
 
     Component(ComponentType type, Entity *entity);
-    ~Component();
+    virtual ~Component();
 
     virtual void process(float delta);
 };

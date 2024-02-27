@@ -4,6 +4,7 @@ TransformComponent::TransformComponent(Entity *entity, Vector2 position, Vector2
     Component(ComponentType::TRANSFORM, entity),
     position {position},
     scale {scale},
+    velocity {0, 0},
     angle {angle}
     {}
 
@@ -17,4 +18,8 @@ void TransformComponent::translate_x(float adding) {
 
 void TransformComponent::translate_y(float adding) {
     position.y += adding;
+}
+
+void TransformComponent::process(float delta) {
+    position = Vector2Add(position, Vector2Multiply(velocity, {delta, delta}));
 }

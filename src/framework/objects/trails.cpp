@@ -8,7 +8,7 @@ Trail::Trail(
     width {width},
     max_points {max_points},
     color {color},
-    fade_color {0, 0, 0, 0},
+    fade_color {fade_color},
     force {0, 0},
     tick {.025},
     timer {0}
@@ -115,6 +115,6 @@ void Trail::draw() {
                 width*anim, color_calc
             );
         }
-        DrawCircleV(first_point.position, width*anim * .5, color_calc);
+        // DrawCircleV(first_point.position, width*anim * .5, color_calc);
     }
 }

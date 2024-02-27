@@ -20,6 +20,7 @@
 // Components
 #include <health_component.hpp>
 #include <transform_component.hpp>
+#include <camera_component.hpp>
 
 // Entities
 #include <test_entity.hpp>

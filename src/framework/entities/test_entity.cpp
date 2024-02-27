@@ -2,9 +2,9 @@
 
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
-    particle_sys {ParticleSystem("test.json")},
-    trail_vfx {Trail({0, 0}, 24, 24, RED)}
+    particle_sys {ParticleSystem("test.json")}
 {
+    trail_vfx = Trail({0, 0}, 24, 24, RED, {255, 0, 0, 0});
 
     add_component(
         new TransformComponent(this)
@@ -12,6 +12,12 @@ TestEntity::TestEntity():
     add_component(
         new HealthComponent(this, 10)
     );
+    CameraComponent *camera_comp = new CameraComponent(this);
+    add_component(
+        camera_comp
+    );
+
+    CameraManager::bind_camera(camera_comp->get_camera());
 }
 
 void TestEntity::process(float delta) {
@@ -19,7 +25,10 @@ void TestEntity::process(float delta) {
     trail_vfx.process(delta);
 
     TransformComponent *transform_comp = (TransformComponent*)comps[CompType::TRANSFORM];
-    transform_comp->position = GetMousePosition();
+    transform_comp->velocity = Vector2Multiply({
+        float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A)),
+        float(IsKeyDown(KEY_S)) - float(IsKeyDown(KEY_W))
+    }, {300, 300});
 
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);
