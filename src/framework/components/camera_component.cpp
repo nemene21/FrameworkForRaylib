@@ -16,7 +16,7 @@ CameraComponent::CameraComponent(Entity *entity, Vector2 position):
     desired_position {position},
     position {position},
     offset {0, 0},
-    smoothing_speed {100}
+    smoothing_speed {5}
 {
     camera.offset = position;
 }
@@ -30,7 +30,7 @@ void CameraComponent::process(float delta) {
 
     position = Lerpi(position, desired_position, smoothing_speed);
 
-    camera.target = Vector2Add(desired_position, offset);
+    camera.target = Vector2Add(position, offset);
     camera.target = Vector2Subtract(camera.target, half_res);
 
     camera.rotation = 0;

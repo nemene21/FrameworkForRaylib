@@ -30,7 +30,7 @@ Vector2 Lerp(Vector2 a, Vector2 b, float c) {
 }
 
 Vector2 Lerpi(Vector2 a, Vector2 b, float speed) {
-    float blend = pow(GetFrameTime() * speed, .5f);
+    float blend = pow(.5f, GetFrameTime() * speed);
 
     return Lerp(b, a, blend);
 }
