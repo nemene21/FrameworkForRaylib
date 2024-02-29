@@ -4,7 +4,7 @@ TestEntity::TestEntity():
     sprite {Sprite("test.png")},
     particle_sys {ParticleSystem("test.json")}
 {
-    trail_vfx = Trail({0, 0}, 24, 24, RED, {255, 0, 0, 0});
+    trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
 
     add_component(
         new TransformComponent(this)
@@ -24,7 +24,7 @@ void TestEntity::process(float delta) {
     particle_sys.process(delta);
     trail_vfx.process(delta);
 
-    TransformComponent *transform_comp = (TransformComponent*)comps[CompType::TRANSFORM];
+    TransformComponent *transform_comp = (TransformComponent*)get_component(CompType::TRANSFORM);
     transform_comp->interpolate_velocity(
         Vector2Multiply({
             float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A)),
@@ -41,6 +41,12 @@ void TestEntity::process(float delta) {
         1.f + (float)cos(GetTime()*PI) * 0.5f
     });
     sprite.angle += delta * 180;
+
+    if (IsKeyPressed(KEY_SPACE)) {
+        CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
+        camera->shake(64, 0.25);
+        std::cout << "Shaking!!!" << std::endl;
+    }
 }
 
 void TestEntity::draw(float delta) {

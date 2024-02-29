@@ -41,6 +41,7 @@ int main() {
     SetTargetFPS(120);
 
     Easing::InitEasingFuncs();
+    CameraManager::init();
 
     SceneManager::setup_scene(new TestScene());
     SceneManager::set_scene("test_scene");
@@ -72,8 +73,8 @@ int main() {
         BeginTextureMode(foreground);
         ClearBackground({0, 0, 0, 0});
 
-        if (camera != nullptr) {
-            BeginMode2D(*camera);
+        if (global_camera != nullptr) {
+            BeginMode2D(*global_camera);
         }
 
         // Object drawing test
@@ -112,8 +113,8 @@ int main() {
         
         SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), noise_texture);
 
-        if (camera != nullptr) {
-            Vector2 camera_offset = Vector2Divide(camera->target, res);
+        if (global_camera != nullptr) {
+            Vector2 camera_offset = Vector2Divide(global_camera->target, res);
 
             SetShaderValue(
                 post_processing,
