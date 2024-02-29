@@ -26,6 +26,8 @@ private:
     Vector2 desired_position, position, offset, shake_offset;
     float smoothing_speed;
 
+    float camera_zoom, zoom_anim_timer, zoom_anim_duration, zoom_animation_value;
+
     float shake_strength, shake_duration, shake_timer;
     Vector2 shake_direction;
     
@@ -34,8 +36,11 @@ public:
     CameraComponent(Entity *entity, Vector2 position={0,0});
 
     Camera2D *get_camera();
-
+    
+    void zoom(float new_zoom, float duration);
     void shake(float strength, float duration, float direction=-1);
+
+    void set_zoom(float zoom);
     
     void process(float delta);
 };

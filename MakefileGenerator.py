@@ -87,7 +87,7 @@ def get_filename(string):
     return string.split("/")[-1]
 
 def run():
-    result = subprocess.run("Build.exe", shell=True, cwd="build")
+    result = subprocess.run("Build.exe", shell=True, cwd="build") 
 
     if result:
         print("Game Sucessfully Ran!")

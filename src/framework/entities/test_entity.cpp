@@ -45,7 +45,7 @@ void TestEntity::process(float delta) {
     if (IsKeyPressed(KEY_SPACE)) {
         CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
         camera->shake(64, 0.25);
-        std::cout << "Shaking!!!" << std::endl;
+        camera->zoom(1.025, 0.2);
     }
 }
 
