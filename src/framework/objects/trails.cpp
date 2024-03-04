@@ -11,7 +11,8 @@ Trail::Trail(
     fade_color {fade_color},
     force {0, 0},
     tick {.025},
-    timer {0}
+    timer {0},
+    random_offset {random_offset}
     {}
 
 // For adders
