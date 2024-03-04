@@ -24,7 +24,7 @@ namespace CameraManager {
 class CameraComponent: public Component {
 private:
     Vector2 desired_position, position, offset, shake_offset;
-    float smoothing_speed;
+    float smoothing_speed, shake_rotation;
 
     float camera_zoom, zoom_anim_timer, zoom_anim_duration, zoom_animation_value;
 

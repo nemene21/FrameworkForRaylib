@@ -6,6 +6,7 @@ void process(float delta) {
     // Processing data managers
     TextureManager::unload_check();
     ParticleDataManager::unload_check();
+    AudioManager::unload_check();
     ShaderManager::unload_check();
     ShaderManager::update_uniforms();
 
@@ -13,6 +14,7 @@ void process(float delta) {
     if (TryingToHotReload()) {
         TextureManager::reload();
         ShaderManager::reload();
+        AudioManager::reload();
         ParticleDataManager::reload();
     }
 
@@ -31,7 +33,7 @@ void draw_foreground(float delta) {
 int main() {
     srand(time(NULL));
 
-    // Rendering init
+    // Init
     InitWindow(res.x, res.y, "Raylib Window!");
 
     RenderTexture2D background  = LoadRenderTexture(res.x, res.y);
@@ -39,6 +41,8 @@ int main() {
     RenderTexture2D composition = LoadRenderTexture(res.x, res.y);
     // ToggleFullscreen();
     SetTargetFPS(120);
+
+    InitAudioDevice();
 
     Easing::InitEasingFuncs();
     CameraManager::init();
@@ -146,6 +150,7 @@ int main() {
     ParticleDataManager::unload_all();
     ShaderManager::unload_all();
     SceneManager::unload_all();
+    AudioManager::unload_all();
 
     UnloadTexture(noise_texture);
 

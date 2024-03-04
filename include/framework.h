@@ -11,6 +11,7 @@
 #include <objects/sprites.hpp>
 #include <objects/trails.hpp>
 #include <objects/particles.hpp>
+#include <objects/audio.hpp>
 
 // Component/entity/scene
 #include <component.hpp>

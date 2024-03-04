@@ -18,15 +18,21 @@ void CameraManager::init() {
 // <Camera Component>
 CameraComponent::CameraComponent(Entity *entity, Vector2 position):
     Component(CompType::CAMERA, entity),
+
     desired_position {position},
     position {position},
+
     offset {0, 0},
     shake_offset {0, 0},
+
     smoothing_speed {10},
+    shake_rotation {0.05},
+
     camera_zoom {1},
     zoom_anim_timer {.5f},
     zoom_anim_duration {1},
     zoom_animation_value {1},
+
     shake_strength {0},
     shake_duration {1},
     shake_timer {0}
@@ -65,10 +71,8 @@ void CameraComponent::process(float delta) {
     camera.target = Vector2Add(position, offset); // Position + Offset
     camera.target = Vector2Subtract(camera.target, shake_offset); // Shake
 
-    camera.target = Vector2Subtract(camera.target, Vector2Divide(half_res, {camera.zoom, camera.zoom})); // Center
-
-    camera.rotation = 0;
-    camera.offset = {0, 0};
+    camera.offset = Vector2Divide(half_res, {camera.zoom, camera.zoom}); // Center
+    camera.rotation = shake_offset.x * shake_rotation;
 }
 
 Camera2D *CameraComponent::get_camera() {
@@ -97,7 +101,7 @@ void CameraComponent::set_zoom(float zoom) {
 
 void CameraComponent::zoom(float new_zoom, float duration) {
     if (zoom_anim_timer != 0) return;
-    
+
     zoom_anim_duration = duration;
     zoom_anim_timer = duration;
 
