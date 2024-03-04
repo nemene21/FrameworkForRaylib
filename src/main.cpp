@@ -51,7 +51,8 @@ int main() {
     SceneManager::set_scene("test_scene");
 
     ShaderPtr post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
-    Texture2D noise_texture = LoadTexture("assets/images/noise.png");
+    TexturePtr noise_texture = TextureManager::get("post_processing/noise.png");
+    TexturePtr paper_texture = TextureManager::get("post_processing/paper.png");
 
     // Test data
     Sprite bg = Sprite{"concept2.png", Vector2{0, 0}};
@@ -115,7 +116,8 @@ int main() {
 
         SetShaderValue(post_processing, GetShaderLocation(post_processing, "time"), &timer, SHADER_UNIFORM_FLOAT);
         
-        SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), noise_texture);
+        SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), *noise_texture.get());
+        SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "paper_texture"), *paper_texture.get());
 
         if (global_camera != nullptr) {
             Vector2 camera_offset = Vector2Divide(global_camera->target, res);
@@ -151,8 +153,6 @@ int main() {
     ShaderManager::unload_all();
     SceneManager::unload_all();
     AudioManager::unload_all();
-
-    UnloadTexture(noise_texture);
 
     CloseWindow();
 

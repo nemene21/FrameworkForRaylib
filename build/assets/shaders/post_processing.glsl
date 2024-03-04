@@ -11,6 +11,9 @@ const float warp = 1.0;
 uniform sampler2D texture0;
 uniform float time;
 
+uniform sampler2D paper_texture;
+uniform float paperness = 0.05;
+
 uniform sampler2D noise_texture;
 const float noise_zoom = 0.5;
 const float noise_strength = 0.009;
@@ -58,6 +61,8 @@ void main() {
     warped_uv += noise_ofst;
     vec4 pixel = texture(texture0, warped_uv);
     pixel.rgb *= vignette;
+
+    pixel.rgb = mix(pixel.rgb, texture(paper_texture, fragTexCoord).rgb, paperness);
 
     FragColor = pixel;
 
