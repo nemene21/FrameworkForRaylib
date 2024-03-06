@@ -12,7 +12,7 @@ Trail::Trail(
     force {0, 0},
     tick {.025},
     timer {0},
-    random_offset {random_offset}
+    random_offset {0}
     {}
 
 // For adders

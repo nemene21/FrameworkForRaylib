@@ -38,9 +38,29 @@ TestScene::TestScene(): Scene("test_scene") {
 }
 
 void TestScene::restart() {
+    Tilemap *tilemap = new Tilemap({96, 96}, "tiles.png");
+
+    for (int x = 0; x < 5; x++) {
+        for (int y = 0; y < 2; y++) {
+            tilemap->set_tile(x, y, 0);
+        }
+    }
+
+    for (int x = 3; x < 6; x++) {
+        for (int y = 1; y < 4; y++) {
+            tilemap->set_tile(x, y, 0);
+        }
+    }
+    tilemap->build();
+
+    std::cout << tilemap->get_tile(0, 0) << std::endl;
+
     entities = {
+        (Entity*)tilemap,
         (Entity*)(new TestEntity())
     };
+
+    std::cout << "entities in" << std::endl;
 }
 
 // <Scene Manager>

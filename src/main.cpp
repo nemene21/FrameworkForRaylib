@@ -54,9 +54,6 @@ int main() {
     TexturePtr noise_texture = TextureManager::get("post_processing/noise.png");
     TexturePtr paper_texture = TextureManager::get("post_processing/paper.png");
 
-    // Test data
-    Sprite bg = Sprite{"concept2.png", Vector2{0, 0}};
-
     while (!WindowShouldClose()) {
         float delta = GetFrameTime();
   
@@ -84,7 +81,6 @@ int main() {
 
         // Object drawing test
         EndShaderMode();
-        bg.draw();
 
         draw_foreground(delta);
 

@@ -158,12 +158,11 @@ void ParticleSystem::reload_data() {
 }
 
 // Constructor
-ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position} {
+ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position}, force {0, 0}, spawn_timer {0} {
     // Load data
     particle_data = ParticleDataManager::get(data_filename);
     reload_data();
 
-    force = Vector2{0, 0};
     left = -1;
 }
 

@@ -15,3 +15,4 @@ framework/objects/particles
 framework/objects/audio
 
 framework/entities/test_entity
+framework/entities/tilemap_entity

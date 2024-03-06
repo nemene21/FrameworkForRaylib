@@ -6,13 +6,13 @@ const float vignette_add = .75;
 const float vignette_multiplier = 1.25;
 const float vignette_exp = 1.25;
 
-const float warp = 1.0;
+const float warp = 0.6;
 
 uniform sampler2D texture0;
 uniform float time;
 
 uniform sampler2D paper_texture;
-uniform float paperness = 0.05;
+uniform float paperness = 0.033;
 
 uniform sampler2D noise_texture;
 const float noise_zoom = 0.5;

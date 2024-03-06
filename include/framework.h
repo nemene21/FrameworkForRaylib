@@ -25,5 +25,6 @@
 
 // Entities
 #include <test_entity.hpp>
+#include <tilemap_entity.hpp>
 
 #endif

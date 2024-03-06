@@ -39,8 +39,11 @@ object_files/audio.o: ../src/framework/objects/audio.cpp
 object_files/test_entity.o: ../src/framework/entities/test_entity.cpp
 	g++ -O1 -Wall -Wno-missing-braces -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/framework/entities/test_entity.cpp -o $(@)
 
-Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/scene.o object_files/misc.o object_files/health_component.o object_files/transform_component.o object_files/camera_component.o object_files/trails.o object_files/sprites.o object_files/particles.o object_files/audio.o object_files/test_entity.o 
-	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/scene.o object_files/misc.o object_files/health_component.o object_files/transform_component.o object_files/camera_component.o object_files/trails.o object_files/sprites.o object_files/particles.o object_files/audio.o object_files/test_entity.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+object_files/tilemap_entity.o: ../src/framework/entities/tilemap_entity.cpp
+	g++ -O1 -Wall -Wno-missing-braces -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/framework/entities/tilemap_entity.cpp -o $(@)
+
+Build.exe: object_files/main.o object_files/entity.o object_files/component.o object_files/scene.o object_files/misc.o object_files/health_component.o object_files/transform_component.o object_files/camera_component.o object_files/trails.o object_files/sprites.o object_files/particles.o object_files/audio.o object_files/test_entity.o object_files/tilemap_entity.o 
+	g++ -o Build.exe object_files/main.o object_files/entity.o object_files/component.o object_files/scene.o object_files/misc.o object_files/health_component.o object_files/transform_component.o object_files/camera_component.o object_files/trails.o object_files/sprites.o object_files/particles.o object_files/audio.o object_files/test_entity.o object_files/tilemap_entity.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
 
 .PHONY: clean
 clean:
@@ -57,3 +60,4 @@ clean:
 	del /S /Q object_files\particles.o
 	del /S /Q object_files\audio.o
 	del /S /Q object_files\test_entity.o
+	del /S /Q object_files\tilemap_entity.o

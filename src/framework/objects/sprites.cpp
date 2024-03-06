@@ -3,7 +3,7 @@
 // Draws a centered texture, you should basically always use this when drawing a texture
 void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale, float angle, Color tint) {
     float width  = texture_ptr->width  * scale.x,
-        height = texture_ptr->height * scale.y;
+          height = texture_ptr->height * scale.y;
 
     DrawTexturePro(
         *texture_ptr,
@@ -12,6 +12,42 @@ void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale
             0, 0,
             (float)texture_ptr->width,
             (float)texture_ptr->height
+        },
+
+        Rectangle{
+            position.x, position.y,
+            width,
+            height
+        },
+            
+        Vector2{width * .5f, height * .5f},
+        angle,
+        tint
+    );
+}
+
+void DrawTextureSheet(
+    Texture2D *texture_ptr,
+    Vector2 frame,
+    Vector2 max_frames,
+    Vector2 position,
+    Vector2 scale,
+    float angle,
+    Color tint
+) {
+    float frame_width  = texture_ptr->width   / max_frames.x,
+          frame_height = texture_ptr->height  / max_frames.y;
+
+    float width  = frame_width  * scale.x,
+          height = frame_height * scale.y;
+
+    DrawTexturePro(
+        *texture_ptr,
+
+        Rectangle{
+            frame_width * frame.x, frame_height * frame.y,
+            frame_width,
+            frame_height
         },
 
         Rectangle{

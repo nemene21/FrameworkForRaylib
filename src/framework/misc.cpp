@@ -7,9 +7,37 @@ bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
 }
 
-std::ostream& operator<<(std::ostream& str, Vector2& vec) {
+std::ostream& operator<<(std::ostream& str, Vector2 vec) {
     str << "vec(" << vec.x << ", " << vec.y << ")"; 
     return str;
+}
+
+bool operator>(Vector2 first, Vector2 other) {
+    if (first.x > other.x) return true;
+    if (first.x < other.x) return false;
+
+    return first.y > other.y;
+}
+
+bool operator<(Vector2 first, Vector2 other) {
+    if (first.x < other.x) return true;
+    if (first.x > other.x) return false;
+
+    return first.y < other.y;
+}
+
+bool operator==(Vector2 first, Vector2 other) {
+    return first.x == other.x && first.y == other.y;
+}
+
+// Magic Ai hash function for Vector2's (DO NOT TOUCH)
+std::size_t Vector2Hash::operator()(const Vector2& v) const {
+    // Use hash_combine to combine hashes of x and y components
+    std::size_t seed = 0;
+    std::hash<float> hasher;
+    seed ^= hasher(v.x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    seed ^= hasher(v.y) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        return seed;
 }
 
 // Lerps
@@ -34,6 +62,10 @@ Vector2 Lerpi(Vector2 a, Vector2 b, float speed) {
 
     return Lerp(b, a, blend);
 }
+
+std::string stringify(Vector2 vec) {
+    return std::to_string((int)vec.x) + "," + std::to_string((int)vec.y);
+} 
 
 // Random float from 0 to 1
 float RandF() {

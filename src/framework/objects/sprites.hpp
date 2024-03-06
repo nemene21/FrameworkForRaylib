@@ -11,7 +11,16 @@
 #define TEXTURE_DIR (std::string)("assets/images/") +
 #define SHADER_DIR  (std::string)("assets/shaders/") +
 
-void DrawTextureCentered(Texture2D* texture_ptr, Vector2 position, Vector2 scale={1, 1}, float angle=0, Color tint=WHITE);
+void DrawTextureCentered(Texture2D *texture_ptr, Vector2 position, Vector2 scale={1, 1}, float angle=0, Color tint=WHITE);
+void DrawTextureSheet(
+    Texture2D *texture_ptr,
+    Vector2 frame,
+    Vector2 max_frames,
+    Vector2 position,
+    Vector2 scale={1, 1},
+    float angle=0,
+    Color tint=WHITE
+);
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 
