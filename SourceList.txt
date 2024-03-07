@@ -2,6 +2,10 @@ main
 
 framework/entity
 framework/component
+
+framework/entities/test_entity
+framework/entities/tilemap_entity
+
 framework/scene
 framework/misc
 
@@ -13,6 +17,3 @@ framework/objects/trails
 framework/objects/sprites
 framework/objects/particles
 framework/objects/audio
-
-framework/entities/test_entity
-framework/entities/tilemap_entity

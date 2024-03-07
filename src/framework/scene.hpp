@@ -4,6 +4,9 @@
 #include <entity.hpp>
 #include <vector>
 
+#include <test_entity.hpp>
+#include <tilemap_entity.hpp>
+
 class Scene {
 public:
     std::string name;
@@ -21,10 +24,14 @@ protected:
     std::vector<Entity*> entities;
 };
 
+class Tilemap;
+
 class TestScene: public Scene {
 public:
     TestScene();
     void restart();
+
+    Tilemap *tiles;
 };
 
 typedef std::map<std::string, Scene*> SceneMap;

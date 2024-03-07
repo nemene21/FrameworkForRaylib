@@ -19,6 +19,8 @@ private:
     std::vector<TileData> drawable_tiles;
 
 public:
+    bool changed;
+
     Tilemap(Vector2 tilesize, std::string texture_path);
 
     void process(float delta);

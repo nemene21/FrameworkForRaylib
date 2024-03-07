@@ -1,5 +1,4 @@
 #include <scene.hpp>
-#include <test_entity.hpp>
 
 // <Scene>
 Scene::Scene(std::string name): name {name}, entities {} {
@@ -38,25 +37,25 @@ TestScene::TestScene(): Scene("test_scene") {
 }
 
 void TestScene::restart() {
-    Tilemap *tilemap = new Tilemap({96, 96}, "tiles.png");
+    tiles = new Tilemap({96, 96}, "tiles.png");
 
     for (int x = 0; x < 5; x++) {
         for (int y = 0; y < 2; y++) {
-            tilemap->set_tile(x, y, 0);
+            tiles->set_tile(x, y, 0);
         }
     }
 
     for (int x = 3; x < 6; x++) {
         for (int y = 1; y < 4; y++) {
-            tilemap->set_tile(x, y, 0);
+            tiles->set_tile(x, y, 0);
         }
     }
-    tilemap->build();
+    tiles->build();
 
-    std::cout << tilemap->get_tile(0, 0) << std::endl;
+    std::cout << tiles->get_tile(0, 0) << std::endl;
 
     entities = {
-        (Entity*)tilemap,
+        (Entity*)tiles,
         (Entity*)(new TestEntity())
     };
 

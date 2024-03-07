@@ -32,6 +32,17 @@ void TestEntity::process(float delta) {
         }, {700, 700}
     ), 15);
 
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
+
+        int x = int((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
+            y = int((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
+        ((TestScene*)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
+        
+        if (((TestScene*)SceneManager::scene_on)->tiles->changed)
+            ((TestScene*)SceneManager::scene_on)->tiles->build();
+    }
+
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);
     trail_vfx.set_position(transform_comp->position);

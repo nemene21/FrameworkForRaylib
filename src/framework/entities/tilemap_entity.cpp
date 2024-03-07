@@ -4,9 +4,14 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
     tilesize {tilesize},
     texture {TextureManager::get(texture_path)},
     tiledata {},
-    drawable_tiles {} {}
+    drawable_tiles {},
+    changed {false} {}
 
 void Tilemap::set_tile(int x, int y, int type) {
+    if (tiledata[std::make_pair(x, y)] == type) {
+        return;
+    }
+    changed = true;
     tiledata[std::make_pair(x, y)] = type;
 }
 
@@ -25,6 +30,7 @@ int Tilemap::get_tile(int x, int y) {
 
 void Tilemap::build() {
     drawable_tiles.clear();
+    changed = false;
 
     std::set<std::pair<float, float>> corners;
     for (auto& tile: tiledata) {
@@ -112,7 +118,7 @@ void Tilemap::process(float delta) {}
 void Tilemap::draw(float delta) {
     for (auto& tile: drawable_tiles) {
 
-        DrawTextureSheet(texture.get(), tile.state, {4, 4}, {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y}, {1.02, 1.02});
+        DrawTextureSheet(texture.get(), tile.state, {4, 4}, {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y}, {1, 1});
         // DrawCircle(tile.pos.x * tilesize.x, tile.pos.y * tilesize.y, 4, RED);
     }
 }

@@ -23,7 +23,7 @@ namespace CameraManager {
 // <Camera Component>
 class CameraComponent: public Component {
 private:
-    Vector2 desired_position, position, offset, shake_offset;
+    Vector2 desired_position, shake_offset;
     float smoothing_speed, shake_rotation;
 
     float camera_zoom, zoom_anim_timer, zoom_anim_duration, zoom_animation_value;
@@ -33,6 +33,8 @@ private:
     
     Camera2D camera;
 public:
+    Vector2 position, offset;
+
     CameraComponent(Entity *entity, Vector2 position={0,0});
 
     Camera2D *get_camera();
