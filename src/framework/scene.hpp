@@ -6,6 +6,7 @@
 
 #include <test_entity.hpp>
 #include <tilemap_entity.hpp>
+#include <misc.hpp>
 
 class Scene {
 public:

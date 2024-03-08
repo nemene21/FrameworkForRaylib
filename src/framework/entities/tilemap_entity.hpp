@@ -4,6 +4,8 @@
 #include <sprites.hpp>
 #include <entity.hpp>
 
+#include <camera_component.hpp>
+
 #include <map>
 #include <set>
 

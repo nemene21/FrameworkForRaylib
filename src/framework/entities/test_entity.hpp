@@ -1,7 +1,15 @@
 #ifndef TEST_ENTITY_H
 #define TEST_ENTITY_H
 
-#include <framework.h>
+#include <sprites.hpp>
+#include <trails.hpp>
+#include <particles.hpp>
+#include <tilemap_entity.hpp>
+#include <audio.hpp>
+#include <scene.hpp>
+#include <health_component.hpp>
+#include <transform_component.hpp>
+#include <camera_component.hpp>
 
 class TestEntity: public Entity {
 protected:

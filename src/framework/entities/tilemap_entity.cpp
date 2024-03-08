@@ -107,9 +107,19 @@ void Tilemap::build() {
 void Tilemap::process(float delta) {}
 
 void Tilemap::draw(float delta) {
+    Vector2 camera_pos {0, 0};
+    float max_dist = sqrt(tilesize.x*tilesize.x + tilesize.y*tilesize.y) +
+        sqrt(res.x*res.x + res.y*res.y);
+
+    if (CameraManager::get_camera() != nullptr)
+        camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
+
     for (auto& tile: drawable_tiles) {
 
-        DrawTextureSheet(texture.get(), tile.state, {4, 4}, {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y}, {1, 1});
+        Vector2 tile_pos {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y};
+
+        if (Vector2Distance(camera_pos, tile_pos) < max_dist)
+            DrawTextureSheet(texture.get(), tile.state, {4, 4}, tile_pos, {1, 1});
         // DrawCircle(tile.pos.x * tilesize.x, tile.pos.y * tilesize.y, 4, RED);
     }
 }

@@ -37,15 +37,9 @@ TestScene::TestScene(): Scene("test_scene") {}
 void TestScene::restart() {
     tiles = new Tilemap({96, 96}, "tiles.png");
 
-    for (int x = 0; x < 5; x++) {
-        for (int y = 0; y < 2; y++) {
-            tiles->set_tile(x, y, 0);
-        }
-    }
-
-    for (int x = 3; x < 6; x++) {
-        for (int y = 1; y < 4; y++) {
-            tiles->set_tile(x, y, 0);
+    for (int x = 0; x < 2048; x++) {
+        for (int y = 0; y < 2048; y++) {
+            if (RandF() > .5) tiles->set_tile(x, y, 0);
         }
     }
     tiles->build();
