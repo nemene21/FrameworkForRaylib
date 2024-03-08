@@ -1,14 +1,14 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
-#include <framework.h>
+#include <sprites.hpp>
+#include <entity.hpp>
+
 #include <map>
 #include <set>
 
 class Tilemap: public Entity {
 private:
-    Vector2 tilesize;
-
     typedef struct {
         Vector2 pos, state;
     } TileData;
@@ -20,6 +20,7 @@ private:
 
 public:
     bool changed;
+    Vector2 tilesize;
 
     Tilemap(Vector2 tilesize, std::string texture_path);
 

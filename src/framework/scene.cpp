@@ -32,9 +32,7 @@ void Scene::draw_entities(float delta) {
 void Scene::process(float delta) {}
 
 // Test scene
-TestScene::TestScene(): Scene("test_scene") {
-    restart();
-}
+TestScene::TestScene(): Scene("test_scene") {}
 
 void TestScene::restart() {
     tiles = new Tilemap({96, 96}, "tiles.png");
@@ -72,6 +70,7 @@ void SceneManager::setup_scene(Scene* scene) {
 
 void SceneManager::set_scene(std::string name) {
     scene_on = scene_map[name];
+    scene_map[name]->restart();
 }
 
 void SceneManager::unload(std::string name) {

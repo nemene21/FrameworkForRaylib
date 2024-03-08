@@ -18,6 +18,9 @@ TestEntity::TestEntity():
     );
 
     CameraManager::bind_camera(camera_comp->get_camera());
+
+    particle_sys.set_collision_mask(((TestScene*)SceneManager::scene_on)->tiles);
+    particle_sys.add_force({0, 1500});
 }
 
 void TestEntity::process(float delta) {
@@ -35,8 +38,8 @@ void TestEntity::process(float delta) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
 
-        int x = int((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
-            y = int((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
+        int x = round((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
+            y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
         ((TestScene*)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
         
         if (((TestScene*)SceneManager::scene_on)->tiles->changed)

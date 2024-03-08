@@ -1,11 +1,11 @@
 #include <tilemap_entity.hpp>
 
 Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
-    tilesize {tilesize},
     texture {TextureManager::get(texture_path)},
     tiledata {},
     drawable_tiles {},
-    changed {false} {}
+    changed {false},
+    tilesize {tilesize} {}
 
 void Tilemap::set_tile(int x, int y, int type) {
     if (tiledata[std::make_pair(x, y)] == type) {
@@ -18,12 +18,8 @@ void Tilemap::set_tile(int x, int y, int type) {
 int Tilemap::get_tile(int x, int y) {
     std::pair<int, int> pos = std::make_pair(x, y);
 
-    std::cout << "Lookup: " << pos.first << ", " << pos.second << std::endl;
-
     if (tiledata.find(pos) == tiledata.end())
         return -1;
-    
-    std::cout << "Exists!" << std::endl;
     
     return tiledata[pos];
 }
@@ -35,8 +31,6 @@ void Tilemap::build() {
     std::set<std::pair<float, float>> corners;
     for (auto& tile: tiledata) {
         std::pair<float, float> pos = std::make_pair<float, float>(tile.first.first, tile.first.second);
-
-        std::cout << tile.first.first << ", " << tile.first.second << std::endl;
 
         corners.insert({pos.first +.5f, pos.second +.5f});
         corners.insert({pos.first -.5f, pos.second -.5f});
@@ -51,8 +45,6 @@ void Tilemap::build() {
         bitmap += get_tile(pos.first + .5f, pos.second - .5f) == -1 ? "." : "#";
         bitmap += get_tile(pos.first - .5f, pos.second + .5f) == -1 ? "." : "#";
         bitmap += get_tile(pos.first + .5f, pos.second + .5f) == -1 ? "." : "#";
-
-        std::cout << bitmap << std::endl;
 
         TileData data {{pos.first, pos.second}, {0, 0}};
     	
@@ -107,7 +99,6 @@ void Tilemap::build() {
             data.state = {0, 3};
 
         if (bitmap != "....") {
-            std::cout << "Placed tile on: " << pos.first << ", " << pos.second << std::endl;
             drawable_tiles.push_back(data);
         }
     }

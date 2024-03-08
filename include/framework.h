@@ -7,6 +7,15 @@
 
 #include <misc.hpp>
 
+// Components
+#include <health_component.hpp>
+#include <transform_component.hpp>
+#include <camera_component.hpp>
+
+// Entities
+#include <test_entity.hpp>
+#include <tilemap_entity.hpp>
+
 // Objects
 #include <objects/sprites.hpp>
 #include <objects/trails.hpp>
@@ -17,14 +26,5 @@
 #include <component.hpp>
 #include <entity.hpp>
 #include <scene.hpp>
-
-// Components
-#include <health_component.hpp>
-#include <transform_component.hpp>
-#include <camera_component.hpp>
-
-// Entities
-#include <test_entity.hpp>
-#include <tilemap_entity.hpp>
 
 #endif

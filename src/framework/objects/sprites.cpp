@@ -46,8 +46,8 @@ void DrawTextureSheet(
 
         Rectangle{
             frame_width * frame.x, frame_height * frame.y,
-            frame_width,
-            frame_height
+            frame_width  * .99f,
+            frame_height * .99f
         },
 
         Rectangle{
@@ -55,7 +55,7 @@ void DrawTextureSheet(
             width,
             height
         },
-            
+        
         Vector2{width * .5f, height * .5f},
         angle,
         tint

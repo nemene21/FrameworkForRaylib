@@ -88,6 +88,15 @@ void ParticleSystem::remove_force(Vector2 removing) {
     force = Vector2Subtract(force, removing);
 }
 
+Vector2 ParticleSystem::get_force() {
+    return force;
+}
+
+// Collision mask setter
+void ParticleSystem::set_collision_mask(Tilemap *mask) {
+    collision_mask = mask;
+}
+
 // Left setter and getter
 void ParticleSystem::set_left(int new_left) {
     left = new_left;
@@ -158,7 +167,12 @@ void ParticleSystem::reload_data() {
 }
 
 // Constructor
-ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position): position {position}, force {0, 0}, spawn_timer {0} {
+ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position):
+    collision_mask {nullptr},
+    position {position},
+    force {0, 0},
+    spawn_timer {0} {
+
     // Load data
     particle_data = ParticleDataManager::get(data_filename);
     reload_data();
@@ -208,6 +222,27 @@ void ParticleSystem::spawn_particle() {
     particles.push_back(new_particle);
 }
 
+void ParticleSystem::attempt_particle_bounce(Particle &particle, Vector2 dir, float velocity_anim, float delta) {
+
+    if (collision_mask != nullptr) {
+        bool colliding = collision_mask->get_tile(
+            round(particle.position.x / collision_mask->tilesize.x),
+            round(particle.position.y / collision_mask->tilesize.y)
+        ) != -1;
+
+        if (colliding) {
+            particle.position.x -= Lerp(particle.velocity.x, particle.velocity.x * velocity_end, velocity_anim) * delta * dir.x * 2;
+            particle.position.y -= Lerp(particle.velocity.y, particle.velocity.y * velocity_end, velocity_anim) * delta * dir.y * 2;
+
+            if (dir.x != 0)
+                particle.velocity.x *= -dir.x;
+            
+            if (dir.y != 0)
+                particle.velocity.y *= -dir.y;
+        }
+    }
+}
+
 void ParticleSystem::process(float delta) {
     if (TryingToHotReload())
         reload_data();
@@ -240,13 +275,11 @@ void ParticleSystem::process(float delta) {
         );
 
         // Add velocity
-        particle.position = Vector2Add(particle.position,
-            Vector2Multiply(Lerp(
-                particle.velocity,
-                {particle.velocity.x * velocity_end, particle.velocity.y * velocity_end},
-                velocity_anim
-            ), {delta, delta})
-        );
+        particle.position.x += Lerp(particle.velocity.x, particle.velocity.x * velocity_end, velocity_anim) * delta;
+        attempt_particle_bounce(particle, Vector2{0.75, 0}, velocity_anim, delta);
+
+        particle.position.y += Lerp(particle.velocity.y, particle.velocity.y * velocity_end, velocity_anim) * delta;
+        attempt_particle_bounce(particle, Vector2{0, 0.75}, velocity_anim, delta);
 
         // Add angular velocity
         particle.angle += particle.angular_velocity * delta;

@@ -8,6 +8,7 @@
 #include <raymath.h>
 
 #include <sprites.hpp>
+#include <tilemap_entity.hpp>
 #include <misc.hpp>
 
 #include <json.hpp>
@@ -50,10 +51,13 @@ protected:
 
     } Particle;
 
+    Tilemap *collision_mask;
+
     ParticleDataPtr particle_data;
 
     void spawn_particle();
     void process_particle(Particle& particle);
+    void attempt_particle_bounce(Particle& particle, Vector2 dir, float velocity_anim, float delta);
 
     typedef std::vector<Particle> ParticleList;
     ParticleList particles;
@@ -82,8 +86,11 @@ protected:
 public:
     ParticleSystem(std::string data_filename, Vector2 position={0, 0});
 
+    Vector2 get_force();
     void add_force(Vector2 adding);
     void remove_force(Vector2 removing);
+
+    void set_collision_mask(Tilemap *mask);
 
     void set_position(Vector2 position);
     Vector2 get_position();
