@@ -3,33 +3,63 @@
 Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
     texture {TextureManager::get(texture_path)},
     tiledata {},
-    drawable_tiles {},
-    changed {false},
-    tilesize {tilesize} {}
+    built_chunks {},
+    changed_chunks {},
+    tilesize {tilesize},
+    chunksize {16, 16} {}
 
 void Tilemap::set_tile(int x, int y, int type) {
-    if (tiledata[std::make_pair(x, y)] == type) {
+    std::pair<int, int> chunk_pos = std::make_pair<int, int>(x / chunksize.x, y / chunksize.y);
+
+    if (tiledata.find(chunk_pos) == tiledata.end())
+        tiledata[chunk_pos] = {};
+
+    if (get_tile(x, y) == type) {
         return;
     }
-    changed = true;
-    tiledata[std::make_pair(x, y)] = type;
+    changed_chunks.insert({chunk_pos.first, chunk_pos.second});
+    changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second + 0});
+    changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second + 1});
+    changed_chunks.insert({chunk_pos.first + 0, chunk_pos.second + 1});
+    changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second - 0});
+    changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second - 1});
+    changed_chunks.insert({chunk_pos.first - 0, chunk_pos.second - 1});
+    changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second + 1});
+    changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second - 1});
+
+    tiledata[chunk_pos][std::make_pair(x, y)] = type;
 }
 
 int Tilemap::get_tile(int x, int y) {
+    std::pair<int, int> chunk_pos = std::make_pair<int, int>(x / chunksize.x, y / chunksize.y);
     std::pair<int, int> pos = std::make_pair(x, y);
 
-    if (tiledata.find(pos) == tiledata.end())
+    if (tiledata.find(chunk_pos) == tiledata.end())
         return -1;
     
-    return tiledata[pos];
+    if (tiledata[chunk_pos].find(pos) == tiledata[chunk_pos].end())
+        return -1;
+    
+    return tiledata[chunk_pos][pos];
 }
 
 void Tilemap::build() {
-    drawable_tiles.clear();
-    changed = false;
+    for (auto& chunk_pos: changed_chunks) {
+        build_chunk(chunk_pos);
+    }
+
+    changed_chunks.clear();
+}
+
+void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
+
+    if (built_chunks.find(chunk_pos) == built_chunks.end())
+        built_chunks[chunk_pos] = {};
+    else
+        built_chunks[chunk_pos].clear();
 
     std::set<std::pair<float, float>> corners;
-    for (auto& tile: tiledata) {
+    for (auto& tile: tiledata[chunk_pos]) {
         std::pair<float, float> pos = std::make_pair<float, float>(tile.first.first, tile.first.second);
 
         corners.insert({pos.first +.5f, pos.second +.5f});
@@ -99,7 +129,7 @@ void Tilemap::build() {
             data.state = {0, 3};
 
         if (bitmap != "....") {
-            drawable_tiles.push_back(data);
+            built_chunks[chunk_pos].push_back(data);
         }
     }
 }
@@ -114,12 +144,27 @@ void Tilemap::draw(float delta) {
     if (CameraManager::get_camera() != nullptr)
         camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
 
-    for (auto& tile: drawable_tiles) {
+    std::pair<int, int> camera_chunk_pos = std::make_pair<int, int>(
+        (camera_pos.x / 96.f) / chunksize.x,
+        (camera_pos.y / 96.f) / chunksize.y
+    );
 
-        Vector2 tile_pos {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y};
+    for (int x = camera_chunk_pos.first - 2; x < camera_chunk_pos.second + 2; x++) {
+        for (int y = camera_chunk_pos.second - 2; y < camera_chunk_pos.second + 2; y++) {
 
-        if (Vector2Distance(camera_pos, tile_pos) < max_dist)
-            DrawTextureSheet(texture.get(), tile.state, {4, 4}, tile_pos, {1, 1});
-        // DrawCircle(tile.pos.x * tilesize.x, tile.pos.y * tilesize.y, 4, RED);
+            std::pair<int, int> chunk_pos = std::make_pair(x, y);
+
+            if (built_chunks.find(chunk_pos) != built_chunks.end()) {
+                TileDataVector &drawables = built_chunks[chunk_pos];
+
+                for (auto& tile: drawables) {
+
+                    Vector2 tile_pos {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y};
+
+                    if (Vector2Distance(camera_pos, tile_pos) < max_dist)
+                        DrawTextureSheet(texture.get(), tile.state, {4, 4}, tile_pos, {1, 1});
+                }
+            }
+        }
     }
 }

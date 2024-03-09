@@ -15,14 +15,24 @@ private:
         Vector2 pos, state;
     } TileData;
 
+    typedef std::map<std::pair<int, int>, int> TileTypeMap;
+    typedef std::map<std::pair<int, int>, TileTypeMap> TileTypeChunks;
+
+    typedef std::vector<TileData> TileDataVector;
+    typedef std::map<std::pair<int, int>, TileDataVector> TileDataChunks;
+
+    typedef std::set<std::pair<int, int>> ChunkSet;
+
     TexturePtr texture;
 
-    std::map<std::pair<int, int>, int> tiledata;
-    std::vector<TileData> drawable_tiles;
+    TileTypeChunks tiledata;
+
+    TileDataChunks built_chunks;    
+    ChunkSet changed_chunks;
 
 public:
-    bool changed;
     Vector2 tilesize;
+    Vector2 chunksize;
 
     Tilemap(Vector2 tilesize, std::string texture_path);
 
@@ -33,6 +43,7 @@ public:
     int  get_tile(int x, int y);
 
     void build();
+    void build_chunk(std::pair<int, int>);
 };
 
 #endif

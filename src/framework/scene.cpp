@@ -35,14 +35,20 @@ void Scene::process(float delta) {}
 TestScene::TestScene(): Scene("test_scene") {}
 
 void TestScene::restart() {
+    std::cout << "gonna make tilemap" << std::endl;
     tiles = new Tilemap({96, 96}, "tiles.png");
+    std::cout << "done" << std::endl;
 
+    std::cout << "setting tiles" << std::endl;
     for (int x = 0; x < 2048; x++) {
         for (int y = 0; y < 2048; y++) {
             if (RandF() > .5) tiles->set_tile(x, y, 0);
         }
     }
+    std::cout << "done" << std::endl;
+    std::cout << "building drawables" << std::endl;
     tiles->build();
+    std::cout << "done" << std::endl;
 
     std::cout << tiles->get_tile(0, 0) << std::endl;
 
