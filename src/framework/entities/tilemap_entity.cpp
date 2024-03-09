@@ -150,7 +150,7 @@ void Tilemap::draw(float delta) {
         (camera_pos.y / 96.f) / chunksize.y
     );
 
-    for (int x = camera_chunk_pos.first - 2; x < camera_chunk_pos.second + 2; x++) {
+    for (int x = camera_chunk_pos.first - 2; x < camera_chunk_pos.first + 2; x++) {
         for (int y = camera_chunk_pos.second - 2; y < camera_chunk_pos.second + 2; y++) {
 
             std::pair<int, int> chunk_pos = std::make_pair(x, y);
