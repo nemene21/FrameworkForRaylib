@@ -141,9 +141,10 @@ void Tilemap::draw(float delta) {
     float max_dist = sqrt(tilesize.x*tilesize.x + tilesize.y*tilesize.y) +
         sqrt(res.x*res.x + res.y*res.y);
 
-    if (CameraManager::get_camera() != nullptr)
+    if (CameraManager::get_camera() != nullptr) {
         camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
-
+        camera_pos = Vector2Subtract(camera_pos, half_res);
+    }
     std::pair<int, int> camera_chunk_pos = std::make_pair<int, int>(
         (camera_pos.x / 96.f) / chunksize.x,
         (camera_pos.y / 96.f) / chunksize.y
