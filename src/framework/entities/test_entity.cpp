@@ -42,8 +42,7 @@ void TestEntity::process(float delta) {
             y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
         ((TestScene*)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
         
-        if (((TestScene*)SceneManager::scene_on)->tiles->changed)
-            ((TestScene*)SceneManager::scene_on)->tiles->build();
+        ((TestScene*)SceneManager::scene_on)->tiles->build();
     }
 
     sprite.set_position(transform_comp->position);

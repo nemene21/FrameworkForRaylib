@@ -20,9 +20,6 @@ CameraComponent::CameraComponent(Entity *entity, Vector2 position):
     Component(CompType::CAMERA, entity),
 
     desired_position {position},
-    position {position},
-
-    offset {0, 0},
     shake_offset {0, 0},
 
     smoothing_speed {10},
@@ -35,7 +32,10 @@ CameraComponent::CameraComponent(Entity *entity, Vector2 position):
 
     shake_strength {0},
     shake_duration {1},
-    shake_timer {0}
+    shake_timer {0},
+
+    position {position},
+    offset {0, 0}
 {
     camera.offset = position;
 }
