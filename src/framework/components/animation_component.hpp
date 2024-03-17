@@ -4,6 +4,7 @@
 #include <component.hpp>
 #include <functional>
 #include <map>
+#include <misc.hpp>
 
 typedef std::function<void(float)> KeyFunc;
 

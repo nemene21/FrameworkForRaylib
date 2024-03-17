@@ -1,13 +1,33 @@
 #include <test_entity.hpp>
 
-void TestEntity::test_animation(float anim) {
+void TestEntity::stretch(float anim) {
 
     sprite.set_scale({
-        1.f + (float)sin(anim*PI * 2.0) * 0.5f,
-        1.f + (float)cos(anim*PI * 2.0) * 0.5f
+        1.f - anim * .5f,
+        1.f + anim * .5f
     });
-    sprite.angle = 360 * anim;
 }
+
+void TestEntity::squash(float anim) {
+
+    sprite.set_scale({
+        1.f - cos(PI*anim) * .5f,
+        1.f + cos(PI*anim) * .5f
+    });
+}
+
+void TestEntity::return_state(float anim) {
+
+    sprite.set_scale({
+        1.5f - anim * .5f,
+        .5f  + anim * .5f
+    });
+}
+
+void TestEntity::spin(float anim) {
+    sprite.angle = Easing::ease_in_out(anim) * 360;
+}
+
 
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
@@ -29,7 +49,12 @@ TestEntity::TestEntity():
     AnimationComponent *anim_comp = new AnimationComponent(this);
     
     anim_comp->make_animation("idle_test", 1, true);
-    anim_comp->add_keyframe("idle_test", 0, 1, [this](float value) { test_animation(value); });
+    anim_comp->add_keyframe("idle_test", 0, 0.6, [this](float value) { stretch(value); });
+    anim_comp->add_keyframe("idle_test", 0.6, 0.8, [this](float value) { squash(value); });
+    anim_comp->add_keyframe("idle_test", 0.8, 1.0, [this](float value) { return_state(value); });
+
+    anim_comp->add_keyframe("idle_test", .0f, 1.f, [this](float value) { spin(value); });
+
 
     anim_comp->play("idle_test");
 
