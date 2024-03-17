@@ -1,5 +1,14 @@
 #include <test_entity.hpp>
 
+void TestEntity::test_animation(float anim) {
+
+    sprite.set_scale({
+        1.f + (float)sin(anim*PI * 2.0) * 0.5f,
+        1.f + (float)cos(anim*PI * 2.0) * 0.5f
+    });
+    sprite.angle = 360 * anim;
+}
+
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
     particle_sys {ParticleSystem("test.json")}
@@ -15,6 +24,17 @@ TestEntity::TestEntity():
     CameraComponent *camera_comp = new CameraComponent(this);
     add_component(
         camera_comp
+    );
+
+    AnimationComponent *anim_comp = new AnimationComponent(this);
+    
+    anim_comp->make_animation("idle_test", 1, true);
+    anim_comp->add_keyframe("idle_test", 0, 1, [this](float value) { test_animation(value); });
+
+    anim_comp->play("idle_test");
+
+    add_component(
+        anim_comp
     );
 
     CameraManager::bind_camera(camera_comp->get_camera());
@@ -48,12 +68,6 @@ void TestEntity::process(float delta) {
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);
     trail_vfx.set_position(transform_comp->position);
-
-    sprite.set_scale({
-        1.f + (float)sin(GetTime()*PI) * 0.5f,
-        1.f + (float)cos(GetTime()*PI) * 0.5f
-    });
-    sprite.angle += delta * 180;
 
     if (IsKeyPressed(KEY_SPACE)) {
         CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);

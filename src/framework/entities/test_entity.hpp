@@ -10,6 +10,7 @@
 #include <health_component.hpp>
 #include <transform_component.hpp>
 #include <camera_component.hpp>
+#include <animation_component.hpp>
 
 class TestEntity: public Entity {
 protected:
@@ -19,6 +20,8 @@ protected:
 
 public:
     TestEntity();
+
+    void test_animation(float anim);
     
     void process(float delta);
     void draw(float delta);

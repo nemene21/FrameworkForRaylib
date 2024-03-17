@@ -12,6 +12,7 @@ framework/misc
 framework/components/health_component
 framework/components/transform_component
 framework/components/camera_component
+framework/components/animation_component
 
 framework/objects/trails
 framework/objects/sprites

@@ -29,6 +29,7 @@ enum ComponentType {
     VELOCITY,
     HEALTH,
     CAMERA,
+    ANIMATION,
     COUNT,
 };
 
