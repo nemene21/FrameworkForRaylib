@@ -34,10 +34,6 @@ int Tilemap::get_tile(int x, int y) {
     std::pair<int, int> chunk_pos = std::make_pair<int, int>(x / chunksize.x, y / chunksize.y);
     std::pair<int, int> pos = std::make_pair(x, y);
 
-    if (IsKeyPressed(KEY_EIGHT)) {
-        std::cout << chunk_pos.first << ", " << chunk_pos.second << " " << pos.first << ", " << pos.second << std::endl;
-    }
-
     if (tiledata.find(chunk_pos) == tiledata.end())
         return -1;
     

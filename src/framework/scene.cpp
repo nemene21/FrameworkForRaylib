@@ -45,14 +45,10 @@ void TestScene::restart() {
 
     tiles->build();
 
-    std::cout << tiles->get_tile(0, 0) << std::endl;
-
     entities = {
         (Entity*)tiles,
         (Entity*)(new TestEntity())
     };
-
-    std::cout << "entities in" << std::endl;
 }
 
 // <Scene Manager>
