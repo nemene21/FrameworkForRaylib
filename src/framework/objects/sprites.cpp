@@ -219,7 +219,7 @@ Sprite::Sprite(
         Vector2 scale,
         float angle
     ):
-        position {position}, scale {scale}, angle {angle}, tint {WHITE}
+        position {position}, scale {scale}, tint {WHITE}, angle {angle}
     {
         texture = TextureManager::get(texture_path);
     }

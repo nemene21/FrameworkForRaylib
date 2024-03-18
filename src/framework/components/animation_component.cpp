@@ -29,6 +29,18 @@ void AnimationComponent::add_keyframe(std::string name, float start, float end, 
     animation_map[name].keyframes.push_back(new_keyframe);
 }
 
+void AnimationComponent::add_event(std::string name, float time, std::function<void(float)> function) {
+
+    Event new_event;
+    new_event.time = time;
+
+    new_event.function = function;
+    new_event.played = false;
+
+    animation_map[name].events.push_back(new_event);
+}
+
+
 void AnimationComponent::process_animation(std::string name, float delta) {
     Animation &animation = animation_map[name];
 
@@ -39,15 +51,31 @@ void AnimationComponent::process_animation(std::string name, float delta) {
         
             keyframe.function((animation.progress - keyframe.start) / (keyframe.end - keyframe.start));
     }
+    
+    for (auto &event: animation_map[name].events) {
+        if (!event.played && event.time >= animation.progress) {
+
+            event.function(animation.progress / animation.duration);
+            event.played = true;
+        }
+    }
 
     if (animation.progress > animation.duration && animation.repeating) {
         animation.progress = 0;
+        
+        for (auto &event: animation_map[name].events) {
+            event.played = false;
+        }
     }
 }
 
 void AnimationComponent::play(std::string name) {
 
     animation_playing = name;
+
+    for (auto &event: animation_map[name].events) {
+        event.played = false;
+    }
 }
 
 void AnimationComponent::process(float delta) {

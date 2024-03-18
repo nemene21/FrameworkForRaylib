@@ -22,7 +22,14 @@ protected:
     } Keyframe;
 
     typedef struct {
+        std::function<void(float)> function;
+        float time;
+        bool played;
+    } Event;
+
+    typedef struct {
         std::vector<Keyframe> keyframes;
+        std::vector<Event> events;
         float duration, progress;
 
         bool repeating;
@@ -34,7 +41,6 @@ protected:
     void process_animation(std::string anim, float delta);
 
 public:
-
     typedef std::map<std::string, Animation> AnimationMap;
 
     AnimationComponent(Entity *entity);
@@ -47,6 +53,7 @@ public:
 
     void make_animation(std::string name, float duration, bool repeating);
     void add_keyframe(std::string name, float start, float end, std::function<void(float)> function);
+    void add_event(std::string name, float time, std::function<void(float)> function);
 
     void toggle_pause();
     void pause();

@@ -28,6 +28,10 @@ void TestEntity::spin(float anim) {
     sprite.angle = Easing::ease_in_out(anim) * 360;
 }
 
+void TestEntity::change_color_event(float anim) {
+    sprite.tint = Color{(unsigned char)(rand()%100), (unsigned char)(rand()%255), (unsigned char)(rand()%255), 255};
+}
+
 
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
@@ -55,6 +59,7 @@ TestEntity::TestEntity():
 
     anim_comp->add_keyframe("idle_test", .0f, 1.f, [this](float value) { spin(value); });
 
+    anim_comp->add_event("idle_test", .6f, [this](float value) { change_color_event(value); });
 
     anim_comp->play("idle_test");
 
