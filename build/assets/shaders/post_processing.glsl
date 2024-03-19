@@ -12,7 +12,7 @@ uniform sampler2D texture0;
 uniform float time;
 
 uniform sampler2D paper_texture;
-uniform float paperness = 0.033;
+uniform float paperness = 0.05;
 
 uniform sampler2D noise_texture;
 const float noise_zoom = 0.5;

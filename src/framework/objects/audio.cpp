@@ -2,6 +2,7 @@
 
 // <Audio Manager>
 std::map<std::string, SoundVectorPtr> AudioManager::sound_map;
+std::map<std::string, SoundVectorPtr> AudioManager::music_map;
 float AudioManager::timer = 0.0f;
 float AudioManager::tick  = 210.0f;
 
