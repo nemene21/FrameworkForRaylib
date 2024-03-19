@@ -24,6 +24,8 @@ public:
 
     static float timer;
     static float tick;
+    static float sfx_volume;    
+    static float music_volume;    
 
     static void load(std::string path);
     static void unload(std::string path);
