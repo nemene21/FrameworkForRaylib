@@ -34,7 +34,7 @@ int main() {
     srand(time(NULL));
 
     // Init
-    InitWindow(res.x, res.y, "Raylib Window!");
+    InitWindow(res.x, res.y, "ne_mene's raylib framework :)");
 
     RenderTexture2D background  = LoadRenderTexture(res.x, res.y);
     RenderTexture2D foreground  = LoadRenderTexture(res.x, res.y);
