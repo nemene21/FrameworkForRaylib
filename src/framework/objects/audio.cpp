@@ -9,23 +9,23 @@ float AudioManager::sfx_volume    = 1.f;
 float AudioManager::music_volume  = 1.f;
 
 // Load a sound and put it's smart pointer into the sound map (it's path is the key)
-void AudioManager::load(std::string name) {
+void AudioManager::load_sfx(std::string name) {
     std::vector<Sound> sound_arr {LoadSound((SFX_DIR name).c_str())};
 
     sound_map[name] = std::make_shared<std::vector<Sound>>(sound_arr);
 }
 
 // Returns a sound smart pointer and loads the sound if required
-SoundVectorPtr AudioManager::get(std::string name) {
+SoundVectorPtr AudioManager::get_sfx(std::string name) {
     if (sound_map.find(name) != sound_map.end())
         return sound_map[name];
 
-    load(name);
+    load_sfx(name);
     return sound_map[name];
 }
 
 // Unloads a sound
-void AudioManager::unload(std::string name) {
+void AudioManager::unload_sfx(std::string name) {
 
     std::vector<Sound>& arr = *sound_map[name].get();
 
@@ -40,7 +40,7 @@ void AudioManager::unload_unused() {
     for (auto& sound_pair: sound_map) {
 
         if (sound_pair.second.use_count() == 1) {
-            unload(sound_pair.first);
+            unload_sfx(sound_pair.first);
         }
     }
 }
@@ -73,13 +73,13 @@ void AudioManager::reload() {
 void AudioManager::unload_all() {
     for (auto& texture_pair: sound_map) {
 
-        unload(texture_pair.first);
+        unload_sfx(texture_pair.first);
     }
 }
 
 // Plays a sound with randomized pitch and volume
-void AudioManager::play_sound(std::string path, float volume, float pitch, float volume_rand, float pitch_rand) {
-    SoundVectorPtr sound_arr_ptr = get(path);
+void AudioManager::play_sfx(std::string path, float volume, float pitch, float volume_rand, float pitch_rand) {
+    SoundVectorPtr sound_arr_ptr = get_sfx(path);
 
     Sound sound;
 

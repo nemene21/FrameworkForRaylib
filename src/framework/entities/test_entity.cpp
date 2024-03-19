@@ -103,7 +103,7 @@ void TestEntity::process(float delta) {
         CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
         camera->shake(64, 0.25);
         camera->zoom(1.015, 0.15);
-        AudioManager::play_sound("shoot4.mp3", 1, 1, 0, 0.2);
+        AudioManager::play_sfx("shoot4.mp3", 1, 1, 0, 0.2);
     }
 }
 
