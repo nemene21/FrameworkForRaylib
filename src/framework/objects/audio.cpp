@@ -2,12 +2,36 @@
 
 // <Audio Manager>
 std::map<std::string, SoundVectorPtr> AudioManager::sound_map;
-std::map<std::string, SoundVectorPtr> AudioManager::music_map;
+std::map<std::string, MusicPtr>       AudioManager::music_map;
 float AudioManager::timer = 0.0f;
 float AudioManager::tick  = 210.0f;
 
 float AudioManager::sfx_volume    = 1.f;
 float AudioManager::music_volume  = 1.f;
+
+// Load a sound and put it's smart pointer into the sound map (it's path is the key)
+void AudioManager::load_track(std::string name) {
+
+    music_map[name] = std::make_shared<Music>(LoadMusicStream((MUSIC_DIR name).c_str()));
+}
+
+// Returns a sound smart pointer and loads the sound if required
+MusicPtr AudioManager::get_track(std::string name) {
+    if (music_map.find(name) != music_map.end())
+        return music_map[name];
+
+    load_track(name);
+    return music_map[name];
+}
+
+// Unloads a sound
+void AudioManager::unload_track(std::string name) {
+
+    Music &track = *music_map[name].get();
+    UnloadMusicStream(track);
+
+    music_map.erase(name);
+}
 
 // Load a sound and put it's smart pointer into the sound map (it's path is the key)
 void AudioManager::load_sfx(std::string name) {
@@ -36,12 +60,19 @@ void AudioManager::unload_sfx(std::string name) {
     sound_map.erase(name);
 }
 
-// Unloads all sounds that aren't being referanced 
+// Unloads all sounds and tracks that aren't being referanced 
 void AudioManager::unload_unused() {
-    for (auto& sound_pair: sound_map) {
+    for (auto &sound_pair: sound_map) {
 
         if (sound_pair.second.use_count() == 1) {
             unload_sfx(sound_pair.first);
+        }
+    }
+
+    for (auto &music_pair: music_map) {
+
+        if (music_pair.second.use_count() == 1) {
+            unload_track(music_pair.first);
         }
     }
 }
@@ -56,9 +87,9 @@ void AudioManager::unload_check() {
     }
 }
 
-// Reloads all sounds
+// Reloads all sounds and tracks
 void AudioManager::reload() {
-    for (auto& sound_pair: sound_map) {
+    for (auto &sound_pair: sound_map) {
         
         std::vector<Sound>& arr = *sound_pair.second.get();
 
@@ -68,13 +99,22 @@ void AudioManager::reload() {
         arr.clear();
         arr.push_back(LoadSound((SFX_DIR sound_pair.first).c_str()));
     }
+
+    for (auto &music_pair: music_map) {
+        
+        UnloadMusicStream(*music_pair.second.get());
+        *music_pair.second.get() = LoadMusicStream((MUSIC_DIR music_pair.first).c_str());
+    }
 }
 
-// Unloads all sounds
+// Unloads all sounds and tracks
 void AudioManager::unload_all() {
-    for (auto& texture_pair: sound_map) {
 
+    for (auto& texture_pair: sound_map) {
         unload_sfx(texture_pair.first);
+    }
+    for (auto& music_pair: music_map) {
+        unload_sfx(music_pair.first);
     }
 }
 

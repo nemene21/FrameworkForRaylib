@@ -11,7 +11,8 @@
 
 #include <misc.hpp>
 
-#define SFX_DIR  (std::string)("assets/sfx/") +
+#define SFX_DIR   (std::string)("assets/sfx/") +
+#define MUSIC_DIR (std::string)("assets/tracks/") +
 
 typedef std::shared_ptr<std::vector<Sound>> SoundVectorPtr;
 typedef std::shared_ptr<Music> MusicPtr;

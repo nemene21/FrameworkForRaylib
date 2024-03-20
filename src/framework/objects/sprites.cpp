@@ -137,7 +137,7 @@ void ShaderManager::reload() {
     }
 }
 
-// Unloads all particle data objects
+// Unloads all shader objects
 void ShaderManager::unload_all() {
     for (auto& shader_pair: shader_map) {
 
