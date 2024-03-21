@@ -9,13 +9,54 @@ float AudioManager::tick  = 210.0f;
 float AudioManager::sfx_volume    = 1.f;
 float AudioManager::music_volume  = 1.f;
 
-// Load a sound and put it's smart pointer into the sound map (it's path is the key)
+float AudioManager::music_fade = 1.f;
+float AudioManager::fade_speed = 1.f;
+
+MusicPtr AudioManager::track_playing = nullptr;
+MusicPtr AudioManager::track_fading  = nullptr;
+
+void AudioManager::process_track_fade(float delta) {
+    music_fade += delta * fade_speed;
+    music_fade = std::min(music_fade, 1.f);
+
+    if (track_playing.get() != nullptr) {
+        SetMusicVolume(*track_playing.get(), music_volume * music_fade);
+
+        if (!IsMusicStreamPlaying(*track_playing.get())) {
+            PlayMusicStream(*track_playing.get());
+        }
+        UpdateMusicStream(*track_playing.get());
+    }
+
+    if (track_fading.get() != nullptr) {
+        SetMusicVolume(*track_fading.get(),  music_volume * (1.f - music_fade));
+
+        if (!IsMusicStreamPlaying(*track_fading.get()) && music_fade != 1.f) {
+            PlayMusicStream(*track_fading.get());
+        }
+
+        UpdateMusicStream(*track_fading.get());
+    }
+}
+
+void AudioManager::play_track(std::string path, float fade = 0.f) {
+    music_fade = 1.f - music_fade;
+    fade_speed = 1 / (fade + 0.001f);
+
+    if (track_playing != nullptr) 
+        track_fading = std::make_shared<Music>(*track_playing.get());
+    track_playing = get_track(path);
+
+    PlayMusicStream(*track_playing.get());
+}
+
+// Load a track and put it's smart pointer into the track map (it's path is the key)
 void AudioManager::load_track(std::string name) {
 
     music_map[name] = std::make_shared<Music>(LoadMusicStream((MUSIC_DIR name).c_str()));
 }
 
-// Returns a sound smart pointer and loads the sound if required
+// Returns a track smart pointer and loads the sound if required
 MusicPtr AudioManager::get_track(std::string name) {
     if (music_map.find(name) != music_map.end())
         return music_map[name];
@@ -24,7 +65,7 @@ MusicPtr AudioManager::get_track(std::string name) {
     return music_map[name];
 }
 
-// Unloads a sound
+// Unloads a track
 void AudioManager::unload_track(std::string name) {
 
     Music &track = *music_map[name].get();
@@ -114,7 +155,7 @@ void AudioManager::unload_all() {
         unload_sfx(texture_pair.first);
     }
     for (auto& music_pair: music_map) {
-        unload_sfx(music_pair.first);
+        unload_track(music_pair.first);
     }
 }
 

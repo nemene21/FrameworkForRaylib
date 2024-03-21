@@ -1,7 +1,6 @@
 #include <test_entity.hpp>
 
 void TestEntity::stretch(float anim) {
-
     sprite.set_scale({
         1.f - anim * .5f,
         1.f + anim * .5f
@@ -9,7 +8,6 @@ void TestEntity::stretch(float anim) {
 }
 
 void TestEntity::squash(float anim) {
-
     sprite.set_scale({
         1.f - cos(PI*anim) * .5f,
         1.f + cos(PI*anim) * .5f
@@ -17,7 +15,6 @@ void TestEntity::squash(float anim) {
 }
 
 void TestEntity::return_state(float anim) {
-
     sprite.set_scale({
         1.5f - anim * .5f,
         .5f  + anim * .5f
@@ -35,7 +32,8 @@ void TestEntity::change_color_event(float anim) {
 
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
-    particle_sys {ParticleSystem("test.json")}
+    particle_sys {ParticleSystem("test.json")},
+    track_bool {false}
 {
     trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
 
@@ -104,6 +102,11 @@ void TestEntity::process(float delta) {
         camera->shake(64, 0.25);
         camera->zoom(1.015, 0.15);
         AudioManager::play_sfx("shoot4.mp3", 1, 1, 0, 0.2);
+
+        track_bool = !track_bool;
+        
+        if (track_bool) AudioManager::play_track("1.wav", 0.5);
+        else AudioManager::play_track("2.wav", 0.5);
     }
 }
 

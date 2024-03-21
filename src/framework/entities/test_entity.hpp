@@ -17,6 +17,7 @@ protected:
     Sprite sprite;
     ParticleSystem particle_sys;
     Trail trail_vfx;
+    bool track_bool;
 
 public:
     TestEntity();

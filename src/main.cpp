@@ -6,7 +6,10 @@ void process(float delta) {
     // Processing data managers
     TextureManager::unload_check();
     ParticleDataManager::unload_check();
+    
     AudioManager::unload_check();
+    AudioManager::process_track_fade(delta);
+
     ShaderManager::unload_check();
     ShaderManager::update_uniforms();
 

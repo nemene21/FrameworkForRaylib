@@ -31,8 +31,12 @@ public:
 
     static float timer;
     static float tick;
-    static float sfx_volume;    
-    static float music_volume;    
+    static float sfx_volume;  
+    static float music_volume;
+
+    static MusicPtr track_playing;
+    static MusicPtr track_fading;
+    static float music_fade, fade_speed;
 
     static void load_sfx(std::string path);
     static void unload_sfx(std::string path);
@@ -44,7 +48,8 @@ public:
     static void unload_track(std::string path);
     static MusicPtr get_track(std::string path);
 
-    static void play_track(std::string path);
+    static void play_track(std::string path, float fade);
+    static void process_track_fade(float delta);
 
     static void unload_check();
     static void unload_unused();
