@@ -30,6 +30,7 @@ enum ComponentType {
     HEALTH,
     CAMERA,
     ANIMATION,
+    COLLIDER,
     COUNT,
 };
 
@@ -44,10 +45,11 @@ public:
     virtual ~Component();
 
     virtual void process(float delta);
+    virtual void draw(float delta);
 };
 
 // <Component Namespace>
-typedef std::set<Component*> ComponentSet;
+typedef std::set<Component *> ComponentSet;
 
 typedef std::map<ComponentType, ComponentSet>
     ComponentMap;

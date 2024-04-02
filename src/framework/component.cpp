@@ -25,6 +25,7 @@ Component::~Component() {
 }
 
 void Component::process(float delta) {}
+void Component::draw(float delta) {}
 
 // <Component manager>
 ComponentMap ComponentManager::component_map {};

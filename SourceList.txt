@@ -9,6 +9,7 @@ framework/entities/tilemap_entity
 framework/scene
 framework/misc
 
+framework/components/collider_component
 framework/components/health_component
 framework/components/transform_component
 framework/components/camera_component

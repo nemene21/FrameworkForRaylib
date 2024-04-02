@@ -26,6 +26,7 @@ void Scene::draw_entities(float delta) {
 
     for (Entity *entity: entities) {
         entity->draw(delta);
+        entity->draw_components(delta);
     }
 }
 

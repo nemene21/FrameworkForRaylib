@@ -19,6 +19,7 @@ public:
     virtual ~Entity();
 
     virtual void process_components(float delta);
+    virtual void draw_components(float delta);
  
     virtual void join_group(std::string group);
     virtual void leave_group(std::string group);

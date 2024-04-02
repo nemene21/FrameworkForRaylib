@@ -20,8 +20,25 @@ void TransformComponent::translate_y(float adding) {
     position.y += adding;
 }
 
+void TransformComponent::check_bounds(Vector2 direction) {
+    std::cout << "bound check!!!" << std::endl;
+    if (entity->has_component(CompType::COLLIDER)) {
+        auto collider_ptr = (ColliderComponent *)entity->get_component(CompType::COLLIDER);
+
+        collider_ptr->position = position;
+
+        collider_ptr->collide(direction);
+    }
+}
+
 void TransformComponent::process(float delta) {
-    position = Vector2Add(position, Vector2Multiply(velocity, {delta, delta}));
+    std::cout << "Gonna move!!!" << std::endl;
+    position.x += velocity.x * delta;
+    std::cout << "Just gotta check bounds now!!!" << std::endl;
+    if (velocity.x != 0) check_bounds({(float)(velocity.x > 0.f) * 2.f - 1.f, 0.f});
+
+    position.y += velocity.y * delta;
+    if (velocity.y != 0) check_bounds({0.f, (float)(velocity.y > 0.f) * 2.f - 1.f});
 }
 
 void TransformComponent::interpolate_velocity(Vector2 to, float speed) {

@@ -16,6 +16,7 @@
 #include <health_component.hpp>
 #include <transform_component.hpp>
 #include <camera_component.hpp>
+#include <collider_component.hpp>
 
 // Objects
 #include <objects/sprites.hpp>

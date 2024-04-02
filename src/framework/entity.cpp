@@ -15,6 +15,13 @@ void Entity::process_components(float delta) {
     }
 }
 
+void Entity::draw_components(float delta) {
+
+    for (auto& comp_pair: comps) {
+        comp_pair.second->draw(delta);
+    }
+}
+
 void Entity::queue_free() {
     death_queued = true;
 }

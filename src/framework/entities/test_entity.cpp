@@ -48,6 +48,10 @@ TestEntity::TestEntity():
         camera_comp
     );
 
+    add_component(
+        new ColliderComponent(this, 36, 36)
+    );
+
     AnimationComponent *anim_comp = new AnimationComponent(this);
     
     anim_comp->make_animation("idle_test", 1, true);

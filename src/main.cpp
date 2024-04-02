@@ -13,6 +13,8 @@ void process(float delta) {
     ShaderManager::unload_check();
     ShaderManager::update_uniforms();
 
+    ColliderManager::reload_colliders();
+
     // Hot reloading
     if (TryingToHotReload()) {
         TextureManager::reload();
@@ -49,6 +51,7 @@ int main() {
 
     Easing::InitEasingFuncs();
     CameraManager::init();
+    ColliderManager::init();
 
     SceneManager::setup_scene(new TestScene());
     SceneManager::set_scene("test_scene");

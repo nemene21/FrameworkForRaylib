@@ -2,9 +2,11 @@
 #define TRANSFORM_COMP_H
 
 #include <component.hpp>
+#include <entity.hpp>
 #include <raylib.h>
 #include <raymath.h>
 #include <misc.hpp>
+#include <collider_component.hpp>
 
 class TransformComponent: public Component {
 public:
@@ -20,6 +22,7 @@ public:
     void interpolate_velocity(Vector2 to, float speed);
 
     void process(float delta);
+    void check_bounds(Vector2 direction);
 };
 
 #endif

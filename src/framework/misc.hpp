@@ -12,6 +12,10 @@
 extern const Vector2 res;
 extern const Vector2 half_res;
 
+typedef struct {
+    float x, y, radius;
+} Circle;
+
 struct Vector2Hash {
     std::size_t operator()(const Vector2& v) const;
 };
