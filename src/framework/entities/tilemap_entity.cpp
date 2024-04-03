@@ -27,7 +27,12 @@ void Tilemap::set_tile(int x, int y, int type) {
     changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second + 1});
     changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second - 1});
 
-    tiledata[chunk_pos][std::make_pair(x, y)] = type;
+    ColliderComponent collider = ColliderComponent(this, tilesize.x, tilesize.y);
+    collider.position = {x * tilesize.x, y * tilesize.y};
+    collider.set_layer((int)ColliderIndex::TILEMAP, true);
+    collider.process(0);
+
+    tiledata[chunk_pos][std::make_pair(x, y)] = {type, collider};
 }
 
 int Tilemap::get_tile(int x, int y) {
@@ -40,11 +45,11 @@ int Tilemap::get_tile(int x, int y) {
     if (tiledata[chunk_pos].find(pos) == tiledata[chunk_pos].end())
         return -1;
     
-    return tiledata[chunk_pos][pos];
+    return tiledata[chunk_pos][pos].type;
 }
 
 void Tilemap::build() {
-    for (auto& chunk_pos: changed_chunks) {
+    for (auto &chunk_pos: changed_chunks) {
         build_chunk(chunk_pos);
     }
 
@@ -75,6 +80,9 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
         bitmap += get_tile(pos.first + .5f, pos.second - .5f) == -1 ? "." : "#";
         bitmap += get_tile(pos.first - .5f, pos.second + .5f) == -1 ? "." : "#";
         bitmap += get_tile(pos.first + .5f, pos.second + .5f) == -1 ? "." : "#";
+
+        ColliderComponent collider = ColliderComponent(this, tilesize.x, tilesize.y);
+        collider.position = {pos.first, pos.second};
 
         TileData data {{pos.first, pos.second}, {0, 0}};
     	

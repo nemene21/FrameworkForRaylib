@@ -5,6 +5,7 @@
 #include <entity.hpp>
 
 #include <camera_component.hpp>
+#include <collider_component.hpp>
 
 #include <map>
 #include <set>
@@ -15,7 +16,12 @@ private:
         Vector2 pos, state;
     } TileData;
 
-    typedef std::map<std::pair<int, int>, int> TileTypeMap;
+    typedef struct {
+        int type;
+        ColliderComponent collider;
+    } TileTypeData;
+
+    typedef std::map<std::pair<int, int>, TileTypeData> TileTypeMap;
     typedef std::map<std::pair<int, int>, TileTypeMap> TileTypeChunks;
 
     typedef std::vector<TileData> TileDataVector;

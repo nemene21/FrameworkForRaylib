@@ -6,7 +6,8 @@
 #include <raylib.h>
 #include <set>
 
-#define COLLIDER_CHUNK_SIZE 1024
+#define COLLIDER_CHUNK_SIZE (int)1024
+#define DRAW_COLLIDERS true
 
 enum class ColliderIndex {
     TILEMAP,
@@ -22,6 +23,7 @@ public:
     void *shape;
     Vector2 position;
 
+    ColliderComponent();
     ColliderComponent(Entity *entity, float width, float height);
     ColliderComponent(Entity *entity, float radius);
 
@@ -34,7 +36,7 @@ public:
 
     void collide(Vector2 direction);
     void process(float delta);
-    void draw(float delta);
+    void debug_draw();
 };
 
 bool collides(ColliderComponent *coll1, ColliderComponent *coll2);
@@ -45,9 +47,12 @@ public:
     typedef std::vector<ColliderComponent *> ColliderChunk;
     typedef std::map<std::pair<int, int>, ColliderChunk> ColliderLayer;
 
+    static void draw_debug();
+
     static std::vector<ColliderLayer> collider_layers;
     static void reload_colliders();
-    static ColliderChunk get_nearby_colliders(ColliderComponent *comp);
+    static ColliderChunk get_chunk(ColliderLayer &layer, int x, int y);
+    static ColliderChunk get_nearby_colliders(ColliderComponent *comp, int layer);
     static void init();
 };
 

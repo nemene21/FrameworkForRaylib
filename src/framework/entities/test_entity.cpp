@@ -48,8 +48,11 @@ TestEntity::TestEntity():
         camera_comp
     );
 
+    ColliderComponent *collider_comp = new ColliderComponent(this, 36);
+    collider_comp->set_layer((int)ColliderIndex::TILEMAP, true);
+
     add_component(
-        new ColliderComponent(this, 36, 36)
+        collider_comp
     );
 
     AnimationComponent *anim_comp = new AnimationComponent(this);

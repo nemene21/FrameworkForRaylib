@@ -38,7 +38,7 @@ typedef ComponentType CompType;
 
 class Component {
 public:
-    const ComponentType type;
+    ComponentType type;
     Entity *entity;
 
     Component(ComponentType type, Entity *entity);
