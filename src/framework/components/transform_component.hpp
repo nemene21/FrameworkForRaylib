@@ -20,6 +20,7 @@ public:
     void translate_y(float adding);
 
     void interpolate_velocity(Vector2 to, float speed);
+    void accelerate(Vector2 by);
 
     void process(float delta);
     void check_bounds(Vector2 direction);

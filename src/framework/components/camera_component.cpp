@@ -79,6 +79,7 @@ Camera2D *CameraComponent::get_camera() {
     return &camera;
 }
 
+// Initiates a camera shake animation
 void CameraComponent::shake(float strength, float duration, float angle) {
     if (shake_timer > 0 && shake_strength >= strength) {
         return;
@@ -99,6 +100,7 @@ void CameraComponent::set_zoom(float zoom) {
     camera_zoom = zoom;
 }
 
+// Initiates a zooming animation
 void CameraComponent::zoom(float new_zoom, float duration) {
     if (zoom_anim_timer != 0) return;
 

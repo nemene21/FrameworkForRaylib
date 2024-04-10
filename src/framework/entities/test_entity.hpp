@@ -18,6 +18,7 @@ protected:
     ParticleSystem particle_sys;
     Trail trail_vfx;
     bool track_bool;
+    Vector2 collision_direction;
 
 public:
     TestEntity();

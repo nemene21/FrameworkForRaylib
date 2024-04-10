@@ -3,7 +3,9 @@
 
 #include <component.hpp>
 #include <misc.hpp>
+#include <camera_component.hpp>
 #include <raylib.h>
+#include <raymath.h>
 #include <set>
 
 #define COLLIDER_CHUNK_SIZE (int)1024
@@ -19,6 +21,7 @@ private:
     std::set<int> layers;
 
 public:
+    Vector2 collision_direction;
     bool is_rectangle, is_circle;
     void *shape;
     Vector2 position;
@@ -34,8 +37,15 @@ public:
     void add_layer(int layer);
     std::set<int>& get_layers();
 
+    bool on_floor();
+    bool on_ceil();
+    bool on_left_wall();
+    bool on_right_wall();
+    bool on_wall();
+
     void collide(Vector2 direction);
     void process(float delta);
+    void update_shape_position();
     void debug_draw();
 };
 

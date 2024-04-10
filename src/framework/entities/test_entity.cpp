@@ -37,9 +37,13 @@ TestEntity::TestEntity():
 {
     trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
 
+    TransformComponent *transform_comp = new TransformComponent(this);
+    transform_comp->position = {300, -100};
+
     add_component(
-        new TransformComponent(this)
+        transform_comp
     );
+
     add_component(
         new HealthComponent(this, 10)
     );
@@ -48,7 +52,7 @@ TestEntity::TestEntity():
         camera_comp
     );
 
-    ColliderComponent *collider_comp = new ColliderComponent(this, 36);
+    ColliderComponent *collider_comp = new ColliderComponent(this, 64, 88);
     collider_comp->set_layer((int)ColliderIndex::TILEMAP, true);
 
     add_component(
@@ -82,30 +86,41 @@ void TestEntity::process(float delta) {
     particle_sys.process(delta);
     trail_vfx.process(delta);
 
-    TransformComponent *transform_comp = (TransformComponent*)get_component(CompType::TRANSFORM);
-    transform_comp->interpolate_velocity(
-        Vector2Multiply({
-            float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A)),
-            float(IsKeyDown(KEY_S)) - float(IsKeyDown(KEY_W))
-        }, {700, 700}
-    ), 15);
+    ColliderComponent *collider_comp = (ColliderComponent *)get_component(CompType::COLLIDER);
+
+    TransformComponent *transform_comp = (TransformComponent *)get_component(CompType::TRANSFORM);
+    transform_comp->interpolate_velocity({
+        (float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A))) * 600.f,
+        transform_comp->velocity.y 
+    }, 15);
+
+    if (!collider_comp->on_floor())
+        transform_comp->accelerate({0, 2500.f * (1.f + 1.5f * (float)(transform_comp->velocity.y > 0))});
+    else
+        transform_comp->velocity.y = 50;
+    
+    if (collider_comp->on_ceil()) transform_comp->velocity.y = -.5f * transform_comp->velocity.y;
 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
 
         int x = round((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
             y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
-        ((TestScene*)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
+        ((TestScene *)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
         
-        ((TestScene*)SceneManager::scene_on)->tiles->build();
+        ((TestScene *)SceneManager::scene_on)->tiles->build();
     }
 
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);
     trail_vfx.set_position(transform_comp->position);
 
-    if (IsKeyPressed(KEY_SPACE)) {
-        CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
+    if (IsKeyPressed(KEY_SPACE) && collider_comp->on_floor()) {
+        transform_comp->velocity.y = -1200;
+    }
+
+    if (IsKeyPressed(KEY_U)) {
+        CameraComponent *camera = (CameraComponent *)get_component(CompType::CAMERA);
         camera->shake(64, 0.25);
         camera->zoom(1.015, 0.15);
         AudioManager::play_sfx("shoot4.mp3", 1, 1, 0, 0.2);

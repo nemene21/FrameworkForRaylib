@@ -89,7 +89,7 @@ int main() {
         EndShaderMode();
 
         draw_foreground(delta);
-        if (DRAW_COLLIDERS) ColliderManager::draw_debug();
+        ColliderManager::draw_debug();
 
         EndMode2D();        
         EndTextureMode();

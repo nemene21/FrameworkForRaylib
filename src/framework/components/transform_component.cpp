@@ -46,3 +46,7 @@ void TransformComponent::process(float delta) {
 void TransformComponent::interpolate_velocity(Vector2 to, float speed) {
     velocity = Lerpi(velocity, to, speed);
 }
+void TransformComponent::accelerate(Vector2 by) {
+    float delta = GetFrameTime();
+    velocity = Vector2Add(velocity, Vector2Multiply(by, {delta, delta}));
+}

@@ -33,18 +33,15 @@ bool collides(ColliderComponent *coll1, ColliderComponent *coll2) {
     return CheckCollisionCircles({circle1->x, circle1->y}, circle1->radius, {circle2->x, circle2->y}, circle2->radius);
 }
 
+// Collision resolution
 void resolve_collision(Vector2 direction, ColliderComponent *coll1, ColliderComponent *coll2) {
     Vector2 collision_point {0, 0};
 
     if (coll2->is_circle) {
-        Circle shape2 = *(Circle *)coll2->shape;
-        collision_point = coll2->position;
-
-        float angle = atan2f(collision_point.x - coll1->position.x, collision_point.y - coll1->position.y);
-        collision_point = Vector2Add(collision_point, Vector2Rotate({shape2.radius, 0}, angle));
-
+        // ...
     }
     else if (coll2->is_rectangle) {
+        // Gets the collision point by trapping the first collider's position within the second rectangle collider
         Rectangle shape2 = *(Rectangle *)coll2->shape;
         collision_point = coll1->position;
 
@@ -53,36 +50,65 @@ void resolve_collision(Vector2 direction, ColliderComponent *coll1, ColliderComp
     }
 
     if (coll1->is_rectangle) {
+        // Solves first colliders position if it's a rectangle
         Rectangle shape = *(Rectangle *)coll1->shape;
 
-        if (direction.y == 0) {
-            coll1->position.x = collision_point.x + shape.width * ((int)(direction.x < 0) * 2.f - 1.f) * .55f;
-        } else
-            coll1->position.y = collision_point.y + shape.height * ((int)(direction.y < 0) * 2.f - 1.f) * .55f;
-
+        if (direction.x != 0) {
+            coll1->position.x = collision_point.x + (shape.width) * ((int)(direction.x < 0) * 2.f - 1.f) * .500001f;
+        }
+        if (direction.y != 0) {
+            coll1->position.y = collision_point.y + (shape.height) * ((int)(direction.y < 0) * 2.f - 1.f) * .500001f;
+        }
     } else if (coll1->is_circle) {
 
     }
 }
-
+// Collider rectangle init
 ColliderComponent::ColliderComponent(Entity *entity, float width, float height):
     Component(CompType::COLLIDER, entity),
     shape {nullptr},
     is_rectangle {true},
-    is_circle {false}
+    is_circle {false},
+    collision_direction {0, 0}
 {
     shape = new Rectangle{0, 0, width, height};
 }
 
+// Collider circle init (crashes due to unimplemented circles)
 ColliderComponent::ColliderComponent(Entity *entity, float radius):
     Component(CompType::COLLIDER, entity),
     shape {nullptr},
     is_rectangle {false},
     is_circle {true}
 {
+    std::cout << "Didnt add circles yet :(" << std::endl;
+    exit(0);
+
     shape = new Circle{0, 0, radius};
 }
 
+// Collider collision direction checks
+bool ColliderComponent::on_floor() {
+    return collision_direction.y > 0;
+}
+
+bool ColliderComponent::on_ceil() {
+    return collision_direction.y < 0;
+}
+
+bool ColliderComponent::on_left_wall() {
+    return collision_direction.x < 0;
+}
+
+bool ColliderComponent::on_right_wall() {
+    return collision_direction.x > 0;
+}
+
+bool ColliderComponent::on_wall() {
+    return collision_direction.x != 0;
+}
+
+// Collider layer manipulation
 void ColliderComponent::set_layer(int layer, bool enabled) {
     if (enabled)
         layers.insert(layer);
@@ -116,35 +142,57 @@ std::set<int>& ColliderComponent::get_layers() {
     return layers;
 }
 
+// Checks and resolves collision among other colliders in the same layers
 void ColliderComponent::collide(Vector2 direction) {
+    if (direction.x != 0) collision_direction.x = 0;
+    if (direction.y != 0) collision_direction.y = 0;
+
     for (auto layer: layers) {
         for (auto collider: ColliderManager::get_nearby_colliders(this, layer)) {
 
             if (collider != this) {
-                process(1);
+                update_shape_position();
 
                 if (collides(this, collider)) {
+
+                    if (direction.x != 0) collision_direction.x = direction.x;
+                    if (direction.y != 0) collision_direction.y = direction.y;
+
                     resolve_collision(direction, this, collider);
                 }
-                process(1);
+                update_shape_position();
             }
         }
     }
 }
 
+// Draws the shape for debugging purposes
 void ColliderComponent::debug_draw() {
+
+    Vector2 camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
+    if (Vector2Distance(camera_pos, position) > res.x * sqrt(2.f) + 1000) return;
+
     if (is_circle) {
         Circle *circle = (Circle *)shape;
 
         DrawCircleLines(circle->x, circle->y, circle->radius, {0, 0, 255, 255});
+        DrawCircle(circle->x, circle->y, circle->radius, {0, 0, 255, 20});
+
     } else if (is_rectangle) {
         Rectangle *rect = (Rectangle *)shape;
 
         DrawRectangleLines(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 0, 255, 255});
+        DrawRectangle(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 0, 255, 20});
     }
 }
 
+// Processes collider component
 void ColliderComponent::process(float delta) {
+    update_shape_position();
+}
+
+// Updates position of the colliders shape
+void ColliderComponent::update_shape_position() {
     if (is_circle) {
         Circle *circle = (Circle *)shape;
         circle->x = position.x;
@@ -157,9 +205,10 @@ void ColliderComponent::process(float delta) {
     }
 }
 
-// Collider manager
+// <Collider manager>
 std::vector<ColliderManager::ColliderLayer> ColliderManager::collider_layers {};
 
+// Creates the layers
 void ColliderManager::init() {
     for (int i = 0; i < (int)ColliderIndex::COUNT; i++) {
 
@@ -167,6 +216,7 @@ void ColliderManager::init() {
     }
 }
 
+// Gets all colliders in a chunk
 ColliderManager::ColliderChunk ColliderManager::get_chunk(ColliderLayer &layer, int x, int y) {
     std::pair<int, int> chunk_pos = std::make_pair(x, y);
 
@@ -176,7 +226,7 @@ ColliderManager::ColliderChunk ColliderManager::get_chunk(ColliderLayer &layer, 
         return {};
 }
 
-
+// Returns all colliders in a layer that are in a 5x5 chunk area around the given component
 ColliderManager::ColliderChunk ColliderManager::get_nearby_colliders(ColliderComponent *comp, int layer) {
     ColliderChunk colliders {};
 
@@ -184,30 +234,18 @@ ColliderManager::ColliderChunk ColliderManager::get_nearby_colliders(ColliderCom
         y = comp->position.y / COLLIDER_CHUNK_SIZE;
 
     auto &layer_ref = collider_layers[layer];
-    
-    ColliderChunk chunk1 = get_chunk(layer_ref, x, y);
-    ColliderChunk chunk2 = get_chunk(layer_ref, x + 1, y);
-    ColliderChunk chunk3 = get_chunk(layer_ref, x - 1, y);
-    ColliderChunk chunk4 = get_chunk(layer_ref, x, y + 1);
-    ColliderChunk chunk5 = get_chunk(layer_ref, x, y - 1);
-    ColliderChunk chunk6 = get_chunk(layer_ref, x + 1, y + 1);
-    ColliderChunk chunk7 = get_chunk(layer_ref, x - 1, y + 1);
-    ColliderChunk chunk8 = get_chunk(layer_ref, x + 1, y - 1);
-    ColliderChunk chunk9 = get_chunk(layer_ref, x - 1, y - 1);
 
-    colliders.insert(colliders.end(), chunk1.begin(), chunk1.end());
-    colliders.insert(colliders.end(), chunk2.begin(), chunk2.end());
-    colliders.insert(colliders.end(), chunk3.begin(), chunk3.end());
-    colliders.insert(colliders.end(), chunk4.begin(), chunk4.end());
-    colliders.insert(colliders.end(), chunk5.begin(), chunk5.end());
-    colliders.insert(colliders.end(), chunk6.begin(), chunk6.end());
-    colliders.insert(colliders.end(), chunk7.begin(), chunk7.end());
-    colliders.insert(colliders.end(), chunk8.begin(), chunk8.end());
-    colliders.insert(colliders.end(), chunk9.begin(), chunk9.end());
+    for (int X = -2; X <= 2; X++) {
+        for (int Y = -2; Y <= 2; Y++) {
+            ColliderChunk chunk = get_chunk(layer_ref, x + X, y + Y);
+            colliders.insert(colliders.end(), chunk.begin(), chunk.end());
+        }
+    }
 
     return colliders;
 }
 
+// Clears the layer array and adds in the colliders again, O(n^2)
 void ColliderManager::reload_colliders() {
     for (auto& layer: collider_layers) {
         layer.clear();
@@ -221,8 +259,7 @@ void ColliderManager::reload_colliders() {
             collider_component->position.y / COLLIDER_CHUNK_SIZE
         );
 
-        // std::cout << chunk_pos.first << ", " << chunk_pos.second << std::endl;
-
+        // Puts the collider in a chunk in every one of its layers
         for (int layer: collider_component->get_layers()) {
             auto &layer_ref = collider_layers[layer];
 
@@ -234,10 +271,11 @@ void ColliderManager::reload_colliders() {
     }
 }
 
+// Calls debug draw on all colliders
 void ColliderManager::draw_debug() {
-
     for (auto component: ComponentManager::query_components(CompType::COLLIDER)) {
+
         ColliderComponent *collider_component = (ColliderComponent *)component;
-        collider_component->debug_draw();
+        if (DRAW_COLLIDERS) collider_component->debug_draw();
     }
 }
