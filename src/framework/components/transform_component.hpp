@@ -7,6 +7,7 @@
 #include <raymath.h>
 #include <misc.hpp>
 #include <collider_component.hpp>
+#include <area_component.hpp>
 
 class TransformComponent: public Component {
 public:

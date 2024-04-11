@@ -41,6 +41,11 @@ void TransformComponent::process(float delta) {
 
     position.y += velocity.y * delta;
     if (abs(velocity.y) > 1) check_bounds({0.f, (float)(velocity.y > 0.f) * 2.f - 1.f});
+
+    if (entity->has_component(CompType::AREA)) {
+        auto area_comp = (AreaComponent *)entity->get_component(CompType::AREA);
+        area_comp->position = position;
+    }
 }
 
 void TransformComponent::interpolate_velocity(Vector2 to, float speed) {

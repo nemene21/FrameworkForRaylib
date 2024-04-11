@@ -19,6 +19,7 @@ enum class ColliderIndex {
 class ColliderComponent: public Component {
 private:
     std::set<int> layers;
+    std::set<int> mask;
 
 public:
     Vector2 collision_direction;
@@ -36,6 +37,13 @@ public:
     void remove_layer(int layer);
     void add_layer(int layer);
     std::set<int>& get_layers();
+
+    void set_mask(std::set<int> new_layers);
+    void set_mask_bit(int layer, bool enabled);
+    void toggle_mask_bit(int layer);
+    void remove_mask_bit(int layer);
+    void add_mask_bit(int layer);
+    std::set<int>& get_mask();
 
     bool on_floor();
     bool on_ceil();

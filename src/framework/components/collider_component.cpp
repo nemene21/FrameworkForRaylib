@@ -108,6 +108,8 @@ bool ColliderComponent::on_wall() {
     return collision_direction.x != 0;
 }
 
+// TODO: fix the stuck on ceiling bug
+
 // Collider layer manipulation
 void ColliderComponent::set_layer(int layer, bool enabled) {
     if (enabled)
@@ -142,12 +144,46 @@ std::set<int>& ColliderComponent::get_layers() {
     return layers;
 }
 
+// Collider mask manipulation
+void ColliderComponent::set_mask_bit(int layer, bool enabled) {
+    if (enabled)
+        mask.insert(layer);
+    else
+        mask.erase(layer);
+}
+
+void ColliderComponent::add_mask_bit(int layer) {
+    mask.insert(layer);
+}
+
+void ColliderComponent::remove_mask_bit(int layer) {
+    mask.insert(layer);
+}
+
+void ColliderComponent::toggle_mask_bit(int layer) {
+    if (mask.find(layer) != mask.end()) mask.erase(layer);
+
+    else mask.insert(layer);
+}
+
+void ColliderComponent::set_mask(std::set<int> new_mask) {
+    mask.clear();
+
+    for (int layer: new_mask) {
+        mask.insert(layer);
+    }
+}
+
+std::set<int>& ColliderComponent::get_mask() {
+    return mask;
+}
+
 // Checks and resolves collision among other colliders in the same layers
 void ColliderComponent::collide(Vector2 direction) {
     if (direction.x != 0) collision_direction.x = 0;
     if (direction.y != 0) collision_direction.y = 0;
 
-    for (auto layer: layers) {
+    for (auto layer: mask) {
         for (auto collider: ColliderManager::get_nearby_colliders(this, layer)) {
 
             if (collider != this) {

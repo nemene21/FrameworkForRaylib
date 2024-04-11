@@ -14,6 +14,7 @@ void process(float delta) {
     ShaderManager::update_uniforms();
 
     ColliderManager::reload_colliders();
+    AreaManager::reload_areas();
 
     // Hot reloading
     if (TryingToHotReload()) {
@@ -52,6 +53,7 @@ int main() {
     Easing::InitEasingFuncs();
     CameraManager::init();
     ColliderManager::init();
+    AreaManager::init();
 
     SceneManager::setup_scene(new TestScene());
     SceneManager::set_scene("test_scene");
@@ -90,6 +92,7 @@ int main() {
 
         draw_foreground(delta);
         ColliderManager::draw_debug();
+        AreaManager::draw_debug();
 
         EndMode2D();        
         EndTextureMode();
@@ -158,6 +161,5 @@ int main() {
     AudioManager::unload_all();
 
     CloseWindow();
-
     return 0;
 }

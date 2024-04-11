@@ -53,11 +53,16 @@ TestEntity::TestEntity():
     );
 
     ColliderComponent *collider_comp = new ColliderComponent(this, 64, 88);
-    collider_comp->set_layer((int)ColliderIndex::TILEMAP, true);
+    collider_comp->set_mask_bit((int)ColliderIndex::TILEMAP, true);
 
     add_component(
         collider_comp
     );
+
+    std::cout << "tryna make an area component" << std::endl;
+    AreaComponent *area_component = new AreaComponent(this, 24);
+
+    add_component(area_component);
 
     AnimationComponent *anim_comp = new AnimationComponent(this);
     

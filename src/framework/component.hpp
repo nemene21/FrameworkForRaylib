@@ -31,6 +31,7 @@ enum ComponentType {
     CAMERA,
     ANIMATION,
     COLLIDER,
+    AREA,
     COUNT,
 };
 

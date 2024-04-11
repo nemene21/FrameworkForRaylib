@@ -11,6 +11,7 @@
 #include <transform_component.hpp>
 #include <camera_component.hpp>
 #include <animation_component.hpp>
+#include <area_component.hpp>
 
 class TestEntity: public Entity {
 protected:
