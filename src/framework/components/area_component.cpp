@@ -137,10 +137,8 @@ void AreaComponent::check_overlaps() {
         auto areas = AreaManager::get_nearby_areas(this, layer);
 
         for (auto area: areas) {
-            std::cout << "Wow i am checking that one test area" << std::endl;
             if (area != this) {
                 if (overlaps(this, area)) {
-                    std::cout << "Thingy should be in set!!!" << std::endl;
                     
                     // Add area if its not in
                     if (areas_overlapping.find(area) == areas_overlapping.end()) {
@@ -231,8 +229,6 @@ AreaManager::AreaChunk AreaManager::get_nearby_areas(AreaComponent *comp, int la
     for (int X = -2; X <= 2; X++) {
         for (int Y = -2; Y <= 2; Y++) {
             AreaChunk chunk = get_chunk(layer_ref, x + X, y + Y);
-            if (x + X == 0 && y + Y == 0)
-                std::cout << chunk.size() << std::endl;
             areas.insert(areas.end(), chunk.begin(), chunk.end());
         }
     }
@@ -257,7 +253,7 @@ void AreaManager::reload_areas() {
             auto &layer_ref = area_layers[layer];
 
             if (layer_ref.find(chunk_pos) == layer_ref.end())
-                layer_ref[chunk_pos] = {};
+                layer_ref[chunk_pos] = {area_component};
             else
                 layer_ref[chunk_pos].push_back(area_component);
         }

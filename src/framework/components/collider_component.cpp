@@ -109,8 +109,6 @@ bool ColliderComponent::on_wall() {
     return collision_direction.x != 0;
 }
 
-// TODO: fix the stuck on ceiling bug
-
 // Collider layer manipulation
 void ColliderComponent::set_layer(int layer, bool enabled) {
     if (enabled)
@@ -301,7 +299,7 @@ void ColliderManager::reload_colliders() {
             auto &layer_ref = collider_layers[layer];
 
             if (layer_ref.find(chunk_pos) == layer_ref.end())
-                layer_ref[chunk_pos] = {};
+                layer_ref[chunk_pos] = {collider_component};
             else
                 layer_ref[chunk_pos].push_back(collider_component);
         }
