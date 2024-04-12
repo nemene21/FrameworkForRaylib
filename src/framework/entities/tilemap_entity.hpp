@@ -6,6 +6,7 @@
 
 #include <camera_component.hpp>
 #include <collider_component.hpp>
+#include <area_component.hpp>
 
 #include <map>
 #include <set>

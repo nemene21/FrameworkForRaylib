@@ -38,7 +38,7 @@ TestEntity::TestEntity():
     trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
 
     TransformComponent *transform_comp = new TransformComponent(this);
-    transform_comp->position = {300, -100};
+    transform_comp->position = {500, -500};
 
     add_component(
         transform_comp
@@ -59,9 +59,8 @@ TestEntity::TestEntity():
         collider_comp
     );
 
-    std::cout << "tryna make an area component" << std::endl;
-    AreaComponent *area_component = new AreaComponent(this, 24);
-
+    AreaComponent *area_component = new AreaComponent(this, 40);
+    area_component->set_mask_bit((int)AreaIndex::TEST, true);
     add_component(area_component);
 
     AnimationComponent *anim_comp = new AnimationComponent(this);
@@ -106,14 +105,19 @@ void TestEntity::process(float delta) {
     
     if (collider_comp->on_ceil()) transform_comp->velocity.y = -.5f * transform_comp->velocity.y;
 
+    CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-        CameraComponent *camera = (CameraComponent*)get_component(CompType::CAMERA);
 
         int x = round((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
             y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
         ((TestScene *)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
         
         ((TestScene *)SceneManager::scene_on)->tiles->build();
+    }
+
+    auto area_comp = (AreaComponent *)get_component(CompType::AREA);
+    if (area_comp->areas_overlapping.size() != 0) {
+        std::cout << "me BOMBOCLATT: " << delta << std::endl;
     }
 
     sprite.set_position(transform_comp->position);

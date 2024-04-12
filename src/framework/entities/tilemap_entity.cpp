@@ -6,7 +6,13 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
     built_chunks {},
     changed_chunks {},
     tilesize {tilesize},
-    chunksize {16, 16} {}
+    chunksize {16, 16} {
+
+        auto area_comp = new AreaComponent(this, 256, 256);
+        area_comp->set_layer((int)AreaIndex::TEST, true);
+        area_comp->position = {0, 0};
+        add_component(area_comp);
+    }
 
 // Sets tile at x, y (tileposition) to 'type' type
 void Tilemap::set_tile(int x, int y, int type) {
@@ -156,7 +162,9 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
     }
 }
 
-void Tilemap::process(float delta) {}
+void Tilemap::process(float delta) {
+    get_component(CompType::AREA)->process(delta);
+}
 
 // Draws the tilemap (spatial partitioning and camera culling at play)
 void Tilemap::draw(float delta) {

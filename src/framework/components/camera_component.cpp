@@ -33,6 +33,7 @@ CameraComponent::CameraComponent(Entity *entity, Vector2 position):
     shake_strength {0},
     shake_duration {1},
     shake_timer {0},
+    camera {{0, 0}, {0, 0}, 0, 1},
 
     position {position},
     offset {0, 0}

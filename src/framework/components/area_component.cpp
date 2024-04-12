@@ -36,6 +36,8 @@ bool overlaps(AreaComponent *area1, AreaComponent *area2) {
 // Area rectangle init
 AreaComponent::AreaComponent(Entity *entity, float width, float height):
     Component(CompType::AREA, entity),
+    layers {},
+    mask {},
     shape {nullptr},
     is_rectangle {true},
     is_circle {false},
@@ -47,6 +49,8 @@ AreaComponent::AreaComponent(Entity *entity, float width, float height):
 // Area circle init (crashes due to unimplemented circles)
 AreaComponent::AreaComponent(Entity *entity, float radius):
     Component(CompType::AREA, entity),
+    layers {},
+    mask {},
     shape {nullptr},
     is_rectangle {false},
     is_circle {true},
@@ -130,10 +134,13 @@ void AreaComponent::check_overlaps() {
     update_shape_position();
 
     for (auto layer: mask) {
-        for (auto area: AreaManager::get_nearby_areas(this, layer)) {
+        auto areas = AreaManager::get_nearby_areas(this, layer);
 
+        for (auto area: areas) {
+            std::cout << "Wow i am checking that one test area" << std::endl;
             if (area != this) {
                 if (overlaps(this, area)) {
+                    std::cout << "Thingy should be in set!!!" << std::endl;
                     
                     // Add area if its not in
                     if (areas_overlapping.find(area) == areas_overlapping.end()) {
@@ -166,14 +173,15 @@ void AreaComponent::debug_draw() {
     } else if (is_rectangle) {
         Rectangle *rect = (Rectangle *)shape;
 
-        DrawRectangleLines(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 0, 255, 255});
-        DrawRectangle(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 0, 255, 20});
+        DrawRectangleLines(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 255, 0, 255});
+        DrawRectangle(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 255, 0, 20});
     }
 }
 
 // Processes area component
 void AreaComponent::process(float delta) {
     update_shape_position();
+    check_overlaps();
 }
 
 // Updates position of the areas shape
@@ -223,10 +231,11 @@ AreaManager::AreaChunk AreaManager::get_nearby_areas(AreaComponent *comp, int la
     for (int X = -2; X <= 2; X++) {
         for (int Y = -2; Y <= 2; Y++) {
             AreaChunk chunk = get_chunk(layer_ref, x + X, y + Y);
+            if (x + X == 0 && y + Y == 0)
+                std::cout << chunk.size() << std::endl;
             areas.insert(areas.end(), chunk.begin(), chunk.end());
         }
     }
-
     return areas;
 }
 
@@ -235,10 +244,9 @@ void AreaManager::reload_areas() {
     for (auto& layer: area_layers) {
         layer.clear();
     }
-
+    int i = 0;
     for (auto component: ComponentManager::query_components(CompType::AREA)) {
         auto area_component = (AreaComponent *)component;
-
         std::pair<int, int> chunk_pos = std::make_pair(
             area_component->position.x / AREA_CHUNK_SIZE,
             area_component->position.y / AREA_CHUNK_SIZE

@@ -69,7 +69,8 @@ ColliderComponent::ColliderComponent(Entity *entity, float width, float height):
     shape {nullptr},
     is_rectangle {true},
     is_circle {false},
-    collision_direction {0, 0}
+    collision_direction {0, 0},
+    position {0, 0}
 {
     shape = new Rectangle{0, 0, width, height};
 }
