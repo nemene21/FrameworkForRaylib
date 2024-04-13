@@ -143,12 +143,14 @@ void AreaComponent::check_overlaps() {
                     // Add area if its not in
                     if (areas_overlapping.find(area) == areas_overlapping.end()) {
                         areas_overlapping.insert(area);
+                        area_entered.emit(entity);
                     }
                 } else {
                     
                     // Remove area if it is in
                     if (areas_overlapping.find(area) != areas_overlapping.end()) {
                         areas_overlapping.erase(area);
+                        area_exited.emit(entity);
                     }
                 }
             }

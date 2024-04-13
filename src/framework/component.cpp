@@ -2,7 +2,9 @@
 
 
 // <Signals>
-void Signal::connect(const SignalFunction &function) {
+Signal::Signal(): callers {} {}
+
+void Signal::connect(SignalFunction function) {
     callers.push_back(function);
 }
 

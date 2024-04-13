@@ -29,12 +29,20 @@ void TestEntity::change_color_event(float anim) {
     sprite.tint = Color{(unsigned char)(rand()%100), (unsigned char)(rand()%255), (unsigned char)(rand()%255), 255};
 }
 
+void track1(Entity *entity) {
+    AudioManager::play_track("1.wav", 0.5);
+}
+ 
+void track2(Entity *entity) {
+    AudioManager::play_track("2.wav", 0.5);
+}
 
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
     particle_sys {ParticleSystem("test.json")},
     track_bool {false}
 {
+    std::cout << "test init" << std::endl;
     trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
 
     TransformComponent *transform_comp = new TransformComponent(this);
@@ -59,9 +67,17 @@ TestEntity::TestEntity():
         collider_comp
     );
 
+    std::cout << "gonna make area!" << std::endl;
     AreaComponent *area_component = new AreaComponent(this, 40);
+    std::cout << "did!" << std::endl;
     area_component->set_mask_bit((int)AreaIndex::TEST, true);
     add_component(area_component);
+    std::cout << "added it!" << std::endl;
+    std::cout << "Gonna connect!" << std::endl;
+
+    area_component->area_entered.connect([](Entity *entity) { track1(entity); });
+    area_component->area_exited.connect([](Entity *entity) { track2(entity); });
+    std::cout << "Connected!" << std::endl;
 
     AnimationComponent *anim_comp = new AnimationComponent(this);
     
@@ -116,9 +132,6 @@ void TestEntity::process(float delta) {
     }
 
     auto area_comp = (AreaComponent *)get_component(CompType::AREA);
-    if (area_comp->areas_overlapping.size() != 0) {
-        std::cout << "me BOMBOCLATT: " << delta << std::endl;
-    }
 
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);
@@ -126,18 +139,11 @@ void TestEntity::process(float delta) {
 
     if (IsKeyPressed(KEY_SPACE) && collider_comp->on_floor()) {
         transform_comp->velocity.y = -1200;
-    }
 
-    if (IsKeyPressed(KEY_U)) {
         CameraComponent *camera = (CameraComponent *)get_component(CompType::CAMERA);
         camera->shake(64, 0.25);
         camera->zoom(1.015, 0.15);
         AudioManager::play_sfx("shoot4.mp3", 1, 1, 0, 0.2);
-
-        track_bool = !track_bool;
-        
-        if (track_bool) AudioManager::play_track("1.wav", 0.5);
-        else AudioManager::play_track("2.wav", 0.5);
     }
 }
 

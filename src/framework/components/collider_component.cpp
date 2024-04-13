@@ -54,10 +54,10 @@ void resolve_collision(Vector2 direction, ColliderComponent *coll1, ColliderComp
         Rectangle shape = *(Rectangle *)coll1->shape;
 
         if (direction.x != 0) {
-            coll1->position.x = collision_point.x + (shape.width) * ((int)(direction.x < 0) * 2.f - 1.f) * .500001f;
+            coll1->position.x = collision_point.x + (shape.width) * ((int)(direction.x < 0) * 2.f - 1.f) * .500001f - (shape.width) * .0000005f;
         }
         if (direction.y != 0) {
-            coll1->position.y = collision_point.y + (shape.height) * ((int)(direction.y < 0) * 2.f - 1.f) * .500001f;
+            coll1->position.y = collision_point.y + (shape.height) * ((int)(direction.y < 0) * 2.f - 1.f) * .500001f - (shape.height) * .0000005f;
         }
     } else if (coll1->is_circle) {
 

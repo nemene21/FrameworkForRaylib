@@ -27,6 +27,8 @@ public:
     Vector2 position;
     std::set<AreaComponent *> areas_overlapping;
 
+    Signal area_entered, area_exited;
+
     AreaComponent();
     AreaComponent(Entity *entity, float width, float height);
     AreaComponent(Entity *entity, float radius);

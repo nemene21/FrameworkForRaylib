@@ -13,6 +13,9 @@
 #include <animation_component.hpp>
 #include <area_component.hpp>
 
+void track1(Entity *entity);
+void track2(Entity *entity);
+
 class TestEntity: public Entity {
 protected:
     Sprite sprite;

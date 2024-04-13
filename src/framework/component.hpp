@@ -10,7 +10,7 @@
 
 class Entity;
 
-using SignalFunction = std::function<void(Entity*)>;
+typedef std::function<void(Entity *)> SignalFunction;
 
 // <Signals>
 class Signal {
@@ -18,8 +18,8 @@ protected:
     std::vector<SignalFunction> callers;
 
 public:
-    void connect(const SignalFunction& function);
-
+    Signal();
+    void connect(SignalFunction func);
     void emit(Entity* parent);
 };
 
