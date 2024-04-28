@@ -6,6 +6,7 @@ AnimationComponent::AnimationComponent(Entity *entity): Component(CompType::ANIM
     playback_speed {1}
     {}
 
+// Initializes a new animation
 void AnimationComponent::make_animation(std::string name, float duration, bool repeating) {
     
     Animation new_animation;
@@ -18,6 +19,7 @@ void AnimationComponent::make_animation(std::string name, float duration, bool r
     animation_map[name] = new_animation;
 }
 
+// Adds a keyframe to an animation
 void AnimationComponent::add_keyframe(std::string name, float start, float end, std::function<void(float)> function) {
 
     Keyframe new_keyframe;
@@ -29,6 +31,7 @@ void AnimationComponent::add_keyframe(std::string name, float start, float end, 
     animation_map[name].keyframes.push_back(new_keyframe);
 }
 
+// Adds an event to an animation
 void AnimationComponent::add_event(std::string name, float time, std::function<void(float)> function) {
 
     Event new_event;
@@ -40,7 +43,7 @@ void AnimationComponent::add_event(std::string name, float time, std::function<v
     animation_map[name].events.push_back(new_event);
 }
 
-
+// Runs any event or keyframe required and makes animation go forward
 void AnimationComponent::process_animation(std::string name, float delta) {
     Animation &animation = animation_map[name];
 
@@ -53,7 +56,7 @@ void AnimationComponent::process_animation(std::string name, float delta) {
     }
     
     for (auto &event: animation_map[name].events) {
-        if (!event.played && event.time >= animation.progress) {
+        if (!event.played && event.time <= animation.progress) {
 
             event.function(animation.progress / animation.duration);
             event.played = true;
@@ -68,9 +71,8 @@ void AnimationComponent::process_animation(std::string name, float delta) {
         }
     }
 }
-
+// Plays animation
 void AnimationComponent::play(std::string name) {
-
     animation_playing = name;
 
     for (auto &event: animation_map[name].events) {
@@ -78,6 +80,7 @@ void AnimationComponent::play(std::string name) {
     }
 }
 
+// Calls animation processing
 void AnimationComponent::process(float delta) {
     process_animation(animation_playing, delta);
 }
