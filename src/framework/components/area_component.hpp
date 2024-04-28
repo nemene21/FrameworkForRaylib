@@ -28,6 +28,7 @@ public:
     std::set<AreaComponent *> areas_overlapping;
 
     Signal area_entered, area_exited;
+    AreaComponent *last_entered, *last_exited;
 
     AreaComponent();
     AreaComponent(Entity *entity, float width, float height);
@@ -48,6 +49,7 @@ public:
     std::set<int>& get_mask();
 
     void check_overlaps();
+    void clear_overlap();
 
     void process(float delta);
     void update_shape_position();

@@ -36,6 +36,8 @@ bool overlaps(AreaComponent *area1, AreaComponent *area2) {
 // Area rectangle init
 AreaComponent::AreaComponent(Entity *entity, float width, float height):
     Component(CompType::AREA, entity),
+    last_entered {nullptr},
+    last_exited {nullptr},
     layers {},
     mask {},
     shape {nullptr},
@@ -46,9 +48,11 @@ AreaComponent::AreaComponent(Entity *entity, float width, float height):
     shape = (void *)(new Rectangle{0, 0, width, height});
 }
 
-// Area circle init (crashes due to unimplemented circles)
+// Area circle init
 AreaComponent::AreaComponent(Entity *entity, float radius):
     Component(CompType::AREA, entity),
+    last_entered {nullptr},
+    last_exited {nullptr},
     layers {},
     mask {},
     shape {nullptr},
@@ -57,6 +61,16 @@ AreaComponent::AreaComponent(Entity *entity, float radius):
     areas_overlapping {}
 {
     shape = (void *)(new Circle{0, 0, radius});
+}
+
+// Clears all areas that are currently overlapping (for DOT zones and such...)
+void AreaComponent::clear_overlap() {
+    for (auto *area: areas_overlapping) {
+        last_exited = area;
+        area_exited.emit(entity);
+    }
+
+    areas_overlapping.clear();
 }
 
 // Area layer manipulation
@@ -143,6 +157,8 @@ void AreaComponent::check_overlaps() {
                     // Add area if its not in
                     if (areas_overlapping.find(area) == areas_overlapping.end()) {
                         areas_overlapping.insert(area);
+
+                        last_entered = area;
                         area_entered.emit(entity);
                     }
                 } else {
@@ -150,6 +166,8 @@ void AreaComponent::check_overlaps() {
                     // Remove area if it is in
                     if (areas_overlapping.find(area) != areas_overlapping.end()) {
                         areas_overlapping.erase(area);
+
+                        last_exited = area;
                         area_exited.emit(entity);
                     }
                 }
