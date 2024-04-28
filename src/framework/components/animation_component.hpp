@@ -45,7 +45,7 @@ public:
 
     AnimationComponent(Entity *entity);
 
-    Signal animation_finished;
+    Signal animation_finished, animation_started;
 
     void play(std::string name);
 

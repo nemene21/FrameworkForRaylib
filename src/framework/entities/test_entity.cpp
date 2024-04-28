@@ -80,7 +80,7 @@ TestEntity::TestEntity():
     std::cout << "Connected!" << std::endl;
 
     AnimationComponent *anim_comp = new AnimationComponent(this);
-    
+
     anim_comp->make_animation("idle_test", 1, true);
     anim_comp->add_keyframe("idle_test", 0, 0.6, [this](float value) { stretch(value); });
     anim_comp->add_keyframe("idle_test", 0.6, 0.8, [this](float value) { squash(value); });
@@ -131,15 +131,13 @@ void TestEntity::process(float delta) {
         ((TestScene *)SceneManager::scene_on)->tiles->build();
     }
 
-    auto area_comp = (AreaComponent *)get_component(CompType::AREA);
-
     sprite.set_position(transform_comp->position);
     particle_sys.set_position(transform_comp->position);
     trail_vfx.set_position(transform_comp->position);
 
     if (IsKeyPressed(KEY_SPACE) && collider_comp->on_floor()) {
         transform_comp->velocity.y = -1200;
-
+ 
         CameraComponent *camera = (CameraComponent *)get_component(CompType::CAMERA);
         camera->shake(64, 0.25);
         camera->zoom(1.015, 0.15);

@@ -1,6 +1,7 @@
 #include <animation_component.hpp>
 
 AnimationComponent::AnimationComponent(Entity *entity): Component(CompType::ANIMATION, entity),
+    animation_playing {"none"},
     paused {false},
     direction {1},
     playback_speed {1}
@@ -63,17 +64,20 @@ void AnimationComponent::process_animation(std::string name, float delta) {
         }
     }
 
-    if (animation.progress > animation.duration && animation.repeating) {
-        animation.progress = 0;
-        
-        for (auto &event: animation_map[name].events) {
-            event.played = false;
-        }
+    if (animation.progress > animation.duration) {
+        animation_finished.emit(entity);
+
+        if (animation.repeating) play(animation_playing);
+        else animation_playing = "none";
     }
 }
 // Plays animation
 void AnimationComponent::play(std::string name) {
     animation_playing = name;
+    Animation &animation = animation_map[name];
+    animation.progress = 0;
+
+    animation_started.emit(entity);
 
     for (auto &event: animation_map[name].events) {
         event.played = false;
