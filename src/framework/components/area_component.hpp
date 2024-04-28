@@ -50,6 +50,8 @@ public:
 
     void check_overlaps();
     void clear_overlap();
+    std::set<AreaComponent *> get_overlapping();
+    AreaComponent *get_one_overlapping();
 
     void process(float delta);
     void update_shape_position();

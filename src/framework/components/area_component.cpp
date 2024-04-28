@@ -141,7 +141,13 @@ std::set<int>& AreaComponent::get_mask() {
     return mask;
 }
 
-// TODO: functions for retrieving the first area it's overlapping, signal for when areas are entering and exiting
+std::set<AreaComponent *> AreaComponent::get_overlapping() {
+    return areas_overlapping;
+}
+
+AreaComponent *AreaComponent::get_one_overlapping() {
+    return *areas_overlapping.begin();
+}
 
 // Checks and resolves areaision among other areas in the same layers
 void AreaComponent::check_overlaps() {
