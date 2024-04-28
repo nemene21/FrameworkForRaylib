@@ -149,7 +149,7 @@ AreaComponent *AreaComponent::get_one_overlapping() {
     return *areas_overlapping.begin();
 }
 
-// Checks and resolves areaision among other areas in the same layers
+// Checks overlap among other areas in the same layers
 void AreaComponent::check_overlaps() {
     update_shape_position();
 
