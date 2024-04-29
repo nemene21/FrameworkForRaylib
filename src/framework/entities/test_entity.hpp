@@ -12,6 +12,7 @@
 #include <camera_component.hpp>
 #include <animation_component.hpp>
 #include <area_component.hpp>
+#include <timer_component.hpp>
 
 void track1(Entity *entity);
 void track2(Entity *entity);
@@ -22,6 +23,8 @@ protected:
     ParticleSystem particle_sys;
     Trail trail_vfx;
     bool track_bool;
+
+    Timer *test_timer;
 
 public:
     TestEntity();

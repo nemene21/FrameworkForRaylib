@@ -37,18 +37,28 @@ void track2(Entity *entity) {
     AudioManager::play_track("2.wav", 0.5);
 }
 
+void pogger(Entity *entity) {
+    std::cout << "Time passed: " << GetTime() << std::endl;
+}
+
 TestEntity::TestEntity():
     sprite {Sprite("test.png")},
     particle_sys {ParticleSystem("test.json")},
     track_bool {false}
 {
-    std::cout << "test init" << std::endl;
     trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
 
     TransformComponent *transform_comp = new TransformComponent(this);
     transform_comp->position = {500, -500};
 
-    add_component(
+    auto *timer_comp = new TimerComponent(this);
+    test_timer = timer_comp->add_timer("CoolTimer", 5, true);
+
+    test_timer->finished.connect([](Entity *entity) { pogger(entity); });
+
+    add_component(timer_comp);
+
+    add_component( 
         transform_comp
     );
 
@@ -67,17 +77,12 @@ TestEntity::TestEntity():
         collider_comp
     );
 
-    std::cout << "gonna make area!" << std::endl;
     AreaComponent *area_component = new AreaComponent(this, 40);
-    std::cout << "did!" << std::endl;
     area_component->set_mask_bit((int)AreaIndex::TEST, true);
     add_component(area_component);
-    std::cout << "added it!" << std::endl;
-    std::cout << "Gonna connect!" << std::endl;
 
     area_component->area_entered.connect([](Entity *entity) { track1(entity); });
     area_component->area_exited.connect([](Entity *entity) { track2(entity); });
-    std::cout << "Connected!" << std::endl;
 
     AnimationComponent *anim_comp = new AnimationComponent(this);
 
@@ -127,8 +132,10 @@ void TestEntity::process(float delta) {
         int x = round((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
             y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
         ((TestScene *)SceneManager::scene_on)->tiles->set_tile(x, y, 1);
-        
+
         ((TestScene *)SceneManager::scene_on)->tiles->build();
+
+        test_timer->start();
     }
 
     sprite.set_position(transform_comp->position);

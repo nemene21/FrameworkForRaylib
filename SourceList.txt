@@ -15,6 +15,7 @@ framework/components/transform_component
 framework/components/camera_component
 framework/components/animation_component
 framework/components/area_component
+framework/components/timer_component
 
 framework/objects/trails
 framework/objects/sprites

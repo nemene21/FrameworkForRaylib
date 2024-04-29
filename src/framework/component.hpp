@@ -32,6 +32,7 @@ enum ComponentType {
     ANIMATION,
     COLLIDER,
     AREA,
+    TIMER,
     COUNT,
 };
 
