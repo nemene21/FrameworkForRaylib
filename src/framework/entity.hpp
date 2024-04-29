@@ -7,6 +7,8 @@
 #include <component.hpp>
 #include <unordered_set>
 
+class Component;
+
 class Entity {
 protected:
     std::map<ComponentType, Component*> comps;

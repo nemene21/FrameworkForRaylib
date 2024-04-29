@@ -46,6 +46,8 @@ public:
     Component(ComponentType type, Entity *entity);
     virtual ~Component();
 
+    virtual void setup();
+
     virtual void process(float delta);
     virtual void draw(float delta);
 };
@@ -62,13 +64,11 @@ protected:
 
 public:
     static void add_component(Component *comp);
-
     static void remove_component(Component *comp);
 
     static ComponentSet query_components(ComponentType type);
 
     static int component_type_count(ComponentType type);
-
     static int component_count();
 };
 

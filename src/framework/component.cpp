@@ -1,5 +1,5 @@
 #include <component.hpp>
-
+#include <entity.hpp>
 
 // <Signals>
 Signal::Signal(): callers {} {}
@@ -24,6 +24,10 @@ Component::Component(ComponentType type, Entity *entity):
 
 Component::~Component() {
     ComponentManager::remove_component(this);
+}
+
+void Component::setup() {
+    entity->add_component(this);
 }
 
 void Component::process(float delta) {}

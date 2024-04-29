@@ -8,8 +8,8 @@
 #include <misc.hpp>
 
 // Component/entity/scene
-#include <component.hpp>
 #include <entity.hpp>
+#include <component.hpp>
 #include <scene.hpp>
 
 // Components

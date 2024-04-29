@@ -52,11 +52,10 @@ TestEntity::TestEntity():
     transform_comp->position = {500, -500};
 
     auto *timer_comp = new TimerComponent(this);
+    timer_comp->setup();
     test_timer = timer_comp->add_timer("CoolTimer", 5, true);
 
     test_timer->finished.connect([](Entity *entity) { pogger(entity); });
-
-    add_component(timer_comp);
 
     add_component( 
         transform_comp
