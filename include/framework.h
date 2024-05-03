@@ -21,6 +21,7 @@
 #include <animation_component.hpp>
 
 // Objects
+#include <objects/drawables.hpp>
 #include <objects/sprites.hpp>
 #include <objects/trails.hpp>
 #include <objects/particles.hpp>

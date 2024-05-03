@@ -34,12 +34,12 @@ public:
     static void update_uniforms();
 };
 
-class Material {
+class ShaderBond {
 public:
     ShaderPtr shader;
 
-    Material(std::string shader_path);
-    Material(ShaderPtr shader);
+    ShaderBond(std::string shader_path);
+    ShaderBond(ShaderPtr shader);
 
     virtual void set_shader(std::string shader_path);
     virtual void set_shader(ShaderPtr new_shader);

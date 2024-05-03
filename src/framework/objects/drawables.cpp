@@ -83,24 +83,24 @@ void ShaderManager::unload_all() {
     }
 }
 
-// <Materials>
-Material::Material(std::string shader_path): shader {ShaderManager::get(shader_path)} {}
-Material::Material(ShaderPtr shader): shader {shader} {}
+// <Materials/ShaderBond>
+ShaderBond::ShaderBond(std::string shader_path): shader {ShaderManager::get(shader_path)} {}
+ShaderBond::ShaderBond(ShaderPtr shader): shader {shader} {}
 
-void Material::use() {
+void ShaderBond::use() {
     BeginShaderMode(*shader.get());
 }
 
-void Material::process(float delta) {}
+void ShaderBond::process(float delta) {}
 
 // Shader setter/getter
-void Material::set_shader(std::string shader_path) {
+void ShaderBond::set_shader(std::string shader_path) {
     shader = ShaderManager::get(shader_path);
 }
-void Material::set_shader(ShaderPtr new_shader) {
+void ShaderBond::set_shader(ShaderPtr new_shader) {
     shader = new_shader;
 }
 
-ShaderPtr Material::get_shader() {
+ShaderPtr ShaderBond::get_shader() {
     return shader;
 }

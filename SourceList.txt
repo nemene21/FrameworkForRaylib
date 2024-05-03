@@ -17,6 +17,7 @@ framework/components/animation_component
 framework/components/area_component
 framework/components/timer_component
 
+framework/objects/drawables
 framework/objects/trails
 framework/objects/sprites
 framework/objects/particles
