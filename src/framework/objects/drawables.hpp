@@ -56,7 +56,7 @@ public:
     Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="default.glsl");
 
     Vector2 position, offset, scale;
-    float angle;
+    float angle, z_coord;
     ShaderBond shader_bond;
 
     virtual void draw() = 0;

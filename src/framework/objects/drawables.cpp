@@ -111,6 +111,7 @@ Drawable::Drawable(Vector2 position, Vector2 offset, Vector2 scale, float angle,
     offset {offset},
     scale {scale},
     angle {angle},
+    z_coord {0},
     shader_bond {ShaderBond(shader_path)} {}
 
 void Drawable::update_transform(TransformComponent *trans_comp) {
