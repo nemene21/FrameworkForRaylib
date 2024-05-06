@@ -104,3 +104,21 @@ void ShaderBond::set_shader(ShaderPtr new_shader) {
 ShaderPtr ShaderBond::get_shader() {
     return shader;
 }
+
+// <Drawables>
+Drawable::Drawable(Vector2 position, Vector2 offset, Vector2 scale, float angle, std::string shader_path):
+    position {position},
+    offset {offset},
+    scale {scale},
+    angle {angle},
+    shader_bond {ShaderBond(shader_path)} {}
+
+void Drawable::update_transform(TransformComponent *trans_comp) {
+    position = trans_comp->position;
+    scale = trans_comp->scale;
+    angle = trans_comp->angle;
+}
+
+Vector2 Drawable::real_position() {
+    return Vector2Add(position, offset);
+}

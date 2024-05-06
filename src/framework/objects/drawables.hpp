@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <transform_component.hpp>
 
 #define SHADER_DIR  (std::string)("assets/shaders/") +
 
@@ -48,6 +49,19 @@ public:
     virtual void process(float delta);
 
     ShaderPtr get_shader();
+};
+
+class Drawable {
+public:
+    Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="default.glsl");
+
+    Vector2 position, offset, scale;
+    float angle;
+    ShaderBond shader_bond;
+
+    virtual void draw() = 0;
+    virtual void update_transform(TransformComponent *trans_comp);
+    virtual Vector2 real_position();
 };
 
 #endif
