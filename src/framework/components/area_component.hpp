@@ -9,7 +9,7 @@
 #include <set>
 
 #define AREA_CHUNK_SIZE (int)1024
-#define DRAW_AREAS false
+#define DRAW_AREAS true
 
 enum class AreaIndex {
     TEST,

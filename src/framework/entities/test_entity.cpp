@@ -92,6 +92,16 @@ void TestEntity::process(float delta) {
 
         test_timer->start();
     }
+    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+
+        int x = round((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
+            y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
+        ((TestScene *)SceneManager::scene_on)->tiles->set_tile(x, y, -1);
+
+        ((TestScene *)SceneManager::scene_on)->tiles->build();
+
+        test_timer->start();
+    }
 
     sprite.update_transform(transform_comp);
     particle_sys.update_transform(transform_comp);

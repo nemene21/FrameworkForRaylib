@@ -47,6 +47,7 @@ public:
     void draw(float delta);
 
     void set_tile(int x, int y, int type);
+    void remove_tile(int x, int y);
     int  get_tile(int x, int y);
 
     void build();

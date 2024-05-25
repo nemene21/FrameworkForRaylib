@@ -2,21 +2,21 @@
 
 in vec2 fragTexCoord;
 
-const float vignette_add = .75;
-const float vignette_multiplier = 1;
+const float vignette_add = .6;
+const float vignette_multiplier = 1.5;
 const float vignette_exp = 1.25;
 
-const float warp = 0.f;
+const float warp = 0.5f;
 
 uniform sampler2D texture0;
 uniform float time;
 
 uniform sampler2D paper_texture;
-uniform float paperness = 0.00;
+uniform float paperness = 0.04;
 
 uniform sampler2D noise_texture;
 const float noise_zoom = 0.5;
-const float noise_strength = 0.00;
+const float noise_strength = 0.006;
 const float noise_anim_speed = 6.0;
 
 uniform vec2 camera_offset = vec2(0, 0);
