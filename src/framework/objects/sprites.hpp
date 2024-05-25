@@ -39,11 +39,8 @@ public:
     static void reload();
 };
 
-class Sprite {
+class Sprite: public Drawable {
 public:
-    Vector2 position, scale;
-    Color tint;
-    float angle;
 
     Sprite(std::string texture_name, Vector2 position={0,0}, Vector2 scale={1,1}, float angle=0);
 

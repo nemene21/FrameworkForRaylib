@@ -4,6 +4,8 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <map>
+#include <set>
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <memory>
@@ -54,14 +56,29 @@ public:
 class Drawable {
 public:
     Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="default.glsl");
+    ~Drawable();
 
     Vector2 position, offset, scale;
-    float angle, z_coord;
+    float angle;
+    Color tint;
+
+    float z_coord;
+
     ShaderBond shader_bond;
 
     virtual void draw() = 0;
     virtual void update_transform(TransformComponent *trans_comp);
-    virtual Vector2 real_position();
+    virtual Vector2 real_pos();
+};
+
+class DrawableManager {
+public:
+    static std::set<Drawable *> drawables;
+
+    static void draw();
+    static void clear();
+    static void add(Drawable *drawable);
+    static void remove(Drawable *drawable);
 };
 
 #endif

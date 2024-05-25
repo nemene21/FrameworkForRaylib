@@ -42,7 +42,7 @@ public:
 };
 
 // <Particle Class>
-class ParticleSystem {
+class ParticleSystem: public Drawable {
 protected:
     typedef struct {
         Vector2 position, velocity;
@@ -62,20 +62,26 @@ protected:
     typedef std::vector<Particle> ParticleList;
     ParticleList particles;
 
-    Vector2 position, force;
+    Vector2 force;
     float spawn_timer;
     int left;
 
     // All particle system properties (loaded from a JSON file)
     float lifetime, lifetime_randomness;
-    float angle, angle_randomness;
+    float particle_angle,
+          particle_angle_randomness;
+
     bool rotate_to_velocity;
     float angular_velocity, angular_velocity_randomness;
     float velocity, velocity_randomness, velocity_end, shot_angle, spread;
-    float scale, scale_randomness, scale_end;
+
+    float particle_scale,
+          particle_scale_randomness,
+          particle_scale_end;
+
     float firerate, firerate_randomness;
     int amount;
-    Color tint, tint_end; float tint_randomness;
+    Color particle_tint, particle_tint_end; float particle_tint_randomness;
     
     std::string velocity_ease_name;
     std::string scale_ease_name;

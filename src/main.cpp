@@ -34,6 +34,7 @@ void draw_background(float delta) {
 
 void draw_foreground(float delta) {
     SceneManager::scene_on->draw_entities(delta);
+    DrawableManager::draw();
 }
 
 int main() {

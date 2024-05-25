@@ -112,8 +112,8 @@ void ParticleSystem::reload_data() {
     texture = TextureManager::get(data["texture"]);
     
     // Angle
-    angle = data["angle"];
-    angle_randomness = data["angle_randomness"];
+    particle_angle = data["angle"];
+    particle_angle_randomness = data["angle_randomness"];
 
     angular_velocity = data["angular_velocity"];
     angular_velocity_randomness = data["angular_velocity_randomness"];
@@ -125,9 +125,9 @@ void ParticleSystem::reload_data() {
     lifetime_randomness = data["lifetime_randomness"];
 
     // Scale
-    scale = data["scale"];
-    scale_randomness = data["scale_randomness"];
-    scale_end = data["scale_end"];
+    particle_scale = data["scale"];
+    particle_scale_randomness = data["scale_randomness"];
+    particle_scale_end = data["scale_end"];
     scale_ease_name = (std::string)(data["scale_ease"]);
 
     // Velocity
@@ -148,7 +148,7 @@ void ParticleSystem::reload_data() {
     // Color
     tint_ease_name = (std::string)(data["tint_ease"]);
 
-    tint_randomness = data["tint_randomness"];
+    particle_tint_randomness = data["tint_randomness"];
 
     int r = data["tint"][0], g = data["tint"][1], b = data["tint"][2], a = data["tint"][3];
     tint = Color{
@@ -158,7 +158,7 @@ void ParticleSystem::reload_data() {
         static_cast<unsigned char>(a)
     };
 
-    tint_end = Color{
+    particle_tint_end = Color{
         static_cast<unsigned char>(data["tint_end"][0]),
         static_cast<unsigned char>(data["tint_end"][1]),
         static_cast<unsigned char>(data["tint_end"][2]),
@@ -168,8 +168,8 @@ void ParticleSystem::reload_data() {
 
 // Constructor
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position):
+    Drawable(position),
     collision_mask {nullptr},
-    position {position},
     force {0, 0},
     spawn_timer {0} {
 
@@ -187,16 +187,16 @@ void ParticleSystem::spawn_particle() {
 
     // Transform
     new_particle.position = position;
-    new_particle.scale = scale + (scale_randomness*.5 * RandF2());
-    new_particle.scale_end = scale_end * new_particle.scale;
+    new_particle.scale = particle_scale + (particle_scale_randomness*.5 * RandF2());
+    new_particle.scale_end = particle_scale_end * new_particle.scale;
 
-    new_particle.angle = angle + (angle_randomness*.5 * RandF2());
+    new_particle.angle = angle + (particle_angle_randomness*.5 * RandF2());
     new_particle.angular_velocity = angular_velocity  + (angular_velocity_randomness*.5 * RandF2());
 
     // Color
-    int rand_r = tint_randomness*.5 * RandF2(),
-        rand_g = tint_randomness*.5 * RandF2(),
-        rand_b = tint_randomness*.5 * RandF2();
+    int rand_r = particle_tint_randomness*.5 * RandF2(),
+        rand_g = particle_tint_randomness*.5 * RandF2(),
+        rand_b = particle_tint_randomness*.5 * RandF2();
 
     new_particle.tint = Color{
         static_cast<unsigned char>(tint.r + rand_r),
@@ -206,10 +206,10 @@ void ParticleSystem::spawn_particle() {
     };
 
     new_particle.tint_end = Color{
-        static_cast<unsigned char>(tint_end.r + rand_r),
-        static_cast<unsigned char>(tint_end.g + rand_g),
-        static_cast<unsigned char>(tint_end.b + rand_b),
-        tint_end.a
+        static_cast<unsigned char>(particle_tint_end.r + rand_r),
+        static_cast<unsigned char>(particle_tint_end.g + rand_g),
+        static_cast<unsigned char>(particle_tint_end.b + rand_b),
+        particle_tint_end.a
     };
 
     // Lifetime

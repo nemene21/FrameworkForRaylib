@@ -9,7 +9,7 @@
 #include <set>
 
 #define COLLIDER_CHUNK_SIZE (int)1024
-#define DRAW_COLLIDERS true
+#define DRAW_COLLIDERS false
 
 enum class ColliderIndex {
     TILEMAP,

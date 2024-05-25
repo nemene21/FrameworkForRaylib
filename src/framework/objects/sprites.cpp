@@ -136,7 +136,7 @@ Sprite::Sprite(
         Vector2 scale,
         float angle
     ):
-        position {position}, scale {scale}, tint {WHITE}, angle {angle}
+        Drawable(position, {0, 0}, scale, angle)
     {
         texture = TextureManager::get(texture_path);
     }
@@ -178,6 +178,4 @@ void Sprite::draw() {
 
     if (shader_ptr != nullptr)
         EndShaderMode();
-
-    // DrawCircleV(position, 6, RED);
 }
