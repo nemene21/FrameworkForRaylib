@@ -19,6 +19,7 @@ TestEntity::TestEntity():
 {
     trail_vfx = Trail({0, 0}, 40, 24, BLUE, {255, 0, 0, 0});
     particle_sys.z_coord = -1;
+    trail_vfx.z_coord = -1;
 
     TransformComponent *transform_comp = new TransformComponent(this);
     transform_comp->position = {500, -500};
@@ -94,7 +95,7 @@ void TestEntity::process(float delta) {
 
     sprite.update_transform(transform_comp);
     particle_sys.update_transform(transform_comp);
-    trail_vfx.set_position(transform_comp->position);
+    trail_vfx.update_transform(transform_comp);
 
     if (IsKeyPressed(KEY_SPACE) && collider_comp->on_floor()) {
         transform_comp->velocity.y = -1200;
@@ -107,5 +108,4 @@ void TestEntity::process(float delta) {
 }
 
 void TestEntity::draw(float delta) {
-    trail_vfx.draw();
 }

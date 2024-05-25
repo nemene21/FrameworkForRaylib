@@ -9,14 +9,14 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <drawables.hpp>
 
-class Trail {
+class Trail: public Drawable {
 protected:
     typedef struct {
         Vector2 position, velocity;
     } TrailPoint;
 
-    Vector2 position;
     float width;
     int max_points;
 

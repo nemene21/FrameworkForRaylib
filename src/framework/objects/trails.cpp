@@ -4,7 +4,7 @@
 Trail::Trail(
     Vector2 position, float width, int max_points, Color color, Color fade_color
 ):
-    position {position},
+    Drawable(position),
     width {width},
     max_points {max_points},
     color {color},
@@ -45,7 +45,7 @@ void Trail::spawn_point() {
     Vector2 offset {(float)GetRandomValue(0, random_offset), 0};
     offset = Vector2Rotate(offset, RandF() * PI * 2);
 
-    new_point.position = Vector2Add(position, offset);
+    new_point.position = Vector2Add(real_pos(), offset);
     new_point.velocity = Vector2{0.f, 0.f};
 
     points.push(new_point);
@@ -116,6 +116,6 @@ void Trail::draw() {
                 width*anim, color_calc
             );
         }
-        // DrawCircleV(first_point.position, width*anim * .5, color_calc);
+        DrawCircleV(first_point.position, width*anim * .5, color_calc);
     }
 }
