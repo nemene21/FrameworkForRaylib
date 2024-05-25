@@ -2,6 +2,7 @@ main
 
 framework/entity
 framework/component
+framework/input
 
 framework/entities/test_entity
 framework/entities/tilemap_entity

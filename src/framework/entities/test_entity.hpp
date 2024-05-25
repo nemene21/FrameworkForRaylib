@@ -13,6 +13,7 @@
 #include <animation_component.hpp>
 #include <area_component.hpp>
 #include <timer_component.hpp>
+#include <input.hpp>
 
 void track1(Entity *entity);
 void track2(Entity *entity);

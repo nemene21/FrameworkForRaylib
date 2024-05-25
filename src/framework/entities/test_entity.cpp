@@ -70,7 +70,7 @@ void TestEntity::process(float delta) {
 
     TransformComponent *transform_comp = (TransformComponent *)get_component(CompType::TRANSFORM);
     transform_comp->interpolate_velocity({
-        (float(IsKeyDown(KEY_D)) - float(IsKeyDown(KEY_A))) * 600.f,
+        (float(IsPressed("right")) - float(IsPressed("left"))) * 600.f,
         transform_comp->velocity.y 
     }, 15);
 
@@ -97,7 +97,7 @@ void TestEntity::process(float delta) {
     particle_sys.update_transform(transform_comp);
     trail_vfx.update_transform(transform_comp);
 
-    if (IsKeyPressed(KEY_SPACE) && collider_comp->on_floor()) {
+    if (IsJustPressed("jump") && collider_comp->on_floor()) {
         transform_comp->velocity.y = -1200;
  
         CameraComponent *camera = (CameraComponent *)get_component(CompType::CAMERA);
