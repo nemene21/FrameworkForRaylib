@@ -37,10 +37,11 @@ TestScene::TestScene(): Scene("test_scene") {}
 
 void TestScene::restart() {
     tiles = new Tilemap({96, 96}, "tiles.png");
+    FastNoiseLite gen_noise = FastNoiseLite();
 
     for (int x = 0; x < 128; x++) {
         for (int y = 0; y < 128; y++) {
-            if (RandF() > 0.5f) tiles->set_tile(x, y, 0);
+            if (gen_noise.GetNoise((float)x * 8.f, (float)y * 8.f) > 0.f) tiles->set_tile(x, y, 0);
         }
     }
 
