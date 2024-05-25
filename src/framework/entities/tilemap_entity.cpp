@@ -61,6 +61,33 @@ int Tilemap::get_tile(int x, int y) {
     return tiledata[chunk_pos][pos].type;
 }
 
+// Removes tile at x, y (tileposition)
+void Tilemap::remove_tile(int x, int y) {
+    std::pair<int, int> chunk_pos = std::make_pair<int, int>(x / chunksize.x, y / chunksize.y);
+    
+    // Create tile if it's not found in its chunk
+    if (tiledata.find(chunk_pos) == tiledata.end())
+        return;
+
+    // Returns if tile already exists there of that type
+    if (get_tile(x, y) == -1) {
+        return;
+    }
+
+    // Mark chunks
+    changed_chunks.insert({chunk_pos.first, chunk_pos.second});
+    changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second + 0});
+    changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second + 1});
+    changed_chunks.insert({chunk_pos.first + 0, chunk_pos.second + 1});
+    changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second - 0});
+    changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second - 1});
+    changed_chunks.insert({chunk_pos.first - 0, chunk_pos.second - 1});
+    changed_chunks.insert({chunk_pos.first - 1, chunk_pos.second + 1});
+    changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second - 1});
+
+    tiledata[chunk_pos].erase(std::make_pair(x, y));
+}
+
 // Builds all chunks
 void Tilemap::build() {
     for (auto &chunk_pos: changed_chunks) {

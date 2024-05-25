@@ -96,7 +96,7 @@ void TestEntity::process(float delta) {
 
         int x = round((GetMousePosition().x + camera->position.x + camera->offset.x - res.x*.5) / 96.0),
             y = round((GetMousePosition().y + camera->position.y + camera->offset.y - res.y*.5) / 96.0);
-        ((TestScene *)SceneManager::scene_on)->tiles->set_tile(x, y, -1);
+        ((TestScene *)SceneManager::scene_on)->tiles->remove_tile(x, y);
 
         ((TestScene *)SceneManager::scene_on)->tiles->build();
 
@@ -104,6 +104,9 @@ void TestEntity::process(float delta) {
     }
 
     sprite.update_transform(transform_comp);
+    sprite.scale.x = sprite.scale.x * (int(transform_comp->velocity.x > 0) * 2 - 1);
+    sprite.angle = sin(GetTime() * 15) * 10.f * (transform_comp->velocity.x/600.f);
+
     particle_sys.update_transform(transform_comp);
     trail_vfx.update_transform(transform_comp);
 
