@@ -1,11 +1,8 @@
-#version 330 core
+#version 330
 
-in vec2 fragTexCoord;
-uniform sampler2D texture0;
-uniform float time;
-
-out vec4 FragColor;
+in vec4 fragColor; // Color coming from the vertex shader
+out vec4 finalColor;
 
 void main() {
-    FragColor = texture(texture0, fragTexCoord);
+    finalColor = fragColor; // Output the color
 }

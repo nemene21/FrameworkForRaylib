@@ -41,10 +41,7 @@ public:
 
 class Sprite: public Drawable {
 public:
-
     Sprite(std::string texture_name, Vector2 position={0,0}, Vector2 scale={1,1}, float angle=0);
-
-    void set_shader(std::string shader_name);
 
     Vector2 get_position();
     void set_position(Vector2 new_pos);
@@ -56,7 +53,6 @@ public:
     void draw();
     
 protected:
-    ShaderPtr shader;
     TexturePtr texture;
 };
 

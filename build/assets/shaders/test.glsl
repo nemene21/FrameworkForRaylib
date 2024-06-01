@@ -8,10 +8,5 @@ out vec4 FragColor;
 
 void main()
 {
-    FragColor = texture(texture0, fragTexCoord) * vec4(
-        abs(sin(time*5)),
-        abs(sin(time*4+1)),
-        abs(sin(time*4+2)),
-        1.0
-    );
+    FragColor = texture(texture0, fragTexCoord);
 }

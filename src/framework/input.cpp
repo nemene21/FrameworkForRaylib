@@ -1,26 +1,32 @@
 #include <input.hpp>
 
-std::map<std::string, std::set<int>> inputs = {
-    {"jump", {KEY_SPACE}},
-    {"continue", {KEY_SPACE, KEY_ENTER, KEY_C}},
+// Input map (holds all inputs)
+std::map<std::string, std::vector<Input>> inputs = {
+    {"jump", {{InputType::KEY, KEY_SPACE}, {InputType::MOUSE, MOUSE_BUTTON_LEFT}}},
+    {"continue", {{InputType::KEY, KEY_SPACE}, {InputType::KEY, KEY_ENTER}, {InputType::KEY, KEY_C}}},
 
-    {"up",    {KEY_W, KEY_UP}},
-    {"left",  {KEY_A, KEY_LEFT}},
-    {"down",  {KEY_S, KEY_DOWN}},
-    {"right", {KEY_D, KEY_RIGHT}}
+    {"up",    {{InputType::KEY, KEY_W}, {InputType::KEY, KEY_UP   }}},
+    {"left",  {{InputType::KEY, KEY_A}, {InputType::KEY, KEY_LEFT }}},
+    {"down",  {{InputType::KEY, KEY_S}, {InputType::KEY, KEY_DOWN }}},
+    {"right", {{InputType::KEY, KEY_D}, {InputType::KEY, KEY_RIGHT}}}
 };
 
-
-bool IsPressed(std::string name) {
-    for (int key: inputs[name]) {
-        if (IsKeyDown(key)) return true;
+// Check if an input is being held right now
+bool IsPressed(std::string name, int gamepad) {
+    for (Input input: inputs[name]) {
+        if (input.type == InputType::KEY      && IsKeyDown(input.id))                    return true;
+        if (input.type == InputType::MOUSE    && IsMouseButtonDown(input.id))            return true;
+        if (input.type == InputType::JOYSTICK && IsGamepadButtonDown(gamepad, input.id)) return true;
     }
     return false;
 }
 
-bool IsJustPressed(std::string name) {
-    for (int key: inputs[name]) {
-        if (IsKeyPressed(key)) return true;
+// Check if an input was pressed this frame
+bool IsJustPressed(std::string name, int gamepad) {
+    for (Input input: inputs[name]) {
+        if (input.type == InputType::KEY      && IsKeyPressed(input.id))                    return true;
+        if (input.type == InputType::MOUSE    && IsMouseButtonPressed(input.id))            return true;
+        if (input.type == InputType::JOYSTICK && IsGamepadButtonPressed(gamepad, input.id)) return true;
     }
     return false;
 }

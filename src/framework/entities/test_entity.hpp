@@ -29,12 +29,6 @@ protected:
 
 public:
     TestEntity();
-
-    void stretch(float anim);
-    void squash(float anim);
-    void return_state(float anim);
-    void spin(float anim);
-    void change_color_event(float anim);
     
     void process(float delta);
     void draw(float delta);

@@ -152,11 +152,6 @@ Sprite::Sprite(
         texture = TextureManager::get(texture_path);
     }
 
-// Shader setter
-void Sprite::set_shader(std::string shader_name) {
-    shader = ShaderManager::get(shader_name);
-}
-
 // Position getter
 Vector2 Sprite::get_position() {
     return position;
@@ -180,13 +175,5 @@ Vector2 Sprite::get_scale() {
 
 // Draws the transformed texture with the shader (if it has one)
 void Sprite::draw() {
-
-    Shader* shader_ptr = shader.get();
-    if (shader_ptr != nullptr)
-        BeginShaderMode(*shader_ptr);
-
-    DrawTextureCentered(texture.get(), position, scale, angle, tint);
-
-    if (shader_ptr != nullptr)
-        EndShaderMode();
+    DrawTextureCentered(texture.get(), real_pos(), scale, angle, tint);
 }

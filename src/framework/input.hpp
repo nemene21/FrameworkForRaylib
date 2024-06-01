@@ -4,14 +4,22 @@
 #include <iostream>
 #include <raylib.h>
 #include <raymath.h>
-#include <set>
+#include <vector>
 #include <map>
 
-#define MOUSE_KEY + 2024
+enum InputType {
+    KEY,
+    MOUSE,
+    JOYSTICK,
+};
 
-extern std::map<std::string, std::set<int>> inputs;
+typedef struct {
+    int type, id;
+} Input;
 
-bool IsPressed(std::string name);
-bool IsJustPressed(std::string name);
+extern std::map<std::string, std::vector<Input>> inputs;
+
+bool IsPressed(std::string name, int gamepad=0);
+bool IsJustPressed(std::string name, int gamepad=0);
 
 #endif
