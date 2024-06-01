@@ -12,6 +12,11 @@ std::ostream& operator<<(std::ostream& str, Vector2 vec) {
     return str;
 }
 
+std::ostream& operator<<(std::ostream& str, Color col) {
+    str << "col(" << (unsigned int)col.r << ", " << (unsigned int)col.g << ", " << (unsigned int)col.b << ", " << (unsigned int)col.a << ")";
+    return str;
+}
+
 bool operator>(Vector2 first, Vector2 other) {
     if (first.x > other.x) return true;
     if (first.x < other.x) return false;

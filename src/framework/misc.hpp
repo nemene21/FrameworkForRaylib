@@ -23,6 +23,7 @@ struct Vector2Hash {
 bool operator==(Color first, Color other);
 
 std::ostream& operator<<(std::ostream& str, Vector2 vec);
+std::ostream& operator<<(std::ostream& str, Color col);
 
 bool operator>(Vector2 first, Vector2 other);
 bool operator<(Vector2 first, Vector2 other);
