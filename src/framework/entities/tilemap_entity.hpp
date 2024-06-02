@@ -7,16 +7,31 @@
 #include <camera_component.hpp>
 #include <collider_component.hpp>
 #include <area_component.hpp>
+#include <fstream>
+#include <json.hpp>
 
 #include <map>
 #include <set>
 
+using json = nlohmann::json;
+
+typedef struct {
+    Vector2 pos, state;
+} TileData;
+
+typedef std::vector<TileData> TileDataVector;
+
+void to_json(json& j, const TileData& data);
+void from_json(const json& j, TileData& data);
+
+void to_json(json& j, const Vector2& vec);
+void from_json(const json& j, Vector2& vec);
+
+void to_json(json& j, const TileDataVector& vec);
+void from_json(const json& j, TileDataVector& vec);
+
 class Tilemap: public Entity {
 private:
-    typedef struct {
-        Vector2 pos, state;
-    } TileData;
-
     typedef struct {
         int type;
         ColliderComponent collider;
@@ -25,7 +40,6 @@ private:
     typedef std::map<std::pair<int, int>, TileTypeData> TileTypeMap;
     typedef std::map<std::pair<int, int>, TileTypeMap> TileTypeChunks;
 
-    typedef std::vector<TileData> TileDataVector;
     typedef std::map<std::pair<int, int>, TileDataVector> TileDataChunks;
 
     typedef std::set<std::pair<int, int>> ChunkSet;
@@ -52,6 +66,9 @@ public:
 
     void build();
     void build_chunk(std::pair<int, int>);
+
+    void save(std::string path);
+    void load(std::string path);
 };
 
 #endif

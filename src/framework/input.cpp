@@ -2,7 +2,7 @@
 
 // Input map (holds all inputs)
 std::map<std::string, std::vector<Input>> inputs = {
-    {"jump", {{InputType::KEY, KEY_SPACE}, {InputType::MOUSE, MOUSE_BUTTON_LEFT}}},
+    {"jump", {{InputType::KEY, KEY_SPACE}}},
     {"continue", {{InputType::KEY, KEY_SPACE}, {InputType::KEY, KEY_ENTER}, {InputType::KEY, KEY_C}}},
 
     {"up",    {{InputType::KEY, KEY_W}, {InputType::KEY, KEY_UP   }}},
@@ -29,4 +29,12 @@ bool IsJustPressed(std::string name, int gamepad) {
         if (input.type == InputType::JOYSTICK && IsGamepadButtonPressed(gamepad, input.id)) return true;
     }
     return false;
+}
+
+// Mouse position in world
+Vector2 mouse_pos() {
+    Vector2 pos = GetMousePosition();
+    pos.x = (pos.x / GetScreenWidth() ) * res.x;
+    pos.y = (pos.y / GetScreenHeight()) * res.y;
+    return pos;
 }

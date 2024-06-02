@@ -14,6 +14,38 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
         add_component(area_comp);
     }
 
+// Json to/from for TileData and Vector2
+void to_json(json& j, const Vector2& vec) {
+    j = json{{"x", vec.x}, {"y", vec.y}};
+}
+
+void from_json(const json& j, Vector2& vec) {
+    j.at("x").get_to(vec.x);
+    j.at("y").get_to(vec.y);
+}
+
+void to_json(json& j, const TileData& data) {
+    j = json{{"pos", data.pos}, {"state", data.state}};
+}
+
+void from_json(const json& j, TileData& data) {
+    j.at("pos").get_to(data.pos);
+    j.at("state").get_to(data.state);
+}
+
+void to_json(json& j, const TileDataVector& arr) {
+    j = json::array();
+    for (const auto& thing: arr) {
+        j.push_back(thing);
+    }
+}
+
+void from_json(const json& j, TileDataVector& arr) {
+    for (const auto& thing: j) {
+        arr.push_back(thing.get<TileData>());
+    }
+}
+
 // Sets tile at x, y (tileposition) to 'type' type
 void Tilemap::set_tile(int x, int y, int type) {
     std::pair<int, int> chunk_pos = std::make_pair<int, int>(x / chunksize.x, y / chunksize.y);
@@ -45,6 +77,46 @@ void Tilemap::set_tile(int x, int y, int type) {
     collider.process(0);
 
     tiledata[chunk_pos][std::make_pair(x, y)] = {type, collider};
+}
+
+void Tilemap::save(std::string path) {
+    json j = json::array();
+
+    TileDataVector tiles {};
+    for (auto& tile_map_pair: tiledata) {
+        for (auto tile_pair: tile_map_pair.second) {
+            j.push_back(json{
+                {"x", tile_pair.first.first},
+                {"y", tile_pair.first.second},
+                {"type", tile_pair.second.type}
+            });
+        }
+    }
+
+    std::ofstream file(path);
+
+    if (file.is_open()) {
+        file << j.dump(4);
+        file.close();
+
+    } else {
+        std::cout << "Couldnt open file: " << path << std::endl;
+    }
+}
+
+void Tilemap::load(std::string path) {
+    std::ifstream file(path);
+    json j;
+    file >> j;
+    file.close();
+
+    built_chunks.clear();
+    tiledata.clear();
+
+    for (auto& el: j) {
+        set_tile((int)el["x"], (int)el["y"], (int)el["type"]);
+    }
+    build();
 }
 
 // Returns tile type at x, y (tileposition), -1 if empty
@@ -191,6 +263,9 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
 
 void Tilemap::process(float delta) {
     get_component(CompType::AREA)->process(delta);
+    if (IsKeyPressed(KEY_ENTER)) {
+        save("test.json");
+    }
 }
 
 // Draws the tilemap (spatial partitioning and camera culling at play)

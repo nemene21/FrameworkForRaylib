@@ -63,6 +63,8 @@ TestEntity::TestEntity():
 }
 
 void TestEntity::process(float delta) {
+    std::cout << mouse_pos() << std::endl;
+
     particle_sys.process(delta);
     trail_vfx.process(delta);
 

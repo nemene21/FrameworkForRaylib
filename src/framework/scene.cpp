@@ -45,7 +45,7 @@ void TestScene::restart() {
         }
     }
 
-    tiles->build();
+    tiles->load("test.json");
 
     entities = {
         (Entity*)tiles,

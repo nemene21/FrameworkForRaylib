@@ -6,6 +6,7 @@
 #include <raymath.h>
 #include <vector>
 #include <map>
+#include <misc.hpp>
 
 enum InputType {
     KEY,
@@ -21,5 +22,7 @@ extern std::map<std::string, std::vector<Input>> inputs;
 
 bool IsPressed(std::string name, int gamepad=0);
 bool IsJustPressed(std::string name, int gamepad=0);
+
+Vector2 mouse_pos();
 
 #endif
