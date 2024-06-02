@@ -63,7 +63,6 @@ TestEntity::TestEntity():
 }
 
 void TestEntity::process(float delta) {
-    std::cout << mouse_pos() << std::endl;
 
     particle_sys.process(delta);
     trail_vfx.process(delta);
@@ -123,4 +122,6 @@ void TestEntity::process(float delta) {
 }
 
 void TestEntity::draw(float delta) {
+    TransformComponent *transform_comp = (TransformComponent *)get_component(CompType::TRANSFORM);
+    DrawLineV(transform_comp->position, mouse_pos(), WHITE);
 }

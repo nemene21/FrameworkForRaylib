@@ -32,9 +32,19 @@ bool IsJustPressed(std::string name, int gamepad) {
 }
 
 // Mouse position in world
-Vector2 mouse_pos() {
+Vector2 mouse_screen_pos() {
     Vector2 pos = GetMousePosition();
     pos.x = (pos.x / GetScreenWidth() ) * res.x;
     pos.y = (pos.y / GetScreenHeight()) * res.y;
+    return pos;
+}
+
+Vector2 mouse_pos() {
+    Vector2 pos = mouse_screen_pos();
+    Camera2D *camera = CameraManager::get_camera();
+
+    pos = Vector2Add(pos, Vector2Add(camera->target, camera->offset));
+    pos = Vector2Subtract(pos, res);
+
     return pos;
 }
