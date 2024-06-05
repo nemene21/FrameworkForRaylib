@@ -10,6 +10,8 @@
 #include <sprites.hpp>
 #include <tilemap_entity.hpp>
 #include <misc.hpp>
+#include <entity.hpp>
+#include <transform_component.hpp>
 
 #include <json.hpp>
 #include <memory>
@@ -103,11 +105,20 @@ public:
 
     void set_left(int new_left);
     int get_left();
+    int get_num_particles();
 
     void reload_data();
 
     void process(float delta);
     void draw();
+};
+
+class ParticleEntity: public Entity {
+public:
+    ParticleSystem system;
+
+    ParticleEntity(std::string path, Vector2 pos, int left=1);
+    void process(float delta);
 };
 
 #endif

@@ -1,6 +1,6 @@
 {
     "texture": "particle_test.png",
-    "lifetime": 0.2, "lifetime_randomness": 0.3,
+    "lifetime": 2, "lifetime_randomness": 0.3,
 
     "firerate": 8.0, "firerate_randomness": 0,
     "amount": 2,

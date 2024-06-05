@@ -301,6 +301,10 @@ void ParticleSystem::process(float delta) {
     }
 }
 
+int ParticleSystem::get_num_particles() {
+    return particles.size();
+}
+
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
 
@@ -324,5 +328,20 @@ void ParticleSystem::draw() {
             particle.angle,
             calc_tint
         );
+    }
+}
+
+ParticleEntity::ParticleEntity(std::string path, Vector2 position, int left):
+    system {ParticleSystem(path, position)} {
+
+    add_component(new TransformComponent(this, position));
+    system.set_left(left);
+}
+
+void ParticleEntity::process(float delta) {
+    system.update_transform((TransformComponent *)get_component(CompType::TRANSFORM));
+
+    if (system.get_num_particles() == 0 && system.get_left() == 0) {
+        queue_free();
     }
 }
