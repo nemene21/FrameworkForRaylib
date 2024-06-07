@@ -19,6 +19,8 @@ public:
     virtual void draw_entities(float delta);
     virtual void process_entities(float delta);
 
+    virtual void add_entity(Entity* entity);
+
     virtual void restart() = 0;
 
 protected:

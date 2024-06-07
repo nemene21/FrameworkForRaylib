@@ -30,6 +30,10 @@ void Scene::draw_entities(float delta) {
     }
 }
 
+void Scene::add_entity(Entity* entity) {
+    entities.push_back(entity);
+}
+
 void Scene::process(float delta) {}
 
 // Test scene
