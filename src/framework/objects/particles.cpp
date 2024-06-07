@@ -97,6 +97,11 @@ void ParticleSystem::set_collision_mask(Tilemap *mask) {
     collision_mask = mask;
 }
 
+// Collision mask getter
+Tilemap *ParticleSystem::get_collision_mask() {
+    return collision_mask;
+}
+
 // Left setter and getter
 void ParticleSystem::set_left(int new_left) {
     left = new_left;
@@ -331,15 +336,20 @@ void ParticleSystem::draw() {
     }
 }
 
-ParticleEntity::ParticleEntity(std::string path, Vector2 position, int left):
+ParticleEntity::ParticleEntity(std::string path, Vector2 position, int left, Tilemap *mask):
     system {ParticleSystem(path, position)} {
 
     add_component(new TransformComponent(this, position));
     system.set_left(left);
+
+    if (mask != nullptr) {
+        system.set_collision_mask(mask);
+    }
 }
 
 void ParticleEntity::process(float delta) {
     system.update_transform((TransformComponent *)get_component(CompType::TRANSFORM));
+    system.process(delta);
 
     if (system.get_num_particles() == 0 && system.get_left() == 0) {
         queue_free();

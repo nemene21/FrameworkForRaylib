@@ -99,6 +99,7 @@ public:
     void remove_force(Vector2 removing);
 
     void set_collision_mask(Tilemap *mask);
+    Tilemap *get_collision_mask();
 
     void set_position(Vector2 position);
     Vector2 get_position();
@@ -117,7 +118,7 @@ class ParticleEntity: public Entity {
 public:
     ParticleSystem system;
 
-    ParticleEntity(std::string path, Vector2 pos, int left=1);
+    ParticleEntity(std::string path, Vector2 pos, int left=1, Tilemap *mask=nullptr);
     void process(float delta);
 };
 
