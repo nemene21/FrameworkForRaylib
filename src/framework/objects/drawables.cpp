@@ -1,5 +1,71 @@
 #include <drawables.hpp>
 
+// <Texture Manager>
+std::map<std::string, TexturePtr> TextureManager::texture_map;
+float TextureManager::timer = 0.0f;
+float TextureManager::tick  = 100.0f;
+
+// Load a texture and put it's smart pointer into the texture map (it's path is the key)
+void TextureManager::load(std::string name) {
+    texture_map[name] = std::make_shared<Texture2D>(
+        LoadTexture((TEXTURE_DIR name).c_str())
+    );
+}
+
+// Returns a texture smart pointer and loads the texture if required
+TexturePtr TextureManager::get(std::string name) {
+    if (texture_map.find(name) != texture_map.end())
+        return texture_map[name];
+
+    load(name);
+    return texture_map[name];
+}
+
+// Unloads a texture
+void TextureManager::unload(std::string name) {
+
+    UnloadTexture(*texture_map[name].get());
+    texture_map.erase(name);
+}
+
+// Unloads all textures that aren't being referanced 
+void TextureManager::unload_unused() {
+    for (auto& texture_pair: texture_map) {
+
+        if (texture_pair.second.use_count() == 1) {
+            unload(texture_pair.first);
+        }
+    }
+}
+// Ticks down a timer which calls "unload_unused()" when it hits 0 every "tick" seconds
+void TextureManager::unload_check() {
+    timer -= GetFrameTime();
+
+    if (timer < .0) {
+        timer = tick;
+
+        unload_unused();
+    }
+}
+
+// Reloads all textures
+void TextureManager::reload() {
+    for (auto& texture_pair: texture_map) {
+
+        UnloadTexture(*texture_pair.second.get());
+        *texture_pair.second.get() = LoadTexture((TEXTURE_DIR texture_pair.first).c_str());
+    }
+}
+
+// Unloads all textures
+void TextureManager::unload_all() {
+    for (auto& texture_pair: texture_map) {
+
+        unload(texture_pair.first);
+    }
+}
+
+
 // <Shader Manager>
 std::map<std::string, ShaderPtr> ShaderManager::shader_map;
 float ShaderManager::timer = 0.0f;
@@ -84,12 +150,19 @@ void ShaderManager::unload_all() {
 }
 
 // <Materials/ShaderBond>
-ShaderBond::ShaderBond(std::string shader_path): shader {ShaderManager::get(shader_path)} {}
-ShaderBond::ShaderBond(ShaderPtr shader): shader {shader} {}
+ShaderBond::ShaderBond(std::string shader_path): shader {ShaderManager::get(shader_path)}, bound_textures {} {}
+ShaderBond::ShaderBond(ShaderPtr shader): shader {shader}, bound_textures {} {}
 
 void ShaderBond::use() {
     BeginShaderMode(*shader.get());
-}
+    
+    for (BoundTexture& bound_texture: bound_textures) {
+        SetShaderValueTexture(
+            *shader.get(),
+            GetShaderLocation(*shader.get(), bound_texture.name.c_str()),
+            *bound_texture.texture.get()
+        );
+    }}
 
 void ShaderBond::process(float delta) {}
 
@@ -103,6 +176,14 @@ void ShaderBond::set_shader(ShaderPtr new_shader) {
 
 ShaderPtr ShaderBond::get_shader() {
     return shader;
+}
+
+void ShaderBond::send_uniform(std::string name, void *ptr, int type) {
+    SetShaderValue(*shader.get(), GetShaderLocation(*shader.get(), name.c_str()), ptr, type);
+}
+
+void ShaderBond::bind_texture(std::string name, TexturePtr texture) {
+    bound_textures.push_back({texture, name});
 }
 
 // <Drawables>

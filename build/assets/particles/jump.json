@@ -1,9 +1,9 @@
 {
     "texture": "particle_test.png",
-    "lifetime": 2, "lifetime_randomness": 0.3,
+    "lifetime": 1, "lifetime_randomness": 0.3,
 
     "firerate": 8.0, "firerate_randomness": 0,
-    "amount": 2,
+    "amount": 8,
 
     "scale": 1.2, "scale_randomness": 0.4,
     "scale_end": 0.25,
@@ -19,7 +19,7 @@
     "tint_end": [255, 0, 0, 0],
     "tint_ease": "ease_in",
 
-    "velocity": 500, "velocity_randomness": 100,
+    "velocity": 200, "velocity_randomness": 200,
     "velocity_end" : 1,
     "velocity_ease": "ease_out",
 

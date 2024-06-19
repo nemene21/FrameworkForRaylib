@@ -22,13 +22,16 @@ TestEntity::TestEntity():
     trail_vfx.z_coord = -1;
 
     TransformComponent *transform_comp = new TransformComponent(this);
-    transform_comp->position = {500, -500};
+    transform_comp->position = {500, 0};
 
     auto *timer_comp = new TimerComponent(this);
     timer_comp->setup();
     test_timer = timer_comp->add_timer("CoolTimer", 5, true);
 
     test_timer->finished.connect([](Entity *entity) { pogger(entity); });
+
+    sprite.shader_bond = ShaderBond("test.glsl");
+    sprite.shader_bond.bind_texture("noise", TextureManager::get("noise.png"));
 
     add_component( 
         transform_comp
@@ -37,6 +40,7 @@ TestEntity::TestEntity():
     add_component(
         new HealthComponent(this, 10)
     );
+    
     CameraComponent *camera_comp = new CameraComponent(this);
     add_component(
         camera_comp
@@ -63,13 +67,16 @@ TestEntity::TestEntity():
 }
 
 void TestEntity::process(float delta) {
+    TransformComponent *transform_comp = (TransformComponent *)get_component(CompType::TRANSFORM);
 
     particle_sys.process(delta);
     trail_vfx.process(delta);
 
+    float sending = abs(transform_comp->velocity.x / 600.f);
+    sprite.shader_bond.send_uniform("jolly", &sending, SHADER_UNIFORM_FLOAT);
+
     ColliderComponent *collider_comp = (ColliderComponent *)get_component(CompType::COLLIDER);
 
-    TransformComponent *transform_comp = (TransformComponent *)get_component(CompType::TRANSFORM);
     transform_comp->interpolate_velocity({
         (float(IsPressed("right")) - float(IsPressed("left"))) * 600.f,
         transform_comp->velocity.y 
@@ -118,6 +125,18 @@ void TestEntity::process(float delta) {
         camera->shake(64, 0.25);
         camera->zoom(1.015, 0.15);
         AudioManager::play_sfx("shoot4.mp3", 1, 1, 0, 0.2);
+
+        ParticleEntity *vfx = new ParticleEntity(
+            "jump.json",
+            transform_comp->position,
+            1,
+            particle_sys.get_collision_mask()
+        );
+        vfx->system.add_force({0, 2000});
+
+        SceneManager::scene_on->add_entity(
+            (Entity*)vfx
+        );
     }
 }
 

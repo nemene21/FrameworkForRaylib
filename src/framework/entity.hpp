@@ -35,8 +35,8 @@ public:
     virtual bool has_component(ComponentType type);
     virtual Component *get_component(ComponentType type);
 
-    virtual void process(float delta) = 0;
-    virtual void draw(float delta) = 0;
+    virtual void process(float delta);
+    virtual void draw(float delta);
 };
 
 #endif
