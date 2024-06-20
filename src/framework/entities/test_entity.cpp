@@ -116,6 +116,8 @@ void TestEntity::process(float delta) {
     sprite.angle = sin(GetTime() * 15) * 10.f * (transform_comp->velocity.x/600.f);
 
     particle_sys.update_transform(transform_comp);
+    particle_sys.angle = Vector2LineAngle({0, 0}, {transform_comp->velocity.x, -transform_comp->velocity.y});
+    particle_sys.scale = {sending, abs(transform_comp->velocity.y)/2500.f};
     trail_vfx.update_transform(transform_comp);
 
     if (IsJustPressed("jump") && collider_comp->on_floor()) {

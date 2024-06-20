@@ -191,11 +191,14 @@ void ParticleSystem::spawn_particle() {
     Particle new_particle;
 
     // Transform
-    new_particle.position = position;
-    new_particle.scale = particle_scale + (particle_scale_randomness*.5 * RandF2());
+    new_particle.position  = position;
+    new_particle.scale     = particle_scale + (particle_scale_randomness*.5 * RandF2());
     new_particle.scale_end = particle_scale_end * new_particle.scale;
 
-    new_particle.angle = angle + (particle_angle_randomness*.5 * RandF2());
+    new_particle.scale     *= fmaxf(scale.x, scale.y);
+    new_particle.scale_end *= fmaxf(scale.x, scale.y);
+
+    new_particle.angle = RAD2DEG * angle + particle_angle + (particle_angle_randomness*.5 * RandF2());
     new_particle.angular_velocity = angular_velocity  + (angular_velocity_randomness*.5 * RandF2());
 
     // Color
@@ -222,7 +225,10 @@ void ParticleSystem::spawn_particle() {
     new_particle.lifetime     = new_particle.lifetime_max;
 
     // Velocity
-    new_particle.velocity = Vector2Rotate({velocity + velocity_randomness*.5f * RandF2(), 0}, shot_angle + RandF2() * spread*.5);
+    new_particle.velocity = Vector2Rotate(
+        {velocity + velocity_randomness*.5f * RandF2(), 0},
+        shot_angle * DEG2RAD + RandF2() * spread*.5 + angle
+    );
 
     particles.push_back(new_particle);
 }
