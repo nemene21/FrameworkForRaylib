@@ -191,7 +191,7 @@ void ParticleSystem::spawn_particle() {
     Particle new_particle;
 
     // Transform
-    new_particle.position  = position;
+    new_particle.position  = Vector2Add(position, offset);
     new_particle.scale     = particle_scale + (particle_scale_randomness*.5 * RandF2());
     new_particle.scale_end = particle_scale_end * new_particle.scale;
 
