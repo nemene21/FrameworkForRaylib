@@ -9,6 +9,7 @@
 #include <area_component.hpp>
 #include <fstream>
 #include <json.hpp>
+#include <tuple>
 
 #include <map>
 #include <set>
@@ -37,11 +38,12 @@ private:
         ColliderComponent collider;
     } TileTypeData;
 
+    int type_count;
+
     typedef std::map<std::pair<int, int>, TileTypeData> TileTypeMap;
     typedef std::map<std::pair<int, int>, TileTypeMap> TileTypeChunks;
 
     typedef std::map<std::pair<int, int>, TileDataVector> TileDataChunks;
-
     typedef std::set<std::pair<int, int>> ChunkSet;
 
     TexturePtr texture;

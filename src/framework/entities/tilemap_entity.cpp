@@ -12,6 +12,8 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
         area_comp->set_layer((int)AreaIndex::TEST, true);
         area_comp->position = {0, 0};
         add_component(area_comp);
+
+        type_count = (texture.get()->width / tilesize.x) / 4;
     }
 
 // Json to/from for TileData and Vector2
@@ -179,18 +181,19 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
         built_chunks[chunk_pos].clear();
 
     // Generate the corner positions from the tiles
-    std::set<std::pair<float, float>> corners;
+    std::set<std::tuple<float, float, int>> corners;
     for (auto& tile: tiledata[chunk_pos]) {
         std::pair<float, float> pos = std::make_pair<float, float>(tile.first.first, tile.first.second);
 
-        corners.insert({pos.first +.5f, pos.second +.5f});
-        corners.insert({pos.first -.5f, pos.second -.5f});
-        corners.insert({pos.first +.5f, pos.second -.5f});
-        corners.insert({pos.first -.5f, pos.second +.5f});
+        corners.insert({pos.first +.5f, pos.second +.5f, tile.second.type});
+        corners.insert({pos.first -.5f, pos.second -.5f, tile.second.type});
+        corners.insert({pos.first +.5f, pos.second -.5f, tile.second.type});
+        corners.insert({pos.first -.5f, pos.second +.5f, tile.second.type});
     }
 
-    for (std::pair<float, float> pos: corners) {
+    for (std::tuple<float, float, int> corner_data: corners) {
         std::string bitmap = "";
+        auto pos = std::make_pair(std::get<0>(corner_data), std::get<1>(corner_data));
 
         // Builds a string bitmap representation from 4 cornering tiles 
         bitmap += get_tile(pos.first - .5f, pos.second - .5f) == -1 ? "." : "#";
@@ -254,6 +257,10 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
         else if (bitmap == "####")
             data.state = {0, 3};
 
+        // Move by 4*type to get the correct image displaying
+        int type = std::get<2>(corner_data);
+        data.state.x += 4 * type;
+
         // If tile isn't empty, push it
         if (bitmap != "....") {
             built_chunks[chunk_pos].push_back(data);
@@ -302,7 +309,7 @@ void Tilemap::draw(float delta) {
 
                     // Draw tile if in camera view
                     if (Vector2Distance(camera_pos, tile_pos) < max_dist)
-                        DrawTextureSheet(texture.get(), tile.state, {4, 4}, tile_pos, {1, 1});
+                        DrawTextureSheet(texture.get(), tile.state, {4.f*type_count, 4}, tile_pos, {1, 1});
                 }
             }
         }
