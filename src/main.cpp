@@ -65,7 +65,7 @@ int main() {
     TexturePtr paper_texture = TextureManager::get("post_processing/paper.png");
 
     while (!WindowShouldClose()) {
-        float delta = GetFrameTime();
+        float delta = fminf(GetFrameTime(), 1/20.f);
   
         // Object processing test
         process(delta);
