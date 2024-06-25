@@ -32,4 +32,7 @@
 #include <test_entity.hpp>
 #include <tilemap_entity.hpp>
 
+// Scenes
+#include <scenes/game.hpp>
+
 #endif

@@ -57,8 +57,8 @@ int main() {
     ColliderManager::init();
     AreaManager::init();
 
-    SceneManager::setup_scene(new TestScene());
-    SceneManager::set_scene("test_scene");
+    SceneManager::setup_scene(new GameScene());
+    SceneManager::set_scene("game_scene");
 
     ShaderPtr post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     TexturePtr noise_texture = TextureManager::get("post_processing/noise.png");
