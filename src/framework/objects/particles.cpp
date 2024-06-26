@@ -410,10 +410,8 @@ void ParticleSystem::draw() {
 
         float calc_scale = Lerp(particle.scale, particle.scale_end, scale_anim);
         Color calc_tint = Lerp(particle.tint, particle.tint_end, tint_anim);
-
         calc_scale = std::max(calc_scale, 0.f);
 
-        shader_bond.send_uniform("tint", &calc_tint, SHADER_UNIFORM_VEC4);
         DrawTextureCentered(texture.get(),
             particle.position,
             {calc_scale, calc_scale},
@@ -436,7 +434,6 @@ ParticleEntity::ParticleEntity(std::string path, Vector2 position, int left, Til
 
 void ParticleEntity::process(float delta) {
     system.update_transform((TransformComponent *)get_component(CompType::TRANSFORM));
-    system.process(delta);
 
     if (system.get_num_particles() == 0 && system.get_left() == 0) {
         queue_free();

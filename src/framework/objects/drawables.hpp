@@ -88,7 +88,7 @@ public:
 
 class Drawable {
 public:
-    Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="default.glsl");
+    Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="-");
     ~Drawable();
 
     Vector2 position, offset, scale;
@@ -100,6 +100,7 @@ public:
     ShaderBond shader_bond;
 
     virtual void draw() = 0;
+    virtual void process(float delta);
     virtual void update_transform(TransformComponent *trans_comp);
     virtual Vector2 real_pos();
 };

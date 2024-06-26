@@ -150,12 +150,20 @@ void ShaderManager::unload_all() {
 }
 
 // <Materials/ShaderBond>
-ShaderBond::ShaderBond(std::string shader_path): shader {ShaderManager::get(shader_path)}, bound_textures {} {}
+ShaderBond::ShaderBond(std::string shader_path): bound_textures {} {
+    if (shader_path != "-") {
+        shader = ShaderManager::get(shader_path);
+
+    } else {
+        shader = nullptr;
+    }
+}
 ShaderBond::ShaderBond(ShaderPtr shader): shader {shader}, bound_textures {} {}
 
 void ShaderBond::use() {
+    if (shader == nullptr) return;
+
     BeginShaderMode(*shader.get());
-    
     for (BoundTexture& bound_texture: bound_textures) {
         SetShaderValueTexture(
             *shader.get(),
@@ -203,6 +211,8 @@ Drawable::~Drawable() {
     DrawableManager::remove(this);
 }
 
+void Drawable::process(float delta) { std::cout << "what the sigma" << std::endl; }
+
 void Drawable::update_transform(TransformComponent *trans_comp) {
     position = trans_comp->position;
     scale = trans_comp->scale;
@@ -225,6 +235,7 @@ void DrawableManager::draw() {
     std::sort(sorted.begin(), sorted.end(), drawable_comparison);
 
     for (auto drawable: sorted) {
+        drawable->process(GetFrameTime());
         drawable->shader_bond.use();
         drawable->draw();
         EndShaderMode();

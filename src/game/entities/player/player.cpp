@@ -33,7 +33,6 @@ void Player::process(float delta) {
     trans_comp->angle = mouse_angle;
 
     move_particles.update_transform(trans_comp);
-    move_particles.process(delta);
 
     move_particles.set_left(!(input_dir.x == 0 && input_dir.y == 0));
 
