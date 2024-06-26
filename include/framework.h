@@ -36,4 +36,7 @@
 // Scenes
 #include <scenes/game.hpp>
 
+// Scenes
+#include <scenes/game.hpp>
+
 #endif
