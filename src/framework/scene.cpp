@@ -41,6 +41,22 @@ void Scene::add_entity(Entity* entity) {
     entities.push_back(entity);
 }
 
+std::vector<Entity*> Scene::query_in_group(std::string name) {
+    std::vector<Entity*> found {};
+
+    for (auto entity: entities) {
+        if (entity->is_in_group(name)) found.push_back(entity);
+    }
+    return found;
+}
+
+Entity *Scene::first_in_group(std::string name) {
+    for (auto entity: entities) {
+        if (entity->is_in_group(name)) return entity;
+    }
+    return nullptr;
+}
+
 void Scene::process(float delta) {}
 
 // <Scene Manager>

@@ -21,6 +21,9 @@ public:
     virtual void add_entity(Entity* entity);
     virtual int  entity_count();
 
+    virtual std::vector<Entity*> query_in_group(std::string);
+    virtual Entity*              first_in_group(std::string);
+
     virtual void restart() = 0;
 
 protected:

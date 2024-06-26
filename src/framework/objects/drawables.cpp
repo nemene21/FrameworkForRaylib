@@ -211,7 +211,7 @@ Drawable::~Drawable() {
     DrawableManager::remove(this);
 }
 
-void Drawable::process(float delta) { std::cout << "what the sigma" << std::endl; }
+void Drawable::process(float delta) {}
 
 void Drawable::update_transform(TransformComponent *trans_comp) {
     position = trans_comp->position;

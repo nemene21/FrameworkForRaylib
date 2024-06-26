@@ -13,6 +13,8 @@ Bubble::Bubble(Vector2 position, Vector2 velocity, float charge):
     trans_comp->scale = {Lerp(0.1f, 1.f, charge), Lerp(0.1f, 1.f, charge)};
     sprite.update_transform(trans_comp);
     add_component(trans_comp);
+
+    join_group("bubble");
 }
 
 void Bubble::pop() {

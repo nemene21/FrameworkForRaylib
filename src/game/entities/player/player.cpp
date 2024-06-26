@@ -25,15 +25,16 @@ void Player::process(float delta) {
     Vector2 input_dir = InputVectorNormalized(
         "left", "right", "up", "down"
     );
-    Vector2 target_vel = Vector2Multiply(input_dir, {200, 200});
 
+    std::cout << SceneManager::scene_on->query_in_group("bubble").size() << std::endl;
+
+    Vector2 target_vel = Vector2Multiply(input_dir, {200, 200});
     trans_comp->interpolate_velocity(target_vel, 16);
     
     float mouse_angle = Vector2LineAngle({trans_comp->position.x, -trans_comp->position.y}, {mouse_pos().x, -mouse_pos().y}) * RAD2DEG;
     trans_comp->angle = mouse_angle;
 
     move_particles.update_transform(trans_comp);
-
     move_particles.set_left(!(input_dir.x == 0 && input_dir.y == 0));
 
     sprite.update_transform(trans_comp);
