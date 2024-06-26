@@ -3,6 +3,7 @@
 // Input map (holds all inputs)
 std::map<std::string, std::vector<Input>> inputs = {
     {"jump", {{InputType::KEY, KEY_SPACE}}},
+    {"shoot", {{InputType::MOUSE, MOUSE_BUTTON_LEFT}}},
     {"continue", {{InputType::KEY, KEY_SPACE}, {InputType::KEY, KEY_ENTER}, {InputType::KEY, KEY_C}}},
 
     {"up",    {{InputType::KEY, KEY_W}, {InputType::KEY, KEY_UP   }}},
@@ -30,6 +31,27 @@ bool IsJustPressed(std::string name, int gamepad) {
     }
     return false;
 }
+// Check if an input was released this frame
+bool IsJustReleased(std::string name, int gamepad) {
+    for (Input input: inputs[name]) {
+        if (input.type == InputType::KEY      && IsKeyReleased(input.id))                    return true;
+        if (input.type == InputType::MOUSE    && IsMouseButtonReleased(input.id))            return true;
+        if (input.type == InputType::JOYSTICK && IsGamepadButtonReleased(gamepad, input.id)) return true;
+    }
+    return false;
+}
+
+// Get input vector
+Vector2 InputVector(std::string left, std::string right, std::string up, std::string down) {
+    return {
+        (float)IsPressed(right) - (float)IsPressed(left),
+        (float)IsPressed(down)  - (float)IsPressed(up)
+    };
+}
+
+Vector2 InputVectorNormalized(std::string left, std::string right, std::string up, std::string down) {
+    return Vector2Normalize(InputVector(left, right, up, down));
+}
 
 // Mouse position in world
 Vector2 mouse_screen_pos() {
@@ -41,10 +63,10 @@ Vector2 mouse_screen_pos() {
 
 Vector2 mouse_pos() {
     Vector2 pos = mouse_screen_pos();
+
     Camera2D *camera = CameraManager::get_camera();
 
     pos = Vector2Add(pos, Vector2Add(camera->target, camera->offset));
-    pos = Vector2Subtract(pos, res);
 
     return pos;
 }

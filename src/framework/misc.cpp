@@ -1,6 +1,6 @@
 #include <misc.hpp>
 
-const Vector2 res {1920, 1080};
+const Vector2 res {320, 180};
 const Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
 
 bool operator==(Color first, Color other) {

@@ -8,11 +8,6 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
     tilesize {tilesize},
     chunksize {16, 16} {
 
-        auto area_comp = new AreaComponent(this, 256, 256);
-        area_comp->set_layer((int)AreaIndex::TEST, true);
-        area_comp->position = {0, 0};
-        add_component(area_comp);
-
         type_count = (texture.get()->width / tilesize.x) / 4;
     }
 

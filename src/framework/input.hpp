@@ -23,6 +23,10 @@ extern std::map<std::string, std::vector<Input>> inputs;
 
 bool IsPressed(std::string name, int gamepad=0);
 bool IsJustPressed(std::string name, int gamepad=0);
+bool IsJustReleased(std::string name, int gamepad=0);
+
+Vector2 InputVector(std::string left, std::string right, std::string up, std::string down);
+Vector2 InputVectorNormalized(std::string left, std::string right, std::string up, std::string down);
 
 Vector2 mouse_screen_pos();
 Vector2 mouse_pos();

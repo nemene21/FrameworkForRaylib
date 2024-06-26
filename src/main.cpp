@@ -41,7 +41,9 @@ int main() {
     srand(time(NULL));
 
     // Init
-    InitWindow(res.x, res.y, "ne_mene's raylib framework :)");
+    std::string title = "ne_mene's framework :)";
+    InitWindow(res.x, res.y, (title + "  -  [F11 for fullscreen]").c_str());
+    SetWindowState(FLAG_WINDOW_RESIZABLE);
     SetExitKey(0);
 
     RenderTexture2D background  = LoadRenderTexture(res.x, res.y);
@@ -52,13 +54,21 @@ int main() {
 
     InitAudioDevice();
 
+    Camera2D blank_camera;
+    blank_camera.target = {0, 0};
+    blank_camera.offset = {0, 0};
+    blank_camera.rotation = 0;
+    blank_camera.zoom = 1;
+
     Easing::InitEasingFuncs();
     CameraManager::init();
     ColliderManager::init();
     AreaManager::init();
 
-    SceneManager::setup_scene(new TestScene());
-    SceneManager::set_scene("test_scene");
+    CameraManager::bind_camera(&blank_camera);
+
+    SceneManager::setup_scene(new GameScene());
+    SceneManager::set_scene("game_scene");
 
     ShaderPtr post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     TexturePtr noise_texture = TextureManager::get("post_processing/noise.png");
@@ -66,6 +76,10 @@ int main() {
 
     while (!WindowShouldClose()) {
         float delta = fminf(GetFrameTime(), 1/20.f);
+
+        if (IsWindowResized()) {
+            SetWindowSize(GetScreenWidth(), GetScreenHeight());
+        }
   
         // Object processing test
         process(delta);
@@ -137,10 +151,19 @@ int main() {
                 SHADER_ATTRIB_VEC2
             );
         }
-    
+
+        float draw_width  = GetScreenWidth();
+        float draw_height = GetScreenWidth() * (res.y / res.x);
+
+        if (draw_height > GetScreenHeight()) {
+            draw_height = GetScreenHeight();
+            draw_width  = GetScreenHeight() * (res.x / res.y);
+        }
+
+        ClearBackground(BLACK);
         DrawTexturePro(composition.texture,
             {0, 0, res.x, res.y},
-            {0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
+            {(GetScreenWidth() - draw_width) * .5f, (GetScreenHeight() - draw_height) * .5f, draw_width, draw_height},
             {0, 0},
             0,
             Color{255, 255, 255}

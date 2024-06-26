@@ -5,11 +5,17 @@ Scene::Scene(std::string name): name {name}, entities {} {
     SceneManager::setup_scene(this);
 }
 
+int Scene::entity_count() {
+    return entities.size();
+}
+
 void Scene::process_entities(float delta) {
-    
-    for (Entity *entity: entities) {
-        entity->process(delta); 
+    int i = 0;
+    while (i != entities.size()) {
+        Entity *entity = entities[i];
+        entity->process(delta);
         entity->process_components(delta);
+        i++;
     }
 
     // Remove dead entities
@@ -20,8 +26,9 @@ void Scene::process_entities(float delta) {
             entities.erase(entities.begin() + i);
         }
     }
-}
 
+}
+ 
 void Scene::draw_entities(float delta) {
 
     for (Entity *entity: entities) {
@@ -35,27 +42,6 @@ void Scene::add_entity(Entity* entity) {
 }
 
 void Scene::process(float delta) {}
-
-// Test scene
-TestScene::TestScene(): Scene("test_scene") {}
-
-void TestScene::restart() {
-    tiles = new Tilemap({96, 96}, "tiles.png");
-    FastNoiseLite gen_noise = FastNoiseLite();
-
-    for (int x = 0; x < 128; x++) {
-        for (int y = 0; y < 128; y++) {
-            if (gen_noise.GetNoise((float)x * 8.f, (float)y * 8.f) > 0.f) tiles->set_tile(x, y, 0);
-        }
-    }
-
-    tiles->load("test.json");
-
-    entities = {
-        (Entity*)tiles,
-        (Entity*)(new TestEntity())
-    };
-}
 
 // <Scene Manager>
 SceneMap SceneManager::scene_map = {};

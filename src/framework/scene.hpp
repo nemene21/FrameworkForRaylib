@@ -4,7 +4,6 @@
 #include <entity.hpp>
 #include <vector>
 
-#include <test_entity.hpp>
 #include <tilemap_entity.hpp>
 #include <misc.hpp>
 
@@ -20,21 +19,12 @@ public:
     virtual void process_entities(float delta);
 
     virtual void add_entity(Entity* entity);
+    virtual int  entity_count();
 
     virtual void restart() = 0;
 
 protected:
     std::vector<Entity*> entities;
-};
-
-class Tilemap;
-
-class TestScene: public Scene {
-public:
-    TestScene();
-    void restart();
-
-    Tilemap *tiles;
 };
 
 typedef std::map<std::string, Scene*> SceneMap;

@@ -12,6 +12,7 @@
 #include <misc.hpp>
 #include <entity.hpp>
 #include <transform_component.hpp>
+#include <misc.hpp>
 
 #include <json.hpp>
 #include <memory>
@@ -43,6 +44,36 @@ public:
     static void reload();
 };
 
+class EmitShape {
+public:
+    float edge_ratio;
+    EmitShape(float edge_ratio);
+
+    virtual Vector2 get_pos(Vector2 position, float scale) = 0;
+};
+
+class EmitCircle: public EmitShape {
+public:
+    float radius;
+    EmitCircle(float radius, float edge_ratio);
+
+    Vector2 get_pos(Vector2 position, float scale);
+};
+
+class EmitRect: public EmitShape {
+public:
+    Vector2 dimensions;
+    EmitRect(Vector2 dimensions, float edge_ratio);
+
+    Vector2 get_pos(Vector2 position, float scale);
+};
+
+class EmitPoint: public EmitShape {
+public:
+    EmitPoint();
+    Vector2 get_pos(Vector2 position, float scale);
+};
+
 // <Particle Class>
 class ParticleSystem: public Drawable {
 protected:
@@ -69,6 +100,8 @@ protected:
     int left;
 
     // All particle system properties (loaded from a JSON file)
+    EmitShape* emit_shape;
+
     float lifetime, lifetime_randomness;
     float particle_angle,
           particle_angle_randomness;
@@ -93,6 +126,7 @@ protected:
 
 public:
     ParticleSystem(std::string data_filename, Vector2 position={0, 0});
+    ~ParticleSystem();
 
     Vector2 get_force();
     void add_force(Vector2 adding);
@@ -107,6 +141,8 @@ public:
     void set_left(int new_left);
     int get_left();
     int get_num_particles();
+
+    void set_amount(int amt);
 
     void reload_data();
 

@@ -68,6 +68,56 @@ void ParticleDataManager::unload_all() {
     }
 }
 
+// <Emit Shapes>
+EmitShape::EmitShape(float edge_ratio): edge_ratio {edge_ratio} {}
+
+EmitCircle::EmitCircle(float radius, float edge_ratio):
+    EmitShape(edge_ratio),
+    radius {radius}
+    {}
+
+Vector2 EmitCircle::get_pos(Vector2 position, float scale) {
+    float rng = Lerp(1, edge_ratio, (rand()%100) * 0.01f);
+    Vector2 offset = Vector2Rotate({rng * radius, 0}, (rand()%628) * 0.01f);
+
+    offset = Vector2Multiply(offset, {scale, scale});
+    return Vector2Add(offset, position);
+}
+
+EmitRect::EmitRect(Vector2 dimensions, float edge_ratio):
+    EmitShape(edge_ratio),
+    dimensions {dimensions}
+    {}
+
+Vector2 EmitRect::get_pos(Vector2 position, float scale) {
+    Vector2 offset;
+    
+    if (RandF() > .5f) {
+        offset = {
+            round(RandF()) - .5f,
+            RandF() - .5f
+        };
+    } else {
+        offset = {
+            RandF() - .5f,
+            round(RandF()) - .5f
+        };
+    }
+    offset = Vector2Multiply(offset, dimensions);
+
+    float coeff = fmaxf(0, RandF() - edge_ratio);
+    offset = Lerp(offset, Vector2{0, 0}, coeff);
+
+    offset = Vector2Multiply(offset, {scale, scale});
+    return Vector2Add(offset, position);
+}
+
+EmitPoint::EmitPoint():
+    EmitShape(0)
+    {}
+
+Vector2 EmitPoint::get_pos(Vector2 position, float scale) { return position; }
+
 // <Particle System>
 
 // Position setter and getter
@@ -115,6 +165,24 @@ void ParticleSystem::reload_data() {
     json data = *particle_data.get();
 
     texture = TextureManager::get(data["texture"]);
+
+    free(emit_shape);
+    if (data.contains("shape")) {
+        json shape_data = data["shape"];
+        int num_params = shape_data.size();
+
+        // Is circle (radius, edge)
+        if (num_params == 2) {
+            emit_shape = new EmitCircle(shape_data[0], shape_data[1]);
+        
+        // Is rectangle (width, height, edge)
+        } else {
+            emit_shape = new EmitRect({shape_data[0], shape_data[1]}, shape_data[2]);
+        }
+    // Default to point
+    } else {
+        emit_shape = new EmitPoint();
+    }
     
     // Angle
     particle_angle = data["angle"];
@@ -175,6 +243,7 @@ void ParticleSystem::reload_data() {
 ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position):
     Drawable(position),
     collision_mask {nullptr},
+    emit_shape {nullptr},
     force {0, 0},
     spawn_timer {0} {
 
@@ -185,18 +254,29 @@ ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position):
     left = -1;
 }
 
+ParticleSystem::~ParticleSystem() {
+    free(emit_shape);
+}
+
+void ParticleSystem::set_amount(int amt) {
+    amount = amt;
+}
+
 void ParticleSystem::spawn_particle() {
     json data = *particle_data.get();
 
     Particle new_particle;
 
     // Transform
+    float scale_coeff = (scale.x + scale.y)*.5f;
     new_particle.position  = Vector2Add(position, offset);
+    new_particle.position  = emit_shape->get_pos(new_particle.position, scale_coeff);
+
     new_particle.scale     = particle_scale + (particle_scale_randomness*.5 * RandF2());
     new_particle.scale_end = particle_scale_end * new_particle.scale;
 
-    new_particle.scale     *= fmaxf(scale.x, scale.y);
-    new_particle.scale_end *= fmaxf(scale.x, scale.y);
+    new_particle.scale     *= scale_coeff;
+    new_particle.scale_end *= scale_coeff;
 
     new_particle.angle = RAD2DEG * angle + particle_angle + (particle_angle_randomness*.5 * RandF2());
     new_particle.angular_velocity = angular_velocity  + (angular_velocity_randomness*.5 * RandF2());
@@ -227,8 +307,9 @@ void ParticleSystem::spawn_particle() {
     // Velocity
     new_particle.velocity = Vector2Rotate(
         {velocity + velocity_randomness*.5f * RandF2(), 0},
-        shot_angle * DEG2RAD + RandF2() * spread*.5 + angle
+        shot_angle * DEG2RAD + RandF2() * spread*.5f + angle
     );
+    new_particle.velocity = Vector2Multiply(new_particle.velocity, {scale_coeff, scale_coeff});
 
     particles.push_back(new_particle);
 }
@@ -318,7 +399,6 @@ int ParticleSystem::get_num_particles() {
 
 void ParticleSystem::draw() {
     for (auto& particle: particles) {
-
         // Calculate animation values (0 - 1) based on custom easing functions
         float scale_anim = Easing::easing_functions[scale_ease_name](
             1.0f - particle.lifetime / particle.lifetime_max
@@ -333,6 +413,7 @@ void ParticleSystem::draw() {
 
         calc_scale = std::max(calc_scale, 0.f);
 
+        shader_bond.send_uniform("tint", &calc_tint, SHADER_UNIFORM_VEC4);
         DrawTextureCentered(texture.get(),
             particle.position,
             {calc_scale, calc_scale},

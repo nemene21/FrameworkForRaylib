@@ -1,0 +1,29 @@
+{
+    "texture": "bubble_particle.png",
+    "lifetime": 0.5, "lifetime_randomness": 0.2,
+
+    "firerate": 12.0, "firerate_randomness": 0,
+    "amount": 2,
+
+    "shape": [4, 0],
+
+    "scale": 1.2, "scale_randomness": 0.4,
+    "scale_end": 0.1,
+    "scale_ease": "bounce_out",
+
+    "angle": 0, "angle_randomness": 0,
+    "velocity_angle": false,
+
+    "angular_velocity": 0,
+    "angular_velocity_randomness": 0,
+
+    "tint": [255, 0, 0, 255], "tint_randomness": 255,
+    "tint_end": [255, 0, 0, 0],
+    "tint_ease": "ease_in",
+
+    "velocity": 0, "velocity_randomness": 30,
+    "velocity_end" : 1,
+    "velocity_ease": "ease_out",
+
+    "shot_angle": 0, "spread": 360
+}

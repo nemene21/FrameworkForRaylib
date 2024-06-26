@@ -35,7 +35,6 @@ void TransformComponent::check_bounds(Vector2 direction) {
 }
 
 void TransformComponent::process(float delta) {
-
     position.x += velocity.x * delta;
     if (abs(velocity.x) > 1) check_bounds({(float)(velocity.x > 0.f) * 2.f - 1.f, 0.f});
 

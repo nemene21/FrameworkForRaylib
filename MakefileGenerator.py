@@ -1,6 +1,6 @@
 import tkinter, subprocess
 
-CFLAGS   = "-O1 -Wall -Wno-missing-braces -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
+CFLAGS   = "-O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
 LDFLAGS  = "-L../lib/"
 LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
 OBJ_DIR  = "object_files"

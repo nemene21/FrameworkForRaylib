@@ -1,0 +1,29 @@
+{
+    "texture": "bubble_pop.png",
+    "lifetime": 0.8, "lifetime_randomness": 0.1,
+
+    "shape" : [8, 0],
+
+    "firerate": 8.0, "firerate_randomness": 0,
+    "amount": 16,
+
+    "scale": 1, "scale_randomness": 0.4,
+    "scale_end": 1,
+    "scale_ease": "ease_in_out",
+
+    "angle": 0, "angle_randomness": 0,
+    "velocity_angle": true,
+
+    "angular_velocity": 0,
+    "angular_velocity_randomness": 0,
+
+    "tint": [255, 255, 255, 255], "tint_randomness": 0,
+    "tint_end": [255, 255, 255, 0],
+    "tint_ease": "ease_in",
+
+    "velocity": 160, "velocity_randomness": 150,
+    "velocity_end" : 0,
+    "velocity_ease": "ease_out",
+
+    "shot_angle": 0, "spread": 360
+}

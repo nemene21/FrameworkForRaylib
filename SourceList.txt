@@ -4,7 +4,6 @@ framework/entity
 framework/component
 framework/input
 
-framework/entities/test_entity
 framework/entities/tilemap_entity
 
 framework/scene
@@ -23,3 +22,7 @@ framework/objects/trails
 framework/objects/sprites
 framework/objects/particles
 framework/objects/audio
+
+game/scenes/game
+game/entities/player/player
+game/entities/bubble/bubble

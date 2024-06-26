@@ -12,7 +12,6 @@ void Entity::process(float delta) {}
 void Entity::draw(float delta) {}
 
 void Entity::process_components(float delta) {
-
     for (auto& comp_pair: comps) {
         comp_pair.second->process(delta);
     }
