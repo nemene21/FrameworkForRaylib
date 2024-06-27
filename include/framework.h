@@ -30,13 +30,5 @@
 
 // Entities
 #include <tilemap_entity.hpp>
-#include <entities/player/player.hpp>
-#include <entities/bubble/bubble.hpp>
-
-// Scenes
-#include <scenes/game.hpp>
-
-// Scenes
-#include <scenes/game.hpp>
 
 #endif
