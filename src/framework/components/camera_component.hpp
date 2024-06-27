@@ -37,13 +37,21 @@ public:
 
     CameraComponent(Entity *entity, Vector2 position={0,0});
 
+    /// @brief Returns pointer to component's camera
+    /// @return Pointer to camera
     Camera2D *get_camera();
     
+    /// @brief Zoom in/out effect
+    /// @param new_zoom Zoom that you are animating to
+    /// @param duration Duration of zoom animation
     void zoom(float new_zoom, float duration);
+    /// @brief Shake effect
+    /// @param strength Distance in pixels the camera will shake
+    /// @param duration 
+    /// @param direction Shake angle
     void shake(float strength, float duration, float direction=-1);
-
-    void set_zoom(float zoom);
-    
+ 
+    void set_zoom(float zoom);    
     void process(float delta);
 };
 
