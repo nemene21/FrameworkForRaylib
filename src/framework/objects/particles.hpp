@@ -34,8 +34,15 @@ public:
     static float timer;
     static float tick;
 
+    /// @brief Load particle data into memory
+    /// @param path Path to data
     static void load(std::string path);
+    /// @brief Unloads particle data from memory
+    /// @param path Path to data
     static void unload(std::string path);
+    /// @brief Returns smart pointer to particle data
+    /// @param path Path to data
+    /// @return Smart pointer to particle data
     static ParticleDataPtr get(std::string path);
 
     static void unload_check();
@@ -44,14 +51,18 @@ public:
     static void reload();
 };
 
+/// @brief Shape that determines the offset position of particles
 class EmitShape {
 public:
+    /// @brief When this is set to 1 the particles spawn on the edge of a shape, when it's set to 0 they spawn anywhere inside the shape
     float edge_ratio;
     EmitShape(float edge_ratio);
 
     virtual Vector2 get_pos(Vector2 position, float scale) = 0;
 };
 
+/// @brief Particles will emit in a circle
+/// @note This shape is used when the "shape" property in the particle data has 2 paramaters (radius and edge ratio)
 class EmitCircle: public EmitShape {
 public:
     float radius;
@@ -60,14 +71,22 @@ public:
     Vector2 get_pos(Vector2 position, float scale);
 };
 
+/// @brief Particles will emit in a rectangle
+/// @note This shape is used when the "shape" property in the particle data has 3 paramaters (radius and edge ratio)
 class EmitRect: public EmitShape {
 public:
     Vector2 dimensions;
     EmitRect(Vector2 dimensions, float edge_ratio);
 
+    /// @brief Returns a random position for a particle
+    /// @param position Position of particle
+    /// @param scale Scale of particle
+    /// @return Returns a new position with a random offset
     Vector2 get_pos(Vector2 position, float scale);
 };
 
+/// @brief Particles will emit in a single point
+/// @note This shape is used when the "shape" property in the particle data doesn't exist
 class EmitPoint: public EmitShape {
 public:
     EmitPoint();
@@ -128,20 +147,42 @@ public:
     ParticleSystem(std::string data_filename, Vector2 position={0, 0});
     ~ParticleSystem();
 
+    /// @brief Returns force vector that acts upon particles
+    /// @return Force vector
     Vector2 get_force();
+    /// @brief Adds to the force vector that affects particles
+    /// @param adding Vector to add
     void add_force(Vector2 adding);
+    /// @brief Subtracts from the force vector
+    /// @param removing Force subtracting
     void remove_force(Vector2 removing);
 
+    /// @brief Sets the tilemap particles collide with
+    /// @param mask Pointer to tilemap entity
     void set_collision_mask(Tilemap *mask);
+    /// @brief Returns the tilemap the particles collide with
+    /// @return Pointer to tilemap
     Tilemap *get_collision_mask();
 
+    /// @brief Sets the position of the tilemap
+    /// @param position Vector the position is set to
     void set_position(Vector2 position);
+    /// @brief Returns the position of the tilemap
+    /// @return Tilemaps position
     Vector2 get_position();
 
+    /// @brief Sets the number of particle bursts left to emit
+    /// @param new_left Number of particle bursts left to emit (-1 = infinite)
     void set_left(int new_left);
+    /// @brief Returns the amount of bursts left to emit
+    /// @return Amount of bursts left to emit (-1 = infinite)
     int get_left();
+    /// @brief Returns number of particles that are alive
+    /// @return Number of particles that are alive
     int get_num_particles();
 
+    /// @brief Sets the amount of particles emitted in a burst
+    /// @param amt Amount of particles emitted in a burst
     void set_amount(int amt);
 
     void reload_data();
@@ -149,7 +190,7 @@ public:
     void process(float delta);
     void draw();
 };
-
+/// @brief Entity that holds a particle system and unloads itself automatically once there arent any particles left
 class ParticleEntity: public Entity {
 public:
     ParticleSystem system;

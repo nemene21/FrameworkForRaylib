@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['unload_0',['unload',['../class_texture_manager.html#a01d83b2aefd9190a53d51e2d4fb07c03',1,'TextureManager::unload()'],['../class_shader_manager.html#a3be10f695be6bd03b7129e53968fdcfe',1,'ShaderManager::unload()']]],
-  ['unload_5fsfx_1',['unload_sfx',['../class_audio_manager.html#a87b57d8a6de2b6684d445e193f94ff40',1,'AudioManager']]],
-  ['unload_5ftrack_2',['unload_track',['../class_audio_manager.html#a3bb71e1a48ab87441c4a9310bcd011b1',1,'AudioManager']]],
-  ['update_5ftransform_3',['update_transform',['../class_drawable.html#aefad13ec1184e13720afe89bb0ccd982',1,'Drawable']]],
-  ['use_4',['use',['../class_shader_bond.html#a7c543ca1f4bd72c2a3dc620120672002',1,'ShaderBond']]]
+  ['send_5funiform_0',['send_uniform',['../class_shader_bond.html#a0ce6b1f7e362ae1442d0b6b34d870979',1,'ShaderBond']]],
+  ['set_5famount_1',['set_amount',['../class_particle_system.html#a469b62311eb6754c376f94e4e6b042f4',1,'ParticleSystem']]],
+  ['set_5fcollision_5fmask_2',['set_collision_mask',['../class_particle_system.html#a4960d12245ac2d09aac3400c04d6e499',1,'ParticleSystem']]],
+  ['set_5fleft_3',['set_left',['../class_particle_system.html#ac3e6f94f844ed325febb3a5cf9005070',1,'ParticleSystem']]],
+  ['set_5fposition_4',['set_position',['../class_particle_system.html#aae861feb2068d24fb1c1d6a139db7807',1,'ParticleSystem']]],
+  ['set_5fshader_5',['set_shader',['../class_shader_bond.html#ae5435027dff4321aeefe378c9a01db0f',1,'ShaderBond::set_shader(std::string shader_path)'],['../class_shader_bond.html#a250e732e08c6fbd00e576924432c13a9',1,'ShaderBond::set_shader(ShaderPtr new_shader)']]]
 ];

@@ -128,157 +128,172 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static</span> <span class="keywordtype">float</span> timer;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">static</span> <span class="keywordtype">float</span> tick;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> load(std::string path);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload(std::string path);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> ParticleDataPtr get(std::string path);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload_check();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload_unused();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload_all();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> reload();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_data_manager.html#affeadb5efe00379705dcd61158b77c52">load</a>(std::string path);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_data_manager.html#a095772a313319911f2c41b535a0da13e">unload</a>(std::string path);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">static</span> ParticleDataPtr <a class="code hl_function" href="class_particle_data_manager.html#ae5a97951fc9b5b3884b6d931fee2656d">get</a>(std::string path);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload_check();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload_unused();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> unload_all();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> reload();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
 </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="};">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_emit_shape.html">   47</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">float</span> edge_ratio;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="class_emit_shape.html">EmitShape</a>(<span class="keywordtype">float</span> edge_ratio);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">virtual</span> Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale) = 0;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>};</div>
-</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="foldopen" id="foldopen00055" data-start="{" data-end="};">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_emit_circle.html">   55</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_circle.html">EmitCircle</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_emit_shape.html">   55</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">float</span> radius;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_class" href="class_emit_circle.html">EmitCircle</a>(<span class="keywordtype">float</span> radius, <span class="keywordtype">float</span> edge_ratio);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_emit_shape.html#a1fde926c9e18c5262d5bad0f73f04be1">   58</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="class_emit_shape.html#a1fde926c9e18c5262d5bad0f73f04be1">edge_ratio</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="class_emit_shape.html">EmitShape</a>(<span class="keywordtype">float</span> <a class="code hl_variable" href="class_emit_shape.html#a1fde926c9e18c5262d5bad0f73f04be1">edge_ratio</a>);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">virtual</span> Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale) = 0;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_emit_rect.html">   63</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_rect.html">EmitRect</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    Vector2 dimensions;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_class" href="class_emit_rect.html">EmitRect</a>(Vector2 dimensions, <span class="keywordtype">float</span> edge_ratio);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>};</div>
-</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="};">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_emit_circle.html">   66</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_circle.html">EmitCircle</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">float</span> radius;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_class" href="class_emit_circle.html">EmitCircle</a>(<span class="keywordtype">float</span> radius, <span class="keywordtype">float</span> <a class="code hl_variable" href="class_emit_shape.html#a1fde926c9e18c5262d5bad0f73f04be1">edge_ratio</a>);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="foldopen" id="foldopen00071" data-start="{" data-end="};">
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_emit_point.html">   71</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_point.html">EmitPoint</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_class" href="class_emit_point.html">EmitPoint</a>();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">// &lt;Particle Class&gt;</span></div>
-<div class="foldopen" id="foldopen00078" data-start="{" data-end="};">
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="class_particle_system.html">   78</a></span><span class="keyword">class </span><a class="code hl_class" href="class_particle_system.html">ParticleSystem</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_drawable.html">Drawable</a> {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">protected</span>:</div>
-<div class="foldopen" id="foldopen00080" data-start="{" data-end="};">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="struct_particle_system_1_1_particle.html">   80</a></span>    <span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        Vector2 position, velocity;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">float</span> lifetime, lifetime_max, angle, angular_velocity, scale, scale_end;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        Color tint, tint_end;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    } <a class="code hl_struct" href="struct_particle_system_1_1_particle.html">Particle</a>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="};">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="class_emit_rect.html">   76</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_rect.html">EmitRect</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    Vector2 dimensions;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_class" href="class_emit_rect.html">EmitRect</a>(Vector2 dimensions, <span class="keywordtype">float</span> <a class="code hl_variable" href="class_emit_shape.html#a1fde926c9e18c5262d5bad0f73f04be1">edge_ratio</a>);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    Vector2 <a class="code hl_function" href="class_emit_rect.html#ade1d4cae6e95c3195f619577af520f67">get_pos</a>(Vector2 position, <span class="keywordtype">float</span> scale);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
 </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_class" href="class_tilemap.html">Tilemap</a> *collision_mask;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    ParticleDataPtr particle_data;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> spawn_particle();</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> process_particle(<a class="code hl_struct" href="struct_particle_system_1_1_particle.html">Particle</a>&amp; particle);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">void</span> attempt_particle_bounce(<a class="code hl_struct" href="struct_particle_system_1_1_particle.html">Particle</a>&amp; particle, Vector2 dir, <span class="keywordtype">float</span> velocity_anim, <span class="keywordtype">float</span> delta);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keyword">typedef</span> std::vector&lt;Particle&gt; ParticleList;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    ParticleList particles;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    Vector2 force;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">float</span> spawn_timer;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">int</span> left;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="comment">// All particle system properties (loaded from a JSON file)</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_class" href="class_emit_shape.html">EmitShape</a>* emit_shape;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">float</span> lifetime, lifetime_randomness;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">float</span> particle_angle,</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>          particle_angle_randomness;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">bool</span> rotate_to_velocity;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">float</span> angular_velocity, angular_velocity_randomness;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">float</span> velocity, velocity_randomness, velocity_end, shot_angle, spread;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">float</span> particle_scale,</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>          particle_scale_randomness,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>          particle_scale_end;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="};">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="class_emit_point.html">   90</a></span><span class="keyword">class </span><a class="code hl_class" href="class_emit_point.html">EmitPoint</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_emit_shape.html">EmitShape</a> {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_class" href="class_emit_point.html">EmitPoint</a>();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    Vector2 get_pos(Vector2 position, <span class="keywordtype">float</span> scale);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>};</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">// &lt;Particle Class&gt;</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="};">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_particle_system.html">   97</a></span><span class="keyword">class </span><a class="code hl_class" href="class_particle_system.html">ParticleSystem</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_drawable.html">Drawable</a> {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="};">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="struct_particle_system_1_1_particle.html">   99</a></span>    <span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        Vector2 position, velocity;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">float</span> lifetime, lifetime_max, angle, angular_velocity, scale, scale_end;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        Color tint, tint_end;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    } <a class="code hl_struct" href="struct_particle_system_1_1_particle.html">Particle</a>;</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_class" href="class_tilemap.html">Tilemap</a> *collision_mask;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    ParticleDataPtr particle_data;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">void</span> spawn_particle();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">void</span> process_particle(<a class="code hl_struct" href="struct_particle_system_1_1_particle.html">Particle</a>&amp; particle);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> attempt_particle_bounce(<a class="code hl_struct" href="struct_particle_system_1_1_particle.html">Particle</a>&amp; particle, Vector2 dir, <span class="keywordtype">float</span> velocity_anim, <span class="keywordtype">float</span> delta);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">typedef</span> std::vector&lt;Particle&gt; ParticleList;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    ParticleList particles;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">float</span> firerate, firerate_randomness;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">int</span> amount;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    Color particle_tint, particle_tint_end; <span class="keywordtype">float</span> particle_tint_randomness;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    std::string velocity_ease_name;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    std::string scale_ease_name;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    std::string tint_ease_name;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    std::shared_ptr&lt;Texture2D&gt; texture;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_class" href="class_particle_system.html">ParticleSystem</a>(std::string data_filename, Vector2 position={0, 0});</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_class" href="class_particle_system.html">~ParticleSystem</a>();</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    Vector2 get_force();</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">void</span> add_force(Vector2 adding);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">void</span> remove_force(Vector2 removing);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">void</span> set_collision_mask(<a class="code hl_class" href="class_tilemap.html">Tilemap</a> *mask);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <a class="code hl_class" href="class_tilemap.html">Tilemap</a> *get_collision_mask();</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">void</span> set_position(Vector2 position);</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    Vector2 get_position();</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordtype">void</span> set_left(<span class="keywordtype">int</span> new_left);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordtype">int</span> get_left();</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordtype">int</span> get_num_particles();</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">void</span> set_amount(<span class="keywordtype">int</span> amt);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">void</span> reload_data();</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordtype">void</span> draw();</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>};</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    Vector2 force;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">float</span> spawn_timer;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">int</span> left;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">// All particle system properties (loaded from a JSON file)</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_class" href="class_emit_shape.html">EmitShape</a>* emit_shape;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordtype">float</span> lifetime, lifetime_randomness;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">float</span> particle_angle,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>          particle_angle_randomness;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">bool</span> rotate_to_velocity;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">float</span> angular_velocity, angular_velocity_randomness;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">float</span> velocity, velocity_randomness, velocity_end, shot_angle, spread;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">float</span> particle_scale,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>          particle_scale_randomness,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>          particle_scale_end;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">float</span> firerate, firerate_randomness;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordtype">int</span> amount;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    Color particle_tint, particle_tint_end; <span class="keywordtype">float</span> particle_tint_randomness;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    std::string velocity_ease_name;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    std::string scale_ease_name;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    std::string tint_ease_name;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    std::shared_ptr&lt;Texture2D&gt; texture;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_class" href="class_particle_system.html">ParticleSystem</a>(std::string data_filename, Vector2 position={0, 0});</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <a class="code hl_class" href="class_particle_system.html">~ParticleSystem</a>();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    Vector2 <a class="code hl_function" href="class_particle_system.html#af7518a71f148b3afb5bd81bdb27f2a5a">get_force</a>();</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_system.html#a4cd1c52e5c95864b561311938b9b1629">add_force</a>(Vector2 adding);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_system.html#ae9a6ee1003a79d5971dfee210484bfa0">remove_force</a>(Vector2 removing);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_system.html#a4960d12245ac2d09aac3400c04d6e499">set_collision_mask</a>(<a class="code hl_class" href="class_tilemap.html">Tilemap</a> *mask);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <a class="code hl_class" href="class_tilemap.html">Tilemap</a> *<a class="code hl_function" href="class_particle_system.html#ab4368f87d920b7c231673aa0771eadc9">get_collision_mask</a>();</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_system.html#aae861feb2068d24fb1c1d6a139db7807">set_position</a>(Vector2 position);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    Vector2 <a class="code hl_function" href="class_particle_system.html#a93aa3ddb1673efd553329530eccbfc70">get_position</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_system.html#ac3e6f94f844ed325febb3a5cf9005070">set_left</a>(<span class="keywordtype">int</span> new_left);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_particle_system.html#a9fc4c1822757bc88fbc3503ce048c443">get_left</a>();</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_particle_system.html#a26b3286e68bc6f812da1ad5bb9b168fe">get_num_particles</a>();</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_particle_system.html#a469b62311eb6754c376f94e4e6b042f4">set_amount</a>(<span class="keywordtype">int</span> amt);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">void</span> reload_data();</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordtype">void</span> draw();</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>};</div>
 </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="foldopen" id="foldopen00153" data-start="{" data-end="};">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_particle_entity.html">  153</a></span><span class="keyword">class </span><a class="code hl_class" href="class_particle_entity.html">ParticleEntity</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_entity.html">Entity</a> {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <a class="code hl_class" href="class_particle_system.html">ParticleSystem</a> system;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <a class="code hl_class" href="class_particle_entity.html">ParticleEntity</a>(std::string path, Vector2 pos, <span class="keywordtype">int</span> left=1, <a class="code hl_class" href="class_tilemap.html">Tilemap</a> *mask=<span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>};</div>
+<div class="foldopen" id="foldopen00194" data-start="{" data-end="};">
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="class_particle_entity.html">  194</a></span><span class="keyword">class </span><a class="code hl_class" href="class_particle_entity.html">ParticleEntity</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_entity.html">Entity</a> {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <a class="code hl_class" href="class_particle_system.html">ParticleSystem</a> system;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_class" href="class_particle_entity.html">ParticleEntity</a>(std::string path, Vector2 pos, <span class="keywordtype">int</span> left=1, <a class="code hl_class" href="class_tilemap.html">Tilemap</a> *mask=<span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>};</div>
 </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_drawable_html"><div class="ttname"><a href="class_drawable.html">Drawable</a></div><div class="ttdef"><b>Definition</b> drawables.hpp:116</div></div>
-<div class="ttc" id="aclass_emit_circle_html"><div class="ttname"><a href="class_emit_circle.html">EmitCircle</a></div><div class="ttdef"><b>Definition</b> particles.hpp:55</div></div>
-<div class="ttc" id="aclass_emit_point_html"><div class="ttname"><a href="class_emit_point.html">EmitPoint</a></div><div class="ttdef"><b>Definition</b> particles.hpp:71</div></div>
-<div class="ttc" id="aclass_emit_rect_html"><div class="ttname"><a href="class_emit_rect.html">EmitRect</a></div><div class="ttdef"><b>Definition</b> particles.hpp:63</div></div>
-<div class="ttc" id="aclass_emit_shape_html"><div class="ttname"><a href="class_emit_shape.html">EmitShape</a></div><div class="ttdef"><b>Definition</b> particles.hpp:47</div></div>
+<div class="ttc" id="aclass_emit_circle_html"><div class="ttname"><a href="class_emit_circle.html">EmitCircle</a></div><div class="ttdoc">Particles will emit in a circle.</div><div class="ttdef"><b>Definition</b> particles.hpp:66</div></div>
+<div class="ttc" id="aclass_emit_point_html"><div class="ttname"><a href="class_emit_point.html">EmitPoint</a></div><div class="ttdoc">Particles will emit in a single point.</div><div class="ttdef"><b>Definition</b> particles.hpp:90</div></div>
+<div class="ttc" id="aclass_emit_rect_html"><div class="ttname"><a href="class_emit_rect.html">EmitRect</a></div><div class="ttdoc">Particles will emit in a rectangle.</div><div class="ttdef"><b>Definition</b> particles.hpp:76</div></div>
+<div class="ttc" id="aclass_emit_rect_html_ade1d4cae6e95c3195f619577af520f67"><div class="ttname"><a href="class_emit_rect.html#ade1d4cae6e95c3195f619577af520f67">EmitRect::get_pos</a></div><div class="ttdeci">Vector2 get_pos(Vector2 position, float scale)</div><div class="ttdoc">Returns a random position for a particle.</div><div class="ttdef"><b>Definition</b> particles.cpp:92</div></div>
+<div class="ttc" id="aclass_emit_shape_html"><div class="ttname"><a href="class_emit_shape.html">EmitShape</a></div><div class="ttdoc">Shape that determines the offset position of particles.</div><div class="ttdef"><b>Definition</b> particles.hpp:55</div></div>
+<div class="ttc" id="aclass_emit_shape_html_a1fde926c9e18c5262d5bad0f73f04be1"><div class="ttname"><a href="class_emit_shape.html#a1fde926c9e18c5262d5bad0f73f04be1">EmitShape::edge_ratio</a></div><div class="ttdeci">float edge_ratio</div><div class="ttdoc">When this is set to 1 the particles spawn on the edge of a shape, when it's set to 0 they spawn anywh...</div><div class="ttdef"><b>Definition</b> particles.hpp:58</div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdef"><b>Definition</b> entity.hpp:12</div></div>
 <div class="ttc" id="aclass_particle_data_manager_html"><div class="ttname"><a href="class_particle_data_manager.html">ParticleDataManager</a></div><div class="ttdef"><b>Definition</b> particles.hpp:27</div></div>
-<div class="ttc" id="aclass_particle_entity_html"><div class="ttname"><a href="class_particle_entity.html">ParticleEntity</a></div><div class="ttdef"><b>Definition</b> particles.hpp:153</div></div>
-<div class="ttc" id="aclass_particle_system_html"><div class="ttname"><a href="class_particle_system.html">ParticleSystem</a></div><div class="ttdef"><b>Definition</b> particles.hpp:78</div></div>
+<div class="ttc" id="aclass_particle_data_manager_html_a095772a313319911f2c41b535a0da13e"><div class="ttname"><a href="class_particle_data_manager.html#a095772a313319911f2c41b535a0da13e">ParticleDataManager::unload</a></div><div class="ttdeci">static void unload(std::string path)</div><div class="ttdoc">Unloads particle data from memory.</div><div class="ttdef"><b>Definition</b> particles.cpp:31</div></div>
+<div class="ttc" id="aclass_particle_data_manager_html_ae5a97951fc9b5b3884b6d931fee2656d"><div class="ttname"><a href="class_particle_data_manager.html#ae5a97951fc9b5b3884b6d931fee2656d">ParticleDataManager::get</a></div><div class="ttdeci">static ParticleDataPtr get(std::string path)</div><div class="ttdoc">Returns smart pointer to particle data.</div><div class="ttdef"><b>Definition</b> particles.cpp:22</div></div>
+<div class="ttc" id="aclass_particle_data_manager_html_affeadb5efe00379705dcd61158b77c52"><div class="ttname"><a href="class_particle_data_manager.html#affeadb5efe00379705dcd61158b77c52">ParticleDataManager::load</a></div><div class="ttdeci">static void load(std::string path)</div><div class="ttdoc">Load particle data into memory.</div><div class="ttdef"><b>Definition</b> particles.cpp:9</div></div>
+<div class="ttc" id="aclass_particle_entity_html"><div class="ttname"><a href="class_particle_entity.html">ParticleEntity</a></div><div class="ttdoc">Entity that holds a particle system and unloads itself automatically once there arent any particles l...</div><div class="ttdef"><b>Definition</b> particles.hpp:194</div></div>
+<div class="ttc" id="aclass_particle_system_html"><div class="ttname"><a href="class_particle_system.html">ParticleSystem</a></div><div class="ttdef"><b>Definition</b> particles.hpp:97</div></div>
+<div class="ttc" id="aclass_particle_system_html_a26b3286e68bc6f812da1ad5bb9b168fe"><div class="ttname"><a href="class_particle_system.html#a26b3286e68bc6f812da1ad5bb9b168fe">ParticleSystem::get_num_particles</a></div><div class="ttdeci">int get_num_particles()</div><div class="ttdoc">Returns number of particles that are alive.</div><div class="ttdef"><b>Definition</b> particles.cpp:396</div></div>
+<div class="ttc" id="aclass_particle_system_html_a469b62311eb6754c376f94e4e6b042f4"><div class="ttname"><a href="class_particle_system.html#a469b62311eb6754c376f94e4e6b042f4">ParticleSystem::set_amount</a></div><div class="ttdeci">void set_amount(int amt)</div><div class="ttdoc">Sets the amount of particles emitted in a burst.</div><div class="ttdef"><b>Definition</b> particles.cpp:261</div></div>
+<div class="ttc" id="aclass_particle_system_html_a4960d12245ac2d09aac3400c04d6e499"><div class="ttname"><a href="class_particle_system.html#a4960d12245ac2d09aac3400c04d6e499">ParticleSystem::set_collision_mask</a></div><div class="ttdeci">void set_collision_mask(Tilemap *mask)</div><div class="ttdoc">Sets the tilemap particles collide with.</div><div class="ttdef"><b>Definition</b> particles.cpp:146</div></div>
+<div class="ttc" id="aclass_particle_system_html_a4cd1c52e5c95864b561311938b9b1629"><div class="ttname"><a href="class_particle_system.html#a4cd1c52e5c95864b561311938b9b1629">ParticleSystem::add_force</a></div><div class="ttdeci">void add_force(Vector2 adding)</div><div class="ttdoc">Adds to the force vector that affects particles.</div><div class="ttdef"><b>Definition</b> particles.cpp:133</div></div>
+<div class="ttc" id="aclass_particle_system_html_a93aa3ddb1673efd553329530eccbfc70"><div class="ttname"><a href="class_particle_system.html#a93aa3ddb1673efd553329530eccbfc70">ParticleSystem::get_position</a></div><div class="ttdeci">Vector2 get_position()</div><div class="ttdoc">Returns the position of the tilemap.</div><div class="ttdef"><b>Definition</b> particles.cpp:128</div></div>
+<div class="ttc" id="aclass_particle_system_html_a9fc4c1822757bc88fbc3503ce048c443"><div class="ttname"><a href="class_particle_system.html#a9fc4c1822757bc88fbc3503ce048c443">ParticleSystem::get_left</a></div><div class="ttdeci">int get_left()</div><div class="ttdoc">Returns the amount of bursts left to emit.</div><div class="ttdef"><b>Definition</b> particles.cpp:159</div></div>
+<div class="ttc" id="aclass_particle_system_html_aae861feb2068d24fb1c1d6a139db7807"><div class="ttname"><a href="class_particle_system.html#aae861feb2068d24fb1c1d6a139db7807">ParticleSystem::set_position</a></div><div class="ttdeci">void set_position(Vector2 position)</div><div class="ttdoc">Sets the position of the tilemap.</div><div class="ttdef"><b>Definition</b> particles.cpp:124</div></div>
+<div class="ttc" id="aclass_particle_system_html_ab4368f87d920b7c231673aa0771eadc9"><div class="ttname"><a href="class_particle_system.html#ab4368f87d920b7c231673aa0771eadc9">ParticleSystem::get_collision_mask</a></div><div class="ttdeci">Tilemap * get_collision_mask()</div><div class="ttdoc">Returns the tilemap the particles collide with.</div><div class="ttdef"><b>Definition</b> particles.cpp:151</div></div>
+<div class="ttc" id="aclass_particle_system_html_ac3e6f94f844ed325febb3a5cf9005070"><div class="ttname"><a href="class_particle_system.html#ac3e6f94f844ed325febb3a5cf9005070">ParticleSystem::set_left</a></div><div class="ttdeci">void set_left(int new_left)</div><div class="ttdoc">Sets the number of particle bursts left to emit.</div><div class="ttdef"><b>Definition</b> particles.cpp:156</div></div>
+<div class="ttc" id="aclass_particle_system_html_ae9a6ee1003a79d5971dfee210484bfa0"><div class="ttname"><a href="class_particle_system.html#ae9a6ee1003a79d5971dfee210484bfa0">ParticleSystem::remove_force</a></div><div class="ttdeci">void remove_force(Vector2 removing)</div><div class="ttdoc">Subtracts from the force vector.</div><div class="ttdef"><b>Definition</b> particles.cpp:137</div></div>
+<div class="ttc" id="aclass_particle_system_html_af7518a71f148b3afb5bd81bdb27f2a5a"><div class="ttname"><a href="class_particle_system.html#af7518a71f148b3afb5bd81bdb27f2a5a">ParticleSystem::get_force</a></div><div class="ttdeci">Vector2 get_force()</div><div class="ttdoc">Returns force vector that acts upon particles.</div><div class="ttdef"><b>Definition</b> particles.cpp:141</div></div>
 <div class="ttc" id="aclass_tilemap_html"><div class="ttname"><a href="class_tilemap.html">Tilemap</a></div><div class="ttdef"><b>Definition</b> tilemap_entity.hpp:34</div></div>
-<div class="ttc" id="astruct_particle_system_1_1_particle_html"><div class="ttname"><a href="struct_particle_system_1_1_particle.html">ParticleSystem::Particle</a></div><div class="ttdef"><b>Definition</b> particles.hpp:80</div></div>
+<div class="ttc" id="astruct_particle_system_1_1_particle_html"><div class="ttname"><a href="struct_particle_system_1_1_particle.html">ParticleSystem::Particle</a></div><div class="ttdef"><b>Definition</b> particles.hpp:99</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

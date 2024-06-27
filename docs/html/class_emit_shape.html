@@ -91,33 +91,72 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">EmitShape Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Shape that determines the offset position of particles.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="particles_8hpp_source.html">particles.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for EmitShape:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_emit_shape.png" usemap="#EmitShape_map" alt=""/>
   <map id="EmitShape_map" name="EmitShape_map">
-<area href="class_emit_circle.html" alt="EmitCircle" shape="rect" coords="0,56,71,80"/>
-<area href="class_emit_point.html" alt="EmitPoint" shape="rect" coords="81,56,152,80"/>
-<area href="class_emit_rect.html" alt="EmitRect" shape="rect" coords="162,56,233,80"/>
+<area href="class_emit_circle.html" title="Particles will emit in a circle." alt="EmitCircle" shape="rect" coords="0,56,71,80"/>
+<area href="class_emit_point.html" title="Particles will emit in a single point." alt="EmitPoint" shape="rect" coords="81,56,152,80"/>
+<area href="class_emit_rect.html" title="Particles will emit in a rectangle." alt="EmitRect" shape="rect" coords="162,56,233,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4ad7d2172afcd0aee3bff9f27c3cd906" id="r_a4ad7d2172afcd0aee3bff9f27c3cd906"><td class="memItemLeft" align="right" valign="top"><a id="a4ad7d2172afcd0aee3bff9f27c3cd906" name="a4ad7d2172afcd0aee3bff9f27c3cd906"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EmitShape</b> (float edge_ratio)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EmitShape</b> (float <a class="el" href="#a1fde926c9e18c5262d5bad0f73f04be1">edge_ratio</a>)</td></tr>
 <tr class="separator:a4ad7d2172afcd0aee3bff9f27c3cd906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea5f59bfb740dd4dc5a387e491c79345" id="r_aea5f59bfb740dd4dc5a387e491c79345"><td class="memItemLeft" align="right" valign="top"><a id="aea5f59bfb740dd4dc5a387e491c79345" name="aea5f59bfb740dd4dc5a387e491c79345"></a>
-virtual Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>get_pos</b> (Vector2 position, float scale)=0</td></tr>
+<tr class="memitem:aea5f59bfb740dd4dc5a387e491c79345" id="r_aea5f59bfb740dd4dc5a387e491c79345"><td class="memItemLeft" align="right" valign="top">virtual Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea5f59bfb740dd4dc5a387e491c79345">get_pos</a> (Vector2 position, float scale)=0</td></tr>
 <tr class="separator:aea5f59bfb740dd4dc5a387e491c79345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a1fde926c9e18c5262d5bad0f73f04be1" id="r_a1fde926c9e18c5262d5bad0f73f04be1"><td class="memItemLeft" align="right" valign="top"><a id="a1fde926c9e18c5262d5bad0f73f04be1" name="a1fde926c9e18c5262d5bad0f73f04be1"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>edge_ratio</b></td></tr>
+<tr class="memdesc:a1fde926c9e18c5262d5bad0f73f04be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">When this is set to 1 the particles spawn on the edge of a shape, when it's set to 0 they spawn anywhere inside the shape. <br /></td></tr>
 <tr class="separator:a1fde926c9e18c5262d5bad0f73f04be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Shape that determines the offset position of particles. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aea5f59bfb740dd4dc5a387e491c79345" name="aea5f59bfb740dd4dc5a387e491c79345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea5f59bfb740dd4dc5a387e491c79345">&#9670;&#160;</a></span>get_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Vector2 EmitShape::get_pos </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>scale</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_emit_rect.html#ade1d4cae6e95c3195f619577af520f67">EmitRect</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/framework/objects/<a class="el" href="particles_8hpp_source.html">particles.hpp</a></li>
 <li>src/framework/objects/<b>particles.cpp</b></li>

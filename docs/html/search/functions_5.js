@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['send_5funiform_0',['send_uniform',['../class_shader_bond.html#a0ce6b1f7e362ae1442d0b6b34d870979',1,'ShaderBond']]],
-  ['set_5fshader_1',['set_shader',['../class_shader_bond.html#ae5435027dff4321aeefe378c9a01db0f',1,'ShaderBond::set_shader(std::string shader_path)'],['../class_shader_bond.html#a250e732e08c6fbd00e576924432c13a9',1,'ShaderBond::set_shader(ShaderPtr new_shader)']]]
+  ['real_5fpos_0',['real_pos',['../class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c',1,'Drawable']]],
+  ['remove_5fforce_1',['remove_force',['../class_particle_system.html#ae9a6ee1003a79d5971dfee210484bfa0',1,'ParticleSystem']]]
 ];
