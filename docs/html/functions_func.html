@@ -92,6 +92,8 @@ $(function(){ initResizable(false); });
 <li>add_event()&#160;:&#160;<a class="el" href="class_animation_component.html#a8d6716a1ebb578596d47229ef01a0fb8">AnimationComponent</a></li>
 <li>add_force()&#160;:&#160;<a class="el" href="class_particle_system.html#a4cd1c52e5c95864b561311938b9b1629">ParticleSystem</a>, <a class="el" href="class_trail.html#a414d99f16f3d68fc97bf345fd52c507f">Trail</a></li>
 <li>add_keyframe()&#160;:&#160;<a class="el" href="class_animation_component.html#ad994ba8b602a53482f80e504884b5f8d">AnimationComponent</a></li>
+<li>add_layer()&#160;:&#160;<a class="el" href="class_area_component.html#ae44ea48368ff935327b082a9d85caa59">AreaComponent</a></li>
+<li>add_mask_bit()&#160;:&#160;<a class="el" href="class_area_component.html#a3d488a39406c98dffe72238938d06858">AreaComponent</a></li>
 </ul>
 
 
@@ -121,11 +123,16 @@ $(function(){ initResizable(false); });
 
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
 <li>get()&#160;:&#160;<a class="el" href="class_particle_data_manager.html#ae5a97951fc9b5b3884b6d931fee2656d">ParticleDataManager</a>, <a class="el" href="class_shader_manager.html#a699ed35ef4c7c18cc33425afae309282">ShaderManager</a>, <a class="el" href="class_texture_manager.html#a37e5897a76bb2f0624eb03192822f1f3">TextureManager</a></li>
+<li>get_camera()&#160;:&#160;<a class="el" href="class_camera_component.html#a98c06911bc0affffa4bd30aef7275de8">CameraComponent</a></li>
 <li>get_collision_mask()&#160;:&#160;<a class="el" href="class_particle_system.html#ab4368f87d920b7c231673aa0771eadc9">ParticleSystem</a></li>
 <li>get_component()&#160;:&#160;<a class="el" href="class_entity.html#a667f55f4c732cec106830b4082cc0754">Entity</a></li>
 <li>get_force()&#160;:&#160;<a class="el" href="class_particle_system.html#af7518a71f148b3afb5bd81bdb27f2a5a">ParticleSystem</a></li>
+<li>get_layers()&#160;:&#160;<a class="el" href="class_area_component.html#ab30b29ab4e2cba47fc779a46bb4d9fdd">AreaComponent</a></li>
 <li>get_left()&#160;:&#160;<a class="el" href="class_particle_system.html#a9fc4c1822757bc88fbc3503ce048c443">ParticleSystem</a></li>
+<li>get_mask()&#160;:&#160;<a class="el" href="class_area_component.html#a35d09b95f8c9027dc6b7ecb2f20aeff5">AreaComponent</a></li>
 <li>get_num_particles()&#160;:&#160;<a class="el" href="class_particle_system.html#a26b3286e68bc6f812da1ad5bb9b168fe">ParticleSystem</a></li>
+<li>get_one_overlapping()&#160;:&#160;<a class="el" href="class_area_component.html#ae0b4d4f125111ad69aa1c42b8e114432">AreaComponent</a></li>
+<li>get_overlapping()&#160;:&#160;<a class="el" href="class_area_component.html#ad2a5a4db5ddb3a7d854edf49422a70ba">AreaComponent</a></li>
 <li>get_pos()&#160;:&#160;<a class="el" href="class_emit_rect.html#ade1d4cae6e95c3195f619577af520f67">EmitRect</a></li>
 <li>get_position()&#160;:&#160;<a class="el" href="class_particle_system.html#a93aa3ddb1673efd553329530eccbfc70">ParticleSystem</a></li>
 <li>get_sfx()&#160;:&#160;<a class="el" href="class_audio_manager.html#a5ba25dc70d8d9c565154fd5d47f29c8f">AudioManager</a></li>
@@ -184,6 +191,8 @@ $(function(){ initResizable(false); });
 <li>real_pos()&#160;:&#160;<a class="el" href="class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c">Drawable</a></li>
 <li>remove_component()&#160;:&#160;<a class="el" href="class_entity.html#a2361d524a5a615e2702267072af9a6f7">Entity</a></li>
 <li>remove_force()&#160;:&#160;<a class="el" href="class_particle_system.html#ae9a6ee1003a79d5971dfee210484bfa0">ParticleSystem</a>, <a class="el" href="class_trail.html#aca003527f5c9a11d3507b645b7e25959">Trail</a></li>
+<li>remove_layer()&#160;:&#160;<a class="el" href="class_area_component.html#ae5a7bc78babaaeb639146a14396fd552">AreaComponent</a></li>
+<li>remove_mask_bit()&#160;:&#160;<a class="el" href="class_area_component.html#af293626de006bb1b39eab9ead24a119e">AreaComponent</a></li>
 <li>remove_tile()&#160;:&#160;<a class="el" href="class_tilemap.html#a19d45f263b4b851204c06d4fa5acfbf7">Tilemap</a></li>
 </ul>
 
@@ -194,7 +203,11 @@ $(function(){ initResizable(false); });
 <li>send_uniform()&#160;:&#160;<a class="el" href="class_shader_bond.html#a0ce6b1f7e362ae1442d0b6b34d870979">ShaderBond</a></li>
 <li>set_amount()&#160;:&#160;<a class="el" href="class_particle_system.html#a469b62311eb6754c376f94e4e6b042f4">ParticleSystem</a></li>
 <li>set_collision_mask()&#160;:&#160;<a class="el" href="class_particle_system.html#a4960d12245ac2d09aac3400c04d6e499">ParticleSystem</a></li>
+<li>set_layer()&#160;:&#160;<a class="el" href="class_area_component.html#a282d547dc5a1d025bef39cfc478097a0">AreaComponent</a></li>
+<li>set_layers()&#160;:&#160;<a class="el" href="class_area_component.html#ac7e1f5a9c7cb310412d2673e39d55d63">AreaComponent</a></li>
 <li>set_left()&#160;:&#160;<a class="el" href="class_particle_system.html#ac3e6f94f844ed325febb3a5cf9005070">ParticleSystem</a></li>
+<li>set_mask()&#160;:&#160;<a class="el" href="class_area_component.html#a6947f2c567d047313f606daead0dde2a">AreaComponent</a></li>
+<li>set_mask_bit()&#160;:&#160;<a class="el" href="class_area_component.html#a15ca9ab9fe86bafca234280fea5221c6">AreaComponent</a></li>
 <li>set_position()&#160;:&#160;<a class="el" href="class_particle_system.html#aae861feb2068d24fb1c1d6a139db7807">ParticleSystem</a></li>
 <li>set_scene()&#160;:&#160;<a class="el" href="class_scene_manager.html#af6ae507aba488f029783e0281799d9fd">SceneManager</a></li>
 <li>set_shader()&#160;:&#160;<a class="el" href="class_shader_bond.html#ae5435027dff4321aeefe378c9a01db0f">ShaderBond</a></li>
@@ -202,11 +215,14 @@ $(function(){ initResizable(false); });
 <li>set_tile()&#160;:&#160;<a class="el" href="class_tilemap.html#ab126d19acaae64492b430d29d32d87eb">Tilemap</a></li>
 <li>setup()&#160;:&#160;<a class="el" href="class_component.html#a9cc04b36ceb2cf5bb0abe5672b096c64">Component</a></li>
 <li>setup_scene()&#160;:&#160;<a class="el" href="class_scene_manager.html#ae84f392fbba17a3915a25c54073afa62">SceneManager</a></li>
+<li>shake()&#160;:&#160;<a class="el" href="class_camera_component.html#a1f71ae26a4f5cd3b5703aa0675931462">CameraComponent</a></li>
 <li>spawn_point()&#160;:&#160;<a class="el" href="class_trail.html#a2c7636804fbfc0fd484204bd3523719a">Trail</a></li>
 </ul>
 
 
 <h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>toggle_layer()&#160;:&#160;<a class="el" href="class_area_component.html#a5cb768ea79144dbf75a6f461aaba897c">AreaComponent</a></li>
+<li>toggle_mask_bit()&#160;:&#160;<a class="el" href="class_area_component.html#a5141420cce8f6efdb0905bf29a218283">AreaComponent</a></li>
 <li>toggle_pause()&#160;:&#160;<a class="el" href="class_animation_component.html#a9491b4e0f5864be6e5b96f1d944e5ebc">AnimationComponent</a></li>
 </ul>
 
@@ -218,6 +234,11 @@ $(function(){ initResizable(false); });
 <li>unpause()&#160;:&#160;<a class="el" href="class_animation_component.html#a047bd2905899b3adab154dd83918ca48">AnimationComponent</a></li>
 <li>update_transform()&#160;:&#160;<a class="el" href="class_drawable.html#aefad13ec1184e13720afe89bb0ccd982">Drawable</a></li>
 <li>use()&#160;:&#160;<a class="el" href="class_shader_bond.html#a7c543ca1f4bd72c2a3dc620120672002">ShaderBond</a></li>
+</ul>
+
+
+<h3><a id="index_z" name="index_z"></a>- z -</h3><ul>
+<li>zoom()&#160;:&#160;<a class="el" href="class_camera_component.html#a26ad9f4bef7715b908a87364ca2e2420">CameraComponent</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
