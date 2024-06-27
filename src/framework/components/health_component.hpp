@@ -17,7 +17,6 @@ public:
         healed_signal;
 
     void hurt(float damage);
-
     void heal(float add);
 
     bool check_death();
