@@ -99,8 +99,8 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae84f392fbba17a3915a25c54073afa62" id="r_ae84f392fbba17a3915a25c54073afa62"><td class="memItemLeft" align="right" valign="top"><a id="ae84f392fbba17a3915a25c54073afa62" name="ae84f392fbba17a3915a25c54073afa62"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>setup_scene</b> (<a class="el" href="class_scene.html">Scene</a> *scene)</td></tr>
+<tr class="memitem:ae84f392fbba17a3915a25c54073afa62" id="r_ae84f392fbba17a3915a25c54073afa62"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae84f392fbba17a3915a25c54073afa62">setup_scene</a> (<a class="el" href="class_scene.html">Scene</a> *scene)</td></tr>
+<tr class="memdesc:ae84f392fbba17a3915a25c54073afa62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up a scene (done automatically in the Scene::Scene(name) constructor)  <br /></td></tr>
 <tr class="separator:ae84f392fbba17a3915a25c54073afa62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ee3d67d0d9af194d601355f2b9c5371" id="r_a8ee3d67d0d9af194d601355f2b9c5371"><td class="memItemLeft" align="right" valign="top"><a id="a8ee3d67d0d9af194d601355f2b9c5371" name="a8ee3d67d0d9af194d601355f2b9c5371"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>unload</b> (std::string name)</td></tr>
@@ -108,8 +108,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>unload</b> (st
 <tr class="memitem:acd70ec5ba8492ec758d9996b36cc6a1a" id="r_acd70ec5ba8492ec758d9996b36cc6a1a"><td class="memItemLeft" align="right" valign="top"><a id="acd70ec5ba8492ec758d9996b36cc6a1a" name="acd70ec5ba8492ec758d9996b36cc6a1a"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>unload_all</b> ()</td></tr>
 <tr class="separator:acd70ec5ba8492ec758d9996b36cc6a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6ae507aba488f029783e0281799d9fd" id="r_af6ae507aba488f029783e0281799d9fd"><td class="memItemLeft" align="right" valign="top"><a id="af6ae507aba488f029783e0281799d9fd" name="af6ae507aba488f029783e0281799d9fd"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>set_scene</b> (std::string name)</td></tr>
+<tr class="memitem:af6ae507aba488f029783e0281799d9fd" id="r_af6ae507aba488f029783e0281799d9fd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6ae507aba488f029783e0281799d9fd">set_scene</a> (std::string name)</td></tr>
+<tr class="memdesc:af6ae507aba488f029783e0281799d9fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current scene to another one.  <br /></td></tr>
 <tr class="separator:af6ae507aba488f029783e0281799d9fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
@@ -123,7 +123,74 @@ static <a class="el" href="class_scene.html">Scene</a> *&#160;</td><td class="me
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class responsible for loading and unloading scenes. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af6ae507aba488f029783e0281799d9fd" name="af6ae507aba488f029783e0281799d9fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6ae507aba488f029783e0281799d9fd">&#9670;&#160;</a></span>set_scene()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SceneManager::set_scene </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the current scene to another one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td><a class="el" href="class_scene.html" title="Holds entities which are drawn and processed, offers group queries for entities and automatically rem...">Scene</a> name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae84f392fbba17a3915a25c54073afa62" name="ae84f392fbba17a3915a25c54073afa62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae84f392fbba17a3915a25c54073afa62">&#9670;&#160;</a></span>setup_scene()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SceneManager::setup_scene </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scene.html">Scene</a> *</td>          <td class="paramname"><span class="paramname"><em>scene</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets up a scene (done automatically in the Scene::Scene(name) constructor) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scene</td><td>Pointer to scene </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/framework/<a class="el" href="scene_8hpp_source.html">scene.hpp</a></li>
 <li>src/framework/<b>scene.cpp</b></li>
 </ul>

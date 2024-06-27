@@ -100,8 +100,8 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6fb788d6ae25d5293d3a58966cf29757" id="r_a6fb788d6ae25d5293d3a58966cf29757"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fb788d6ae25d5293d3a58966cf29757">Scene</a> (std::string name)</td></tr>
-<tr class="memdesc:a6fb788d6ae25d5293d3a58966cf29757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises the entity array.  <br /></td></tr>
+<tr class="memitem:a6fb788d6ae25d5293d3a58966cf29757" id="r_a6fb788d6ae25d5293d3a58966cf29757"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fb788d6ae25d5293d3a58966cf29757">Scene</a> (std::string <a class="el" href="#a44b2d6bffa153dda02f026f8533ceb08">name</a>)</td></tr>
+<tr class="memdesc:a6fb788d6ae25d5293d3a58966cf29757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises the entity array and automatically sets up the scene in the scene manager.  <br /></td></tr>
 <tr class="separator:a6fb788d6ae25d5293d3a58966cf29757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6ee80d12ba0af3838907b20f064ab73" id="r_ab6ee80d12ba0af3838907b20f064ab73"><td class="memItemLeft" align="right" valign="top"><a id="ab6ee80d12ba0af3838907b20f064ab73" name="ab6ee80d12ba0af3838907b20f064ab73"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float delta)</td></tr>
@@ -118,10 +118,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process_entit
 <tr class="memitem:a985f6bcd5533a25b8ea9526f3881f054" id="r_a985f6bcd5533a25b8ea9526f3881f054"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a985f6bcd5533a25b8ea9526f3881f054">entity_count</a> ()</td></tr>
 <tr class="memdesc:a985f6bcd5533a25b8ea9526f3881f054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of entities in the scene.  <br /></td></tr>
 <tr class="separator:a985f6bcd5533a25b8ea9526f3881f054"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a774f1e9be470d3595b9453002d6ab295" id="r_a774f1e9be470d3595b9453002d6ab295"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a774f1e9be470d3595b9453002d6ab295">query_in_group</a> (std::string name)</td></tr>
+<tr class="memitem:a774f1e9be470d3595b9453002d6ab295" id="r_a774f1e9be470d3595b9453002d6ab295"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a774f1e9be470d3595b9453002d6ab295">query_in_group</a> (std::string <a class="el" href="#a44b2d6bffa153dda02f026f8533ceb08">name</a>)</td></tr>
 <tr class="memdesc:a774f1e9be470d3595b9453002d6ab295"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array of entities in group.  <br /></td></tr>
 <tr class="separator:a774f1e9be470d3595b9453002d6ab295"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af62fa49f108e48e741d2348f9eb039ca" id="r_af62fa49f108e48e741d2348f9eb039ca"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af62fa49f108e48e741d2348f9eb039ca">first_in_group</a> (std::string name)</td></tr>
+<tr class="memitem:af62fa49f108e48e741d2348f9eb039ca" id="r_af62fa49f108e48e741d2348f9eb039ca"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af62fa49f108e48e741d2348f9eb039ca">first_in_group</a> (std::string <a class="el" href="#a44b2d6bffa153dda02f026f8533ceb08">name</a>)</td></tr>
 <tr class="memdesc:af62fa49f108e48e741d2348f9eb039ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an entity in the group.  <br /></td></tr>
 <tr class="separator:af62fa49f108e48e741d2348f9eb039ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdc81939b09ebfc73cc4ff533a4e9239" id="r_acdc81939b09ebfc73cc4ff533a4e9239"><td class="memItemLeft" align="right" valign="top"><a id="acdc81939b09ebfc73cc4ff533a4e9239" name="acdc81939b09ebfc73cc4ff533a4e9239"></a>
@@ -132,6 +132,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>restart</b> (
 Public Attributes</h2></td></tr>
 <tr class="memitem:a44b2d6bffa153dda02f026f8533ceb08" id="r_a44b2d6bffa153dda02f026f8533ceb08"><td class="memItemLeft" align="right" valign="top"><a id="a44b2d6bffa153dda02f026f8533ceb08" name="a44b2d6bffa153dda02f026f8533ceb08"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="memdesc:a44b2d6bffa153dda02f026f8533ceb08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for setting the scene. <br /></td></tr>
 <tr class="separator:a44b2d6bffa153dda02f026f8533ceb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -142,7 +143,7 @@ std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Holds entities which are drawn and processed, offers group queries for entities and automatically removes entities queued for deletion. </p>
-<dl class="section note"><dt>Note</dt><dd>To use a scene you have to call SceneManager::setup_scene(new YourSceneClass()) and than set the scene with SceneManager::set_scene("your_scene_name") </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>To use a scene you have to initialise the scene with "new YourSceneClass()" and than set the scene with "SceneManager::set_scene("your_scene_name")" </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6fb788d6ae25d5293d3a58966cf29757" name="a6fb788d6ae25d5293d3a58966cf29757"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6fb788d6ae25d5293d3a58966cf29757">&#9670;&#160;</a></span>Scene()</h2>
@@ -159,11 +160,10 @@ std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</
       </table>
 </div><div class="memdoc">
 
-<p>Initialises the entity array. </p>
+<p>Initialises the entity array and automatically sets up the scene in the scene manager. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td><br  />
- </td></tr>
+    <tr><td class="paramname">name</td><td>Name of scene </td></tr>
   </table>
   </dd>
 </dl>

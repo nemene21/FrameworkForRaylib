@@ -62,14 +62,31 @@ public:
     void process(float delta);
     void draw(float delta);
 
+    /// @brief Set tile at x, y to type
+    /// @param x X coord of tile
+    /// @param y Y coord of tile
+    /// @param type Tile type (0 >=)
+    /// @note The position of the tile is in tile position units, not pixels
     void set_tile(int x, int y, int type);
+    /// @brief Removes tile at x, y
+    /// @param x X coord of tile
+    /// @param y Y coord of tile
     void remove_tile(int x, int y);
+    /// @brief Returns tile type at x, y
+    /// @param x X coord of tile
+    /// @param y Y coord of tile
+    /// @return Tile type
     int  get_tile(int x, int y);
 
+    /// @brief Builds the drawing data and collider data of the tilemap
     void build();
     void build_chunk(std::pair<int, int>);
 
+    /// @brief Saves tile data to disk
+    /// @param path Path to save on
     void save(std::string path);
+    /// @brief Loads tile data from the disk
+    /// @param path Path to load from
     void load(std::string path);
 };
 
