@@ -91,6 +91,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Sprite Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Draws a single texture based on it's transform properties.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sprites_8hpp_source.html">sprites.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Sprite:</div>
 <div class="dyncontent">
@@ -106,21 +111,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e67a5647cda643a747944f0e58a50ab" id="r_a3e67a5647cda643a747944f0e58a50ab"><td class="memItemLeft" align="right" valign="top"><a id="a3e67a5647cda643a747944f0e58a50ab" name="a3e67a5647cda643a747944f0e58a50ab"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Sprite</b> (std::string texture_name, Vector2 position={0, 0}, Vector2 scale={1, 1}, float angle=0)</td></tr>
 <tr class="separator:a3e67a5647cda643a747944f0e58a50ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af24b7a8f6e89553d39c0b97ac2f31394" id="r_af24b7a8f6e89553d39c0b97ac2f31394"><td class="memItemLeft" align="right" valign="top"><a id="af24b7a8f6e89553d39c0b97ac2f31394" name="af24b7a8f6e89553d39c0b97ac2f31394"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>get_position</b> ()</td></tr>
-<tr class="separator:af24b7a8f6e89553d39c0b97ac2f31394"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a591de7634a7984609546afafe8cf65db" id="r_a591de7634a7984609546afafe8cf65db"><td class="memItemLeft" align="right" valign="top"><a id="a591de7634a7984609546afafe8cf65db" name="a591de7634a7984609546afafe8cf65db"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_position</b> (Vector2 new_pos)</td></tr>
-<tr class="separator:a591de7634a7984609546afafe8cf65db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4918ed3be5db114df38a4fef37186f0" id="r_ae4918ed3be5db114df38a4fef37186f0"><td class="memItemLeft" align="right" valign="top"><a id="ae4918ed3be5db114df38a4fef37186f0" name="ae4918ed3be5db114df38a4fef37186f0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>translate</b> (Vector2 adding)</td></tr>
-<tr class="separator:ae4918ed3be5db114df38a4fef37186f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab36cd5923d472edf2664211150219710" id="r_ab36cd5923d472edf2664211150219710"><td class="memItemLeft" align="right" valign="top"><a id="ab36cd5923d472edf2664211150219710" name="ab36cd5923d472edf2664211150219710"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>get_scale</b> ()</td></tr>
-<tr class="separator:ab36cd5923d472edf2664211150219710"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cb4205f9f08376cc4dd3eca7b960f0b" id="r_a3cb4205f9f08376cc4dd3eca7b960f0b"><td class="memItemLeft" align="right" valign="top"><a id="a3cb4205f9f08376cc4dd3eca7b960f0b" name="a3cb4205f9f08376cc4dd3eca7b960f0b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_scale</b> (Vector2 new_scale)</td></tr>
-<tr class="separator:a3cb4205f9f08376cc4dd3eca7b960f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a564601ca4ab75681bc6d74acc8199d42" id="r_a564601ca4ab75681bc6d74acc8199d42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a564601ca4ab75681bc6d74acc8199d42">draw</a> ()</td></tr>
 <tr class="separator:a564601ca4ab75681bc6d74acc8199d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_drawable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_drawable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_drawable.html">Drawable</a></td></tr>
@@ -163,12 +153,15 @@ Color&#160;</td><td class="memItemRight" valign="bottom"><b>tint</b></td></tr>
 <tr class="separator:a210cf3516e819891aab6857fa30d12f9 inherit pub_attribs_class_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b1019e92aaa1575a2589372680d7f61 inherit pub_attribs_class_drawable" id="r_a9b1019e92aaa1575a2589372680d7f61"><td class="memItemLeft" align="right" valign="top">
 float&#160;</td><td class="memItemRight" valign="bottom"><b>z_coord</b></td></tr>
+<tr class="memdesc:a9b1019e92aaa1575a2589372680d7f61 inherit pub_attribs_class_drawable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drawables with a lower z_coord are drawn behind one another. <br /></td></tr>
 <tr class="separator:a9b1019e92aaa1575a2589372680d7f61 inherit pub_attribs_class_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22b754298375ed59d4ba4f72846c4f27 inherit pub_attribs_class_drawable" id="r_a22b754298375ed59d4ba4f72846c4f27"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="class_shader_bond.html">ShaderBond</a>&#160;</td><td class="memItemRight" valign="bottom"><b>shader_bond</b></td></tr>
 <tr class="separator:a22b754298375ed59d4ba4f72846c4f27 inherit pub_attribs_class_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Draws a single texture based on it's transform properties. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a564601ca4ab75681bc6d74acc8199d42" name="a564601ca4ab75681bc6d74acc8199d42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a564601ca4ab75681bc6d74acc8199d42">&#9670;&#160;</a></span>draw()</h2>
 

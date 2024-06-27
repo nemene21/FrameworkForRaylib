@@ -196,35 +196,36 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">float</span> angle;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    Color tint;</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">float</span> z_coord;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_class" href="class_shader_bond.html">ShaderBond</a> shader_bond;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw() = 0;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_drawable.html#aefad13ec1184e13720afe89bb0ccd982">update_transform</a>(<a class="code hl_class" href="class_transform_component.html">TransformComponent</a> *trans_comp);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">virtual</span> Vector2 <a class="code hl_function" href="class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c">real_pos</a>();</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>};</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="class_drawable.html#a9b1019e92aaa1575a2589372680d7f61">  126</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="class_drawable.html#a9b1019e92aaa1575a2589372680d7f61">z_coord</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_class" href="class_shader_bond.html">ShaderBond</a> shader_bond;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw() = 0;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_drawable.html#aefad13ec1184e13720afe89bb0ccd982">update_transform</a>(<a class="code hl_class" href="class_transform_component.html">TransformComponent</a> *trans_comp);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">virtual</span> Vector2 <a class="code hl_function" href="class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c">real_pos</a>();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>};</div>
 </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="foldopen" id="foldopen00140" data-start="{" data-end="};">
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="class_drawable_manager.html">  140</a></span><span class="keyword">class </span><a class="code hl_class" href="class_drawable_manager.html">DrawableManager</a> {</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">static</span> std::set&lt;Drawable *&gt; drawables;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> draw();</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> add(<a class="code hl_class" href="class_drawable.html">Drawable</a> *drawable);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> remove(<a class="code hl_class" href="class_drawable.html">Drawable</a> *drawable);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>};</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="};">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="class_drawable_manager.html">  141</a></span><span class="keyword">class </span><a class="code hl_class" href="class_drawable_manager.html">DrawableManager</a> {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">static</span> std::set&lt;Drawable *&gt; drawables;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> draw();</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> add(<a class="code hl_class" href="class_drawable.html">Drawable</a> *drawable);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> remove(<a class="code hl_class" href="class_drawable.html">Drawable</a> *drawable);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>};</div>
 </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_drawable_html"><div class="ttname"><a href="class_drawable.html">Drawable</a></div><div class="ttdef"><b>Definition</b> drawables.hpp:116</div></div>
+<div class="ttc" id="aclass_drawable_html_a9b1019e92aaa1575a2589372680d7f61"><div class="ttname"><a href="class_drawable.html#a9b1019e92aaa1575a2589372680d7f61">Drawable::z_coord</a></div><div class="ttdeci">float z_coord</div><div class="ttdoc">Drawables with a lower z_coord are drawn behind one another.</div><div class="ttdef"><b>Definition</b> drawables.hpp:126</div></div>
 <div class="ttc" id="aclass_drawable_html_aed6f780a330d858e9c6bf49bfa9bbd6c"><div class="ttname"><a href="class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c">Drawable::real_pos</a></div><div class="ttdeci">virtual Vector2 real_pos()</div><div class="ttdoc">Returns the actual position of a Drawable object.</div><div class="ttdef"><b>Definition</b> drawables.cpp:222</div></div>
 <div class="ttc" id="aclass_drawable_html_aefad13ec1184e13720afe89bb0ccd982"><div class="ttname"><a href="class_drawable.html#aefad13ec1184e13720afe89bb0ccd982">Drawable::update_transform</a></div><div class="ttdeci">virtual void update_transform(TransformComponent *trans_comp)</div><div class="ttdoc">Updates position, scale and angle based on a transform component.</div><div class="ttdef"><b>Definition</b> drawables.cpp:216</div></div>
-<div class="ttc" id="aclass_drawable_manager_html"><div class="ttname"><a href="class_drawable_manager.html">DrawableManager</a></div><div class="ttdef"><b>Definition</b> drawables.hpp:140</div></div>
+<div class="ttc" id="aclass_drawable_manager_html"><div class="ttname"><a href="class_drawable_manager.html">DrawableManager</a></div><div class="ttdef"><b>Definition</b> drawables.hpp:141</div></div>
 <div class="ttc" id="aclass_shader_bond_html"><div class="ttname"><a href="class_shader_bond.html">ShaderBond</a></div><div class="ttdef"><b>Definition</b> drawables.hpp:77</div></div>
 <div class="ttc" id="aclass_shader_bond_html_a0ce6b1f7e362ae1442d0b6b34d870979"><div class="ttname"><a href="class_shader_bond.html#a0ce6b1f7e362ae1442d0b6b34d870979">ShaderBond::send_uniform</a></div><div class="ttdeci">virtual void send_uniform(std::string name, void *ptr, int type)</div><div class="ttdoc">Updates an uniform in the bond's shader.</div><div class="ttdef"><b>Definition</b> drawables.cpp:189</div></div>
 <div class="ttc" id="aclass_shader_bond_html_a55e6a9a2ed3b11e39beff7e972b47bd7"><div class="ttname"><a href="class_shader_bond.html#a55e6a9a2ed3b11e39beff7e972b47bd7">ShaderBond::get_shader</a></div><div class="ttdeci">ShaderPtr get_shader()</div><div class="ttdoc">Returns a smart pointer to the bond's shader.</div><div class="ttdef"><b>Definition</b> drawables.cpp:185</div></div>

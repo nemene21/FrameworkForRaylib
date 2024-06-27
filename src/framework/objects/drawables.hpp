@@ -122,6 +122,7 @@ public:
     float angle;
     Color tint;
 
+    /// @brief Drawables with a lower z_coord are drawn behind one another
     float z_coord;
     
     ShaderBond shader_bond;

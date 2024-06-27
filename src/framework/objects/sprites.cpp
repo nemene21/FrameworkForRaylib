@@ -86,27 +86,6 @@ Sprite::Sprite(
         texture = TextureManager::get(texture_path);
     }
 
-// Position getter
-Vector2 Sprite::get_position() {
-    return position;
-}
-// Position setter
-void Sprite::set_position(Vector2 new_pos) {
-    position = new_pos;
-}
-// Position adder
-void Sprite::translate(Vector2 adding) {
-    position = Vector2Add(position, adding);
-}
-
-// Scale setter/getter
-void Sprite::set_scale(Vector2 new_scale) {
-    scale = new_scale;
-}
-Vector2 Sprite::get_scale() {
-    return scale;
-}
-
 // Draws the transformed texture with the shader (if it has one)
 void Sprite::draw() {
     DrawTextureCentered(texture.get(), real_pos(), scale, angle, tint);

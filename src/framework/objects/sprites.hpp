@@ -3,7 +3,21 @@
 
 #include <drawables.hpp>
 
+/// @brief Draws a centered texture
+/// @param texture_ptr Pointer to texture
+/// @param position 
+/// @param scale Scale vector
+/// @param angle 
+/// @param tint 
 void DrawTextureCentered(Texture2D *texture_ptr, Vector2 position, Vector2 scale={1, 1}, float angle=0, Color tint=WHITE);
+/// @brief Draws a centered frame of texture
+/// @param texture_ptr Pointer to texture
+/// @param frame X and y position of a frame in the texture
+/// @param max_frames The number of frames on the x and y axis in the texture
+/// @param position 
+/// @param scale Scale vector
+/// @param angle 
+/// @param tint 
 void DrawTextureSheet(
     Texture2D *texture_ptr,
     Vector2 frame,
@@ -14,17 +28,10 @@ void DrawTextureSheet(
     Color tint=WHITE
 );
 
+/// @brief Draws a single texture based on it's transform properties
 class Sprite: public Drawable {
 public:
     Sprite(std::string texture_name, Vector2 position={0,0}, Vector2 scale={1,1}, float angle=0);
-
-    Vector2 get_position();
-    void set_position(Vector2 new_pos);
-    void translate(Vector2 adding);
-
-    Vector2 get_scale();
-    void set_scale(Vector2 new_scale);
-
     void draw();
     
 protected:
