@@ -29,15 +29,6 @@ void Trail::set_tick(float new_tick) {
     tick = new_tick;
 }
 
-// Position setter and getter
-void Trail::set_position(Vector2 new_pos) {
-    position = new_pos;
-}
-
-Vector2 Trail::get_position() {
-    return position;
-}
-
 // Spawns new point at the end of the trail
 void Trail::spawn_point() {
     TrailPoint new_point;

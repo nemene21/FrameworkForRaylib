@@ -11,6 +11,7 @@
 #include <queue>
 #include <drawables.hpp>
 
+/// @brief Draws a shrinking trail with a color gradient
 class Trail: public Drawable {
 protected:
     typedef struct {
@@ -36,16 +37,23 @@ public:
         Color color=WHITE,
         Color fade_color=WHITE
     );
-    void set_tick(float tick);
 
+    /// @brief Sets the amount of time between updating trail point count
+    /// @param tick 
+    void set_tick(float tick);
+    /// @brief Adds force that affects trail's points
+    /// @param new_force Force to add
     void add_force(Vector2 new_force);
+    /// @brief Subtracts force that affects trail's points
+    /// @param force_removing Force to subtract
     void remove_force(Vector2 force_removing);
 
+    /// @brief Spawns the next point in the trail
     void spawn_point();
+    /// @brief Processes a single point in the trail
+    /// @param point Point pointer
+    /// @param delta Time since last update
     void process_point(TrailPoint& point, float delta);
-
-    void set_position(Vector2 new_pos);
-    Vector2 get_position();
 
     void process(float delta);
     void draw();
