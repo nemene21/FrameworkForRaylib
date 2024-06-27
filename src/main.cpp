@@ -66,8 +66,6 @@ int main() {
     AreaManager::init();
 
     CameraManager::bind_camera(&blank_camera);
-    new GameScene();
-    SceneManager::set_scene("game_scene");
 
     ShaderPtr post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     TexturePtr noise_texture = TextureManager::get("post_processing/noise.png");
