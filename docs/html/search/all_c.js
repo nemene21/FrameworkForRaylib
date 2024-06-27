@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_0',['name',['../class_scene.html#a44b2d6bffa153dda02f026f8533ceb08',1,'Scene']]]
+  ['make_5fanimation_0',['make_animation',['../class_animation_component.html#a6d8b804f2ed255f7f37248c06bfb8603',1,'AnimationComponent']]]
 ];

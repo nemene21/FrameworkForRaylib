@@ -88,3 +88,13 @@ void AnimationComponent::play(std::string name) {
 void AnimationComponent::process(float delta) {
     process_animation(animation_playing, delta);
 }
+
+void AnimationComponent::pause() {
+    paused = true;
+}
+void AnimationComponent::unpause() {
+    paused = false;
+}
+void AnimationComponent::toggle_pause() {
+    paused = !paused;
+}

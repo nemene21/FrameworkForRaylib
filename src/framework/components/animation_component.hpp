@@ -45,18 +45,41 @@ public:
 
     AnimationComponent(Entity *entity);
 
-    Signal animation_finished, animation_started;
+    /// @brief Singal that emits when an animation finishes
+    Signal animation_finished;
+    /// @brief Singal that emits when an animation ends
+    Signal animation_started;
 
+    /// @brief Play animation
+    /// @param name Animation name
     void play(std::string name);
 
     void process(float delta);
 
+    /// @brief Initialises an animation
+    /// @param name Animation name
+    /// @param duration 
+    /// @param repeating 
     void make_animation(std::string name, float duration, bool repeating);
+    /// @brief Adds keyframe to animation
+    /// @param name Animation name
+    /// @param start Keyframe start time
+    /// @param end Keyframe end time
+    /// @param function Animation function
+    /// @note Keyframe start and end time are relative to the animation duration and are a value from 0, start of animation, to 1, end of animation
     void add_keyframe(std::string name, float start, float end, std::function<void(float)> function);
+    /// @brief Add event to animation
+    /// @param name Animation name
+    /// @param time Event time
+    /// @param function Event callback
+    /// @note Event time is relative to the animation duration and is a value from 0, start of animation, to 1, end of animation
     void add_event(std::string name, float time, std::function<void(float)> function);
 
+    /// @brief Toggles animation pause
     void toggle_pause();
+    /// @brief Pauses animation
     void pause();
+    /// @brief Unpauses animation
     void unpause();
 };
 

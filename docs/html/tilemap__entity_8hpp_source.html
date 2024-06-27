@@ -158,22 +158,28 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> draw(<span class="keywordtype">float</span> delta);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> set_tile(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> type);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> remove_tile(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">int</span>  get_tile(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> build();</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">void</span> build_chunk(std::pair&lt;int, int&gt;);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">void</span> save(std::string path);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span> load(std::string path);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_tilemap.html#ab126d19acaae64492b430d29d32d87eb">set_tile</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> type);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_tilemap.html#a19d45f263b4b851204c06d4fa5acfbf7">remove_tile</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">int</span>  <a class="code hl_function" href="class_tilemap.html#a79c66d72474722eac09d0025fca59ef8">get_tile</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_tilemap.html#a4547e971f5e181755e3f8fbd02a0965f">build</a>();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">void</span> build_chunk(std::pair&lt;int, int&gt;);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_tilemap.html#a442c7e4d10b3c3a15e02720cc9021ca7">save</a>(std::string path);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_tilemap.html#a3eff8f5a99c702cd374a43cc3219d88f">load</a>(std::string path);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};</div>
 </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_collider_component_html"><div class="ttname"><a href="class_collider_component.html">ColliderComponent</a></div><div class="ttdef"><b>Definition</b> collider_component.hpp:19</div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">Object in a scene, it has a map of components that are automatically processed and drawn.</div><div class="ttdef"><b>Definition</b> entity.hpp:13</div></div>
 <div class="ttc" id="aclass_tilemap_html"><div class="ttname"><a href="class_tilemap.html">Tilemap</a></div><div class="ttdef"><b>Definition</b> tilemap_entity.hpp:34</div></div>
+<div class="ttc" id="aclass_tilemap_html_a19d45f263b4b851204c06d4fa5acfbf7"><div class="ttname"><a href="class_tilemap.html#a19d45f263b4b851204c06d4fa5acfbf7">Tilemap::remove_tile</a></div><div class="ttdeci">void remove_tile(int x, int y)</div><div class="ttdoc">Removes tile at x, y.</div><div class="ttdef"><b>Definition</b> tilemap_entity.cpp:134</div></div>
+<div class="ttc" id="aclass_tilemap_html_a3eff8f5a99c702cd374a43cc3219d88f"><div class="ttname"><a href="class_tilemap.html#a3eff8f5a99c702cd374a43cc3219d88f">Tilemap::load</a></div><div class="ttdeci">void load(std::string path)</div><div class="ttdoc">Loads tile data from the disk.</div><div class="ttdef"><b>Definition</b> tilemap_entity.cpp:104</div></div>
+<div class="ttc" id="aclass_tilemap_html_a442c7e4d10b3c3a15e02720cc9021ca7"><div class="ttname"><a href="class_tilemap.html#a442c7e4d10b3c3a15e02720cc9021ca7">Tilemap::save</a></div><div class="ttdeci">void save(std::string path)</div><div class="ttdoc">Saves tile data to disk.</div><div class="ttdef"><b>Definition</b> tilemap_entity.cpp:79</div></div>
+<div class="ttc" id="aclass_tilemap_html_a4547e971f5e181755e3f8fbd02a0965f"><div class="ttname"><a href="class_tilemap.html#a4547e971f5e181755e3f8fbd02a0965f">Tilemap::build</a></div><div class="ttdeci">void build()</div><div class="ttdoc">Builds the drawing data and collider data of the tilemap.</div><div class="ttdef"><b>Definition</b> tilemap_entity.cpp:161</div></div>
+<div class="ttc" id="aclass_tilemap_html_a79c66d72474722eac09d0025fca59ef8"><div class="ttname"><a href="class_tilemap.html#a79c66d72474722eac09d0025fca59ef8">Tilemap::get_tile</a></div><div class="ttdeci">int get_tile(int x, int y)</div><div class="ttdoc">Returns tile type at x, y.</div><div class="ttdef"><b>Definition</b> tilemap_entity.cpp:120</div></div>
+<div class="ttc" id="aclass_tilemap_html_ab126d19acaae64492b430d29d32d87eb"><div class="ttname"><a href="class_tilemap.html#ab126d19acaae64492b430d29d32d87eb">Tilemap::set_tile</a></div><div class="ttdeci">void set_tile(int x, int y, int type)</div><div class="ttdoc">Set tile at x, y to type.</div><div class="ttdef"><b>Definition</b> tilemap_entity.cpp:47</div></div>
 <div class="ttc" id="astruct_tile_data_html"><div class="ttname"><a href="struct_tile_data.html">TileData</a></div><div class="ttdef"><b>Definition</b> tilemap_entity.hpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

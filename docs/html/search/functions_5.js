@@ -10,5 +10,6 @@ var searchData=
   ['get_5fposition_7',['get_position',['../class_particle_system.html#a93aa3ddb1673efd553329530eccbfc70',1,'ParticleSystem']]],
   ['get_5fsfx_8',['get_sfx',['../class_audio_manager.html#a5ba25dc70d8d9c565154fd5d47f29c8f',1,'AudioManager']]],
   ['get_5fshader_9',['get_shader',['../class_shader_bond.html#a55e6a9a2ed3b11e39beff7e972b47bd7',1,'ShaderBond']]],
-  ['get_5ftrack_10',['get_track',['../class_audio_manager.html#aaf36b03693b69dee354327d5e03eb7db',1,'AudioManager']]]
+  ['get_5ftile_10',['get_tile',['../class_tilemap.html#a79c66d72474722eac09d0025fca59ef8',1,'Tilemap']]],
+  ['get_5ftrack_11',['get_track',['../class_audio_manager.html#aaf36b03693b69dee354327d5e03eb7db',1,'AudioManager']]]
 ];

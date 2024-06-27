@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['real_5fpos_0',['real_pos',['../class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c',1,'Drawable']]],
-  ['remove_5fcomponent_1',['remove_component',['../class_entity.html#a2361d524a5a615e2702267072af9a6f7',1,'Entity']]],
-  ['remove_5fforce_2',['remove_force',['../class_particle_system.html#ae9a6ee1003a79d5971dfee210484bfa0',1,'ParticleSystem::remove_force()'],['../class_trail.html#aca003527f5c9a11d3507b645b7e25959',1,'Trail::remove_force()']]]
+  ['query_5fcomponents_0',['query_components',['../class_component_manager.html#ad6fa545c6f88a92b401f1f52402aadb2',1,'ComponentManager']]],
+  ['query_5fin_5fgroup_1',['query_in_group',['../class_scene.html#a774f1e9be470d3595b9453002d6ab295',1,'Scene']]],
+  ['queue_5ffree_2',['queue_free',['../class_entity.html#a6c99300e49bd9439ad102458ae7658d6',1,'Entity']]]
 ];
