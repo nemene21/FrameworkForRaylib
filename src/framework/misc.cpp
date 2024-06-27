@@ -35,16 +35,6 @@ bool operator==(Vector2 first, Vector2 other) {
     return first.x == other.x && first.y == other.y;
 }
 
-// Magic Ai hash function for Vector2's (DO NOT TOUCH)
-std::size_t Vector2Hash::operator()(const Vector2& v) const {
-    // Use hash_combine to combine hashes of x and y components
-    std::size_t seed = 0;
-    std::hash<float> hasher;
-    seed ^= hasher(v.x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-    seed ^= hasher(v.y) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-        return seed;
-}
-
 // Lerps
 Color Lerp(Color a, Color b, float c) {
     Color color;
@@ -60,6 +50,12 @@ Vector2 Lerp(Vector2 a, Vector2 b, float c) {
         Lerp(a.x, b.x, c),
         Lerp(a.y, b.y, c)
     };
+}
+
+float Lerpi(float a, float b, float speed) {
+    float blend = pow(.5f, GetFrameTime() * speed);
+
+    return Lerp(b, a, blend);
 }
 
 Vector2 Lerpi(Vector2 a, Vector2 b, float speed) {
