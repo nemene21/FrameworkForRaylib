@@ -91,14 +91,19 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Signal Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Calls callbacks when a certain event happens.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="component_8hpp_source.html">component.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad4864854b39319c2dfaadad646ec1d34" id="r_ad4864854b39319c2dfaadad646ec1d34"><td class="memItemLeft" align="right" valign="top"><a id="ad4864854b39319c2dfaadad646ec1d34" name="ad4864854b39319c2dfaadad646ec1d34"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (SignalFunction func)</td></tr>
+<tr class="memitem:ad4864854b39319c2dfaadad646ec1d34" id="r_ad4864854b39319c2dfaadad646ec1d34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4864854b39319c2dfaadad646ec1d34">connect</a> (SignalFunction func)</td></tr>
+<tr class="memdesc:ad4864854b39319c2dfaadad646ec1d34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a callback function to the signal.  <br /></td></tr>
 <tr class="separator:ad4864854b39319c2dfaadad646ec1d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fd2160f3ca55355ed4e5850086cf653" id="r_a7fd2160f3ca55355ed4e5850086cf653"><td class="memItemLeft" align="right" valign="top"><a id="a7fd2160f3ca55355ed4e5850086cf653" name="a7fd2160f3ca55355ed4e5850086cf653"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>emit</b> (<a class="el" href="class_entity.html">Entity</a> *parent)</td></tr>
+<tr class="memitem:a7fd2160f3ca55355ed4e5850086cf653" id="r_a7fd2160f3ca55355ed4e5850086cf653"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fd2160f3ca55355ed4e5850086cf653">emit</a> (<a class="el" href="class_entity.html">Entity</a> *parent)</td></tr>
+<tr class="memdesc:a7fd2160f3ca55355ed4e5850086cf653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls all the callbacks (event happened)  <br /></td></tr>
 <tr class="separator:a7fd2160f3ca55355ed4e5850086cf653"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -107,6 +112,60 @@ Protected Attributes</h2></td></tr>
 std::vector&lt; SignalFunction &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>callers</b></td></tr>
 <tr class="separator:a5cea9f87e0bf928bc1144b29b69d59b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Calls callbacks when a certain event happens. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad4864854b39319c2dfaadad646ec1d34" name="ad4864854b39319c2dfaadad646ec1d34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4864854b39319c2dfaadad646ec1d34">&#9670;&#160;</a></span>connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Signal::connect </td>
+          <td>(</td>
+          <td class="paramtype">SignalFunction</td>          <td class="paramname"><span class="paramname"><em>func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connect a callback function to the signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Pointer to callback </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Callbacks return nothing and have only one parameter (Entity*) </dd></dl>
+
+</div>
+</div>
+<a id="a7fd2160f3ca55355ed4e5850086cf653" name="a7fd2160f3ca55355ed4e5850086cf653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd2160f3ca55355ed4e5850086cf653">&#9670;&#160;</a></span>emit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Signal::emit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_entity.html">Entity</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calls all the callbacks (event happened) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>The entity the callbacks referance </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/framework/<a class="el" href="component_8hpp_source.html">component.hpp</a></li>
 <li>src/framework/<b>component.cpp</b></li>

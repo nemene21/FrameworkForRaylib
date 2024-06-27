@@ -66,8 +66,7 @@ int main() {
     AreaManager::init();
 
     CameraManager::bind_camera(&blank_camera);
-
-    SceneManager::setup_scene(new GameScene());
+    new GameScene();
     SceneManager::set_scene("game_scene");
 
     ShaderPtr post_processing_ptr = ShaderManager::get("post_processing.glsl"); 

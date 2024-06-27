@@ -93,6 +93,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Trail Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Draws a shrinking trail with a color gradient.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trails_8hpp_source.html">trails.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Trail:</div>
 <div class="dyncontent">
@@ -113,27 +118,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c53e0b7592ca1023e9e33a4a99c1ba4" id="r_a7c53e0b7592ca1023e9e33a4a99c1ba4"><td class="memItemLeft" align="right" valign="top"><a id="a7c53e0b7592ca1023e9e33a4a99c1ba4" name="a7c53e0b7592ca1023e9e33a4a99c1ba4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Trail</b> (Vector2 position=Vector2{0, 0}, float width=0, int max_points=16, Color color=WHITE, Color fade_color=WHITE)</td></tr>
 <tr class="separator:a7c53e0b7592ca1023e9e33a4a99c1ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60a0f84e6d182aa56ca4c44d0ab1e7ea" id="r_a60a0f84e6d182aa56ca4c44d0ab1e7ea"><td class="memItemLeft" align="right" valign="top"><a id="a60a0f84e6d182aa56ca4c44d0ab1e7ea" name="a60a0f84e6d182aa56ca4c44d0ab1e7ea"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_tick</b> (float tick)</td></tr>
+<tr class="memitem:a60a0f84e6d182aa56ca4c44d0ab1e7ea" id="r_a60a0f84e6d182aa56ca4c44d0ab1e7ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60a0f84e6d182aa56ca4c44d0ab1e7ea">set_tick</a> (float tick)</td></tr>
+<tr class="memdesc:a60a0f84e6d182aa56ca4c44d0ab1e7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the amount of time between updating trail point count.  <br /></td></tr>
 <tr class="separator:a60a0f84e6d182aa56ca4c44d0ab1e7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a414d99f16f3d68fc97bf345fd52c507f" id="r_a414d99f16f3d68fc97bf345fd52c507f"><td class="memItemLeft" align="right" valign="top"><a id="a414d99f16f3d68fc97bf345fd52c507f" name="a414d99f16f3d68fc97bf345fd52c507f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_force</b> (Vector2 new_force)</td></tr>
+<tr class="memitem:a414d99f16f3d68fc97bf345fd52c507f" id="r_a414d99f16f3d68fc97bf345fd52c507f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a414d99f16f3d68fc97bf345fd52c507f">add_force</a> (Vector2 new_force)</td></tr>
+<tr class="memdesc:a414d99f16f3d68fc97bf345fd52c507f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds force that affects trail's points.  <br /></td></tr>
 <tr class="separator:a414d99f16f3d68fc97bf345fd52c507f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca003527f5c9a11d3507b645b7e25959" id="r_aca003527f5c9a11d3507b645b7e25959"><td class="memItemLeft" align="right" valign="top"><a id="aca003527f5c9a11d3507b645b7e25959" name="aca003527f5c9a11d3507b645b7e25959"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_force</b> (Vector2 force_removing)</td></tr>
+<tr class="memitem:aca003527f5c9a11d3507b645b7e25959" id="r_aca003527f5c9a11d3507b645b7e25959"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca003527f5c9a11d3507b645b7e25959">remove_force</a> (Vector2 force_removing)</td></tr>
+<tr class="memdesc:aca003527f5c9a11d3507b645b7e25959"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts force that affects trail's points.  <br /></td></tr>
 <tr class="separator:aca003527f5c9a11d3507b645b7e25959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c7636804fbfc0fd484204bd3523719a" id="r_a2c7636804fbfc0fd484204bd3523719a"><td class="memItemLeft" align="right" valign="top"><a id="a2c7636804fbfc0fd484204bd3523719a" name="a2c7636804fbfc0fd484204bd3523719a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>spawn_point</b> ()</td></tr>
+<tr class="memdesc:a2c7636804fbfc0fd484204bd3523719a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns the next point in the trail. <br /></td></tr>
 <tr class="separator:a2c7636804fbfc0fd484204bd3523719a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8942f19a6e9a734e597d572e981e7284" id="r_a8942f19a6e9a734e597d572e981e7284"><td class="memItemLeft" align="right" valign="top"><a id="a8942f19a6e9a734e597d572e981e7284" name="a8942f19a6e9a734e597d572e981e7284"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process_point</b> (<a class="el" href="struct_trail_1_1_trail_point.html">TrailPoint</a> &amp;point, float delta)</td></tr>
+<tr class="memitem:a8942f19a6e9a734e597d572e981e7284" id="r_a8942f19a6e9a734e597d572e981e7284"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8942f19a6e9a734e597d572e981e7284">process_point</a> (<a class="el" href="struct_trail_1_1_trail_point.html">TrailPoint</a> &amp;point, float delta)</td></tr>
+<tr class="memdesc:a8942f19a6e9a734e597d572e981e7284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a single point in the trail.  <br /></td></tr>
 <tr class="separator:a8942f19a6e9a734e597d572e981e7284"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10eb7e0bf9aba87e42ca3a05a3269db7" id="r_a10eb7e0bf9aba87e42ca3a05a3269db7"><td class="memItemLeft" align="right" valign="top"><a id="a10eb7e0bf9aba87e42ca3a05a3269db7" name="a10eb7e0bf9aba87e42ca3a05a3269db7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_position</b> (Vector2 new_pos)</td></tr>
-<tr class="separator:a10eb7e0bf9aba87e42ca3a05a3269db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fe767f9519000386e08a7241f412921" id="r_a4fe767f9519000386e08a7241f412921"><td class="memItemLeft" align="right" valign="top"><a id="a4fe767f9519000386e08a7241f412921" name="a4fe767f9519000386e08a7241f412921"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>get_position</b> ()</td></tr>
-<tr class="separator:a4fe767f9519000386e08a7241f412921"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17cd412aa4b64151f4c9e0f33ff3afe1" id="r_a17cd412aa4b64151f4c9e0f33ff3afe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17cd412aa4b64151f4c9e0f33ff3afe1">process</a> (float delta)</td></tr>
 <tr class="separator:a17cd412aa4b64151f4c9e0f33ff3afe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44045930151aa6eb8f86a89bdc2a7edf" id="r_a44045930151aa6eb8f86a89bdc2a7edf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44045930151aa6eb8f86a89bdc2a7edf">draw</a> ()</td></tr>
@@ -205,7 +205,34 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>tick</b></td></tr>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>timer</b></td></tr>
 <tr class="separator:a2e87fadb3c5e8c3ae8881341d0f4fc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Draws a shrinking trail with a color gradient. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a414d99f16f3d68fc97bf345fd52c507f" name="a414d99f16f3d68fc97bf345fd52c507f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a414d99f16f3d68fc97bf345fd52c507f">&#9670;&#160;</a></span>add_force()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Trail::add_force </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>new_force</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds force that affects trail's points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_force</td><td>Force to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a44045930151aa6eb8f86a89bdc2a7edf" name="a44045930151aa6eb8f86a89bdc2a7edf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a44045930151aa6eb8f86a89bdc2a7edf">&#9670;&#160;</a></span>draw()</h2>
 
@@ -257,6 +284,87 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>timer</b></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_drawable.html">Drawable</a>.</p>
+
+</div>
+</div>
+<a id="a8942f19a6e9a734e597d572e981e7284" name="a8942f19a6e9a734e597d572e981e7284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8942f19a6e9a734e597d572e981e7284">&#9670;&#160;</a></span>process_point()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Trail::process_point </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_trail_1_1_trail_point.html">TrailPoint</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>point</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>delta</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Processes a single point in the trail. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>Point pointer </td></tr>
+    <tr><td class="paramname">delta</td><td>Time since last update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aca003527f5c9a11d3507b645b7e25959" name="aca003527f5c9a11d3507b645b7e25959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca003527f5c9a11d3507b645b7e25959">&#9670;&#160;</a></span>remove_force()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Trail::remove_force </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>force_removing</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Subtracts force that affects trail's points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force_removing</td><td>Force to subtract </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a60a0f84e6d182aa56ca4c44d0ab1e7ea" name="a60a0f84e6d182aa56ca4c44d0ab1e7ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a0f84e6d182aa56ca4c44d0ab1e7ea">&#9670;&#160;</a></span>set_tick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Trail::set_tick </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>tick</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the amount of time between updating trail point count. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tick</td><td><br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

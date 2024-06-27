@@ -92,11 +92,16 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Scene Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Holds entities which are drawn and processed, offers group queries for entities and automatically removes entities queued for deletion.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="scene_8hpp_source.html">scene.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6fb788d6ae25d5293d3a58966cf29757" id="r_a6fb788d6ae25d5293d3a58966cf29757"><td class="memItemLeft" align="right" valign="top"><a id="a6fb788d6ae25d5293d3a58966cf29757" name="a6fb788d6ae25d5293d3a58966cf29757"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Scene</b> (std::string name)</td></tr>
+<tr class="memitem:a6fb788d6ae25d5293d3a58966cf29757" id="r_a6fb788d6ae25d5293d3a58966cf29757"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fb788d6ae25d5293d3a58966cf29757">Scene</a> (std::string name)</td></tr>
+<tr class="memdesc:a6fb788d6ae25d5293d3a58966cf29757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises the entity array.  <br /></td></tr>
 <tr class="separator:a6fb788d6ae25d5293d3a58966cf29757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6ee80d12ba0af3838907b20f064ab73" id="r_ab6ee80d12ba0af3838907b20f064ab73"><td class="memItemLeft" align="right" valign="top"><a id="ab6ee80d12ba0af3838907b20f064ab73" name="ab6ee80d12ba0af3838907b20f064ab73"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float delta)</td></tr>
@@ -107,18 +112,18 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw_entities
 <tr class="memitem:a433bb4021942fea96ee554abac9f4c46" id="r_a433bb4021942fea96ee554abac9f4c46"><td class="memItemLeft" align="right" valign="top"><a id="a433bb4021942fea96ee554abac9f4c46" name="a433bb4021942fea96ee554abac9f4c46"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process_entities</b> (float delta)</td></tr>
 <tr class="separator:a433bb4021942fea96ee554abac9f4c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a732ecffd31fb3b1950768aa51d1020" id="r_a1a732ecffd31fb3b1950768aa51d1020"><td class="memItemLeft" align="right" valign="top"><a id="a1a732ecffd31fb3b1950768aa51d1020" name="a1a732ecffd31fb3b1950768aa51d1020"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>add_entity</b> (<a class="el" href="class_entity.html">Entity</a> *entity)</td></tr>
+<tr class="memitem:a1a732ecffd31fb3b1950768aa51d1020" id="r_a1a732ecffd31fb3b1950768aa51d1020"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a732ecffd31fb3b1950768aa51d1020">add_entity</a> (<a class="el" href="class_entity.html">Entity</a> *entity)</td></tr>
+<tr class="memdesc:a1a732ecffd31fb3b1950768aa51d1020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new entity to the scene.  <br /></td></tr>
 <tr class="separator:a1a732ecffd31fb3b1950768aa51d1020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a985f6bcd5533a25b8ea9526f3881f054" id="r_a985f6bcd5533a25b8ea9526f3881f054"><td class="memItemLeft" align="right" valign="top"><a id="a985f6bcd5533a25b8ea9526f3881f054" name="a985f6bcd5533a25b8ea9526f3881f054"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>entity_count</b> ()</td></tr>
+<tr class="memitem:a985f6bcd5533a25b8ea9526f3881f054" id="r_a985f6bcd5533a25b8ea9526f3881f054"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a985f6bcd5533a25b8ea9526f3881f054">entity_count</a> ()</td></tr>
+<tr class="memdesc:a985f6bcd5533a25b8ea9526f3881f054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of entities in the scene.  <br /></td></tr>
 <tr class="separator:a985f6bcd5533a25b8ea9526f3881f054"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac99273929a5f85d2eb3ab8dcd5ee3b18" id="r_ac99273929a5f85d2eb3ab8dcd5ee3b18"><td class="memItemLeft" align="right" valign="top"><a id="ac99273929a5f85d2eb3ab8dcd5ee3b18" name="ac99273929a5f85d2eb3ab8dcd5ee3b18"></a>
-virtual std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>query_in_group</b> (std::string)</td></tr>
-<tr class="separator:ac99273929a5f85d2eb3ab8dcd5ee3b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7ed918b56703190f65da1ddefee9121" id="r_ad7ed918b56703190f65da1ddefee9121"><td class="memItemLeft" align="right" valign="top"><a id="ad7ed918b56703190f65da1ddefee9121" name="ad7ed918b56703190f65da1ddefee9121"></a>
-virtual <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>first_in_group</b> (std::string)</td></tr>
-<tr class="separator:ad7ed918b56703190f65da1ddefee9121"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774f1e9be470d3595b9453002d6ab295" id="r_a774f1e9be470d3595b9453002d6ab295"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a774f1e9be470d3595b9453002d6ab295">query_in_group</a> (std::string name)</td></tr>
+<tr class="memdesc:a774f1e9be470d3595b9453002d6ab295"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array of entities in group.  <br /></td></tr>
+<tr class="separator:a774f1e9be470d3595b9453002d6ab295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af62fa49f108e48e741d2348f9eb039ca" id="r_af62fa49f108e48e741d2348f9eb039ca"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af62fa49f108e48e741d2348f9eb039ca">first_in_group</a> (std::string name)</td></tr>
+<tr class="memdesc:af62fa49f108e48e741d2348f9eb039ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an entity in the group.  <br /></td></tr>
+<tr class="separator:af62fa49f108e48e741d2348f9eb039ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdc81939b09ebfc73cc4ff533a4e9239" id="r_acdc81939b09ebfc73cc4ff533a4e9239"><td class="memItemLeft" align="right" valign="top"><a id="acdc81939b09ebfc73cc4ff533a4e9239" name="acdc81939b09ebfc73cc4ff533a4e9239"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>restart</b> ()=0</td></tr>
 <tr class="separator:acdc81939b09ebfc73cc4ff533a4e9239"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,6 +140,164 @@ Protected Attributes</h2></td></tr>
 std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>entities</b></td></tr>
 <tr class="separator:a7f08e895eef7c11111f15d399040cef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Holds entities which are drawn and processed, offers group queries for entities and automatically removes entities queued for deletion. </p>
+<dl class="section note"><dt>Note</dt><dd>To use a scene you have to call SceneManager::setup_scene(new YourSceneClass()) and than set the scene with SceneManager::set_scene("your_scene_name") </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6fb788d6ae25d5293d3a58966cf29757" name="a6fb788d6ae25d5293d3a58966cf29757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fb788d6ae25d5293d3a58966cf29757">&#9670;&#160;</a></span>Scene()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Scene::Scene </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialises the entity array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td><br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1a732ecffd31fb3b1950768aa51d1020" name="a1a732ecffd31fb3b1950768aa51d1020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a732ecffd31fb3b1950768aa51d1020">&#9670;&#160;</a></span>add_entity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scene::add_entity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_entity.html">Entity</a> *</td>          <td class="paramname"><span class="paramname"><em>entity</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a new entity to the scene. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>Pointer to entity, the scene is now responsible for it </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a985f6bcd5533a25b8ea9526f3881f054" name="a985f6bcd5533a25b8ea9526f3881f054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a985f6bcd5533a25b8ea9526f3881f054">&#9670;&#160;</a></span>entity_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Scene::entity_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of entities in the scene. </p>
+<dl class="section return"><dt>Returns</dt><dd>Entities in the scene </dd></dl>
+
+</div>
+</div>
+<a id="af62fa49f108e48e741d2348f9eb039ca" name="af62fa49f108e48e741d2348f9eb039ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af62fa49f108e48e741d2348f9eb039ca">&#9670;&#160;</a></span>first_in_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_entity.html">Entity</a> * Scene::first_in_group </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an entity in the group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Returns an entity in the group </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a774f1e9be470d3595b9453002d6ab295" name="a774f1e9be470d3595b9453002d6ab295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a774f1e9be470d3595b9453002d6ab295">&#9670;&#160;</a></span>query_in_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_entity.html">Entity</a> * &gt; Scene::query_in_group </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an array of entities in group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of group </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/framework/<a class="el" href="scene_8hpp_source.html">scene.hpp</a></li>
 <li>src/framework/<b>scene.cpp</b></li>

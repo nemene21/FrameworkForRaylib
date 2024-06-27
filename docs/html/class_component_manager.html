@@ -91,6 +91,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">ComponentManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Is responsible for component queries.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="component_8hpp_source.html">component.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -100,14 +105,14 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>add_component<
 <tr class="memitem:a4435c5b476894f376b6395f2ece12565" id="r_a4435c5b476894f376b6395f2ece12565"><td class="memItemLeft" align="right" valign="top"><a id="a4435c5b476894f376b6395f2ece12565" name="a4435c5b476894f376b6395f2ece12565"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_component</b> (<a class="el" href="class_component.html">Component</a> *comp)</td></tr>
 <tr class="separator:a4435c5b476894f376b6395f2ece12565"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6fa545c6f88a92b401f1f52402aadb2" id="r_ad6fa545c6f88a92b401f1f52402aadb2"><td class="memItemLeft" align="right" valign="top"><a id="ad6fa545c6f88a92b401f1f52402aadb2" name="ad6fa545c6f88a92b401f1f52402aadb2"></a>
-static ComponentSet&#160;</td><td class="memItemRight" valign="bottom"><b>query_components</b> (ComponentType type)</td></tr>
+<tr class="memitem:ad6fa545c6f88a92b401f1f52402aadb2" id="r_ad6fa545c6f88a92b401f1f52402aadb2"><td class="memItemLeft" align="right" valign="top">static ComponentSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6fa545c6f88a92b401f1f52402aadb2">query_components</a> (ComponentType type)</td></tr>
+<tr class="memdesc:ad6fa545c6f88a92b401f1f52402aadb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a set of components of a certain type.  <br /></td></tr>
 <tr class="separator:ad6fa545c6f88a92b401f1f52402aadb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a760cb83ff084da0deb0b7b9d35b5ee82" id="r_a760cb83ff084da0deb0b7b9d35b5ee82"><td class="memItemLeft" align="right" valign="top"><a id="a760cb83ff084da0deb0b7b9d35b5ee82" name="a760cb83ff084da0deb0b7b9d35b5ee82"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>component_type_count</b> (ComponentType type)</td></tr>
+<tr class="memitem:a760cb83ff084da0deb0b7b9d35b5ee82" id="r_a760cb83ff084da0deb0b7b9d35b5ee82"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a760cb83ff084da0deb0b7b9d35b5ee82">component_type_count</a> (ComponentType type)</td></tr>
+<tr class="memdesc:a760cb83ff084da0deb0b7b9d35b5ee82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how many components of "type" type there are.  <br /></td></tr>
 <tr class="separator:a760cb83ff084da0deb0b7b9d35b5ee82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacffec271964f75899d749ec600d7ef0" id="r_aacffec271964f75899d749ec600d7ef0"><td class="memItemLeft" align="right" valign="top"><a id="aacffec271964f75899d749ec600d7ef0" name="aacffec271964f75899d749ec600d7ef0"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>component_count</b> ()</td></tr>
+<tr class="memitem:aacffec271964f75899d749ec600d7ef0" id="r_aacffec271964f75899d749ec600d7ef0"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacffec271964f75899d749ec600d7ef0">component_count</a> ()</td></tr>
+<tr class="memdesc:aacffec271964f75899d749ec600d7ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of all components.  <br /></td></tr>
 <tr class="separator:aacffec271964f75899d749ec600d7ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
@@ -116,6 +121,105 @@ Static Protected Attributes</h2></td></tr>
 static ComponentMap&#160;</td><td class="memItemRight" valign="bottom"><b>component_map</b> {}</td></tr>
 <tr class="separator:aee0c3c8ddde6710026a03ab1da9fa3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Is responsible for component queries. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aacffec271964f75899d749ec600d7ef0" name="aacffec271964f75899d749ec600d7ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacffec271964f75899d749ec600d7ef0">&#9670;&#160;</a></span>component_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ComponentManager::component_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of all components. </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of all components </dd></dl>
+
+</div>
+</div>
+<a id="a760cb83ff084da0deb0b7b9d35b5ee82" name="a760cb83ff084da0deb0b7b9d35b5ee82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a760cb83ff084da0deb0b7b9d35b5ee82">&#9670;&#160;</a></span>component_type_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ComponentManager::component_type_count </td>
+          <td>(</td>
+          <td class="paramtype">ComponentType</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns how many components of "type" type there are. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>CompType::YOUR_COMPONENT_TYPE </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of components </dd></dl>
+
+</div>
+</div>
+<a id="ad6fa545c6f88a92b401f1f52402aadb2" name="ad6fa545c6f88a92b401f1f52402aadb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fa545c6f88a92b401f1f52402aadb2">&#9670;&#160;</a></span>query_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ComponentSet ComponentManager::query_components </td>
+          <td>(</td>
+          <td class="paramtype">ComponentType</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a set of components of a certain type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>CompType::YOUR_COMPONENT_TYPE </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Set of components </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/framework/<a class="el" href="component_8hpp_source.html">component.hpp</a></li>
 <li>src/framework/<b>component.cpp</b></li>

@@ -91,6 +91,11 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Entity Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Object in a scene, it has a map of components that are automatically processed and drawn.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="entity_8hpp_source.html">entity.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Entity:</div>
 <div class="dyncontent">
@@ -111,32 +116,33 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process_compo
 <tr class="memitem:a66c77311392fff6da556a8bb2470f3f8" id="r_a66c77311392fff6da556a8bb2470f3f8"><td class="memItemLeft" align="right" valign="top"><a id="a66c77311392fff6da556a8bb2470f3f8" name="a66c77311392fff6da556a8bb2470f3f8"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw_components</b> (float delta)</td></tr>
 <tr class="separator:a66c77311392fff6da556a8bb2470f3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41cbbd4d998f83e74d9638165c720ce5" id="r_a41cbbd4d998f83e74d9638165c720ce5"><td class="memItemLeft" align="right" valign="top"><a id="a41cbbd4d998f83e74d9638165c720ce5" name="a41cbbd4d998f83e74d9638165c720ce5"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>join_group</b> (std::string group)</td></tr>
+<tr class="memitem:a41cbbd4d998f83e74d9638165c720ce5" id="r_a41cbbd4d998f83e74d9638165c720ce5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41cbbd4d998f83e74d9638165c720ce5">join_group</a> (std::string group)</td></tr>
+<tr class="memdesc:a41cbbd4d998f83e74d9638165c720ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the entity be in a group.  <br /></td></tr>
 <tr class="separator:a41cbbd4d998f83e74d9638165c720ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af486228c13d6018b51976b27554f6b6b" id="r_af486228c13d6018b51976b27554f6b6b"><td class="memItemLeft" align="right" valign="top"><a id="af486228c13d6018b51976b27554f6b6b" name="af486228c13d6018b51976b27554f6b6b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>leave_group</b> (std::string group)</td></tr>
+<tr class="memitem:af486228c13d6018b51976b27554f6b6b" id="r_af486228c13d6018b51976b27554f6b6b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af486228c13d6018b51976b27554f6b6b">leave_group</a> (std::string group)</td></tr>
+<tr class="memdesc:af486228c13d6018b51976b27554f6b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the entity leave a group.  <br /></td></tr>
 <tr class="separator:af486228c13d6018b51976b27554f6b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4490411f270422aca3809f80eddc3cb0" id="r_a4490411f270422aca3809f80eddc3cb0"><td class="memItemLeft" align="right" valign="top"><a id="a4490411f270422aca3809f80eddc3cb0" name="a4490411f270422aca3809f80eddc3cb0"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_in_group</b> (std::string group)</td></tr>
+<tr class="memitem:a4490411f270422aca3809f80eddc3cb0" id="r_a4490411f270422aca3809f80eddc3cb0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4490411f270422aca3809f80eddc3cb0">is_in_group</a> (std::string group)</td></tr>
+<tr class="memdesc:a4490411f270422aca3809f80eddc3cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the entity is in the group.  <br /></td></tr>
 <tr class="separator:a4490411f270422aca3809f80eddc3cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c99300e49bd9439ad102458ae7658d6" id="r_a6c99300e49bd9439ad102458ae7658d6"><td class="memItemLeft" align="right" valign="top"><a id="a6c99300e49bd9439ad102458ae7658d6" name="a6c99300e49bd9439ad102458ae7658d6"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>queue_free</b> ()</td></tr>
+<tr class="memdesc:a6c99300e49bd9439ad102458ae7658d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the entity. <br /></td></tr>
 <tr class="separator:a6c99300e49bd9439ad102458ae7658d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3e9c7df073f38e423bb785c8ebb894a" id="r_ac3e9c7df073f38e423bb785c8ebb894a"><td class="memItemLeft" align="right" valign="top"><a id="ac3e9c7df073f38e423bb785c8ebb894a" name="ac3e9c7df073f38e423bb785c8ebb894a"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_death_queued</b> ()</td></tr>
+<tr class="memitem:ac3e9c7df073f38e423bb785c8ebb894a" id="r_ac3e9c7df073f38e423bb785c8ebb894a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3e9c7df073f38e423bb785c8ebb894a">is_death_queued</a> ()</td></tr>
+<tr class="memdesc:ac3e9c7df073f38e423bb785c8ebb894a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the entity is queued for deletion.  <br /></td></tr>
 <tr class="separator:ac3e9c7df073f38e423bb785c8ebb894a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecfe83c06d87424adb834b42bff14045" id="r_aecfe83c06d87424adb834b42bff14045"><td class="memItemLeft" align="right" valign="top"><a id="aecfe83c06d87424adb834b42bff14045" name="aecfe83c06d87424adb834b42bff14045"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>add_component</b> (<a class="el" href="class_component.html">Component</a> *comp)</td></tr>
+<tr class="memitem:aecfe83c06d87424adb834b42bff14045" id="r_aecfe83c06d87424adb834b42bff14045"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecfe83c06d87424adb834b42bff14045">add_component</a> (<a class="el" href="class_component.html">Component</a> *comp)</td></tr>
+<tr class="memdesc:aecfe83c06d87424adb834b42bff14045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the component to the entity.  <br /></td></tr>
 <tr class="separator:aecfe83c06d87424adb834b42bff14045"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2361d524a5a615e2702267072af9a6f7" id="r_a2361d524a5a615e2702267072af9a6f7"><td class="memItemLeft" align="right" valign="top"><a id="a2361d524a5a615e2702267072af9a6f7" name="a2361d524a5a615e2702267072af9a6f7"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_component</b> (ComponentType type)</td></tr>
+<tr class="memitem:a2361d524a5a615e2702267072af9a6f7" id="r_a2361d524a5a615e2702267072af9a6f7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2361d524a5a615e2702267072af9a6f7">remove_component</a> (ComponentType type)</td></tr>
+<tr class="memdesc:a2361d524a5a615e2702267072af9a6f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the component of a certain type.  <br /></td></tr>
 <tr class="separator:a2361d524a5a615e2702267072af9a6f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7642e9738c2bde4564126ee3497267dd" id="r_a7642e9738c2bde4564126ee3497267dd"><td class="memItemLeft" align="right" valign="top"><a id="a7642e9738c2bde4564126ee3497267dd" name="a7642e9738c2bde4564126ee3497267dd"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_component</b> (ComponentType type)</td></tr>
+<tr class="memitem:a7642e9738c2bde4564126ee3497267dd" id="r_a7642e9738c2bde4564126ee3497267dd"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7642e9738c2bde4564126ee3497267dd">has_component</a> (ComponentType type)</td></tr>
+<tr class="memdesc:a7642e9738c2bde4564126ee3497267dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the entity has a certain component.  <br /></td></tr>
 <tr class="separator:a7642e9738c2bde4564126ee3497267dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667f55f4c732cec106830b4082cc0754" id="r_a667f55f4c732cec106830b4082cc0754"><td class="memItemLeft" align="right" valign="top"><a id="a667f55f4c732cec106830b4082cc0754" name="a667f55f4c732cec106830b4082cc0754"></a>
-virtual <a class="el" href="class_component.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_component</b> (ComponentType type)</td></tr>
+<tr class="memitem:a667f55f4c732cec106830b4082cc0754" id="r_a667f55f4c732cec106830b4082cc0754"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_component.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a667f55f4c732cec106830b4082cc0754">get_component</a> (ComponentType type)</td></tr>
+<tr class="memdesc:a667f55f4c732cec106830b4082cc0754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the wanted component.  <br /></td></tr>
 <tr class="separator:a667f55f4c732cec106830b4082cc0754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af242cb909c0617f1282a1816cc01638f" id="r_af242cb909c0617f1282a1816cc01638f"><td class="memItemLeft" align="right" valign="top"><a id="af242cb909c0617f1282a1816cc01638f" name="af242cb909c0617f1282a1816cc01638f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float delta)</td></tr>
@@ -157,6 +163,290 @@ std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valig
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>death_queued</b></td></tr>
 <tr class="separator:a7c8cca3c1340e8cd4eb051e84535c71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Object in a scene, it has a map of components that are automatically processed and drawn. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aecfe83c06d87424adb834b42bff14045" name="aecfe83c06d87424adb834b42bff14045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecfe83c06d87424adb834b42bff14045">&#9670;&#160;</a></span>add_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::add_component </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_component.html">Component</a> *</td>          <td class="paramname"><span class="paramname"><em>comp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds the component to the entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">comp</td><td><a class="el" href="class_component.html" title="Component object.">Component</a> pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a667f55f4c732cec106830b4082cc0754" name="a667f55f4c732cec106830b4082cc0754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a667f55f4c732cec106830b4082cc0754">&#9670;&#160;</a></span>get_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_component.html">Component</a> * Entity::get_component </td>
+          <td>(</td>
+          <td class="paramtype">ComponentType</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a pointer to the wanted component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>CompType::YOUR_COMPONENT_TYPE </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to component </dd></dl>
+
+</div>
+</div>
+<a id="a7642e9738c2bde4564126ee3497267dd" name="a7642e9738c2bde4564126ee3497267dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7642e9738c2bde4564126ee3497267dd">&#9670;&#160;</a></span>has_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::has_component </td>
+          <td>(</td>
+          <td class="paramtype">ComponentType</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the entity has a certain component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>CompType::YOUR_COMPONENT_TYPE </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">TRUE</td><td><a class="el" href="class_entity.html" title="Object in a scene, it has a map of components that are automatically processed and drawn.">Entity</a> has a certain component </td></tr>
+    <tr><td class="paramname">FALSE</td><td><a class="el" href="class_entity.html" title="Object in a scene, it has a map of components that are automatically processed and drawn.">Entity</a> doesn't have a certain component </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac3e9c7df073f38e423bb785c8ebb894a" name="ac3e9c7df073f38e423bb785c8ebb894a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3e9c7df073f38e423bb785c8ebb894a">&#9670;&#160;</a></span>is_death_queued()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::is_death_queued </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the entity is queued for deletion. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">TRUE</td><td>Is queued for deletion </td></tr>
+    <tr><td class="paramname">FALSE</td><td>Is not queued for deletion </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4490411f270422aca3809f80eddc3cb0" name="a4490411f270422aca3809f80eddc3cb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4490411f270422aca3809f80eddc3cb0">&#9670;&#160;</a></span>is_in_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::is_in_group </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>group</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the entity is in the group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group</td><td>Group name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">TRUE</td><td>Is in the group </td></tr>
+    <tr><td class="paramname">FALSE</td><td>Is not in the group </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a41cbbd4d998f83e74d9638165c720ce5" name="a41cbbd4d998f83e74d9638165c720ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41cbbd4d998f83e74d9638165c720ce5">&#9670;&#160;</a></span>join_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::join_group </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>group</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Makes the entity be in a group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group</td><td>Group name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Groups are used to query components of a certain group or to check if an entity should have a certain functionality </dd></dl>
+
+</div>
+</div>
+<a id="af486228c13d6018b51976b27554f6b6b" name="af486228c13d6018b51976b27554f6b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af486228c13d6018b51976b27554f6b6b">&#9670;&#160;</a></span>leave_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::leave_group </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>group</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Makes the entity leave a group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group</td><td>Group name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2361d524a5a615e2702267072af9a6f7" name="a2361d524a5a615e2702267072af9a6f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2361d524a5a615e2702267072af9a6f7">&#9670;&#160;</a></span>remove_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::remove_component </td>
+          <td>(</td>
+          <td class="paramtype">ComponentType</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes the component of a certain type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>CompType::YOUR_COMPONENT_TYPE </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/framework/<a class="el" href="entity_8hpp_source.html">entity.hpp</a></li>
 <li>src/framework/<b>entity.cpp</b></li>
