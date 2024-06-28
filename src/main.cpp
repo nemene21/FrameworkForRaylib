@@ -71,6 +71,9 @@ int main() {
     TexturePtr noise_texture = TextureManager::get("post_processing/noise.png");
     TexturePtr paper_texture = TextureManager::get("post_processing/paper.png");
 
+    new GameScene();
+    SceneManager::set_scene("game_scene");
+
     while (!WindowShouldClose()) {
         float delta = fminf(GetFrameTime(), 1/20.f);
 

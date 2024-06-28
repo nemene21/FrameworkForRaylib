@@ -31,4 +31,7 @@
 // Entities
 #include <tilemap_entity.hpp>
 
+// Scenes
+#include <scenes/game.hpp>
+
 #endif

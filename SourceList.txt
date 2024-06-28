@@ -22,3 +22,6 @@ framework/objects/trails
 framework/objects/sprites
 framework/objects/particles
 framework/objects/audio
+
+game/entities/player
+game/scenes/game
