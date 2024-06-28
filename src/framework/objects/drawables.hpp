@@ -16,6 +16,7 @@
 
 typedef std::shared_ptr<Texture2D> TexturePtr;
 
+/// @brief Takes care of loading and dynamically unloading textures
 class TextureManager {
 public:
     static std::map<
@@ -45,6 +46,7 @@ public:
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 
+/// @brief Takes care of loading and dynamically unloading shaders
 class ShaderManager {
 public:
     static std::map<
@@ -74,6 +76,7 @@ public:
     static void update_uniforms();
 };
 
+/// @brief A shader material, holds a shader and takes care of the uniforms and texture binding
 class ShaderBond {
 public:
     ShaderPtr shader;
@@ -113,6 +116,7 @@ public:
     ShaderPtr get_shader();
 };
 
+/// @brief An object that gets drawn to the screen with their respective z_coord, also manages a shader material (ShaderBond)
 class Drawable {
 public:
     Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="-");
@@ -138,6 +142,7 @@ public:
     virtual Vector2 real_pos();
 };
 
+/// @brief Manages drawables (sorting and drawing)
 class DrawableManager {
 public:
     static std::set<Drawable *> drawables;

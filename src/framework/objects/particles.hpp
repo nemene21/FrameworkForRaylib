@@ -24,6 +24,7 @@ using json = nlohmann::json;
 // <Particle Manager>
 typedef std::shared_ptr<json> ParticleDataPtr;
 
+/// @brief Takes care of loading and dynamically unloading partcle data
 class ParticleDataManager {
 public:
     static std::map<
@@ -93,7 +94,7 @@ public:
     Vector2 get_pos(Vector2 position, float scale);
 };
 
-// <Particle Class>
+/// @brief Draws and processes list of particles
 class ParticleSystem: public Drawable {
 protected:
     typedef struct {

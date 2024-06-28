@@ -17,6 +17,7 @@
 typedef std::shared_ptr<std::vector<Sound>> SoundVectorPtr;
 typedef std::shared_ptr<Music> MusicPtr;
 
+/// @brief Takes care of loading and dynamically unloading SFX and tracks
 class AudioManager {
 public:
     static std::map<

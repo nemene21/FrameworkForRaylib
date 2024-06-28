@@ -91,13 +91,18 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Drawable Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>An object that gets drawn to the screen with their respective z_coord, also manages a shader material (<a class="el" href="class_shader_bond.html" title="A shader material, holds a shader and takes care of the uniforms and texture binding.">ShaderBond</a>)  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="drawables_8hpp_source.html">drawables.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Drawable:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_drawable.png" usemap="#Drawable_map" alt=""/>
   <map id="Drawable_map" name="Drawable_map">
-<area href="class_particle_system.html" alt="ParticleSystem" shape="rect" coords="0,56,95,80"/>
+<area href="class_particle_system.html" title="Draws and processes list of particles." alt="ParticleSystem" shape="rect" coords="0,56,95,80"/>
 <area href="class_sprite.html" title="Draws a single texture based on it&#39;s transform properties." alt="Sprite" shape="rect" coords="105,56,200,80"/>
 <area href="class_trail.html" title="Draws a shrinking trail with a color gradient." alt="Trail" shape="rect" coords="210,56,305,80"/>
   </map>
@@ -118,7 +123,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (
 <tr class="memdesc:aefad13ec1184e13720afe89bb0ccd982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates position, scale and angle based on a transform component.  <br /></td></tr>
 <tr class="separator:aefad13ec1184e13720afe89bb0ccd982"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed6f780a330d858e9c6bf49bfa9bbd6c" id="r_aed6f780a330d858e9c6bf49bfa9bbd6c"><td class="memItemLeft" align="right" valign="top">virtual Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed6f780a330d858e9c6bf49bfa9bbd6c">real_pos</a> ()</td></tr>
-<tr class="memdesc:aed6f780a330d858e9c6bf49bfa9bbd6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual position of a <a class="el" href="class_drawable.html">Drawable</a> object.  <br /></td></tr>
+<tr class="memdesc:aed6f780a330d858e9c6bf49bfa9bbd6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual position of a <a class="el" href="class_drawable.html" title="An object that gets drawn to the screen with their respective z_coord, also manages a shader material...">Drawable</a> object.  <br /></td></tr>
 <tr class="separator:aed6f780a330d858e9c6bf49bfa9bbd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -146,7 +151,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>z_coord</b></td></tr
 <a class="el" href="class_shader_bond.html">ShaderBond</a>&#160;</td><td class="memItemRight" valign="bottom"><b>shader_bond</b></td></tr>
 <tr class="separator:a22b754298375ed59d4ba4f72846c4f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An object that gets drawn to the screen with their respective z_coord, also manages a shader material (<a class="el" href="class_shader_bond.html" title="A shader material, holds a shader and takes care of the uniforms and texture binding.">ShaderBond</a>) </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aed6f780a330d858e9c6bf49bfa9bbd6c" name="aed6f780a330d858e9c6bf49bfa9bbd6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed6f780a330d858e9c6bf49bfa9bbd6c">&#9670;&#160;</a></span>real_pos()</h2>
 
@@ -170,8 +177,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>z_coord</b></td></tr
 </table>
 </div><div class="memdoc">
 
-<p>Returns the actual position of a <a class="el" href="class_drawable.html">Drawable</a> object. </p>
-<dl class="section return"><dt>Returns</dt><dd>Position of <a class="el" href="class_drawable.html">Drawable</a> (position + offst * scale) </dd></dl>
+<p>Returns the actual position of a <a class="el" href="class_drawable.html" title="An object that gets drawn to the screen with their respective z_coord, also manages a shader material...">Drawable</a> object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Position of <a class="el" href="class_drawable.html" title="An object that gets drawn to the screen with their respective z_coord, also manages a shader material...">Drawable</a> (position + offst * scale) </dd></dl>
 
 </div>
 </div>
