@@ -8,20 +8,34 @@
 class Timer {
 public:
     float duration, progress;
-    bool repeat, paused, running;
+    /// @brief If true, the timer automatically restarts
+    bool repeat;
+    /// @brief If true, the timer is stopped for the time being
+    bool paused;
+    /// @brief If true, the timer is currently ticking down
+    bool running;
+
+    /// @brief Signal is emitted upon the timer finishing
     Signal finished;
     std::string name;
     Entity *entity;
 
     Timer(std::string name, float duration, Entity *entity);
 
+    /// @brief Starts timer
     void start();
+    /// @brief Restarts timer
     void restart();
 
+    /// @brief Pauses the timer
     void pause();
+    /// @brief Unpauses the timer
     void unpause();
+    /// @brief Flips the pause value
     void toggle_pause();
 
+    /// @brief Ticks down timer
+    /// @param delta Time to tick
     void process(float delta);
 };
 
@@ -32,7 +46,16 @@ public:
     TimerComponent(Entity *entity);
     ~TimerComponent();
 
+    /// @brief Adds a new timer to be automatically processed
+    /// @param name Timer name
+    /// @param duration Timer duration (in seconds)
+    /// @param start If true the timer starts instantly upon being added
+    /// @return Returns a pointer to the created timer
+    /// @note The timer component is responsible for the memory of the added timer, there is no need to free it yourself
     Timer *add_timer(std::string name, float duration, bool start=false);
+    /// @brief Returns a pointer to requested timer
+    /// @param name Timer's name, specified upon being added
+    /// @return Pointer to requested timer
     Timer *get_timer(std::string name);
 
     void process(float delta);
