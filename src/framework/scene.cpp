@@ -57,6 +57,15 @@ Entity *Scene::first_in_group(std::string name) {
     return nullptr;
 }
 
+void Scene::unload_entities() {
+    for (int i = entities.size()-1; i >= 0; i--) {
+
+        delete entities[i];
+        entities.erase(entities.begin() + i);
+    }
+}
+
+
 void Scene::process(float delta) {}
 
 // <Scene Manager>
@@ -69,6 +78,7 @@ void SceneManager::setup_scene(Scene* scene) {
 
 void SceneManager::set_scene(std::string name) {
     scene_on = scene_map[name];
+    scene_map[name]->unload_entities();
     scene_map[name]->restart();
 }
 

@@ -37,6 +37,9 @@ public:
     /// @param name Returns an entity in the group
     virtual Entity *first_in_group(std::string name);
 
+    /// @brief Unloads all entities from memory
+    virtual void unload_entities();
+
     virtual void restart() = 0;
 
 protected:
