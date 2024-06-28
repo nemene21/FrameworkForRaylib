@@ -96,31 +96,31 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;component.hpp&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="class_health_component.html">    6</a></span><span class="keyword">class </span><a class="code hl_class" href="class_health_component.html">HealthComponent</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_component.html">Component</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordtype">float</span> hp, max_hp;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">bool</span> dead;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="class_health_component.html">HealthComponent</a>(<a class="code hl_class" href="class_entity.html">Entity</a> *entity, <span class="keywordtype">float</span> max_hp);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="class_signal.html">Signal</a> died_signal,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        hurt_signal,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        healed_signal;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_health_component.html#a4deeeb1be321f19c6b2e981d6d0b3700">hurt</a>(<span class="keywordtype">float</span> damage);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_health_component.html#a99b0ac752fa850b4770ac7a98ea2ea29">heal</a>(<span class="keywordtype">float</span> add);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_health_component.html#a42907ecb55d4947c5239293e22e5739d">check_death</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="foldopen" id="foldopen00007" data-start="{" data-end="};">
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="class_health_component.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="class_health_component.html">HealthComponent</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_component.html">Component</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordtype">float</span> hp, max_hp;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">bool</span> dead;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_class" href="class_health_component.html">HealthComponent</a>(<a class="code hl_class" href="class_entity.html">Entity</a> *entity, <span class="keywordtype">float</span> max_hp);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="class_signal.html">Signal</a> died_signal,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        hurt_signal,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        healed_signal;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_health_component.html#a4deeeb1be321f19c6b2e981d6d0b3700">hurt</a>(<span class="keywordtype">float</span> damage);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_health_component.html#a99b0ac752fa850b4770ac7a98ea2ea29">heal</a>(<span class="keywordtype">float</span> add);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_health_component.html#a42907ecb55d4947c5239293e22e5739d">check_death</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">Component object.</div><div class="ttdef"><b>Definition</b> component.hpp:49</div></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">Component interface.</div><div class="ttdef"><b>Definition</b> component.hpp:49</div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">Object in a scene, it has a map of components that are automatically processed and drawn.</div><div class="ttdef"><b>Definition</b> entity.hpp:13</div></div>
-<div class="ttc" id="aclass_health_component_html"><div class="ttname"><a href="class_health_component.html">HealthComponent</a></div><div class="ttdef"><b>Definition</b> health_component.hpp:6</div></div>
+<div class="ttc" id="aclass_health_component_html"><div class="ttname"><a href="class_health_component.html">HealthComponent</a></div><div class="ttdoc">Component to handle health, damange and healing.</div><div class="ttdef"><b>Definition</b> health_component.hpp:7</div></div>
 <div class="ttc" id="aclass_health_component_html_a42907ecb55d4947c5239293e22e5739d"><div class="ttname"><a href="class_health_component.html#a42907ecb55d4947c5239293e22e5739d">HealthComponent::check_death</a></div><div class="ttdeci">bool check_death()</div><div class="ttdoc">Returns true if the entity should die.</div><div class="ttdef"><b>Definition</b> health_component.cpp:23</div></div>
 <div class="ttc" id="aclass_health_component_html_a4deeeb1be321f19c6b2e981d6d0b3700"><div class="ttname"><a href="class_health_component.html#a4deeeb1be321f19c6b2e981d6d0b3700">HealthComponent::hurt</a></div><div class="ttdeci">void hurt(float damage)</div><div class="ttdoc">Subtracts from hp.</div><div class="ttdef"><b>Definition</b> health_component.cpp:10</div></div>
 <div class="ttc" id="aclass_health_component_html_a99b0ac752fa850b4770ac7a98ea2ea29"><div class="ttname"><a href="class_health_component.html#a99b0ac752fa850b4770ac7a98ea2ea29">HealthComponent::heal</a></div><div class="ttdeci">void heal(float add)</div><div class="ttdoc">Adds to hp.</div><div class="ttdef"><b>Definition</b> health_component.cpp:17</div></div>

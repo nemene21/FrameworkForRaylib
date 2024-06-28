@@ -9,6 +9,7 @@
 #include <collider_component.hpp>
 #include <area_component.hpp>
 
+/// @brief Component responsible for postion, movement, scale and angle of an entity
 class TransformComponent: public Component {
 public:
     Vector2 position, scale, velocity;

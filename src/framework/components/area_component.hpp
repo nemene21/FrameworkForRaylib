@@ -16,6 +16,7 @@ enum class AreaIndex {
     COUNT,
 };
 
+/// @brief Component that detects other areas on its mask layer (for hitboxes/hitboxes, AOE fields...)
 class AreaComponent: public Component {
 private:
     /// @brief Layers the area can be detected in
@@ -98,6 +99,7 @@ public:
 /// @param area2 Area pointer
 bool overlaps(AreaComponent *area1, AreaComponent *area2);
 
+/// @brief Manages area components by splitting them between chunks
 class AreaManager {
 public:
     typedef std::vector<AreaComponent *> AreaChunk;

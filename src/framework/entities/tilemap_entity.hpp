@@ -31,6 +31,7 @@ void from_json(const json& j, Vector2& vec);
 void to_json(json& j, const TileDataVector& vec);
 void from_json(const json& j, TileDataVector& vec);
 
+/// @brief Draws a tilemap and handles autotiling and collision on the TILEMAP collision layer
 class Tilemap: public Entity {
 private:
     typedef struct {

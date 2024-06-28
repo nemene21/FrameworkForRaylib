@@ -107,47 +107,49 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">extern</span> Camera2D *global_camera;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">extern</span> FastNoiseLite shake_noise_obj;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>CameraManager {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> bind_camera(Camera2D *new_camera);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    Camera2D *get_camera();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> init();</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// &lt;Camera Component&gt;</span></div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_camera_component.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="class_camera_component.html">CameraComponent</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_component.html">Component</a> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    Vector2 desired_position, shake_offset;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">float</span> smoothing_speed, shake_rotation;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">float</span> camera_zoom, zoom_anim_timer, zoom_anim_duration, zoom_animation_value;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">float</span> shake_strength, shake_duration, shake_timer;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    Vector2 shake_direction;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    Camera2D camera;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    Vector2 position, offset;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_class" href="class_camera_component.html">CameraComponent</a>(<a class="code hl_class" href="class_entity.html">Entity</a> *entity, Vector2 position={0,0});</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    Camera2D *<a class="code hl_function" href="class_camera_component.html#a98c06911bc0affffa4bd30aef7275de8">get_camera</a>();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_camera_component.html#a26ad9f4bef7715b908a87364ca2e2420">zoom</a>(<span class="keywordtype">float</span> new_zoom, <span class="keywordtype">float</span> duration);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_camera_component.html#a1f71ae26a4f5cd3b5703aa0675931462">shake</a>(<span class="keywordtype">float</span> strength, <span class="keywordtype">float</span> duration, <span class="keywordtype">float</span> direction=-1);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> set_zoom(<span class="keywordtype">float</span> <a class="code hl_function" href="class_camera_component.html#a26ad9f4bef7715b908a87364ca2e2420">zoom</a>);    </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespace_camera_manager.html">   18</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_camera_manager.html">CameraManager</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> bind_camera(Camera2D *new_camera);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    Camera2D *get_camera();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> init();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
 </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_camera_component_html"><div class="ttname"><a href="class_camera_component.html">CameraComponent</a></div><div class="ttdef"><b>Definition</b> camera_component.hpp:24</div></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_camera_component.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="class_camera_component.html">CameraComponent</a>: <span class="keyword">public</span> <a class="code hl_class" href="class_component.html">Component</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    Vector2 desired_position, shake_offset;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">float</span> smoothing_speed, shake_rotation;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">float</span> camera_zoom, zoom_anim_timer, zoom_anim_duration, zoom_animation_value;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">float</span> shake_strength, shake_duration, shake_timer;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    Vector2 shake_direction;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    Camera2D camera;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    Vector2 position, offset;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_class" href="class_camera_component.html">CameraComponent</a>(<a class="code hl_class" href="class_entity.html">Entity</a> *entity, Vector2 position={0,0});</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    Camera2D *<a class="code hl_function" href="class_camera_component.html#a98c06911bc0affffa4bd30aef7275de8">get_camera</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_camera_component.html#a26ad9f4bef7715b908a87364ca2e2420">zoom</a>(<span class="keywordtype">float</span> new_zoom, <span class="keywordtype">float</span> duration);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_camera_component.html#a1f71ae26a4f5cd3b5703aa0675931462">shake</a>(<span class="keywordtype">float</span> strength, <span class="keywordtype">float</span> duration, <span class="keywordtype">float</span> direction=-1);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> set_zoom(<span class="keywordtype">float</span> <a class="code hl_function" href="class_camera_component.html#a26ad9f4bef7715b908a87364ca2e2420">zoom</a>);    </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> process(<span class="keywordtype">float</span> delta);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>};</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_camera_component_html"><div class="ttname"><a href="class_camera_component.html">CameraComponent</a></div><div class="ttdoc">Component to handle a camera, follows an entity and has inbuilt zoom and shake animations.</div><div class="ttdef"><b>Definition</b> camera_component.hpp:25</div></div>
 <div class="ttc" id="aclass_camera_component_html_a1f71ae26a4f5cd3b5703aa0675931462"><div class="ttname"><a href="class_camera_component.html#a1f71ae26a4f5cd3b5703aa0675931462">CameraComponent::shake</a></div><div class="ttdeci">void shake(float strength, float duration, float direction=-1)</div><div class="ttdoc">Shake effect.</div><div class="ttdef"><b>Definition</b> camera_component.cpp:84</div></div>
 <div class="ttc" id="aclass_camera_component_html_a26ad9f4bef7715b908a87364ca2e2420"><div class="ttname"><a href="class_camera_component.html#a26ad9f4bef7715b908a87364ca2e2420">CameraComponent::zoom</a></div><div class="ttdeci">void zoom(float new_zoom, float duration)</div><div class="ttdoc">Zoom in/out effect.</div><div class="ttdef"><b>Definition</b> camera_component.cpp:105</div></div>
 <div class="ttc" id="aclass_camera_component_html_a98c06911bc0affffa4bd30aef7275de8"><div class="ttname"><a href="class_camera_component.html#a98c06911bc0affffa4bd30aef7275de8">CameraComponent::get_camera</a></div><div class="ttdeci">Camera2D * get_camera()</div><div class="ttdoc">Returns pointer to component's camera.</div><div class="ttdef"><b>Definition</b> camera_component.cpp:79</div></div>
-<div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">Component object.</div><div class="ttdef"><b>Definition</b> component.hpp:49</div></div>
+<div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">Component interface.</div><div class="ttdef"><b>Definition</b> component.hpp:49</div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">Object in a scene, it has a map of components that are automatically processed and drawn.</div><div class="ttdef"><b>Definition</b> entity.hpp:13</div></div>
+<div class="ttc" id="anamespace_camera_manager_html"><div class="ttname"><a href="namespace_camera_manager.html">CameraManager</a></div><div class="ttdoc">Manages current camera and provides a convenient referance to it.</div><div class="ttdef"><b>Definition</b> camera_component.hpp:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

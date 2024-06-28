@@ -5,6 +5,7 @@
 
 #define TIMER_LIMIT (float)(1./60.f)
 
+/// @brief Simple timer
 class Timer {
 public:
     float duration, progress;
@@ -39,6 +40,7 @@ public:
     void process(float delta);
 };
 
+/// @brief Component that automatically updates timers and provides easy access to them
 class TimerComponent: public Component {
 public:
     std::map<std::string, Timer *> timers;

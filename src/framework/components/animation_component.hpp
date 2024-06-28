@@ -8,13 +8,14 @@
 
 typedef std::function<void(float)> KeyFunc;
 
+/// @brief Component to handle animations with keyframes and events (animations, cutscenes...)
 class AnimationComponent: public Component {
 protected:
     bool paused;
     float direction, playback_speed;
 
     std::string animation_playing;
-
+    
     typedef struct {
         std::function<void(float)> function;
         float start, end;

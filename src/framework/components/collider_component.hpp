@@ -11,11 +11,13 @@
 #define COLLIDER_CHUNK_SIZE (int)1024
 #define DRAW_COLLIDERS false
 
+/// @brief Collision layers
 enum class ColliderIndex {
     TILEMAP,
     COUNT,
 };
 
+/// @brief Handles AABB collision and crude physics resolutions when combined with a transform component
 class ColliderComponent: public Component {
 private:
     std::set<int> layers;
@@ -91,6 +93,7 @@ public:
 bool collides(ColliderComponent *coll1, ColliderComponent *coll2);
 void resolve_collision(ColliderComponent *coll1, ColliderComponent *coll2);
 
+/// @brief Manages collider components by splitting them between chunks
 class ColliderManager {
 public:
     typedef std::vector<ColliderComponent *> ColliderChunk;

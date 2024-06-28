@@ -3,6 +3,7 @@
 
 #include <component.hpp>
 
+/// @brief Component to handle health, damange and healing
 class HealthComponent: public Component {
 protected:
     float hp, max_hp;

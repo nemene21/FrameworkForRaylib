@@ -91,13 +91,18 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">TimerComponent Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_component.html" title="Component interface.">Component</a> that automatically updates timers and provides easy access to them.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="timer__component_8hpp_source.html">timer_component.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TimerComponent:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_timer_component.png" usemap="#TimerComponent_map" alt=""/>
   <map id="TimerComponent_map" name="TimerComponent_map">
-<area href="class_component.html" title="Component object." alt="Component" shape="rect" coords="0,0,106,24"/>
+<area href="class_component.html" title="Component interface." alt="Component" shape="rect" coords="0,0,106,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -139,7 +144,9 @@ ComponentType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td
 <a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>entity</b></td></tr>
 <tr class="separator:a6acb3f00c9d114d961c8763ede390d2c inherit pub_attribs_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_component.html" title="Component interface.">Component</a> that automatically updates timers and provides easy access to them. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1b5734ed0ea5fff7e58a5feea490757b" name="a1b5734ed0ea5fff7e58a5feea490757b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1b5734ed0ea5fff7e58a5feea490757b">&#9670;&#160;</a></span>add_timer()</h2>
 
@@ -167,8 +174,8 @@ ComponentType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td
 <p>Adds a new timer to be automatically processed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td><a class="el" href="class_timer.html">Timer</a> name </td></tr>
-    <tr><td class="paramname">duration</td><td><a class="el" href="class_timer.html">Timer</a> duration (in seconds) </td></tr>
+    <tr><td class="paramname">name</td><td><a class="el" href="class_timer.html" title="Simple timer.">Timer</a> name </td></tr>
+    <tr><td class="paramname">duration</td><td><a class="el" href="class_timer.html" title="Simple timer.">Timer</a> duration (in seconds) </td></tr>
     <tr><td class="paramname">start</td><td>If true the timer starts instantly upon being added </td></tr>
   </table>
   </dd>
@@ -196,7 +203,7 @@ ComponentType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td
 <p>Returns a pointer to requested timer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td><a class="el" href="class_timer.html">Timer</a>'s name, specified upon being added </td></tr>
+    <tr><td class="paramname">name</td><td><a class="el" href="class_timer.html" title="Simple timer.">Timer</a>'s name, specified upon being added </td></tr>
   </table>
   </dd>
 </dl>

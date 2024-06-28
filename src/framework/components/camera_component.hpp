@@ -14,13 +14,14 @@
 extern Camera2D *global_camera;
 extern FastNoiseLite shake_noise_obj;
 
+/// @brief Manages current camera and provides a convenient referance to it
 namespace CameraManager {
     void bind_camera(Camera2D *new_camera);
     Camera2D *get_camera();
     void init();
 };
 
-// <Camera Component>
+/// @brief Component to handle a camera, follows an entity and has inbuilt zoom and shake animations
 class CameraComponent: public Component {
 private:
     Vector2 desired_position, shake_offset;
@@ -50,7 +51,7 @@ public:
     /// @param duration 
     /// @param direction Shake angle
     void shake(float strength, float duration, float direction=-1);
- 
+    
     void set_zoom(float zoom);    
     void process(float delta);
 };

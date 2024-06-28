@@ -44,7 +44,7 @@ enum ComponentType {
 
 typedef ComponentType CompType;
 
-/// @brief Component object
+/// @brief Component interface
 /// @note This is not a pure ECS, the components hold both data and functionality
 class Component {
 public:
