@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['unload_0',['unload',['../class_texture_manager.html#a01d83b2aefd9190a53d51e2d4fb07c03',1,'TextureManager::unload()'],['../class_shader_manager.html#a3be10f695be6bd03b7129e53968fdcfe',1,'ShaderManager::unload()'],['../class_particle_data_manager.html#a095772a313319911f2c41b535a0da13e',1,'ParticleDataManager::unload()']]],
-  ['unload_5fsfx_1',['unload_sfx',['../class_audio_manager.html#a87b57d8a6de2b6684d445e193f94ff40',1,'AudioManager']]],
-  ['unload_5ftrack_2',['unload_track',['../class_audio_manager.html#a3bb71e1a48ab87441c4a9310bcd011b1',1,'AudioManager']]],
-  ['unpause_3',['unpause',['../class_animation_component.html#a047bd2905899b3adab154dd83918ca48',1,'AnimationComponent']]],
-  ['update_5ftransform_4',['update_transform',['../class_drawable.html#aefad13ec1184e13720afe89bb0ccd982',1,'Drawable']]],
-  ['use_5',['use',['../class_shader_bond.html#a7c543ca1f4bd72c2a3dc620120672002',1,'ShaderBond']]]
+  ['toggle_5flayer_0',['toggle_layer',['../class_area_component.html#a5cb768ea79144dbf75a6f461aaba897c',1,'AreaComponent::toggle_layer()'],['../class_collider_component.html#ac9f101111da68f290c6a4c189463ab20',1,'ColliderComponent::toggle_layer()']]],
+  ['toggle_5fmask_5fbit_1',['toggle_mask_bit',['../class_area_component.html#a5141420cce8f6efdb0905bf29a218283',1,'AreaComponent::toggle_mask_bit()'],['../class_collider_component.html#aca1133323aca02cf8d1ffd265db30403',1,'ColliderComponent::toggle_mask_bit()']]],
+  ['toggle_5fpause_2',['toggle_pause',['../class_animation_component.html#a9491b4e0f5864be6e5b96f1d944e5ebc',1,'AnimationComponent::toggle_pause()'],['../class_timer.html#a70fb124c4b64daaab0c9fd14522f3364',1,'Timer::toggle_pause()']]],
+  ['translate_3',['translate',['../class_transform_component.html#afa6ced870306bf9e0fda927faa918c51',1,'TransformComponent']]],
+  ['translate_5fx_4',['translate_x',['../class_transform_component.html#a85a2b6094b367f0f74e45d73056e957f',1,'TransformComponent']]],
+  ['translate_5fy_5',['translate_y',['../class_transform_component.html#add76fcc34ad6a2c75bffa0c625a1f6e1',1,'TransformComponent']]]
 ];

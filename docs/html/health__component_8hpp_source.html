@@ -110,17 +110,20 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        hurt_signal,</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        healed_signal;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> hurt(<span class="keywordtype">float</span> damage);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> heal(<span class="keywordtype">float</span> add);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">bool</span> check_death();</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_health_component.html#a4deeeb1be321f19c6b2e981d6d0b3700">hurt</a>(<span class="keywordtype">float</span> damage);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_health_component.html#a99b0ac752fa850b4770ac7a98ea2ea29">heal</a>(<span class="keywordtype">float</span> add);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_health_component.html#a42907ecb55d4947c5239293e22e5739d">check_death</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_component_html"><div class="ttname"><a href="class_component.html">Component</a></div><div class="ttdoc">Component object.</div><div class="ttdef"><b>Definition</b> component.hpp:49</div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">Object in a scene, it has a map of components that are automatically processed and drawn.</div><div class="ttdef"><b>Definition</b> entity.hpp:13</div></div>
 <div class="ttc" id="aclass_health_component_html"><div class="ttname"><a href="class_health_component.html">HealthComponent</a></div><div class="ttdef"><b>Definition</b> health_component.hpp:6</div></div>
+<div class="ttc" id="aclass_health_component_html_a42907ecb55d4947c5239293e22e5739d"><div class="ttname"><a href="class_health_component.html#a42907ecb55d4947c5239293e22e5739d">HealthComponent::check_death</a></div><div class="ttdeci">bool check_death()</div><div class="ttdoc">Returns true if the entity should die.</div><div class="ttdef"><b>Definition</b> health_component.cpp:23</div></div>
+<div class="ttc" id="aclass_health_component_html_a4deeeb1be321f19c6b2e981d6d0b3700"><div class="ttname"><a href="class_health_component.html#a4deeeb1be321f19c6b2e981d6d0b3700">HealthComponent::hurt</a></div><div class="ttdeci">void hurt(float damage)</div><div class="ttdoc">Subtracts from hp.</div><div class="ttdef"><b>Definition</b> health_component.cpp:10</div></div>
+<div class="ttc" id="aclass_health_component_html_a99b0ac752fa850b4770ac7a98ea2ea29"><div class="ttname"><a href="class_health_component.html#a99b0ac752fa850b4770ac7a98ea2ea29">HealthComponent::heal</a></div><div class="ttdeci">void heal(float add)</div><div class="ttdoc">Adds to hp.</div><div class="ttdef"><b>Definition</b> health_component.cpp:17</div></div>
 <div class="ttc" id="aclass_signal_html"><div class="ttname"><a href="class_signal.html">Signal</a></div><div class="ttdoc">Calls callbacks when a certain event happens.</div><div class="ttdef"><b>Definition</b> component.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

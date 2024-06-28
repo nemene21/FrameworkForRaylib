@@ -106,11 +106,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a28cacc93f8634f03edd6a50e6e7ea390" id="r_a28cacc93f8634f03edd6a50e6e7ea390"><td class="memItemLeft" align="right" valign="top"><a id="a28cacc93f8634f03edd6a50e6e7ea390" name="a28cacc93f8634f03edd6a50e6e7ea390"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>TimerComponent</b> (<a class="el" href="class_entity.html">Entity</a> *entity)</td></tr>
 <tr class="separator:a28cacc93f8634f03edd6a50e6e7ea390"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b5734ed0ea5fff7e58a5feea490757b" id="r_a1b5734ed0ea5fff7e58a5feea490757b"><td class="memItemLeft" align="right" valign="top"><a id="a1b5734ed0ea5fff7e58a5feea490757b" name="a1b5734ed0ea5fff7e58a5feea490757b"></a>
-<a class="el" href="class_timer.html">Timer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>add_timer</b> (std::string name, float duration, bool start=false)</td></tr>
+<tr class="memitem:a1b5734ed0ea5fff7e58a5feea490757b" id="r_a1b5734ed0ea5fff7e58a5feea490757b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b5734ed0ea5fff7e58a5feea490757b">add_timer</a> (std::string name, float duration, bool start=false)</td></tr>
+<tr class="memdesc:a1b5734ed0ea5fff7e58a5feea490757b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new timer to be automatically processed.  <br /></td></tr>
 <tr class="separator:a1b5734ed0ea5fff7e58a5feea490757b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe065fbc2fca25f26064c47558d93b7f" id="r_abe065fbc2fca25f26064c47558d93b7f"><td class="memItemLeft" align="right" valign="top"><a id="abe065fbc2fca25f26064c47558d93b7f" name="abe065fbc2fca25f26064c47558d93b7f"></a>
-<a class="el" href="class_timer.html">Timer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_timer</b> (std::string name)</td></tr>
+<tr class="memitem:abe065fbc2fca25f26064c47558d93b7f" id="r_abe065fbc2fca25f26064c47558d93b7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe065fbc2fca25f26064c47558d93b7f">get_timer</a> (std::string name)</td></tr>
+<tr class="memdesc:abe065fbc2fca25f26064c47558d93b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to requested timer.  <br /></td></tr>
 <tr class="separator:abe065fbc2fca25f26064c47558d93b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d7e18bd87294dc2d4998fb806ff3829" id="r_a3d7e18bd87294dc2d4998fb806ff3829"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d7e18bd87294dc2d4998fb806ff3829">process</a> (float delta)</td></tr>
 <tr class="separator:a3d7e18bd87294dc2d4998fb806ff3829"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +140,70 @@ ComponentType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td
 <tr class="separator:a6acb3f00c9d114d961c8763ede390d2c inherit pub_attribs_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1b5734ed0ea5fff7e58a5feea490757b" name="a1b5734ed0ea5fff7e58a5feea490757b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b5734ed0ea5fff7e58a5feea490757b">&#9670;&#160;</a></span>add_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_timer.html">Timer</a> * TimerComponent::add_timer </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>duration</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>start</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a new timer to be automatically processed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td><a class="el" href="class_timer.html">Timer</a> name </td></tr>
+    <tr><td class="paramname">duration</td><td><a class="el" href="class_timer.html">Timer</a> duration (in seconds) </td></tr>
+    <tr><td class="paramname">start</td><td>If true the timer starts instantly upon being added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a pointer to the created timer </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The timer component is responsible for the memory of the added timer, there is no need to free it yourself </dd></dl>
+
+</div>
+</div>
+<a id="abe065fbc2fca25f26064c47558d93b7f" name="abe065fbc2fca25f26064c47558d93b7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe065fbc2fca25f26064c47558d93b7f">&#9670;&#160;</a></span>get_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_timer.html">Timer</a> * TimerComponent::get_timer </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a pointer to requested timer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td><a class="el" href="class_timer.html">Timer</a>'s name, specified upon being added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to requested timer </dd></dl>
+
+</div>
+</div>
 <a id="a3d7e18bd87294dc2d4998fb806ff3829" name="a3d7e18bd87294dc2d4998fb806ff3829"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3d7e18bd87294dc2d4998fb806ff3829">&#9670;&#160;</a></span>process()</h2>
 

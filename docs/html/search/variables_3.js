@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['z_5fcoord_0',['z_coord',['../class_drawable.html#a9b1019e92aaa1575a2589372680d7f61',1,'Drawable']]]
+  ['name_0',['name',['../class_scene.html#a44b2d6bffa153dda02f026f8533ceb08',1,'Scene']]]
 ];

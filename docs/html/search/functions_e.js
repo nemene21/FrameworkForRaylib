@@ -1,22 +1,10 @@
 var searchData=
 [
-  ['save_0',['save',['../class_tilemap.html#a442c7e4d10b3c3a15e02720cc9021ca7',1,'Tilemap']]],
-  ['scene_1',['Scene',['../class_scene.html#a6fb788d6ae25d5293d3a58966cf29757',1,'Scene']]],
-  ['send_5funiform_2',['send_uniform',['../class_shader_bond.html#a0ce6b1f7e362ae1442d0b6b34d870979',1,'ShaderBond']]],
-  ['set_5famount_3',['set_amount',['../class_particle_system.html#a469b62311eb6754c376f94e4e6b042f4',1,'ParticleSystem']]],
-  ['set_5fcollision_5fmask_4',['set_collision_mask',['../class_particle_system.html#a4960d12245ac2d09aac3400c04d6e499',1,'ParticleSystem']]],
-  ['set_5flayer_5',['set_layer',['../class_area_component.html#a282d547dc5a1d025bef39cfc478097a0',1,'AreaComponent']]],
-  ['set_5flayers_6',['set_layers',['../class_area_component.html#ac7e1f5a9c7cb310412d2673e39d55d63',1,'AreaComponent']]],
-  ['set_5fleft_7',['set_left',['../class_particle_system.html#ac3e6f94f844ed325febb3a5cf9005070',1,'ParticleSystem']]],
-  ['set_5fmask_8',['set_mask',['../class_area_component.html#a6947f2c567d047313f606daead0dde2a',1,'AreaComponent']]],
-  ['set_5fmask_5fbit_9',['set_mask_bit',['../class_area_component.html#a15ca9ab9fe86bafca234280fea5221c6',1,'AreaComponent']]],
-  ['set_5fposition_10',['set_position',['../class_particle_system.html#aae861feb2068d24fb1c1d6a139db7807',1,'ParticleSystem']]],
-  ['set_5fscene_11',['set_scene',['../class_scene_manager.html#af6ae507aba488f029783e0281799d9fd',1,'SceneManager']]],
-  ['set_5fshader_12',['set_shader',['../class_shader_bond.html#ae5435027dff4321aeefe378c9a01db0f',1,'ShaderBond::set_shader(std::string shader_path)'],['../class_shader_bond.html#a250e732e08c6fbd00e576924432c13a9',1,'ShaderBond::set_shader(ShaderPtr new_shader)']]],
-  ['set_5ftick_13',['set_tick',['../class_trail.html#a60a0f84e6d182aa56ca4c44d0ab1e7ea',1,'Trail']]],
-  ['set_5ftile_14',['set_tile',['../class_tilemap.html#ab126d19acaae64492b430d29d32d87eb',1,'Tilemap']]],
-  ['setup_15',['setup',['../class_component.html#a9cc04b36ceb2cf5bb0abe5672b096c64',1,'Component']]],
-  ['setup_5fscene_16',['setup_scene',['../class_scene_manager.html#ae84f392fbba17a3915a25c54073afa62',1,'SceneManager']]],
-  ['shake_17',['shake',['../class_camera_component.html#a1f71ae26a4f5cd3b5703aa0675931462',1,'CameraComponent']]],
-  ['spawn_5fpoint_18',['spawn_point',['../class_trail.html#a2c7636804fbfc0fd484204bd3523719a',1,'Trail']]]
+  ['real_5fpos_0',['real_pos',['../class_drawable.html#aed6f780a330d858e9c6bf49bfa9bbd6c',1,'Drawable']]],
+  ['remove_5fcomponent_1',['remove_component',['../class_entity.html#a2361d524a5a615e2702267072af9a6f7',1,'Entity']]],
+  ['remove_5fforce_2',['remove_force',['../class_particle_system.html#ae9a6ee1003a79d5971dfee210484bfa0',1,'ParticleSystem::remove_force()'],['../class_trail.html#aca003527f5c9a11d3507b645b7e25959',1,'Trail::remove_force()']]],
+  ['remove_5flayer_3',['remove_layer',['../class_area_component.html#ae5a7bc78babaaeb639146a14396fd552',1,'AreaComponent::remove_layer()'],['../class_collider_component.html#a699bbd4609d255c532f663fa2e932c4a',1,'ColliderComponent::remove_layer()']]],
+  ['remove_5fmask_5fbit_4',['remove_mask_bit',['../class_area_component.html#af293626de006bb1b39eab9ead24a119e',1,'AreaComponent::remove_mask_bit()'],['../class_collider_component.html#aa374b55701c4ecd1c93de17838cc7a32',1,'ColliderComponent::remove_mask_bit()']]],
+  ['remove_5ftile_5',['remove_tile',['../class_tilemap.html#a19d45f263b4b851204c06d4fa5acfbf7',1,'Tilemap']]],
+  ['restart_6',['restart',['../class_timer.html#aa3f7871196bb56202af2bc982bfbfff6',1,'Timer']]]
 ];
