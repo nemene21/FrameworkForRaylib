@@ -49,7 +49,6 @@ int main() {
     RenderTexture2D background  = LoadRenderTexture(res.x, res.y);
     RenderTexture2D foreground  = LoadRenderTexture(res.x, res.y);
     RenderTexture2D composition = LoadRenderTexture(res.x, res.y);
-    // ToggleFullscreen();
     SetTargetFPS(120);
 
     InitAudioDevice();

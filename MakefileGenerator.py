@@ -1,10 +1,11 @@
-import tkinter, subprocess
+import tkinter, subprocess, os
 
 CFLAGS   = "-O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
 LDFLAGS  = "-L../lib/"
 LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
 OBJ_DIR  = "object_files"
 SRC_DIR  = "../src"
+ROOT_DIR = ".."
 COMPILER = "g++"
 
 makefile = ""
@@ -22,19 +23,27 @@ def add(cont):
     global makefile
     makefile += cont
 
+def get_source_list(dir_path):
+    source_files = []
+    dir = os.fsencode(dir_path)
+
+    for file in os.listdir(dir):
+        filename = os.fsdecode(file)
+
+        if filename.endswith(".cpp"):
+            source_files.append(f"{dir_path}/{filename.split('.')[0]}")
+
+        elif not "." in filename:
+            source_files += get_source_list(f"{dir_path}/{filename}")
+    
+    return source_files
+
 def generate_makefile():
     global makefile
 
     print("Starting...")
-    source_list_file = open("SourceList.txt", "r")
-    source_files = []
-
-    for source in source_list_file.read().split("\n"):
-        if source != "":
-            source_files.append(source)
-
-    source_list_file.close()
-    print("Opened Source List...")
+    source_files = get_source_list("src")
+    print("Constructed Source List...")
 
     makefile = ""
 
@@ -42,10 +51,10 @@ def generate_makefile():
     next(2)
 
     for source in source_files:
-        add(f"{OBJ_DIR}/{get_filename(source)}.o: {SRC_DIR}/{source}.cpp")
+        add(f"{OBJ_DIR}/{get_filename(source)}.o: {ROOT_DIR}/{source}.cpp")
         next(); tab()
 
-        add(f"{COMPILER} {CFLAGS} -c {SRC_DIR}/{source}.cpp -o $(@)")
+        add(f"{COMPILER} {CFLAGS} -c {ROOT_DIR}/{source}.cpp -o $(@)")
         next(2)
 
     add("Build.exe: ")
