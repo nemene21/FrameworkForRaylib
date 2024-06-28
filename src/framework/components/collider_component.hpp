@@ -30,25 +30,56 @@ public:
     ColliderComponent();
     ColliderComponent(Entity *entity, float width, float height);
     ColliderComponent(Entity *entity, float radius);
-
+    
+    /// @brief Sets the layers
+    /// @param new_layers Set of layers
     void set_layers(std::set<int> new_layers);
+    /// @brief Sets a single layer
+    /// @param layer Layer to set
+    /// @param enabled
     void set_layer(int layer, bool enabled);
+    /// @brief Toggles a single layer
+    /// @param layer Layer to toggle
     void toggle_layer(int layer);
+    /// @brief Removes a single layer
+    /// @param layer Layer to remove
     void remove_layer(int layer);
+    /// @brief Adds a single layer
+    /// @param layer Layer to add
     void add_layer(int layer);
+    /// @brief Returns the set of layers
+    /// @return Set of layers
     std::set<int>& get_layers();
 
+    /// @brief Sets the mask layers
+    /// @param new_layers Set of mask layers
     void set_mask(std::set<int> new_layers);
+    /// @brief Sets a single mask layer
+    /// @param layer Mask layer to set
+    /// @param enabled
     void set_mask_bit(int layer, bool enabled);
+    /// @brief Toggles a single mask layer
+    /// @param layer Mask layer to toggle
     void toggle_mask_bit(int layer);
+    /// @brief Removes a single mask layer
+    /// @param layer Mask layer to remove
     void remove_mask_bit(int layer);
+    /// @brief Adds a single mask layer
+    /// @param layer Mask layer to add
     void add_mask_bit(int layer);
+    /// @brief Returns the set of mask layers
+    /// @return Set of mask layers
     std::set<int>& get_mask();
 
+    /// @brief Returns true if the collider is touching a floor
     bool on_floor();
+    /// @brief Returns true if the collider is touching a ceiling
     bool on_ceil();
+    /// @brief Returns true if the collider is touching a left wall
     bool on_left_wall();
+    /// @brief Returns true if the collider is touching a right wall
     bool on_right_wall();
+    /// @brief Returns true if the collider is touching any wall
     bool on_wall();
 
     void collide(Vector2 direction);
