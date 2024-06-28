@@ -11,13 +11,7 @@ Player::Player():
 
 void Player::process(float delta) {
     auto *trans_comp = (TransformComponent *)get_component(ComponentType::TRANSFORM);
+    trans_comp->position = mouse_pos();
+
     sprite.update_transform(trans_comp);
-
-    Vector2 input_dir = InputVectorNormalized("left", "right", "up", "down");
-    trans_comp->interpolate_velocity(
-        Vector2Multiply(input_dir, {100, 100}),
-        20
-    );
-
-    sprite.angle = 1 + (trans_comp->velocity.x / 100.f) * 20;
 }

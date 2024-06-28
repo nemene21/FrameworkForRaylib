@@ -55,15 +55,25 @@ Vector2 InputVectorNormalized(std::string left, std::string right, std::string u
 
 // Mouse position in world
 Vector2 mouse_screen_pos() {
+    float draw_width  = GetScreenWidth();
+    float draw_height = GetScreenWidth() * (res.y / res.x);
+
+    if (draw_height > GetScreenHeight()) {
+        draw_height = GetScreenHeight();
+        draw_width  = GetScreenHeight() * (res.x / res.y);
+    }
+
     Vector2 pos = GetMousePosition();
-    pos.x = (pos.x / GetScreenWidth() ) * res.x;
-    pos.y = (pos.y / GetScreenHeight()) * res.y;
+    pos.x = (pos.x / draw_width ) * res.x;
+    pos.y = (pos.y / draw_height) * res.y;
+
+    pos.x -= ((GetScreenWidth () - draw_width ) * .5f) / draw_width  * res.x;
+    pos.y -= ((GetScreenHeight() - draw_height) * .5f) / draw_height * res.y;
     return pos;
 }
 
 Vector2 mouse_pos() {
     Vector2 pos = mouse_screen_pos();
-
     Camera2D *camera = CameraManager::get_camera();
 
     pos = Vector2Add(pos, Vector2Add(camera->target, camera->offset));
