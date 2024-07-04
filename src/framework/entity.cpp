@@ -59,5 +59,9 @@ bool Entity::has_component(ComponentType type) {
 }
 
 Component *Entity::get_component(ComponentType type) {
+    if (!has_component(type)) {
+        std::cout << "WARNING: component not found, returning nullptr" << std::endl;
+        return nullptr;
+    }
     return comps[type];
 }
