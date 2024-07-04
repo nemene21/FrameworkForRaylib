@@ -30,12 +30,14 @@ void TextureManager::unload(std::string name) {
 
 // Unloads all textures that aren't being referanced 
 void TextureManager::unload_unused() {
-    for (auto& texture_pair: texture_map) {
+    std::vector<std::string> to_unload {};
 
+    for (auto& texture_pair: texture_map) {
         if (texture_pair.second.use_count() == 1) {
-            unload(texture_pair.first);
+            to_unload.push_back(texture_pair.first);
         }
     }
+    for (auto to: to_unload) unload(to);
 }
 // Ticks down a timer which calls "unload_unused()" when it hits 0 every "tick" seconds
 void TextureManager::unload_check() {
@@ -96,12 +98,14 @@ void ShaderManager::unload(std::string name) {
 
 // Unloads all shaders which aren't being referanced
 void ShaderManager::unload_unused() {
-    for (auto& texture_pair: shader_map) {
+    std::vector<std::string> to_unload {};
 
+    for (auto& texture_pair: shader_map) {
         if (texture_pair.second.use_count() == 1) {
-            unload(texture_pair.first);
+            to_unload.push_back(texture_pair.first);
         }
     }
+    for (auto to: to_unload) unload(to);
 }
 
 // Ticks down timer which will call "unload_unused()" after "tick" seconds

@@ -68,8 +68,7 @@ void Tilemap::set_tile(int x, int y, int type) {
     changed_chunks.insert({chunk_pos.first + 1, chunk_pos.second - 1});
 
     // Build tile collider
-    ColliderComponent collider = ColliderComponent(this, tilesize.x, tilesize.y);
-    collider.position = {x * tilesize.x, y * tilesize.y};
+    ColliderComponent collider = ColliderComponent(this, {x * tilesize.x, y * tilesize.y}, tilesize.x, tilesize.y);
     collider.set_layer((int)ColliderIndex::TILEMAP, true);
     collider.process(0);
 
@@ -197,8 +196,7 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
         bitmap += get_tile(pos.first + .5f, pos.second + .5f) == -1 ? "." : "#";
 
         // Tile's collider, position and texture position data
-        ColliderComponent collider = ColliderComponent(this, tilesize.x, tilesize.y);
-        collider.position = {pos.first, pos.second};
+        ColliderComponent collider = ColliderComponent(this, {pos.first, pos.second}, tilesize.x, tilesize.y);
 
         TileData data {{pos.first, pos.second}, {0, 0}};
     	
@@ -263,7 +261,11 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
     }
 }
 
-void Tilemap::process(float delta) {}
+void Tilemap::process(float delta) {
+    if (IsKeyPressed(KEY_ENTER)) {
+        save("test.json");
+    }
+}
 
 // Draws the tilemap (spatial partitioning and camera culling at play)
 void Tilemap::draw(float delta) {

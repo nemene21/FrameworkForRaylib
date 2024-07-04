@@ -29,9 +29,9 @@ public:
     void *shape;
     Vector2 position;
 
-    ColliderComponent(Vector2 pos);
-    ColliderComponent(Entity *entity, float width, float height);
-    ColliderComponent(Entity *entity, float radius);
+    ColliderComponent(Vector2 pos={0, 0});
+    ColliderComponent(Entity *entity, Vector2 pos, float width, float height);
+    ColliderComponent(Entity *entity, Vector2 pos, float radius);
     
     /// @brief Sets the layers
     /// @param new_layers Set of layers

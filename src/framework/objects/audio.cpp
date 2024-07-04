@@ -103,19 +103,22 @@ void AudioManager::unload_sfx(std::string name) {
 
 // Unloads all sounds and tracks that aren't being referanced 
 void AudioManager::unload_unused() {
-    for (auto &sound_pair: sound_map) {
+    std::vector<std::string> to_unload {};
 
+    for (auto &sound_pair: sound_map) {
         if (sound_pair.second.use_count() == 1) {
-            unload_sfx(sound_pair.first);
+            to_unload.push_back(sound_pair.first);
         }
     }
+    for (auto to: to_unload) unload_sfx(to);
+    to_unload.clear();
 
     for (auto &music_pair: music_map) {
-
         if (music_pair.second.use_count() == 1 && !IsMusicStreamPlaying(*music_pair.second.get())) {
-            unload_track(music_pair.first);
+            to_unload.push_back(music_pair.first);
         }
     }
+    for (auto to: to_unload) unload_track(to);
 }
 // Ticks down a timer which calls "unload_unused()" when it hits 0 every "tick" seconds
 void AudioManager::unload_check() {

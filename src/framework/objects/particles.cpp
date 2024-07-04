@@ -42,8 +42,8 @@ void ParticleDataManager::unload(std::string name) {
 // Unloads all particle data that isn't being referanced 
 void ParticleDataManager::unload_unused() {
     std::vector<std::string> to_unload {};
+    
     for (auto& texture_pair: particle_data_map) {
-
         if (texture_pair.second.use_count() == 1) {
             to_unload.push_back(texture_pair.first);
         }

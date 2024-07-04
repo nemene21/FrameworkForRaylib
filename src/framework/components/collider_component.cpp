@@ -67,19 +67,20 @@ void resolve_collision(Vector2 direction, ColliderComponent *coll1, ColliderComp
     }
 }
 // Collider rectangle init
-ColliderComponent::ColliderComponent(Entity *entity, float width, float height):
+ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float width, float height):
     Component(CompType::COLLIDER, entity),
     shape {nullptr},
     is_rectangle {true},
     is_circle {false},
     collision_direction {0, 0},
-    position {0, 0}
+    position {pos}
 {
     shape = new Rectangle{0, 0, width, height};
+    update_shape_position();
 }
 
 // Collider circle init (crashes due to unimplemented circles)
-ColliderComponent::ColliderComponent(Entity *entity, float radius):
+ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float radius):
     Component(CompType::COLLIDER, entity),
     shape {nullptr},
     is_rectangle {false},
