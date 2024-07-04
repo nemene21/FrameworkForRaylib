@@ -29,7 +29,7 @@ public:
     void *shape;
     Vector2 position;
 
-    ColliderComponent();
+    ColliderComponent(Vector2 pos);
     ColliderComponent(Entity *entity, float width, float height);
     ColliderComponent(Entity *entity, float radius);
     

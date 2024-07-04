@@ -1,6 +1,9 @@
 #include <collider_component.hpp>
 
-ColliderComponent::ColliderComponent(): Component(CompType::COLLIDER, nullptr) {}
+ColliderComponent::ColliderComponent(Vector2 pos): Component(CompType::COLLIDER, nullptr) {
+    position = pos;
+    update_shape_position();
+}
 
 bool collides(ColliderComponent *coll1, ColliderComponent *coll2) {
     if (coll1->is_rectangle && coll2->is_rectangle) {
