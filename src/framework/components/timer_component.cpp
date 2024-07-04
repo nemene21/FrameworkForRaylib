@@ -49,7 +49,7 @@ TimerComponent::TimerComponent(Entity *entity):
 
 TimerComponent::~TimerComponent() {
     for (auto &timer_pair: timers) {
-        free(timer_pair.second);
+        delete timer_pair.second;
     }
 }
 

@@ -175,7 +175,7 @@ void ParticleSystem::reload_data() {
 
     texture = TextureManager::get(data["texture"]);
 
-    free(emit_shape);
+    delete emit_shape;
     if (data.contains("shape")) {
         json shape_data = data["shape"];
         int num_params = shape_data.size();
