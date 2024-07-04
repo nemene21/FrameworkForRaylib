@@ -1,5 +1,9 @@
 *.exe
 *.a
 *.o
+*.js
+*.wasm
+*.data
+/build/web_build/index.html
 .vscode
 /src/game/
