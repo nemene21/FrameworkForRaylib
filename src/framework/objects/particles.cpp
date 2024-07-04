@@ -7,12 +7,19 @@ float ParticleDataManager::tick  = 100.0f;
 
 // Load particle data and put it's smart pointer into the particle data map (it's path is the key)
 void ParticleDataManager::load(std::string name) {
-    std::ifstream f(PARTICLE_DIR name);
+    FILE* file = fopen((PARTICLE_DIR name).c_str(), "rb");
 
-    if (!f.is_open())
+    if (!file)
         std::cerr << "Can't open file " + PARTICLE_DIR name + " :(" << std::endl;
 
-    json data = json::parse(f);
+    char buffer[2048] = "";
+    char line_buffer[128] = "";
+    while (fgets(line_buffer, 2048, file)) {
+        strcat(buffer, line_buffer);
+    }
+
+    fclose(file);
+    json data = json::parse((std::string)buffer);
     particle_data_map[name] = std::make_shared<json>(
         data
     );
@@ -34,12 +41,14 @@ void ParticleDataManager::unload(std::string name) {
 
 // Unloads all particle data that isn't being referanced 
 void ParticleDataManager::unload_unused() {
+    std::vector<std::string> to_unload {};
     for (auto& texture_pair: particle_data_map) {
 
         if (texture_pair.second.use_count() == 1) {
-            unload(texture_pair.first);
+            to_unload.push_back(texture_pair.first);
         }
     }
+    for (auto to: to_unload) unload(to);
 }
 // Ticks down a timer which calls "unload_unused()" when it hits 0 every "tick" seconds
 void ParticleDataManager::unload_check() {
@@ -255,7 +264,7 @@ ParticleSystem::ParticleSystem(std::string data_filename, Vector2 position):
 }
 
 ParticleSystem::~ParticleSystem() {
-    free(emit_shape);
+    delete emit_shape;
 }
 
 void ParticleSystem::set_amount(int amt) {

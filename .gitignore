@@ -2,3 +2,4 @@
 *.a
 *.o
 .vscode
+/src/game/

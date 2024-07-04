@@ -1,14 +1,41 @@
-import tkinter, subprocess, os
+import tkinter, subprocess, os, time
+import webbrowser
 
-CFLAGS   = "-O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
+CFLAGS   = "-g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
 LDFLAGS  = "-L../lib/"
 LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
 OBJ_DIR  = "object_files"
 SRC_DIR  = "../src"
 ROOT_DIR = ".."
 COMPILER = "g++"
+INDEX    = ""
 
 makefile = ""
+WEB = False
+
+def toggle_web_mode():
+    global WEB
+    global web_button
+    global COMPILER
+    global INDEX
+    global LDFLAGS
+    global LDLIBS
+
+    WEB = not WEB
+    if WEB:
+        COMPILER = "emcc"
+        INDEX    = " index.html"
+        LDFLAGS  = "-L../libweb/"
+        LDLIBS   = "-lraylib"
+    else:
+        COMPILER = "g++"
+        INDEX    = ""
+        LDFLAGS  = "-L../lib/"
+        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
+    
+    web_button.config(text=f"Web: {WEB}")
+    generate_makefile()
+
 
 def next(n=1):
     global makefile
@@ -39,6 +66,12 @@ def get_source_list(dir_path):
     return source_files
 
 def generate_makefile():
+    global WEB
+    global web_button
+    global COMPILER
+    global INDEX
+    global LDFLAGS
+    global LDLIBS
     global makefile
 
     print("Starting...")
@@ -62,9 +95,18 @@ def generate_makefile():
         add(OBJ_DIR + "/" + get_filename(source) + ".o ")
 
     next(); tab()
-    add(f"{COMPILER} -o Build.exe ")
-    for source in source_files:
-        add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+    if not WEB:
+        add(f"{COMPILER} -o{INDEX} Build.exe ")
+        for source in source_files:
+            add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+        
+    else:
+        add(f"{COMPILER} {CFLAGS}")
+        add("../src/main.cpp ")
+        for source in source_files:
+            add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+        add("-o web_build/index.html -s ASSERTIONS=1 -s SAFE_HEAP=1 -s USE_GLFW=3 -s ASYNCIFY -s WASM=1 -s TOTAL_MEMORY=2048MB --shell-file shell.html ")
+        add("--preload-file assets ")
 
     add(LDFLAGS + " " + LDLIBS)
 
@@ -96,13 +138,20 @@ def get_filename(string):
     return string.split("/")[-1]
 
 def run():
-    result = subprocess.run("Build.exe", shell=True, cwd="build") 
-
-    if result:
-        print("Game Sucessfully Ran!")
+    if WEB:
+        server_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "cd /d build/web_build && python -m http.server"])
+        time.sleep(2)
+        ngrok_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "ngrok", "http", "8000"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        webbrowser.open("http://localhost:8000")
     else:
-        print("Game didnt' Run :(")
-    print("")
+        result = subprocess.run("Build.exe", shell=True, cwd="build")
+
+        if result:
+            print("Game Sucessfully Ran!")
+        else:
+            print("Game didnt' Run :(")
+        print("")
+        
 
 def clean():
     result = subprocess.run("make clean", shell=True, cwd="build")
@@ -131,5 +180,9 @@ run_button.place(x = 16, y = 16 + 160)
 
 clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
 clean_button.place(x = 16, y = 16 + 418)
+
+web_button = tkinter.Button(window, text=f"Web: {WEB}", command=toggle_web_mode, font=font)
+web_button.place(x = 16, y = 16 + 418 - 80)
+toggle_web_mode()
 
 window.mainloop()

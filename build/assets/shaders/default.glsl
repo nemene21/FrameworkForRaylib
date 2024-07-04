@@ -1,12 +1,11 @@
-#version 330 core
+#version 100
+precision mediump float;
 
-in vec2 fragTexCoord;
+varying vec2 fragTexCoord;
 uniform sampler2D texture0;
 uniform float time;
 
-out vec4 FragColor;
-
 void main()
 {
-    FragColor = texture(texture0, fragTexCoord);
+    gl_FragColor = texture2D(texture0, fragTexCoord);
 }
