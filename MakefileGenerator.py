@@ -16,6 +16,7 @@ WEB = False
 def toggle_web_mode():
     global WEB
     global web_button
+    global OBJ_DIR
     global COMPILER
     global INDEX
     global LDFLAGS
@@ -27,11 +28,13 @@ def toggle_web_mode():
         INDEX    = " index.html"
         LDFLAGS  = "-L../libweb/"
         LDLIBS   = "-lraylib"
+        OBJ_DIR  = "web_object_files"
     else:
         COMPILER = "g++"
         INDEX    = ""
         LDFLAGS  = "-L../lib/"
         LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
+        OBJ_DIR  = "object_files"
     
     web_button.config(text=f"Web: {WEB}")
     generate_makefile()
@@ -72,6 +75,7 @@ def generate_makefile():
     global INDEX
     global LDFLAGS
     global LDLIBS
+    global OBJ_DIR
     global makefile
 
     print("Starting...")
