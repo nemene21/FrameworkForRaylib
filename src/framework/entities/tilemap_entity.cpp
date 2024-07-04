@@ -279,8 +279,8 @@ void Tilemap::draw(float delta) {
 
     // Get chunk position of camera
     std::pair<int, int> camera_chunk_pos = std::make_pair<int, int>(
-        (camera_pos.x / 96.f) / chunksize.x,
-        (camera_pos.y / 96.f) / chunksize.y
+        (camera_pos.x / tilesize.x) / chunksize.x,
+        (camera_pos.y / tilesize.y) / chunksize.y
     );
 
     // Iterates trough a 3x3 chunk area and attempts drawing the tiles
