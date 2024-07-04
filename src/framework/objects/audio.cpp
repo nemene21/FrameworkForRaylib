@@ -112,7 +112,7 @@ void AudioManager::unload_unused() {
 
     for (auto &music_pair: music_map) {
 
-        if (music_pair.second.use_count() == 1) {
+        if (music_pair.second.use_count() == 1 && !IsMusicStreamPlaying(*music_pair.second.get())) {
             unload_track(music_pair.first);
         }
     }
