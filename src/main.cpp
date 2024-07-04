@@ -42,14 +42,14 @@ int main() {
 
     // Init
     std::string title = "ne_mene's framework :)";
-    InitWindow(res.x, res.y, (title + "  -  [F11 for fullscreen]").c_str());
+    InitWindow(res.x * 5, res.y * 5, (title + "  -  [F11 for fullscreen]").c_str());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
     SetExitKey(0);
 
     RenderTexture2D background  = LoadRenderTexture(res.x, res.y);
     RenderTexture2D foreground  = LoadRenderTexture(res.x, res.y);
     RenderTexture2D composition = LoadRenderTexture(res.x, res.y);
-    SetTargetFPS(120);
+    SetTargetFPS(60);
 
     InitAudioDevice();
 

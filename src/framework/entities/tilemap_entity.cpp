@@ -263,12 +263,7 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
     }
 }
 
-void Tilemap::process(float delta) {
-    get_component(CompType::AREA)->process(delta);
-    if (IsKeyPressed(KEY_ENTER)) {
-        save("test.json");
-    }
-}
+void Tilemap::process(float delta) {}
 
 // Draws the tilemap (spatial partitioning and camera culling at play)
 void Tilemap::draw(float delta) {
