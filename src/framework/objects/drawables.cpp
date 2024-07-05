@@ -190,8 +190,22 @@ ShaderPtr ShaderBond::get_shader() {
     return shader;
 }
 
-void ShaderBond::send_uniform(std::string name, void *ptr, int type) {
-    SetShaderValue(*shader.get(), GetShaderLocation(*shader.get(), name.c_str()), ptr, type);
+void ShaderBond::send_uniform(std::string name, void *ptr, size_t size, int type) {
+    void* new_ptr = malloc(size);
+    memcpy(new_ptr, ptr, size);
+    pending_uniform_updates.push_back({name, new_ptr, type});
+}
+
+void ShaderBond::update_uniforms() {
+    for (auto& update: pending_uniform_updates) {
+        SetShaderValue(
+            *shader.get(),
+            GetShaderLocation(*shader.get(), update.name.c_str()),
+            update.ptr, update.type
+        );
+        free(update.ptr);
+    }
+    pending_uniform_updates.clear();
 }
 
 void ShaderBond::bind_texture(std::string name, TexturePtr texture) {
@@ -240,6 +254,7 @@ void DrawableManager::draw() {
 
     for (auto drawable: sorted) {
         drawable->process(GetFrameTime());
+        drawable->shader_bond.update_uniforms();
         drawable->shader_bond.use();
         drawable->draw();
         EndShaderMode();

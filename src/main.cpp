@@ -42,7 +42,7 @@ int main() {
 
     // Init
     std::string title = "ne_mene's framework :)";
-    InitWindow(res.x * 5, res.y * 5, (title + "  -  [F11 for fullscreen]").c_str());
+    InitWindow(res.x * 4, res.y * 4, (title + "  -  [F11 for fullscreen]").c_str());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
     SetExitKey(0);
 

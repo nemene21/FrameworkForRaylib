@@ -10,6 +10,7 @@
 #include <string>
 #include <memory>
 #include <transform_component.hpp>
+#include <stdlib.h>
 
 #define TEXTURE_DIR (std::string)("assets/images/") +
 #define SHADER_DIR  (std::string)("assets/shaders/") +
@@ -86,7 +87,12 @@ public:
         std::string name;
     } BoundTexture;
 
+    typedef struct {
+        std::string name; void *ptr; int type;
+    } UniformUpdate;
+
     std::vector<BoundTexture> bound_textures;
+    std::vector<UniformUpdate> pending_uniform_updates;
 
     ShaderBond(std::string shader_path);
     ShaderBond(ShaderPtr shader);
@@ -101,7 +107,7 @@ public:
     virtual void use();
     virtual void process(float delta);
 
-    /// @brief 
+    /// @brief Makes shader use a texture for an uniform
     /// @param name Name of uniform in shader
     /// @param texture Smart pointer to texture thats being bound
     virtual void bind_texture(std::string name, TexturePtr texture);
@@ -109,7 +115,10 @@ public:
     /// @param name Name of uniform in shader
     /// @param ptr Void pointer to the value being sent
     /// @param type Type of uniform (eg. SHADER_UNIFORM_FLOAT)
-    virtual void send_uniform(std::string name, void *ptr, int type);
+    virtual void send_uniform(std::string name, void *ptr, size_t size, int type);
+
+    /// @brief Processes all uniform updates since last time this was called (for unique shader uniforms, called internally)
+    virtual void update_uniforms();
 
     /// @brief Returns a smart pointer to the bond's shader
     /// @return Smart pointer to the bond's shader

@@ -7,7 +7,7 @@ const float vignette_add = 0.9;
 const float vignette_multiplier = 1.2;
 const float vignette_exp = 1.25;
 
-const float warp = 0.2;
+const float warp = 0.0;
 
 uniform sampler2D texture0;
 uniform float time;
