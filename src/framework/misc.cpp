@@ -1,7 +1,7 @@
 #include <misc.hpp>
 
-const Vector2 res {320, 180};
-const Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
+Vector2 res {320, 180};
+Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
 
 bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;

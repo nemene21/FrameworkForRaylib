@@ -1,11 +1,12 @@
-#ifndef FRAMEWORK_H
-#define FRAMEWORK_H
+#include <iostream>
+#include <time.h>
 
 // Raylib
 #include <raylib.h>
 #include <raymath.h>
 #include <rlgl.h>
 
+// Misc
 #include <misc.hpp>
 
 // Component/entity/scene
@@ -28,10 +29,14 @@
 #include <objects/particles.hpp>
 #include <objects/audio.hpp>
 
-// Entities
-#include <tilemap_entity.hpp>
+class Framework {
+private:
+    static void process_modules(float delta);
+    static void process_scene(float delta);
+    static void draw_game_layer(float delta);
 
-// Scenes
-#include <scenes/game.hpp>
-
-#endif
+public:
+    static void init(std::string title, Vector2 resolution, int window_scale=1);
+    static void deinit();
+    static void run();
+};

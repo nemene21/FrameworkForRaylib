@@ -9,8 +9,8 @@
 #include <string>
 #include <functional>
 
-extern const Vector2 res;
-extern const Vector2 half_res;
+extern Vector2 res;
+extern Vector2 half_res;
 
 typedef struct {
     float x, y, radius;

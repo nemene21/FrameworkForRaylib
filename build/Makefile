@@ -30,6 +30,9 @@ object_files/tilemap_entity.o: ../src/framework/entities/tilemap_entity.cpp
 object_files/entity.o: ../src/framework/entity.cpp
 	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/framework/entity.cpp -o $(@)
 
+object_files/framework.o: ../src/framework/framework.cpp
+	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/framework/framework.cpp -o $(@)
+
 object_files/input.o: ../src/framework/input.cpp
 	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/framework/input.cpp -o $(@)
 
@@ -63,8 +66,8 @@ object_files/game.o: ../src/game/scenes/game.cpp
 object_files/main.o: ../src/main.cpp
 	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/main.cpp -o $(@)
 
-Build.exe: object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/entity.o object_files/input.o object_files/misc.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/sprites.o object_files/trails.o object_files/scene.o object_files/player.o object_files/game.o object_files/main.o 
-	g++ -o Build.exe object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/entity.o object_files/input.o object_files/misc.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/sprites.o object_files/trails.o object_files/scene.o object_files/player.o object_files/game.o object_files/main.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+Build.exe: object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/entity.o object_files/framework.o object_files/input.o object_files/misc.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/sprites.o object_files/trails.o object_files/scene.o object_files/player.o object_files/game.o object_files/main.o 
+	g++ -o Build.exe object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/entity.o object_files/framework.o object_files/input.o object_files/misc.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/sprites.o object_files/trails.o object_files/scene.o object_files/player.o object_files/game.o object_files/main.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
 
 .PHONY: clean
 clean:
@@ -78,6 +81,7 @@ clean:
 	del /S /Q object_files\transform_component.o
 	del /S /Q object_files\tilemap_entity.o
 	del /S /Q object_files\entity.o
+	del /S /Q object_files\framework.o
 	del /S /Q object_files\input.o
 	del /S /Q object_files\misc.o
 	del /S /Q object_files\audio.o
