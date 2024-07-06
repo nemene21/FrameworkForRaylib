@@ -8,6 +8,7 @@
 
 // Misc
 #include <misc.hpp>
+#include <input.hpp>
 
 // Component/entity/scene
 #include <entity.hpp>
