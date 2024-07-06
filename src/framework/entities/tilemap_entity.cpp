@@ -6,8 +6,8 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
     built_chunks {},
     changed_chunks {},
     tilesize {tilesize},
+    renderer {[this](float delta) {this->render(delta); }},
     chunksize {16, 16} {
-
         type_count = (texture.get()->width / tilesize.x) / 4;
     }
 
@@ -268,7 +268,7 @@ void Tilemap::process(float delta) {
 }
 
 // Draws the tilemap (spatial partitioning and camera culling at play)
-void Tilemap::draw(float delta) {
+void Tilemap::render(float delta) {
     Vector2 camera_pos {0, 0};
     float max_dist = sqrt(tilesize.x*tilesize.x + tilesize.y*tilesize.y) +
         sqrt(res.x*res.x + res.y*res.y);
@@ -294,7 +294,6 @@ void Tilemap::draw(float delta) {
 
             if (built_chunks.find(chunk_pos) != built_chunks.end()) { // If chunk exists
                 TileDataVector &drawables = built_chunks[chunk_pos];
-
                 // For all tiles
                 for (auto& tile: drawables) {
                     Vector2 tile_pos {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y};

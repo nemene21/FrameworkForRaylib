@@ -5,8 +5,10 @@
 #include <entity.hpp>
 
 #include <camera_component.hpp>
+#include <tilemap_renderer.hpp>
 #include <collider_component.hpp>
 #include <area_component.hpp>
+#include <drawables.hpp>
 #include <fstream>
 #include <json.hpp>
 #include <tuple>
@@ -57,11 +59,12 @@ private:
 public:
     Vector2 tilesize;
     Vector2 chunksize;
+    TilemapRenderer renderer;
 
     Tilemap(Vector2 tilesize, std::string texture_path);
 
     void process(float delta);
-    void draw(float delta);
+    void render(float delta);
 
     /// @brief Set tile at x, y to type
     /// @param x X coord of tile
@@ -90,5 +93,6 @@ public:
     /// @param path Path to load from
     void load(std::string path);
 };
+
 
 #endif
