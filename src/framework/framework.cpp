@@ -87,6 +87,15 @@ void Framework::draw_game_layer(float delta) {
     EndTextureMode();
 }
 
+void Framework::draw_ui_layer(float delta) {
+    // Ui layer
+    BeginTextureMode(ui_layer);
+    ClearBackground({0, 0, 0, 0});
+
+    DrawableManager::draw_ui();
+    EndTextureMode();
+}
+
 void Framework::run() {
     while (!WindowShouldClose()) {
         // Delta time calc
@@ -104,10 +113,17 @@ void Framework::run() {
         // Drawing start 
         BeginDrawing();
         Framework::draw_game_layer(delta);
-
+        Framework::draw_ui_layer(delta);
         // Compose UI and game layer
         BeginTextureMode(composition_layer);
         DrawTexturePro(game_layer.texture,
+            {0, 0, res.x, res.y},
+            {0, 0, res.x, res.y},
+            {0, 0},
+            0,
+            WHITE
+        );
+        DrawTexturePro(ui_layer.texture,
             {0, 0, res.x, res.y},
             {0, 0, res.x, res.y},
             {0, 0},

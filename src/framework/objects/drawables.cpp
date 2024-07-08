@@ -213,14 +213,15 @@ void ShaderBond::bind_texture(std::string name, TexturePtr texture) {
 }
 
 // <Drawables>
-Drawable::Drawable(Vector2 position, Vector2 offset, Vector2 scale, float angle, std::string shader_path):
+Drawable::Drawable(Vector2 position, Vector2 offset, Vector2 scale, float angle, std::string shader_path, bool is_ui):
     position {position},
     offset {offset},
     scale {scale},
     angle {angle},
     tint {255, 255, 255, 255},
     z_coord {0},
-    shader_bond {ShaderBond(shader_path)} {
+    shader_bond {ShaderBond(shader_path)},
+    is_ui {is_ui} {
 
         DrawableManager::add(this);
     }
@@ -243,13 +244,14 @@ Vector2 Drawable::real_pos() {
 
 // <Drawable Manager>
 std::set<Drawable *> DrawableManager::drawables {};
+std::set<Drawable *> DrawableManager::ui_drawables {};
 
 bool drawable_comparison(Drawable *a, Drawable *b) {
     return a->z_coord < b->z_coord;
 }
 
-void DrawableManager::draw() {
-    std::vector<Drawable *> sorted (drawables.begin(), drawables.end());
+void DrawableManager::render(std::set<Drawable *>& rendering) {
+    std::vector<Drawable *> sorted (rendering.begin(), rendering.end());
     std::sort(sorted.begin(), sorted.end(), drawable_comparison);
 
     for (auto drawable: sorted) {
@@ -261,14 +263,28 @@ void DrawableManager::draw() {
     }
 }
 
+void DrawableManager::draw() {
+    render(drawables);
+}
+
+void DrawableManager::draw_ui() {
+    render(ui_drawables);
+}
+
 void DrawableManager::clear() {
     drawables.clear();
 }
 
 void DrawableManager::add(Drawable *drawable) {
-    drawables.insert(drawable);
+    if (drawable->is_ui)
+        ui_drawables.insert(drawable);
+    else
+        drawables.insert(drawable);
 }
 
 void DrawableManager::remove(Drawable *drawable) {
-    drawables.erase(drawable);
+    if (drawable->is_ui)
+        ui_drawables.insert(drawable);
+    else
+        drawables.erase(drawable);
 }

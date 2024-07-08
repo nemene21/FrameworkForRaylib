@@ -128,12 +128,14 @@ public:
 /// @brief An object that gets drawn to the screen with their respective z_coord, also manages a shader material (ShaderBond)
 class Drawable {
 public:
-    Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="-");
+    Drawable(Vector2 position={0, 0}, Vector2 offset={0, 0}, Vector2 scale={1, 1}, float angle=0, std::string shader_path="-", bool is_ui=false);
     ~Drawable();
 
     Vector2 position, offset, scale;
     float angle;
     Color tint;
+
+    bool is_ui;
 
     /// @brief Drawables with a lower z_coord are drawn behind one another
     float z_coord;
@@ -155,8 +157,11 @@ public:
 class DrawableManager {
 public:
     static std::set<Drawable *> drawables;
+    static std::set<Drawable *> ui_drawables;
 
     static void draw();
+    static void draw_ui();
+    static void render(std::set<Drawable *>& rendering);
     static void clear();
     static void add(Drawable *drawable);
     static void remove(Drawable *drawable);

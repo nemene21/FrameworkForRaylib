@@ -35,6 +35,7 @@ private:
     static void process_modules(float delta);
     static void process_scene(float delta);
     static void draw_game_layer(float delta);
+    static void draw_ui_layer(float delta);
 
 public:
     static void init(std::string title, Vector2 resolution, int window_scale=1);

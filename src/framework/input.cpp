@@ -63,8 +63,6 @@ Vector2 mouse_screen_pos() {
         draw_width  = GetScreenHeight() * (res.x / res.y);
     }
 
-    std::cout << draw_width << ", " << draw_height << std::endl;
-
     Vector2 pos = GetMousePosition();
     pos.x = (pos.x / draw_width ) * res.x;
     pos.y = (pos.y / draw_height) * res.y;
