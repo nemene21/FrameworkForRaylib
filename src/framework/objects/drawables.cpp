@@ -247,7 +247,7 @@ std::set<Drawable *> DrawableManager::drawables {};
 std::set<Drawable *> DrawableManager::ui_drawables {};
 
 bool drawable_comparison(Drawable *a, Drawable *b) {
-    return a->z_coord < b->z_coord;
+    return (a->z_coord == b->z_coord) ? (a->position.y < b->position.y) : (a->z_coord < b->z_coord);
 }
 
 void DrawableManager::render(std::set<Drawable *>& rendering) {
