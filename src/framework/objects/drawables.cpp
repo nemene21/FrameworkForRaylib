@@ -284,7 +284,7 @@ void DrawableManager::add(Drawable *drawable) {
 
 void DrawableManager::remove(Drawable *drawable) {
     if (drawable->is_ui)
-        ui_drawables.insert(drawable);
+        ui_drawables.erase(drawable);
     else
         drawables.erase(drawable);
 }

@@ -187,6 +187,5 @@ clean_button.place(x = 16, y = 16 + 418)
 
 web_button = tkinter.Button(window, text=f"Web: {WEB}", command=toggle_web_mode, font=font)
 web_button.place(x = 16, y = 16 + 418 - 80)
-toggle_web_mode()
 
 window.mainloop()
