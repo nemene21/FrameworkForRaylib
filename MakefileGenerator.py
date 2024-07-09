@@ -166,6 +166,9 @@ def clean():
         print("Cleanedn't :(")
     print("")
 
+def debug():
+    subprocess.run(["debug.bat"])
+
 window = tkinter.Tk()
 window.configure(bg='#333333')
 window.geometry("512x512")
@@ -181,6 +184,9 @@ make_button.place(x = 16, y = 16 + 80)
 
 run_button = tkinter.Button(window, text="Run", command=run, font=font)
 run_button.place(x = 16, y = 16 + 160)
+
+debug_button = tkinter.Button(window, text="Debug", command=debug, font=font)
+debug_button.place(x = 16, y = 16 + 240)
 
 clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
 clean_button.place(x = 16, y = 16 + 418)
