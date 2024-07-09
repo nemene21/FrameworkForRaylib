@@ -30,6 +30,7 @@
 #include <objects/particles.hpp>
 #include <objects/audio.hpp>
 
+/// @brief Used to initialise the framework and run it in main.cpp
 class Framework {
 private:
     static void process_modules(float delta);
