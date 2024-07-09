@@ -6,3 +6,5 @@
 /build/web_build/index.html
 .vscode
 /src/game/**
+/build/assets/**
+.gitignore

@@ -1,7 +1,7 @@
 #include <progress_bar.hpp>
 
 ProgressBar::ProgressBar(float width, float height, float value, float maximum):
-    Drawable({0, 0}, {0, 0}, {1, 1}, 0, "-", true),
+    UIDrawable(width, height, {0, 0}),
     width {width}, height {height}, value {value}, maximum {maximum}
      {
     progress = value / maximum;
@@ -14,10 +14,12 @@ void ProgressBar::process(float delta) {
 }
 
 void ProgressBar::draw() {
-    Vector2 pos = real_pos();
-    DrawRectangleV(pos, {width, height}, background_clr);
-    DrawRectangleV(pos, {width * ease_progress, height}, ease_clr);
-    DrawRectangleV(pos, {width * progress, height}, progress_clr);
+    Vector2 pos = Vector2Add(position, offset);
+    Vector2 origin = {get_width() * centering.x, get_height() * centering.y};
+
+    DrawRectanglePro({pos.x, pos.y, get_width(), get_height()}, origin, angle, background_clr);
+    DrawRectanglePro({pos.x, pos.y, get_width() * ease_progress, get_height()}, origin, angle, ease_clr);
+    DrawRectanglePro({pos.x, pos.y, get_width() * progress, get_height()}, origin, angle, progress_clr);
 }
 
 void ProgressBar::set_color_scheme(Color background, Color progress, Color ease) {

@@ -1,8 +1,8 @@
 #ifndef PROGRESS_BAR_H
 #define PROGRESS_BAR_H
-#include <drawables.hpp>
+#include <ui_drawables.hpp>
 
-class ProgressBar: public Drawable {
+class ProgressBar: public UIDrawable {
 public:
     float width, height, value, maximum, progress, ease_progress;
     Color background_clr, progress_clr, ease_clr;
