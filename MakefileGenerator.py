@@ -171,7 +171,7 @@ def debug():
 
 window = tkinter.Tk()
 window.configure(bg='#333333')
-window.geometry("512x512")
+window.geometry("494x494")
 window.title("Auto Compiling and Running!")
 
 font = ("Helvetica", 24)
@@ -188,10 +188,11 @@ run_button.place(x = 16, y = 16 + 160)
 debug_button = tkinter.Button(window, text="Debug", command=debug, font=font)
 debug_button.place(x = 16, y = 16 + 240)
 
-clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
-clean_button.place(x = 16, y = 16 + 418)
-
 web_button = tkinter.Button(window, text=f"Web: {WEB}", command=toggle_web_mode, font=font)
-web_button.place(x = 16, y = 16 + 418 - 80)
+web_button.place(x = 16, y = 16 + 320)
+
+clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
+clean_button.place(x = 16, y = 16 + 400)
+
 
 window.mainloop()
