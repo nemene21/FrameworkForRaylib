@@ -143,9 +143,9 @@ def get_filename(string):
 
 def run():
     if WEB:
-        server_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "cd /d build/web_build && python -m http.server"])
+        server_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "color 2 && cd /d build/web_build && python -m http.server"])
         time.sleep(2)
-        ngrok_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "ngrok", "http", "8000"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        ngrok_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "color 4 && ngrok http 8000"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         webbrowser.open("http://localhost:8000")
     else:
         result = subprocess.run("Build.exe", shell=True, cwd="build")
