@@ -65,6 +65,9 @@ void Scene::unload_entities() {
     }
 }
 
+const std::vector<Entity*>& Scene::get_entities() {
+    return entities;
+}
 
 void Scene::process(float delta) {}
 

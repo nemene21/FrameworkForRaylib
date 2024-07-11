@@ -82,12 +82,18 @@ void Framework::debug_gui() {
     if (before != unlimited_framerate)
         SetTargetFPS(unlimited_framerate ? 0 : 60);
 
-    ImGui::Text(("Entities: " + std::to_string(
+    ImGui::Text(("Entity count: " + std::to_string(
         SceneManager::scene_on->entity_count()
     )).c_str());
-    ImGui::Text(("Components: " + std::to_string(
+    ImGui::Text(("Component count: " + std::to_string(
         ComponentManager::component_count()
     )).c_str());
+
+    if (ImGui::CollapsingHeader("Entities:")) {
+        for (Entity* entity: SceneManager::scene_on->get_entities()) {
+            ImGui::Text("Woah");
+        }
+    }
 
     ImGui::ColorEdit4("Background color", background_color);
     rlImGuiEnd();

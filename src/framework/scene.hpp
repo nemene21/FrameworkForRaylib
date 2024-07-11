@@ -42,6 +42,8 @@ public:
 
     virtual void restart() = 0;
 
+    virtual const std::vector<Entity*>& get_entities();
+
 protected:
     std::vector<Entity*> entities;
 };
