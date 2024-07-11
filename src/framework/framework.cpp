@@ -12,10 +12,12 @@ clock_t frame_timer;
 unsigned long frame_time;
 
 bool unlimited_framerate = false;
+bool debug_ui;
 
-void Framework::init(std::string title, Vector2 resolution, int window_scale) {
+void Framework::init(std::string title, Vector2 resolution, int window_scale, bool _debug_window) {
     srand(time(NULL));
     res = resolution;
+    debug_ui = _debug_window;
 
     // Init
     InitWindow(res.x * window_scale, res.y * window_scale, (title).c_str());
@@ -59,6 +61,36 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale) {
     post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     noise_texture = TextureManager::get("post_processing/noise.png");
     paper_texture = TextureManager::get("post_processing/paper.png");
+}
+
+void Framework::debug_gui() {
+    rlImGuiBegin();
+    ImVec4 performance_color = frame_time > (1.0/60.0 * 1000) ?
+        ImVec4(1, 0, 0, 1) : ImVec4(0, 1, 0, 1);
+
+    ImGui::TextColored(
+        performance_color,
+        ("FPS: " + std::to_string(GetFPS())).c_str()
+    );
+    ImGui::TextColored(
+        performance_color,
+        ("Frame time: " + std::to_string(frame_time) + "ms /16.66ms").c_str()
+    );
+
+    bool before = unlimited_framerate;
+    ImGui::Checkbox("Unlimited framerate", &unlimited_framerate);
+    if (before != unlimited_framerate)
+        SetTargetFPS(unlimited_framerate ? 0 : 60);
+
+    ImGui::Text(("Entities: " + std::to_string(
+        SceneManager::scene_on->entity_count()
+    )).c_str());
+    ImGui::Text(("Components: " + std::to_string(
+        ComponentManager::component_count()
+    )).c_str());
+
+    ImGui::ColorEdit4("Background color", background_color);
+    rlImGuiEnd();
 }
 
 void Framework::process_modules(float delta) {
@@ -193,38 +225,11 @@ void Framework::run() {
         );
         EndShaderMode();
 
-
-
-        rlImGuiBegin();
-        ImVec4 performance_color = frame_time > (1.0/60.0 * 1000) ?
-            ImVec4(1, 0, 0, 1) : ImVec4(0, 1, 0, 1);
-
-        ImGui::TextColored(
-            performance_color,
-            ("FPS: " + std::to_string(GetFPS())).c_str()
-        );
-        ImGui::TextColored(
-            performance_color,
-            ("Frame time: " + std::to_string(frame_time) + "ms /16.66ms").c_str()
-        );
-
-        bool before = unlimited_framerate;
-        ImGui::Checkbox("Unlimited framerate", &unlimited_framerate);
-        if (before != unlimited_framerate)
-            SetTargetFPS(unlimited_framerate ? 0 : 60);
-
-        ImGui::Text(("Entities: " + std::to_string(
-            SceneManager::scene_on->entity_count()
-        )).c_str());
-        ImGui::Text(("Components: " + std::to_string(
-            ComponentManager::component_count()
-        )).c_str());
-
-        ImGui::ColorEdit4("Background color", background_color);
-
+        if (debug_ui) {
+            Framework::debug_gui();
+        }
         clock_t new_frame_timer = clock();
         frame_time  = new_frame_timer - frame_timer;
-        rlImGuiEnd();
         EndDrawing();
 
     }

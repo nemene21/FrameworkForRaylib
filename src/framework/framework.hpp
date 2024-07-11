@@ -43,9 +43,10 @@ private:
     static void process_scene(float delta);
     static void draw_game_layer(float delta);
     static void draw_ui_layer(float delta);
+    static void debug_gui();
 
 public:
-    static void init(std::string title, Vector2 resolution, int window_scale=1);
+    static void init(std::string title, Vector2 resolution, int window_scale=1, bool _debug_window=false);
     static void deinit();
     static void run();
 };
