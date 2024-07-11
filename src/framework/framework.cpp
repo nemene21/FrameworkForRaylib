@@ -29,6 +29,7 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale) {
     rlImGuiBegin();
     ImGui::SetWindowFontScale(2);
     ImGui::SetWindowCollapsed(true);
+    ImGui::SetWindowSize({358, 104});
     rlImGuiEnd();
     EndDrawing();
 
