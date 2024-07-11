@@ -3,6 +3,15 @@
 Vector2 res {320, 180};
 Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
 
+Color Float4ToColor(float* arr) {
+    return Color{
+        (unsigned char)(arr[0] * 255),
+        (unsigned char)(arr[1] * 255),
+        (unsigned char)(arr[2] * 255),
+        (unsigned char)(arr[3] * 255)
+    };
+}
+
 bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
 }

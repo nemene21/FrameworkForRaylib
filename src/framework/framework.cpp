@@ -5,6 +5,8 @@ RenderTexture2D ui_layer, game_layer, composition_layer;
 ShaderPtr post_processing_ptr; 
 TexturePtr noise_texture,
            paper_texture;
+        
+float background_color[4] = {0, 0, 0, 1};
 
 void Framework::init(std::string title, Vector2 resolution, int window_scale) {
     srand(time(NULL));
@@ -14,6 +16,8 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale) {
     InitWindow(res.x * window_scale, res.y * window_scale, (title).c_str());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
     SetExitKey(0);
+
+    rlImGuiSetup(true);
 
     ui_layer   = LoadRenderTexture(res.x, res.y);
     game_layer = LoadRenderTexture(res.x, res.y);
@@ -75,7 +79,7 @@ void Framework::draw_game_layer(float delta) {
     // Game layer
     BeginTextureMode(game_layer);
     BeginMode2D(*global_camera);
-    ClearBackground({0, 0, 0, 255});
+    ClearBackground(Float4ToColor(background_color));
 
     SceneManager::scene_on->draw_entities(delta);
     DrawableManager::draw();
@@ -172,12 +176,20 @@ void Framework::run() {
             Color{255, 255, 255}
         );
         EndShaderMode();
-        EndDrawing();
 
-        // FPS counter
-        std::string fps_string = std::to_string(GetFPS());
-        const char* fps_cstring = fps_string.c_str();
-        SetWindowTitle(fps_cstring);
+        rlImGuiBegin();
+        ImGui::SetWindowFontScale(2);
+
+        ImGui::Text(("FPS: " + std::to_string(GetFPS())).c_str());
+
+        ImGui::Text(("Entities: " + std::to_string(
+            SceneManager::scene_on->entity_count()
+        )).c_str());
+
+        ImGui::ColorEdit4("Background color", background_color);
+
+        rlImGuiEnd();
+        EndDrawing();
     }
     deinit();
 }
@@ -190,5 +202,6 @@ void Framework::deinit() {
     SceneManager::unload_all();
     AudioManager::unload_all();
 
+    rlImGuiShutdown();
     CloseWindow();
 }

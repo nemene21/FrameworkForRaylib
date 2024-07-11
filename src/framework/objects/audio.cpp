@@ -153,13 +153,17 @@ void AudioManager::reload() {
 
 // Unloads all sounds and tracks
 void AudioManager::unload_all() {
-
+    std::vector<std::string> to_unload {};
     for (auto& texture_pair: sound_map) {
-        unload_sfx(texture_pair.first);
+        to_unload.push_back(texture_pair.first);
     }
+    for (auto to: to_unload) unload_sfx(to);
+    to_unload.clear();
+    
     for (auto& music_pair: music_map) {
-        unload_track(music_pair.first);
+        to_unload.push_back(music_pair.first);
     }
+    for (auto to: to_unload) unload_track(to);
 }
 
 // Plays a sound with randomized pitch and volume

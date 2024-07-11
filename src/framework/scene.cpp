@@ -88,7 +88,9 @@ void SceneManager::unload(std::string name) {
 }
 
 void SceneManager::unload_all() {
+    std::vector<std::string> to_unload {};
     for (auto& scene_pair: scene_map) {
-        unload(scene_pair.first);
+        to_unload.push_back(scene_pair.first);
     }
+    for (auto to: to_unload) unload(to);
 }

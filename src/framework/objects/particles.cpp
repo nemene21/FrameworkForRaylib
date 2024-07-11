@@ -71,10 +71,11 @@ void ParticleDataManager::reload() {
 
 // Unloads all particle data objects
 void ParticleDataManager::unload_all() {
+    std::vector<std::string> to_unload {};
     for (auto& particle_pair: particle_data_map) {
-
-        unload(particle_pair.first);
+        to_unload.push_back(particle_pair.first);
     }
+    for (auto to: to_unload) unload(to);
 }
 
 // <Emit Shapes>

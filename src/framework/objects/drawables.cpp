@@ -61,10 +61,11 @@ void TextureManager::reload() {
 
 // Unloads all textures
 void TextureManager::unload_all() {
+    std::vector<std::string> to_unload {};
     for (auto& texture_pair: texture_map) {
-
-        unload(texture_pair.first);
+        to_unload.push_back(texture_pair.first);
     }
+    for (auto to: to_unload) unload(to);
 }
 
 
@@ -147,10 +148,11 @@ void ShaderManager::reload() {
 
 // Unloads all shader objects
 void ShaderManager::unload_all() {
+    std::vector<std::string> to_unload {};
     for (auto& shader_pair: shader_map) {
-
-        unload(shader_pair.first);
+        to_unload.push_back(shader_pair.first);
     }
+    for (auto to: to_unload) unload(to);
 }
 
 // <Materials/ShaderBond>

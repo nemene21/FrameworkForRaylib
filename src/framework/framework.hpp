@@ -1,10 +1,16 @@
 #include <iostream>
 #include <time.h>
+#include <string>
 
 // Raylib
 #include <raylib.h>
 #include <raymath.h>
 #include <rlgl.h>
+
+// Imgui
+#include <imgui.h>
+#include <rlImGui.h>
+#include <rlImGuiColors.h>
 
 // Misc
 #include <misc.hpp>
