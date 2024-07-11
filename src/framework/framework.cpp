@@ -8,6 +8,11 @@ TexturePtr noise_texture,
         
 float background_color[4] = {0, 0, 0, 1};
 
+clock_t frame_timer;
+unsigned long frame_time;
+
+bool unlimited_framerate = false;
+
 void Framework::init(std::string title, Vector2 resolution, int window_scale) {
     srand(time(NULL));
     res = resolution;
@@ -17,7 +22,15 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale) {
     SetWindowState(FLAG_WINDOW_RESIZABLE);
     SetExitKey(0);
 
+    frame_timer = clock();
+
+    BeginDrawing();
     rlImGuiSetup(true);
+    rlImGuiBegin();
+    ImGui::SetWindowFontScale(2);
+    ImGui::SetWindowCollapsed(true);
+    rlImGuiEnd();
+    EndDrawing();
 
     ui_layer   = LoadRenderTexture(res.x, res.y);
     game_layer = LoadRenderTexture(res.x, res.y);
@@ -115,7 +128,9 @@ void Framework::run() {
         process_scene(delta);
 
         // Drawing start 
+        frame_timer = clock();
         BeginDrawing();
+        
         Framework::draw_game_layer(delta);
         Framework::draw_ui_layer(delta);
         // Compose UI and game layer
@@ -177,19 +192,40 @@ void Framework::run() {
         );
         EndShaderMode();
 
-        rlImGuiBegin();
-        ImGui::SetWindowFontScale(2);
 
-        ImGui::Text(("FPS: " + std::to_string(GetFPS())).c_str());
+
+        rlImGuiBegin();
+        ImVec4 performance_color = frame_time > (1.0/60.0 * 1000) ?
+            ImVec4(1, 0, 0, 1) : ImVec4(0, 1, 0, 1);
+
+        ImGui::TextColored(
+            performance_color,
+            ("FPS: " + std::to_string(GetFPS())).c_str()
+        );
+        ImGui::TextColored(
+            performance_color,
+            ("Frame time: " + std::to_string(frame_time) + "ms /16.66ms").c_str()
+        );
+
+        bool before = unlimited_framerate;
+        ImGui::Checkbox("Unlimited framerate", &unlimited_framerate);
+        if (before != unlimited_framerate)
+            SetTargetFPS(unlimited_framerate ? 0 : 60);
 
         ImGui::Text(("Entities: " + std::to_string(
             SceneManager::scene_on->entity_count()
         )).c_str());
+        ImGui::Text(("Components: " + std::to_string(
+            ComponentManager::component_count()
+        )).c_str());
 
         ImGui::ColorEdit4("Background color", background_color);
 
+        clock_t new_frame_timer = clock();
+        frame_time  = new_frame_timer - frame_timer;
         rlImGuiEnd();
         EndDrawing();
+
     }
     deinit();
 }
