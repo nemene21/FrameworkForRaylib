@@ -3,6 +3,7 @@
 
 #include <entity.hpp>
 #include <vector>
+#include <unordered_map>
 
 #include <tilemap_entity.hpp>
 #include <misc.hpp>
@@ -46,6 +47,7 @@ public:
 
 protected:
     std::vector<Entity*> entities;
+    std::unordered_map<std::string, Entity*> entities_by_name;
 };
 
 typedef std::map<std::string, Scene*> SceneMap;

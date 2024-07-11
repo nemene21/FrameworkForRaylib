@@ -14,16 +14,24 @@ class Entity {
 protected:
     std::map<ComponentType, Component*> comps;
     std::unordered_set<std::string> groups;
+    std::string name;
 
     bool death_queued;
 
 public:
+    Entity(std::string name);
     Entity();
     virtual ~Entity();
 
     virtual void process_components(float delta);
     virtual void draw_components(float delta);
-    
+
+    virtual std::string get_name();
+    /// @brief Sets name of entity
+    /// @param new_name The new name
+    /// @warning Do not rename entities while they are already in a scene
+    virtual void set_name(std::string new_name);
+
     /// @brief Makes the entity be in a group
     /// @param group Group name
     /// @note Groups are used to query components of a certain group or to check if an entity should have a certain functionality

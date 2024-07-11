@@ -91,7 +91,7 @@ void Framework::debug_gui() {
 
     if (ImGui::CollapsingHeader("Entities:")) {
         for (Entity* entity: SceneManager::scene_on->get_entities()) {
-            ImGui::Text("Woah");
+            ImGui::Text(entity->get_name().c_str());
         }
     }
 

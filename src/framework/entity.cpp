@@ -1,11 +1,20 @@
 #include <entity.hpp>
 
 // <Entity>
-Entity::Entity(): death_queued {false} {}
+Entity::Entity(std::string name): death_queued {false}, name {name} {}
+Entity::Entity(): death_queued {false}, name {"Entity"} {}
 Entity::~Entity() {
     for (auto& comp_pair: comps) {
         delete comp_pair.second;
     }
+}
+
+std::string Entity::get_name() {
+    return name;
+}
+
+void Entity::set_name(std::string new_name) {
+    name = new_name;
 }
 
 void Entity::process(float delta) {}

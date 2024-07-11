@@ -22,6 +22,7 @@ void Scene::process_entities(float delta) {
     for (int i = entities.size()-1; i >= 0; i--) {
 
         if (entities[i]->is_death_queued()) {
+            entities_by_name.erase(entities[i]->get_name());
             delete entities[i];
             entities.erase(entities.begin() + i);
         }
@@ -38,6 +39,13 @@ void Scene::draw_entities(float delta) {
 }
 
 void Scene::add_entity(Entity* entity) {
+    std::string original_name = entity->get_name();
+    int i = 2;
+    while (entities_by_name.find(entity->get_name()) != entities_by_name.end()) {
+        entity->set_name(original_name + "_" + std::to_string(i));
+        i++;
+    }
+    entities_by_name[entity->get_name()] = entity;
     entities.push_back(entity);
 }
 
@@ -59,6 +67,7 @@ Entity *Scene::first_in_group(std::string name) {
 
 void Scene::unload_entities() {
     for (int i = entities.size()-1; i >= 0; i--) {
+        entities_by_name.erase(entities[i]->get_name());
 
         delete entities[i];
         entities.erase(entities.begin() + i);
