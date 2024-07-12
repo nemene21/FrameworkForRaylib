@@ -26,19 +26,18 @@ def toggle_web_mode():
     if WEB:
         COMPILER = "emcc"
         INDEX    = " index.html"
-        LDFLAGS  = "-L../libweb/"
+        LDFLAGS  = "-DWEB -L../libweb/"
         LDLIBS   = "-lraylib"
         OBJ_DIR  = "web_object_files"
     else:
         COMPILER = "g++"
         INDEX    = ""
         LDFLAGS  = "-L../lib/"
-        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
+        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm -ldiscord-rpc"
         OBJ_DIR  = "object_files"
     
     web_button.config(text=f"Web: {WEB}")
     generate_makefile()
-
 
 def next(n=1):
     global makefile
@@ -84,7 +83,7 @@ def generate_makefile():
 
     makefile = ""
 
-    add("all: Build.exe")
+    add("all: Build.exe")   
     next(2)
 
     for source in source_files:
@@ -194,5 +193,7 @@ web_button.place(x = 16, y = 16 + 320)
 clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
 clean_button.place(x = 16, y = 16 + 400)
 
+toggle_web_mode()
+toggle_web_mode()
 
 window.mainloop()
