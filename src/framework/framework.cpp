@@ -5,7 +5,7 @@ RenderTexture2D ui_layer, game_layer, composition_layer;
 ShaderPtr post_processing_ptr; 
 TexturePtr noise_texture,
            paper_texture;
-        
+
 float background_color[4] = {0, 0, 0, 1};
 
 clock_t frame_timer;

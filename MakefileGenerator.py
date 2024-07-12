@@ -24,9 +24,9 @@ def toggle_web_mode():
 
     WEB = not WEB
     if WEB:
-        COMPILER = "emcc"
+        COMPILER = "emcc -DWEB"
         INDEX    = " index.html"
-        LDFLAGS  = "-DWEB -L../libweb/"
+        LDFLAGS  = "-L../libweb/"
         LDLIBS   = "-lraylib"
         OBJ_DIR  = "web_object_files"
     else:
@@ -87,15 +87,17 @@ def generate_makefile():
     next(2)
 
     for source in source_files:
-        add(f"{OBJ_DIR}/{get_filename(source)}.o: {ROOT_DIR}/{source}.cpp")
-        next(); tab()
+        if not (WEB and get_filename(source) == "rich_presence"):
+            add(f"{OBJ_DIR}/{get_filename(source)}.o: {ROOT_DIR}/{source}.cpp")
+            next(); tab()
 
-        add(f"{COMPILER} {CFLAGS} -c {ROOT_DIR}/{source}.cpp -o $(@)")
-        next(2)
+            add(f"{COMPILER} {CFLAGS} -c {ROOT_DIR}/{source}.cpp -o $(@)")
+            next(2)
 
     add("Build.exe: ")
     for source in source_files:
-        add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+        if not (WEB and get_filename(source) == "rich_presence"):
+            add(OBJ_DIR + "/" + get_filename(source) + ".o ")
 
     next(); tab()
     if not WEB:
@@ -107,7 +109,9 @@ def generate_makefile():
         add(f"{COMPILER} {CFLAGS}")
         add("../src/main.cpp ")
         for source in source_files:
-            add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+            if not (WEB and get_filename(source) == "rich_presence"):
+                add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+                
         add("-o web_build/index.html -s ASSERTIONS=1 -s SAFE_HEAP=1 -s USE_GLFW=3 -s ASYNCIFY -s WASM=1 -s TOTAL_MEMORY=2048MB --shell-file shell.html ")
         add("--preload-file assets ")
 
