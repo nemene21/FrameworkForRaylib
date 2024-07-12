@@ -17,6 +17,11 @@ void Entity::set_name(std::string new_name) {
     name = new_name;
 }
 
+std::unordered_set<std::string>& Entity::get_groups() {
+    return groups;
+}
+
+
 std::vector<Component*> Entity::get_components() {
     std::vector<Component*> comp_arr {};
     for (auto comp: comps) {

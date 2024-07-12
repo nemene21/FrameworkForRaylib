@@ -34,6 +34,7 @@ public:
     /// @param new_name The new name
     /// @warning Do not rename entities while they are already in a scene
     virtual void set_name(std::string new_name);
+    virtual std::unordered_set<std::string>& get_groups();
 
     /// @brief Makes the entity be in a group
     /// @param group Group name

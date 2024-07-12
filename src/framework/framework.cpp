@@ -103,11 +103,18 @@ void Framework::debug_gui() {
                 ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.4f, 0.7f, 1.0f, 0.1f));
 
                 if (ImGui::CollapsingHeader(("Components##" + std::to_string(i)).c_str())) {
+                    ImGui::Indent(25.f);
                     for (auto component: entity->get_components()) {
-                        ImGui::Indent(25.f);
                         component->draw_gui_info();
-                        ImGui::Unindent(25.f);
                     }
+                    ImGui::Unindent(25.f);
+                }
+                if (ImGui::CollapsingHeader(("Groups##" + std::to_string(i)).c_str())) {
+                    ImGui::Indent(25.f);
+                    for (auto group: entity->get_groups()) {
+                        ImGui::Text(group.c_str());
+                    }
+                    ImGui::Unindent(25.f);
                 }
                 ImGui::Unindent(25.f);
                 ImGui::PopStyleColor();
