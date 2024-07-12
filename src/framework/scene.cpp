@@ -9,6 +9,14 @@ int Scene::entity_count() {
     return entities.size();
 }
 
+Entity *Scene::get_entity(std::string name) {
+    if (entities_by_name.find(name) == entities_by_name.end()) {
+        std::cout << "ERROR - Entity " << name << " not found!" << std::endl;
+        exit(1);
+    }
+    return entities_by_name[name];
+}
+
 void Scene::process_entities(float delta) {
     int i = 0;
     while (i != entities.size()) {
@@ -42,7 +50,7 @@ void Scene::add_entity(Entity* entity) {
     std::string original_name = entity->get_name();
     int i = 2;
     while (entities_by_name.find(entity->get_name()) != entities_by_name.end()) {
-        entity->set_name(original_name + "_" + std::to_string(i));
+        entity->set_name(original_name + std::to_string(i));
         i++;
     }
     entities_by_name[entity->get_name()] = entity;

@@ -26,6 +26,9 @@ public:
     virtual void process_components(float delta);
     virtual void draw_components(float delta);
 
+    /// @brief Returns array of components on entity
+    virtual std::vector<Component*> get_components();
+
     virtual std::string get_name();
     /// @brief Sets name of entity
     /// @param new_name The new name

@@ -74,7 +74,7 @@ void Framework::debug_gui() {
     );
     ImGui::TextColored(
         performance_color,
-        ("Frame time: " + std::to_string(frame_time) + "ms /16.66ms").c_str()
+        ("Frame time: " + std::to_string(frame_time) + "ms/16.66ms").c_str()
     );
 
     bool before = unlimited_framerate;
@@ -90,10 +90,35 @@ void Framework::debug_gui() {
     )).c_str());
 
     if (ImGui::CollapsingHeader("Entities:")) {
+        ImGui::Indent(25.f);
+        ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.4f, 0.7f, 1.0f, 0.15f));
+
+        int i = 0;
         for (Entity* entity: SceneManager::scene_on->get_entities()) {
-            ImGui::Text(entity->get_name().c_str());
+            i++;
+            std::string ent_name = entity->get_name().c_str();
+
+            if (ImGui::CollapsingHeader(ent_name.c_str())) {
+                ImGui::Indent(25.f);
+                ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.4f, 0.7f, 1.0f, 0.1f));
+
+                if (ImGui::CollapsingHeader(("Components##" + std::to_string(i)).c_str())) {
+                    for (auto component: entity->get_components()) {
+                        ImGui::Indent(25.f);
+                        component->draw_gui_info();
+                        ImGui::Unindent(25.f);
+                    }
+                }
+                ImGui::Unindent(25.f);
+                ImGui::PopStyleColor();
+            }
         }
+        ImGui::Unindent(25.f);
+        ImGui::PopStyleColor();
     }
+
+    ImGui::Checkbox("Draw areas", &DRAW_AREAS);
+    ImGui::Checkbox("Draw colliders", &DRAW_COLLIDERS);
 
     ImGui::ColorEdit4("Background color", background_color);
     rlImGuiEnd();

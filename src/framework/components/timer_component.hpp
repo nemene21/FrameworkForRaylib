@@ -2,6 +2,7 @@
 #define TIMER_H
 #include <map>
 #include <component.hpp>
+#include <math.h>
 
 #define TIMER_LIMIT (float)(1./60.f)
 
@@ -47,6 +48,8 @@ public:
 
     TimerComponent(Entity *entity);
     ~TimerComponent();
+
+    void draw_gui_info();
 
     /// @brief Adds a new timer to be automatically processed
     /// @param name Timer name

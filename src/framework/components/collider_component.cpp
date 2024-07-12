@@ -1,6 +1,8 @@
 #include <collider_component.hpp>
 
-ColliderComponent::ColliderComponent(Vector2 pos): Component(CompType::COLLIDER, nullptr) {
+bool DRAW_COLLIDERS = false;
+
+ColliderComponent::ColliderComponent(Vector2 pos): Component(CompType::COLLIDER, nullptr), draw_debug {false} {
     position = pos;
     update_shape_position();
 }
@@ -71,7 +73,7 @@ ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float width, f
     Component(CompType::COLLIDER, entity),
     shape {nullptr},
     is_rectangle {true},
-    is_circle {false},
+    is_circle {false}, draw_debug {false},
     collision_direction {0, 0},
     position {pos}
 {
@@ -83,7 +85,7 @@ ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float width, f
 ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float radius):
     Component(CompType::COLLIDER, entity),
     shape {nullptr},
-    is_rectangle {false},
+    is_rectangle {false}, draw_debug {false},
     is_circle {true}
 {
     std::cout << "Didnt add circles yet :(" << std::endl;
@@ -91,6 +93,15 @@ ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float radius):
 
     shape = new Circle{0, 0, radius};
 }
+
+void ColliderComponent::draw_gui_info() {
+    ImGui::Text("Collider");
+
+    ImGui::Indent(25.f);
+    ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
+    ImGui::Unindent(25.f);
+}
+
 
 // Collider collision direction checks
 bool ColliderComponent::on_floor() {
@@ -315,6 +326,6 @@ void ColliderManager::draw_debug() {
     for (auto component: ComponentManager::query_components(CompType::COLLIDER)) {
 
         ColliderComponent *collider_component = (ColliderComponent *)component;
-        if (DRAW_COLLIDERS) collider_component->debug_draw();
+        if (DRAW_COLLIDERS || collider_component->draw_debug) collider_component->debug_draw();
     }
 }

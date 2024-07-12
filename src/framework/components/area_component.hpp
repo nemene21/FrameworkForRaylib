@@ -9,7 +9,7 @@
 #include <set>
 
 #define AREA_CHUNK_SIZE (int)1024
-#define DRAW_AREAS true
+extern bool DRAW_AREAS;
 
 /// @brief Area layers
 enum class AreaIndex {
@@ -25,7 +25,7 @@ private:
     std::set<int> mask;
 
 public:
-    bool is_rectangle, is_circle;
+    bool is_rectangle, is_circle, draw_debug;
     void *shape;
     Vector2 position;
     std::set<AreaComponent *> areas_overlapping;
@@ -35,6 +35,8 @@ public:
     /// @brief Signal emitted when an area exits area
     Signal area_exited;
     AreaComponent *last_entered, *last_exited;
+
+    void draw_gui_info();
 
     AreaComponent();
     AreaComponent(Entity *entity, float width, float height);

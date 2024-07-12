@@ -7,10 +7,17 @@
 #include <map>
 #include <vector>
 #include <set>
+#include <string>
+
+#include <imgui.h>
+#include <rlImGui.h>
+#include <rlImGuiColors.h>
 
 class Entity;
 
 typedef std::function<void(Entity *)> SignalFunction;
+
+extern int last_component_id;
 
 /// @brief Calls callbacks when a certain event happens
 class Signal {
@@ -50,6 +57,7 @@ class Component {
 public:
     ComponentType type;
     Entity *entity;
+    int id;
 
     Component(ComponentType type, Entity *entity);
     virtual ~Component();
@@ -59,6 +67,8 @@ public:
 
     virtual void process(float delta);
     virtual void draw(float delta);
+
+    virtual void draw_gui_info();
 };
 
 // <Component Namespace>
@@ -73,7 +83,7 @@ protected:
     static ComponentMap component_map;
 
 public:
-    static void add_component(Component *comp);
+    static int add_component(Component *comp);
     static void remove_component(Component *comp);
 
     /// @brief Returns a set of components of a certain type

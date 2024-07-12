@@ -9,7 +9,7 @@
 #include <set>
 
 #define COLLIDER_CHUNK_SIZE (int)1024
-#define DRAW_COLLIDERS false
+extern bool DRAW_COLLIDERS;
 
 /// @brief Collision layers
 enum class ColliderIndex {
@@ -25,13 +25,15 @@ private:
 
 public:
     Vector2 collision_direction;
-    bool is_rectangle, is_circle;
+    bool is_rectangle, is_circle, draw_debug;
     void *shape;
     Vector2 position;
 
     ColliderComponent(Vector2 pos={0, 0});
     ColliderComponent(Entity *entity, Vector2 pos, float width, float height);
     ColliderComponent(Entity *entity, Vector2 pos, float radius);
+
+    void draw_gui_info();
     
     /// @brief Sets the layers
     /// @param new_layers Set of layers

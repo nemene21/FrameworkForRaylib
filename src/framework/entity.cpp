@@ -17,6 +17,14 @@ void Entity::set_name(std::string new_name) {
     name = new_name;
 }
 
+std::vector<Component*> Entity::get_components() {
+    std::vector<Component*> comp_arr {};
+    for (auto comp: comps) {
+        comp_arr.push_back(comp.second);
+    }
+    return comp_arr;
+}
+
 void Entity::process(float delta) {}
 void Entity::draw(float delta) {}
 

@@ -53,6 +53,22 @@ TimerComponent::~TimerComponent() {
     }
 }
 
+void TimerComponent::draw_gui_info() {
+    if (ImGui::CollapsingHeader(("Timer Manager##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        for (auto timer_pair: timers) {
+            Timer* timer = timer_pair.second;
+
+            ImGui::BulletText(
+                (timer_pair.first + " - " +
+                std::to_string(timer->progress) + "s /" +
+                std::to_string(timer->duration) + "s").c_str()
+            );
+        }
+        ImGui::Unindent(25.f);
+    }
+}
+
 void TimerComponent::process(float delta) {
     for (auto &timer_pair: timers) {
         timer_pair.second->process(delta);

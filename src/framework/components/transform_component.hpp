@@ -17,6 +17,8 @@ public:
 
     TransformComponent(Entity *entity, Vector2 position = {0, 0}, Vector2 scale = {1, 1}, float angle = 0);
 
+    void draw_gui_info();
+
     /// @brief Adds vector to position
     /// @param adding Vector to add
     void translate(Vector2 adding);

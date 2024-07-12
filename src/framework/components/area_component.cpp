@@ -1,6 +1,8 @@
 #include <area_component.hpp>
 
-AreaComponent::AreaComponent(): Component(CompType::AREA, nullptr) {}
+bool DRAW_AREAS = false;
+
+AreaComponent::AreaComponent(): Component(CompType::AREA, nullptr), draw_debug {false} {}
 
 bool overlaps(AreaComponent *area1, AreaComponent *area2) {
     if (area1->is_rectangle && area2->is_rectangle) {
@@ -42,7 +44,7 @@ AreaComponent::AreaComponent(Entity *entity, float width, float height):
     mask {},
     shape {nullptr},
     is_rectangle {true},
-    is_circle {false},
+    is_circle {false}, draw_debug {false},
     areas_overlapping {}
 {
     shape = (void *)(new Rectangle{0, 0, width, height});
@@ -57,10 +59,18 @@ AreaComponent::AreaComponent(Entity *entity, float radius):
     mask {},
     shape {nullptr},
     is_rectangle {false},
-    is_circle {true},
+    is_circle {true}, draw_debug {false},
     areas_overlapping {}
 {
     shape = (void *)(new Circle{0, 0, radius});
+}
+
+void AreaComponent::draw_gui_info() {
+    ImGui::Text("Area");
+
+    ImGui::Indent(25.f);
+    ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
+    ImGui::Unindent(25.f);
 }
 
 // Clears all areas that are currently overlapping (for DOT zones and such...)
@@ -291,6 +301,6 @@ void AreaManager::draw_debug() {
     for (auto component: ComponentManager::query_components(CompType::AREA)) {
 
         AreaComponent *area_component = (AreaComponent *)component;
-        if (DRAW_AREAS) area_component->debug_draw();
+        if (DRAW_AREAS || area_component->draw_debug) area_component->debug_draw();
     }
 }

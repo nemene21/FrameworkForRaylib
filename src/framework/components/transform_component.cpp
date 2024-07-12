@@ -20,6 +20,28 @@ void TransformComponent::translate_y(float adding) {
     position.y += adding;
 }
 
+void TransformComponent::draw_gui_info() {
+    if (ImGui::CollapsingHeader(("Transform##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+
+        float pos[2] = {position.x, position.y};
+        ImGui::DragFloat2(("Position##" + std::to_string(id)).c_str(), pos);
+        position = {pos[0], pos[1]};
+
+        float vel[2] = {velocity.x, velocity.y};
+        ImGui::DragFloat2(("Veclotiy##" + std::to_string(id)).c_str(), vel);
+        velocity = {vel[0], vel[1]};
+
+        float scl[2] = {scale.x, scale.y};
+        ImGui::DragFloat2(("Scale##" + std::to_string(id)).c_str(), scl, 0.01);
+        scale = {scl[0], scl[1]};
+
+        ImGui::DragFloat("Angle ", &angle);
+        
+        ImGui::Unindent(25.f);
+    }
+}
+
 void TransformComponent::check_bounds(Vector2 direction) {
     if (entity->has_component(CompType::COLLIDER)) {
         auto collider_ptr = (ColliderComponent *)entity->get_component(CompType::COLLIDER);
@@ -36,10 +58,12 @@ void TransformComponent::check_bounds(Vector2 direction) {
 
 void TransformComponent::process(float delta) {
     position.x += velocity.x * delta;
-    if (abs(velocity.x) > 1) check_bounds({(float)(velocity.x > 0.f) * 2.f - 1.f, 0.f});
+    if (abs(velocity.x) > 0.1f) check_bounds({(float)(velocity.x > 0.f) * 2.f - 1.f, 0.f});
+    else ((ColliderComponent*)entity->get_component(CompType::COLLIDER))->position.x = position.x;
 
     position.y += velocity.y * delta;
-    if (abs(velocity.y) > 1) check_bounds({0.f, (float)(velocity.y > 0.f) * 2.f - 1.f});
+    if (abs(velocity.y) > 0.1f) check_bounds({0.f, (float)(velocity.y > 0.f) * 2.f - 1.f});
+    else ((ColliderComponent*)entity->get_component(CompType::COLLIDER))->position.y = position.y;
 
     if (entity->has_component(CompType::AREA)) {
         auto area_comp = (AreaComponent *)entity->get_component(CompType::AREA);
