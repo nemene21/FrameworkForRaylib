@@ -2,7 +2,9 @@
 #include <time.h>
 #include <string>
 
-#include <rich_presence.hpp>
+#ifndef WEB
+    #include <rich_presence.hpp>
+#endif
 
 // Raylib
 #include <raylib.h>
