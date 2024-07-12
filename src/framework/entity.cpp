@@ -69,6 +69,10 @@ bool Entity::is_in_group(std::string group) {
 
 // Components
 void Entity::add_component(Component *comp) {
+    if (comps.find(comp->type) != comps.end()) {
+        std::cout << "WARNING: component already set up" << std::endl;
+        exit(1);
+    }
     comps[comp->type] = comp;
 }
 
