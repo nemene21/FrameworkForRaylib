@@ -19,6 +19,12 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     res = resolution;
     debug_ui = _debug_window;
 
+    #ifndef WEB
+        presence_title = title;
+        RichPresence::init();
+
+    #endif
+
     // Init
     InitWindow(res.x * window_scale, res.y * window_scale, (title).c_str());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
@@ -144,6 +150,10 @@ void Framework::process_modules(float delta) {
 
     ColliderManager::reload_colliders();
     AreaManager::reload_areas();
+
+    #ifndef WEB
+        RichPresence::update();
+    #endif
 
     // Hot reloading
     if (TryingToHotReload()) {
@@ -281,6 +291,11 @@ void Framework::deinit() {
     ShaderManager::unload_all();
     SceneManager::unload_all();
     AudioManager::unload_all();
+
+    #ifndef WEB
+        RichPresence::deinit();
+
+    #endif
 
     rlImGuiShutdown();
     CloseWindow();

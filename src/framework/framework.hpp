@@ -2,6 +2,8 @@
 #include <time.h>
 #include <string>
 
+#include <rich_presence.hpp>
+
 // Raylib
 #include <raylib.h>
 #include <raymath.h>
