@@ -13,6 +13,7 @@ extern bool DRAW_AREAS;
 
 /// @brief Area layers
 enum class AreaIndex {
+    TEST,
     COUNT,
 };
 

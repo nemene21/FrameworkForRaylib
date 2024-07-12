@@ -66,11 +66,13 @@ AreaComponent::AreaComponent(Entity *entity, float radius):
 }
 
 void AreaComponent::draw_gui_info() {
-    ImGui::Text("Area");
-
-    ImGui::Indent(25.f);
-    ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
-    ImGui::Unindent(25.f);
+    if (ImGui::CollapsingHeader(("Area##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
+        
+        ImGui::Text(("Overlapping: " + std::to_string(areas_overlapping.size())).c_str());
+        ImGui::Unindent(25.f);
+    }
 }
 
 // Clears all areas that are currently overlapping (for DOT zones and such...)
