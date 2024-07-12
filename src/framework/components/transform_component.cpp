@@ -36,7 +36,7 @@ void TransformComponent::draw_gui_info() {
         ImGui::DragFloat2(("Scale##" + std::to_string(id)).c_str(), scl, 0.01);
         scale = {scl[0], scl[1]};
 
-        ImGui::DragFloat("Angle ", &angle);
+        ImGui::DragFloat(("Angle##" + std::to_string(id)).c_str(), &angle);
         
         ImGui::Unindent(25.f);
     }

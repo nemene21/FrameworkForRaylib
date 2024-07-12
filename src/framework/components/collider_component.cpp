@@ -95,11 +95,22 @@ ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float radius):
 }
 
 void ColliderComponent::draw_gui_info() {
-    ImGui::Text("Collider");
+    if (ImGui::CollapsingHeader(("Collider##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
+        
+        ImGui::Text("Touching: ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_ceil()  ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Up ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_floor() ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Down ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_left_wall()  ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Left ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_right_wall() ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Right");
 
-    ImGui::Indent(25.f);
-    ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
-    ImGui::Unindent(25.f);
+        ImGui::Unindent(25.f);
+    }
 }
 
 
