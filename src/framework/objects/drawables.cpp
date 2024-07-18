@@ -223,6 +223,7 @@ Drawable::Drawable(Vector2 position, Vector2 offset, Vector2 scale, float angle,
     tint {255, 255, 255, 255},
     z_coord {0},
     shader_bond {ShaderBond(shader_path)},
+    blend_mode {BLEND_ALPHA},
     is_ui {is_ui} {
 
         DrawableManager::add(this);
@@ -260,7 +261,11 @@ void DrawableManager::render(std::set<Drawable *>& rendering) {
         drawable->process(GetFrameTime());
         drawable->shader_bond.update_uniforms();
         drawable->shader_bond.use();
+        
+        BeginBlendMode(drawable->blend_mode);
         drawable->draw();
+        EndBlendMode();
+
         EndShaderMode();
     }
 }

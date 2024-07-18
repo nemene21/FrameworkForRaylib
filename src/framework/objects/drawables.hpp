@@ -135,6 +135,7 @@ public:
     Vector2 position, offset, scale;
     float angle;
     Color tint;
+    BlendMode blend_mode;
 
     /// @brief If this is true on init the Drawable is going to be rendered on the UI layer
     bool is_ui;
