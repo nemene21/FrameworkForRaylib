@@ -76,7 +76,7 @@ Vector2 mouse_pos() {
     Vector2 pos = mouse_screen_pos();
     Camera2D *camera = CameraManager::get_camera();
 
-    pos = Vector2Add(pos, Vector2Add(camera->target, camera->offset));
+    pos = Vector2Add(pos, Vector2Subtract(camera->target, camera->offset));
 
     return pos;
 }
