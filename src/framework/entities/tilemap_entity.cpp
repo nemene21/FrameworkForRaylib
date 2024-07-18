@@ -320,7 +320,7 @@ void Tilemap::render(float delta) {
                     // Draw tile if in camera view
                     if (Vector2Distance(camera_pos, tile_pos) < max_dist)
                         DrawTextureSheet(texture.get(), tile.state, {4.f*type_count, 4}, tile_pos, {1, 1});
-                    DrawCircleV(tile_pos, 2, RED);
+                    // DrawCircleV(tile_pos, 2, RED);
                 }
             }
         }
