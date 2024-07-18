@@ -8,3 +8,4 @@ Documentation: https://nemeneframeworkdocs.netlify.app/index.html
 # Examples:
 * Alea         - https://ne-mene.itch.io/alea
 * Azure waters - https://ne-mene.itch.io/azure-waters
+* Gutshot      - https://ne-mene.itch.io/gutshot
