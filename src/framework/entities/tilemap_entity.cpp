@@ -282,10 +282,10 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
 }
 
 Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
-    
-    int ay = to.y-from.y;
-    int ax = to.x-from.x;
+    float ay = to.y-from.y;
+    float ax = to.x-from.x;
 
+    if (ax == 0) ax = 0.001;
     float a = ay/ax;
 
     Vector2 test = {from.x+1,from.y+a};
@@ -297,13 +297,8 @@ Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
             final.x++;
             final.y += a;
         }
-
     }
-
     return final;
-
-
-
 }
 
 
