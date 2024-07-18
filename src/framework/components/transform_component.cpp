@@ -58,17 +58,19 @@ void TransformComponent::check_bounds(Vector2 direction) {
 
 void TransformComponent::process(float delta) {
     position.x += velocity.x * delta;
-    
-    
-        if (abs(velocity.x) > 0.1f) check_bounds({(float)(velocity.x > 0.f) * 2.f - 1.f, 0.f});
-        else if(entity->has_component(CompType::COLLIDER)) ((ColliderComponent*)entity->get_component(CompType::COLLIDER))->position.x = position.x;
+    if (abs(velocity.x) > 0.1f)
+        check_bounds({(float)(velocity.x > 0.f) * 2.f - 1.f, 0.f});
+
+    else if(entity->has_component(CompType::COLLIDER))
+        ((ColliderComponent*)entity->get_component(CompType::COLLIDER))->position.x = position.x;
     
 
     position.y += velocity.y * delta;
+    if (abs(velocity.y) > 0.1f)
+        check_bounds({0.f, (float)(velocity.y > 0.f) * 2.f - 1.f});
 
-    
-        if (abs(velocity.y) > 0.1f) check_bounds({0.f, (float)(velocity.y > 0.f) * 2.f - 1.f});
-        else if(entity->has_component(CompType::COLLIDER)) ((ColliderComponent*)entity->get_component(CompType::COLLIDER))->position.y = position.y;
+    else if (entity->has_component(CompType::COLLIDER))
+        ((ColliderComponent*)entity->get_component(CompType::COLLIDER))->position.y = position.y;
     
 
     if (entity->has_component(CompType::AREA)) {

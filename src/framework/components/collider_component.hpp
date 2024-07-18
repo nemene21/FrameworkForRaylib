@@ -25,13 +25,12 @@ private:
 
 public:
     Vector2 collision_direction;
-    bool is_rectangle, is_circle, draw_debug;
-    void *shape;
+    bool draw_debug;
+    Rectangle shape;
     Vector2 position;
 
     ColliderComponent(Vector2 pos={0, 0});
     ColliderComponent(Entity *entity, Vector2 pos, float width, float height);
-    ColliderComponent(Entity *entity, Vector2 pos, float radius);
 
     void draw_gui_info();
     
