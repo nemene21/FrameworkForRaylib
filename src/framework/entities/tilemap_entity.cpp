@@ -281,11 +281,39 @@ void Tilemap::build_chunk(std::pair<int, int> chunk_pos) {
     }
 }
 
+Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
+    
+    int ay = to.y-from.y;
+    int ax = to.x-from.x;
+
+    float a = ay/ax;
+
+    Vector2 test = {from.x+1,from.y+a};
+    Vector2 final = {from.x,from.y};
+
+    for(int x = from.x+1; x <= from.y; x++){
+        
+        if (Tilemap::get_tile(Tilemap::to_tilepos(test)) == -1){
+            final.x++;
+            final.y += a;
+        }
+
+    }
+
+    return final;
+
+
+
+}
+
+
 void Tilemap::process(float delta) {
     if (IsKeyPressed(KEY_ENTER)) {
         save("test.json");
     }
 }
+
+
 
 // Draws the tilemap (spatial partitioning and camera culling at play)
 void Tilemap::render(float delta) {

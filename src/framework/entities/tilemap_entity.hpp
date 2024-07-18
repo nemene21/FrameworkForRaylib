@@ -91,6 +91,10 @@ public:
     void build();
     void build_chunk(std::pair<int, int>);
 
+    /// @brief Returns the farthest point a ray reaches
+    Vector2 cast_ray(Vector2 from, Vector2 to);
+
+
     /// @brief Saves tile data to disk
     /// @param path Path to save on
     void save(std::string path);
