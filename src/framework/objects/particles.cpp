@@ -436,6 +436,8 @@ ParticleEntity::ParticleEntity(std::string path, Vector2 position, int left, Til
 
     add_component(new TransformComponent(this, position));
     system.set_left(left);
+    
+    set_name("ParticleEffect");
 
     if (mask != nullptr) {
         system.set_collision_mask(mask);

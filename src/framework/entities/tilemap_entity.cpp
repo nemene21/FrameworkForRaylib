@@ -9,6 +9,7 @@ Tilemap::Tilemap(Vector2 tilesize, std::string texture_path):
     renderer {[this](float delta) {this->render(delta); }},
     chunksize {16, 16} {
         type_count = (texture.get()->width / tilesize.x) / 4;
+        set_name("Tilemap");
     }
 
 // Json to/from for TileData and Vector2
