@@ -169,6 +169,12 @@ void Tilemap::remove_tile(Vector2 tilepos) {
     remove_tile(tilepos.x, tilepos.y);
 }
 
+Vector2 Tilemap::to_tilepos(Vector2 position) {
+    return {
+        roundf(position.x / tilesize.x),
+        roundf(position.y / tilesize.y)
+    };
+}
 
 // Builds all chunks
 void Tilemap::build() {

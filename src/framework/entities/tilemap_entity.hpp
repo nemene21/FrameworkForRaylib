@@ -85,6 +85,8 @@ public:
     int  get_tile(int x, int y);
     int  get_tile(Vector2 tilepos);
 
+    Vector2 to_tilepos(Vector2 position);
+
     /// @brief Builds the drawing data and collider data of the tilemap
     void build();
     void build_chunk(std::pair<int, int>);
