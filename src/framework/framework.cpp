@@ -17,6 +17,7 @@ bool debug_ui;
 void Framework::init(std::string title, Vector2 resolution, int window_scale, bool _debug_window) {
     srand(time(NULL));
     res = resolution;
+    half_res = Vector2Divide(res, {2, 2});
     debug_ui = _debug_window;
 
     #ifndef WEB
