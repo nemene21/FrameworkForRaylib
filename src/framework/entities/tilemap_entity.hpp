@@ -72,15 +72,18 @@ public:
     /// @param type Tile type (0 >=)
     /// @note The position of the tile is in tile position units, not pixels
     void set_tile(int x, int y, int type);
+    void set_tile(Vector2 tilepos, int type);
     /// @brief Removes tile at x, y
     /// @param x X coord of tile
     /// @param y Y coord of tile
     void remove_tile(int x, int y);
+    void remove_tile(Vector2 tilepos);
     /// @brief Returns tile type at x, y
     /// @param x X coord of tile
     /// @param y Y coord of tile
     /// @return Tile type
     int  get_tile(int x, int y);
+    int  get_tile(Vector2 tilepos);
 
     /// @brief Builds the drawing data and collider data of the tilemap
     void build();

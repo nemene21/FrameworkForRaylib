@@ -76,6 +76,10 @@ void Tilemap::set_tile(int x, int y, int type) {
     tiledata[chunk_pos][std::make_pair(x, y)] = {type, collider};
 }
 
+void Tilemap::set_tile(Vector2 tilepos, int type) {
+    set_tile(tilepos.x, tilepos.y, type);
+}
+
 void Tilemap::save(std::string path) {
     json j = json::array();
 
@@ -130,6 +134,10 @@ int Tilemap::get_tile(int x, int y) {
     return tiledata[chunk_pos][pos].type;
 }
 
+int Tilemap::get_tile(Vector2 tilepos) {
+    return get_tile(tilepos.x, tilepos.y);
+}
+
 // Removes tile at x, y (tileposition)
 void Tilemap::remove_tile(int x, int y) {
     std::pair<int, int> chunk_pos = std::make_pair<int, int>(x / chunksize.x, y / chunksize.y);
@@ -156,6 +164,11 @@ void Tilemap::remove_tile(int x, int y) {
 
     tiledata[chunk_pos].erase(std::make_pair(x, y));
 }
+
+void Tilemap::remove_tile(Vector2 tilepos) {
+    remove_tile(tilepos.x, tilepos.y);
+}
+
 
 // Builds all chunks
 void Tilemap::build() {
