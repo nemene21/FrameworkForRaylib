@@ -11,6 +11,7 @@
 
 extern Vector2 res;
 extern Vector2 half_res;
+extern float res_diagonal;
 
 typedef struct {
     float x, y, radius;

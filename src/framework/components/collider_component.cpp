@@ -179,6 +179,8 @@ void ColliderComponent::collide(Vector2 direction) {
 // Draws the shape for debugging purposes
 void ColliderComponent::debug_draw() {
     Vector2 camera_pos = Vector2Subtract(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
+    if (Vector2Distance(camera_pos, {shape.x, shape.y}) < shape.width+shape.height + res_diagonal)
+        return;
 
     DrawRectangleLines(shape.x - shape.width*.5f, shape.y - shape.height*.5f, shape.width, shape.height, {0, 0, 255, 255});
     DrawRectangle(shape.x - shape.width*.5f, shape.y - shape.height*.5f, shape.width, shape.height, {0, 0, 255, 20});

@@ -290,9 +290,7 @@ void Tilemap::process(float delta) {
 // Draws the tilemap (spatial partitioning and camera culling at play)
 void Tilemap::render(float delta) {
     Vector2 camera_pos {half_res.x, half_res.y};
-    float max_dist = sqrt(tilesize.x*tilesize.x + tilesize.y*tilesize.y) +
-        sqrt(res.x*res.x + res.y*res.y);
-
+    
     // If camera exists set the actual camera pos
     if (CameraManager::get_camera() != nullptr) {
         camera_pos = Vector2Subtract(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
@@ -318,7 +316,7 @@ void Tilemap::render(float delta) {
                     Vector2 tile_pos {tile.pos.x * tilesize.x, tile.pos.y * tilesize.y};
 
                     // Draw tile if in camera view
-                    if (Vector2Distance(camera_pos, tile_pos) < max_dist)
+                    if (Vector2Distance(camera_pos, tile_pos) < res_diagonal)
                         DrawTextureSheet(texture.get(), tile.state, {4.f*type_count, 4}, tile_pos, {1, 1});
                     // DrawCircleV(tile_pos, 2, RED);
                 }

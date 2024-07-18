@@ -2,6 +2,7 @@
 
 Vector2 res {320, 180};
 Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
+float res_diagonal = sqrtf(res.x*res.x + res.y*res.y);
 
 Color Float4ToColor(float* arr) {
     return Color{
