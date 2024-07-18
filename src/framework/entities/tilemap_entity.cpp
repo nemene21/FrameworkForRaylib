@@ -288,12 +288,12 @@ Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
     if (ax == 0) ax = 0.001;
     float a = ay/ax;
 
-    Vector2 test = {from.x+1,from.y+a};
-    Vector2 final = {from.x,from.y};
+    Vector2 test  = {from.x+1, from.y+a};
+    Vector2 final = {from.x, from.y};
 
-    for(int x = from.x+1; x <= from.y; x++){
+    for (int x = from.x+1; x <= from.y; x++) {
         
-        if (Tilemap::get_tile(Tilemap::to_tilepos(test)) == -1){
+        if (Tilemap::get_tile(Tilemap::to_tilepos(test)) == -1) {
             final.x++;
             final.y += a;
         }
