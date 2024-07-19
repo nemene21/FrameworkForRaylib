@@ -104,7 +104,7 @@ public:
     /// @brief Returns the direction to move at to get to a certain point
     /// @param from The starting point
     /// @param to The end point
-    Vector2 pathfind(Vector2 from, Vector2 to);
+    Vector2 pathfind(Vector2 from, Vector2 to, int max_iterations=512);
 
     /// @brief Saves tile data to disk
     /// @param path Path to save on

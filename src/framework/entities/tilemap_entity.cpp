@@ -312,7 +312,7 @@ const float pathfinding_distance_table[] = {
     1         , 1.41421356
 };
 
-Vector2 Tilemap::pathfind(Vector2 from, Vector2 to) {
+Vector2 Tilemap::pathfind(Vector2 from, Vector2 to, int max_iterations) {
     std::map<std::pair<int, int>, PathNode> open {};
     std::map<std::pair<int, int>, PathNode> done {};
 
@@ -327,7 +327,14 @@ Vector2 Tilemap::pathfind(Vector2 from, Vector2 to) {
         {from.x, from.y}, PathNode{nullptr, (int)from.x, (int)from.y, 0, Vector2Distance(from, to)}
     });
 
+
+    int iter_on = 0;
     while (true) {
+        
+        iter_on++;
+        if (iter_on > max_iterations)
+            return {0, 0};
+
         PathNode* best_node = nullptr;
         for (auto& node_pair: open) {
             PathNode* node = &node_pair.second;
@@ -344,6 +351,9 @@ Vector2 Tilemap::pathfind(Vector2 from, Vector2 to) {
                 best_node = node;
             }
         }
+
+        if (best_node == nullptr)
+            return {0, 0};
 
         auto best_pos = std::make_pair(best_node->x, best_node->y);
         done.insert({best_pos, *best_node});
