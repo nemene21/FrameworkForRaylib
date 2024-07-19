@@ -16,6 +16,8 @@
 #include <map>
 #include <set>
 
+#define PATHFINDING_DIST_MULT 1.2f
+
 typedef struct {
     void* parent;
     int x, y;
@@ -104,7 +106,7 @@ public:
     /// @brief Returns the direction to move at to get to a certain point
     /// @param from The starting point
     /// @param to The end point
-    Vector2 pathfind(Vector2 from, Vector2 to, int max_iterations=512);
+    Vector2 pathfind(Vector2 from, Vector2 to, int max_iterations=1024);
 
     /// @brief Saves tile data to disk
     /// @param path Path to save on

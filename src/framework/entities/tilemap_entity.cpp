@@ -324,13 +324,12 @@ Vector2 Tilemap::pathfind(Vector2 from, Vector2 to, int max_iterations) {
     if (get_tile(to) != -1) return {0, 0};
 
     open.insert({
-        {from.x, from.y}, PathNode{nullptr, (int)from.x, (int)from.y, 0, Vector2Distance(from, to)}
+        {from.x, from.y}, PathNode{nullptr, (int)from.x, (int)from.y, 0, Vector2Distance(from, to) * PATHFINDING_DIST_MULT}
     });
-
 
     int iter_on = 0;
     while (true) {
-        
+
         iter_on++;
         if (iter_on > max_iterations)
             return {0, 0};
@@ -395,7 +394,7 @@ Vector2 Tilemap::pathfind(Vector2 from, Vector2 to, int max_iterations) {
                     PathNode{
                         best_node, (int)neighbour_pos.first, (int)neighbour_pos.second,
                         best_node->g_cost + pathfinding_distance_table[i],
-                        Vector2Distance({neighbour_pos.first, neighbour_pos.second}, to)
+                        Vector2Distance({neighbour_pos.first, neighbour_pos.second}, to) * PATHFINDING_DIST_MULT
                     }
                 });
             } else {
