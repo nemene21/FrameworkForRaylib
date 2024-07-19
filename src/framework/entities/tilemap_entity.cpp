@@ -298,6 +298,10 @@ Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
             final.y += a;
         }
     }
+
+    test.x++;
+    test.y += a;
+
     return final;
 }
 
