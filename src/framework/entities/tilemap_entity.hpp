@@ -16,6 +16,12 @@
 #include <map>
 #include <set>
 
+typedef struct {
+    void* parent;
+    int x, y;
+    float g_cost, h_cost;
+} PathNode;
+
 using json = nlohmann::json;
 
 typedef struct {
@@ -92,8 +98,13 @@ public:
     void build_chunk(std::pair<int, int>);
 
     /// @brief Returns the farthest point a ray reaches
+    /// @param from The starting point
+    /// @param to The end point
     Vector2 cast_ray(Vector2 from, Vector2 to);
-
+    /// @brief Returns the direction to move at to get to a certain point
+    /// @param from The starting point
+    /// @param to The end point
+    Vector2 pathfind(Vector2 from, Vector2 to);
 
     /// @brief Saves tile data to disk
     /// @param path Path to save on

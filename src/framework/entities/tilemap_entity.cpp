@@ -301,14 +301,110 @@ Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
     return final;
 }
 
+const Vector2 pathfinding_direction_table[] = {
+    { 1,  1}, {-1,  1}, { 1, -1},
+    { 0,  1}, { 1,  0}, {-1,  0},
+    { 0, -1}, {-1, -1}
+};
+const float pathfinding_distance_table[] = {
+    1.41421356, 1.41421356, 1.41421356,
+    1         , 1         , 1         ,
+    1         , 1.41421356
+};
+
+Vector2 Tilemap::pathfind(Vector2 from, Vector2 to) {
+    std::map<std::pair<int, int>, PathNode> open {};
+    std::map<std::pair<int, int>, PathNode> done {};
+
+    Vector2 world_from = from;
+    from = to_tilepos(from);
+    to   = to_tilepos(to);
+
+    if (from == to) return {0, 0};
+    if (get_tile(to) != -1) return {0, 0};
+
+    open.insert({
+        {from.x, from.y}, PathNode{nullptr, (int)from.x, (int)from.y, 0, Vector2Distance(from, to)}
+    });
+
+    while (true) {
+        PathNode* best_node = nullptr;
+        for (auto& node_pair: open) {
+            PathNode* node = &node_pair.second;
+
+            if (best_node == nullptr) {
+                best_node = node;
+                continue;
+            }
+
+            float best_cost = best_node->g_cost + best_node->h_cost;
+            float this_cost = node->g_cost      + node->h_cost;
+
+            if (this_cost < best_cost) {
+                best_node = node;
+            }
+        }
+
+        auto best_pos = std::make_pair(best_node->x, best_node->y);
+        done.insert({best_pos, *best_node});
+        best_node = &done[best_pos];
+
+        open.erase(best_pos);
+
+        if (best_pos.first == to.x && best_pos.second == to.y) {
+            PathNode* previous = best_node;
+
+            while (true) {
+                if (((PathNode*)previous->parent)->parent != nullptr) {
+                    previous = (PathNode*)previous->parent;
+                } else {
+                    return Vector2Normalize(Vector2Subtract(
+                        Vector2{(float)previous->x * tilesize.x, (float)previous->y * tilesize.y}, world_from
+                    ));
+                }
+            }
+            break;
+        }
+
+        for (int i = 0; i < 8; i++) {
+            auto offset = pathfinding_direction_table[i];
+
+            auto neighbour_pos = std::make_pair(
+                best_node->x + offset.x,
+                best_node->y + offset.y
+            );
+            if (get_tile(neighbour_pos.first, neighbour_pos.second) != -1)
+                continue;
+
+            if (done.find(neighbour_pos) != done.end())
+                continue;
+
+            if (open.find(neighbour_pos) == open.end()) {
+                open.insert({
+                    neighbour_pos,
+                    PathNode{
+                        best_node, (int)neighbour_pos.first, (int)neighbour_pos.second,
+                        best_node->g_cost + pathfinding_distance_table[i],
+                        Vector2Distance({neighbour_pos.first, neighbour_pos.second}, to)
+                    }
+                });
+            } else {
+                PathNode* neighbour = &open[neighbour_pos];
+                float g_cost = best_node->g_cost + pathfinding_distance_table[i];
+                
+                if (g_cost < neighbour->g_cost) {
+                    neighbour->g_cost = g_cost;
+                }
+            }
+        }
+    }
+}
 
 void Tilemap::process(float delta) {
     if (IsKeyPressed(KEY_ENTER)) {
         save("test.json");
     }
 }
-
-
 
 // Draws the tilemap (spatial partitioning and camera culling at play)
 void Tilemap::render(float delta) {
