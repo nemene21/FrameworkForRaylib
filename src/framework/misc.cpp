@@ -13,6 +13,30 @@ Color Float4ToColor(float* arr) {
     };
 }
 
+const std::string roman_numbers[] = {
+    "M" , "CM", "D",
+    "CD", "C" , "XC", 
+    "L" , "XL", "X" ,
+    "IX", "V" , "IV",
+    "I"
+};
+const int numbers[] = {
+    1000, 900, 500,
+    400 , 100, 90 ,
+    50  , 40 , 10 ,
+    9   , 5  , 4  ,
+    1
+};
+
+std::string roman_numeral(int num) {
+    for (int i = 0; i < 13; i++) {
+        int number_on = numbers[i];
+        if (num >= number_on)
+            return roman_numbers[i] + roman_numeral(num - number_on);
+    }
+    return "";
+}
+
 bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
 }

@@ -17,6 +17,11 @@ typedef struct {
     float x, y, radius;
 } Circle;
 
+/// @brief Converts an integer into a roman numeral string (eg. 145 -> CXLV)
+/// @param num 
+/// @return 
+std::string roman_numeral(int num);
+
 bool operator==(Color first, Color other);
 
 Color Float4ToColor(float* arr);
