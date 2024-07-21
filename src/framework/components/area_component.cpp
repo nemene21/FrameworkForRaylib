@@ -196,18 +196,22 @@ void AreaComponent::check_overlaps() {
 
 // Draws the shape for debugging purposes
 void AreaComponent::debug_draw() {
-
-    Vector2 camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
-    if (Vector2Distance(camera_pos, position) > res.x * sqrt(2.f) + 1000) return;
+    Vector2 camera_pos = Vector2Subtract(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
 
     if (is_circle) {
         Circle *circle = (Circle *)shape;
+
+        if (Vector2Distance(camera_pos, position) > res_diagonal+circle->radius)
+            return;
 
         DrawCircleLines(circle->x, circle->y, circle->radius, {0, 255, 0, 255});
         DrawCircle(circle->x, circle->y, circle->radius, {0, 255, 0, 20});
 
     } else if (is_rectangle) {
         Rectangle *rect = (Rectangle *)shape;
+
+        if (Vector2Distance(camera_pos, position) > res_diagonal+rect->width+rect->height)
+            return;
 
         DrawRectangleLines(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 255, 0, 255});
         DrawRectangle(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 255, 0, 20});
