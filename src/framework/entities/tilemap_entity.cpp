@@ -288,19 +288,48 @@ Vector2 Tilemap::cast_ray(Vector2 from, Vector2 to){
     if (ax == 0) ax = 0.001;
     float a = ay/ax;
 
-    Vector2 test  = {from.x+1, from.y+a};
+    if (a < 0) a *= (-1);
+
+    Vector2 test = {from.x+1, from.y+a};
     Vector2 final = {from.x, from.y};
 
-    for (int x = from.x+1; x <= from.y; x++) {
-        
-        if (Tilemap::get_tile(Tilemap::to_tilepos(test)) == -1) {
-            final.x++;
-            final.y += a;
-        }
-    }
+    if (ax < 0) test.x = from.x - 1;
+    if (ay < 0) test.y = from.y - a;
+  
+    
+    if (ax>0){
+    while (Tilemap::get_tile(Tilemap::to_tilepos(test)) == -1 and test.x <= to.x){
 
-    test.x++;
-    test.y += a;
+        final.x++;
+
+        if(ay > 0) final.y += a;
+        if(ay < 0) final.y -= a;
+
+        test.x++;
+        
+        if(ay > 0) test.y += a;
+        if(ay < 0) test.y -= a;
+    }}
+
+    if (ax<0){
+    while (Tilemap::get_tile(Tilemap::to_tilepos(test)) == -1 and test.x >= to.x){
+
+        final.x--;
+
+        if(ay > 0) final.y += a;
+        if(ay < 0) final.y -= a;
+
+        test.x--;
+        
+        if(ay > 0) test.y += a;
+        if(ay < 0) test.y -= a;
+    }}
+
+    if(final.x > to.x and ax > 0) final.x = to.x;
+    if(final.x < to.x and ax < 0) final.x = to.x;
+
+    if(final.y > to.y and ay > 0) final.y = to.y;
+    if(final.y < to.y and ay < 0) final.y = to.y;
 
     return final;
 }
