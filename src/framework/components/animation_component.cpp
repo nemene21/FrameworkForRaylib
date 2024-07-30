@@ -20,6 +20,14 @@ void AnimationComponent::make_animation(std::string name, float duration, bool r
     animation_map[name] = new_animation;
 }
 
+void AnimationComponent::draw_gui_info() {
+    if (ImGui::CollapsingHeader(("Animator##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        ImGui::Text(("Animation playing" + animation_playing).c_str());
+        ImGui::Unindent(25.f);
+    }
+}
+
 // Adds a keyframe to an animation
 void AnimationComponent::add_keyframe(std::string name, float start, float end, std::function<void(float)> function) {
 

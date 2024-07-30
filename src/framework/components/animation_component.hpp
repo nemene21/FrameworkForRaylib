@@ -82,6 +82,7 @@ public:
     void pause();
     /// @brief Unpauses animation
     void unpause();
+    void draw_gui_info();
 };
 
 #endif

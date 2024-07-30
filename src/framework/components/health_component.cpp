@@ -5,7 +5,7 @@ HealthComponent::HealthComponent(Entity *entity, float max_hp):
     Component(ComponentType::HEALTH, entity),
     hp {max_hp},
     max_hp {max_hp},
-    dead {dead} {}
+    dead {false} {}
 
 void HealthComponent::draw_gui_info() {
     if (ImGui::CollapsingHeader(("Health##" + std::to_string(id)).c_str())) {
