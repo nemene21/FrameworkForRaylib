@@ -93,14 +93,17 @@ object_files/rich_presence.o: ../src/framework/rich_presence.cpp
 object_files/scene.o: ../src/framework/scene.cpp
 	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/framework/scene.cpp -o $(@)
 
+object_files/player.o: ../src/game/entities/player.cpp
+	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/game/entities/player.cpp -o $(@)
+
 object_files/game.o: ../src/game/scenes/game.cpp
 	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/game/scenes/game.cpp -o $(@)
 
 object_files/main.o: ../src/main.cpp
 	g++ -g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/ -c ../src/main.cpp -o $(@)
 
-Build.exe: object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/tilemap_renderer.o object_files/entity.o object_files/framework.o object_files/imgui.o object_files/imgui_demo.o object_files/imgui_draw.o object_files/imgui_tables.o object_files/imgui_widgets.o object_files/rlImGui.o object_files/input.o object_files/misc.o object_files/networking.o object_files/packets.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/progress_bar.o object_files/sprites.o object_files/trails.o object_files/ui_drawables.o object_files/rich_presence.o object_files/scene.o object_files/game.o object_files/main.o 
-	g++ -o Build.exe object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/tilemap_renderer.o object_files/entity.o object_files/framework.o object_files/imgui.o object_files/imgui_demo.o object_files/imgui_draw.o object_files/imgui_tables.o object_files/imgui_widgets.o object_files/rlImGui.o object_files/input.o object_files/misc.o object_files/networking.o object_files/packets.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/progress_bar.o object_files/sprites.o object_files/trails.o object_files/ui_drawables.o object_files/rich_presence.o object_files/scene.o object_files/game.o object_files/main.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm -ldiscord-rpc -lenet64 -lws2_32 -lwinmm
+Build.exe: object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/tilemap_renderer.o object_files/entity.o object_files/framework.o object_files/imgui.o object_files/imgui_demo.o object_files/imgui_draw.o object_files/imgui_tables.o object_files/imgui_widgets.o object_files/rlImGui.o object_files/input.o object_files/misc.o object_files/networking.o object_files/packets.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/progress_bar.o object_files/sprites.o object_files/trails.o object_files/ui_drawables.o object_files/rich_presence.o object_files/scene.o object_files/player.o object_files/game.o object_files/main.o 
+	g++ -o Build.exe object_files/component.o object_files/animation_component.o object_files/area_component.o object_files/camera_component.o object_files/collider_component.o object_files/health_component.o object_files/timer_component.o object_files/transform_component.o object_files/tilemap_entity.o object_files/tilemap_renderer.o object_files/entity.o object_files/framework.o object_files/imgui.o object_files/imgui_demo.o object_files/imgui_draw.o object_files/imgui_tables.o object_files/imgui_widgets.o object_files/rlImGui.o object_files/input.o object_files/misc.o object_files/networking.o object_files/packets.o object_files/audio.o object_files/drawables.o object_files/particles.o object_files/progress_bar.o object_files/sprites.o object_files/trails.o object_files/ui_drawables.o object_files/rich_presence.o object_files/scene.o object_files/player.o object_files/game.o object_files/main.o -L../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm -ldiscord-rpc -lenet64 -lws2_32 -lwinmm
 
 .PHONY: clean
 clean:
@@ -135,5 +138,6 @@ clean:
 	del /S /Q object_files\ui_drawables.o
 	del /S /Q object_files\rich_presence.o
 	del /S /Q object_files\scene.o
+	del /S /Q object_files\player.o
 	del /S /Q object_files\game.o
 	del /S /Q object_files\main.o

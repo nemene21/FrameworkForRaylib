@@ -215,11 +215,6 @@ void Framework::run() {
         // Delta time calc
         float delta = fminf(GetFrameTime(), 1/20.f);
 
-        // Resizing window
-        if (IsWindowResized()) {
-            SetWindowSize(GetScreenWidth(), GetScreenHeight());
-        }
-
         // Processing
         process_modules(delta);
         process_scene(delta);
@@ -232,6 +227,10 @@ void Framework::run() {
         Framework::draw_ui_layer(delta);
         // Compose UI and game layer
         BeginTextureMode(composition_layer);
+
+        Shader post_processing = *post_processing_ptr.get();
+        BeginShaderMode(post_processing);
+
         DrawTexturePro(game_layer.texture,
             {0, 0, res.x, res.y},
             {0, 0, res.x, res.y},
@@ -239,6 +238,8 @@ void Framework::run() {
             0,
             WHITE
         );
+        EndShaderMode();
+
         DrawTexturePro(ui_layer.texture,
             {0, 0, res.x, res.y},
             {0, 0, res.x, res.y},
@@ -249,9 +250,6 @@ void Framework::run() {
         EndTextureMode();
 
         // Post processing uniforms
-        Shader post_processing = *post_processing_ptr.get();
-        BeginShaderMode(post_processing);
-
         float timer = GetTime();
         float aspect_ratio = res.x / res.y;
 
@@ -285,9 +283,8 @@ void Framework::run() {
             {(GetScreenWidth() - draw_width) * .5f, (GetScreenHeight() - draw_height) * .5f, draw_width, draw_height},
             {0, 0},
             0,
-            Color{255, 255, 255}
+            WHITE
         );
-        EndShaderMode();
 
         if (debug_ui) {
             Framework::debug_gui();
