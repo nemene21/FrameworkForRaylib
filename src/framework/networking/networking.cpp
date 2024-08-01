@@ -28,19 +28,36 @@ namespace Networking {
         is_host = true;
     }
 
+    void send_by_server(Packet* packet, size_t size, int flag, ENetPeer* peer_to_exclude=nullptr) {
+        ENetPacket* sending = enet_packet_create(packet, size, flag);
+
+        for (int i = 0; i < server->peerCount; i++) {
+            ENetPeer* peer = (server->peers + i);
+
+            if (peer == peer_to_exclude)
+                continue;
+
+            if (peer->state == ENET_PEER_STATE_CONNECTED) {
+                enet_peer_send(peer, 0, sending);
+            }
+        }
+    }
+
     void process_host_event(ENetEvent& event) {
         switch (event.type) {
             case ENET_EVENT_TYPE_CONNECT:
                 std::cout << event.peer->address.host << std::endl;
                 break;
             
-            case ENET_EVENT_TYPE_RECEIVE:
+            case ENET_EVENT_TYPE_RECEIVE: {
                 receive(event.packet);
+                int flag = event.packet->flags & ENET_PACKET_FLAG_RELIABLE ? ENET_PACKET_FLAG_RELIABLE : ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
+                send_by_server(reinterpret_cast<Packet*>(event.packet->data), event.packet->dataLength, flag, event.peer);
                 enet_packet_destroy(event.packet);
                 break;
-            
+            }
             case ENET_EVENT_TYPE_DISCONNECT:
-                std::cout << event.peer->data << " disconnected" << std::endl;
+                std::cout << event.peer->address.host << " disconnected" << std::endl;
                 event.peer->data = NULL;
                 break;
         }
@@ -171,10 +188,6 @@ namespace Networking {
     void send_by_client(Packet* packet, size_t size, int flag) {
         ENetPacket* sending = enet_packet_create(packet, size, flag);
         enet_peer_send(client_peer, 0, sending);
-    }
-
-    void send_by_server(Packet* packet, size_t size, int flag) {
-
     }
 
     void send(Packet* packet, size_t size, bool reliable) {

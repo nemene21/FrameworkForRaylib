@@ -3,8 +3,7 @@
 RenderTexture2D ui_layer, game_layer, composition_layer;
 
 ShaderPtr post_processing_ptr; 
-TexturePtr noise_texture,
-           paper_texture;
+TexturePtr noise_texture;
 
 float background_color[4] = {0, 0, 0, 1};
 
@@ -75,7 +74,6 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     // Loading post processing shader and it's textures
     post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     noise_texture = TextureManager::get("post_processing/noise.png");
-    paper_texture = TextureManager::get("post_processing/paper.png");
 
     // Networking init
     local_ip = Networking::get_local_ip();
@@ -261,7 +259,6 @@ void Framework::run() {
         
         // Post processing texture binding
         SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "noise_texture"), *noise_texture.get());
-        SetShaderValueTexture(post_processing, GetShaderLocation(post_processing, "paper_texture"), *paper_texture.get());
 
         Vector2 camera_offset = Vector2Divide(global_camera->target, res);
         SetShaderValue(
