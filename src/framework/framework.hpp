@@ -16,6 +16,10 @@
 #include <rlImGui.h>
 #include <rlImGuiColors.h>
 
+// Networking
+#include <networking/networking.hpp>
+#include <networking/packets.hpp>
+
 // Misc
 #include <misc.hpp>
 #include <input.hpp>

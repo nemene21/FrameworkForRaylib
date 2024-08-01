@@ -3,7 +3,7 @@ import webbrowser
 
 CFLAGS   = "-g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
 LDFLAGS  = "-L../lib/"
-LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
+LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm -lenet64 -lws2_32 -lwinmm"
 OBJ_DIR  = "object_files"
 SRC_DIR  = "../src"
 ROOT_DIR = ".."
@@ -27,13 +27,13 @@ def toggle_web_mode():
         COMPILER = "emcc -DWEB"
         INDEX    = " index.html"
         LDFLAGS  = "-L../libweb/"
-        LDLIBS   = "-lraylib"
+        LDLIBS   = "-lraylib -lenet64 -lws2_32 -lwinmm"
         OBJ_DIR  = "web_object_files"
     else:
         COMPILER = "g++"
         INDEX    = ""
         LDFLAGS  = "-L../lib/"
-        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm -ldiscord-rpc"
+        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm -ldiscord-rpc -lenet64 -lws2_32 -lwinmm"
         OBJ_DIR  = "object_files"
     
     web_button.config(text=f"Web: {WEB}")

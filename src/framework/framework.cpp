@@ -11,6 +11,8 @@ float background_color[4] = {0, 0, 0, 1};
 clock_t frame_timer;
 unsigned long frame_time;
 
+std::string local_ip;
+
 bool unlimited_framerate = false;
 bool debug_ui;
 
@@ -35,6 +37,10 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     SetExitKey(0);
 
     frame_timer = clock();
+
+    if (Networking::enet_initialize() != 0) {
+        std::cerr << "Error while initializing enet :(" << std::endl;
+    }
 
     BeginDrawing();
     rlImGuiSetup(true);
@@ -71,6 +77,8 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     post_processing_ptr = ShaderManager::get("post_processing.glsl"); 
     noise_texture = TextureManager::get("post_processing/noise.png");
     paper_texture = TextureManager::get("post_processing/paper.png");
+
+    local_ip = Networking::get_local_ip();
 }
 
 void Framework::debug_gui() {
@@ -91,6 +99,8 @@ void Framework::debug_gui() {
     ImGui::Checkbox("Unlimited framerate", &unlimited_framerate);
     if (before != unlimited_framerate)
         SetTargetFPS(unlimited_framerate ? 0 : 60);
+    
+    ImGui::Text(("Local ip: " + local_ip).c_str());
 
     ImGui::Text(("Entity count: " + std::to_string(
         SceneManager::scene_on->entity_count()
@@ -289,6 +299,11 @@ void Framework::run() {
 }
 
 void Framework::deinit() {
+    if (Networking::active()) {
+        Networking::disconnect();
+    }
+    Networking::enet_deinitialize();
+
     // Unload remaining assets
     TextureManager::unload_all();
     ParticleDataManager::unload_all();
