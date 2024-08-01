@@ -51,8 +51,12 @@ namespace Networking {
             
             case ENET_EVENT_TYPE_RECEIVE: {
                 receive(event.packet);
-                int flag = event.packet->flags & ENET_PACKET_FLAG_RELIABLE ? ENET_PACKET_FLAG_RELIABLE : ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
-                send_by_server(reinterpret_cast<Packet*>(event.packet->data), event.packet->dataLength, flag, event.peer);
+                auto packet = reinterpret_cast<Packet*>(event.packet->data);
+                
+                if (packet->global) {
+                    int flag = event.packet->flags & ENET_PACKET_FLAG_RELIABLE ? ENET_PACKET_FLAG_RELIABLE : ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
+                    send_by_server(packet, event.packet->dataLength, flag, event.peer);
+                }
                 enet_packet_destroy(event.packet);
                 break;
             }
