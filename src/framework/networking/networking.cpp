@@ -9,6 +9,12 @@ namespace Networking {
 
     int port = 7777;
 
+    void receive(ENetPacket* packet) {
+        auto packet_data = reinterpret_cast<Packet*>(packet->data);
+        std::cout << "Packet of type: " << (int)packet_data->type << std::endl;
+        unpackers[(int)packet_data->type](packet_data);
+    }
+
     void host() {
         addr.host = ENET_HOST_ANY;
         addr.port = port;
@@ -29,7 +35,7 @@ namespace Networking {
                 break;
             
             case ENET_EVENT_TYPE_RECEIVE:
-                std::cout << "Received: " << std::string((char*)event.packet->data, event.packet->dataLength) << std::endl;
+                receive(event.packet);
                 enet_packet_destroy(event.packet);
                 break;
             
@@ -42,7 +48,7 @@ namespace Networking {
 
     void process_host() {
         ENetEvent event;
-        while (enet_host_service(server, &event, 1000) > 0) {
+        while (enet_host_service(server, &event, 0) > 0) {
             process_host_event(event);
         }
     }
@@ -95,15 +101,6 @@ namespace Networking {
             std::cerr << "Error connecting peer" << std::endl;
             return;
         }
-
-        ENetPacket* packet = enet_packet_create(
-            "Hello, server!", 
-            strlen("Hello, server!") + 1,
-            ENET_PACKET_FLAG_RELIABLE);
-
-        enet_peer_send(client_peer, 0, packet);
-        enet_host_flush(client);
-
         is_client = true;
     }
 
@@ -152,7 +149,7 @@ namespace Networking {
     void process_client_event(ENetEvent& event) {
         switch (event.type) {
             case ENET_EVENT_TYPE_RECEIVE:
-                std::cout << "Received: " << std::string((char*)event.packet->data, event.packet->dataLength) << std::endl;
+                receive(event.packet);
                 enet_packet_destroy(event.packet);
                 break;
             
@@ -166,24 +163,26 @@ namespace Networking {
     void process_client() {
         ENetEvent event;
 
-        while (enet_host_service(client, &event, 1000) > 0) {
+        while (enet_host_service(client, &event, 0) > 0) {
             process_client_event(event);
         }
     }
 
-    void send_by_client() {
-        
+    void send_by_client(Packet* packet, size_t size, int flag) {
+        ENetPacket* sending = enet_packet_create(packet, size, flag);
+        enet_peer_send(client_peer, 0, sending);
     }
 
-    void send_by_server() {
+    void send_by_server(Packet* packet, size_t size, int flag) {
 
     }
 
-    void send() {
+    void send(Packet* packet, size_t size, bool reliable) {
+        int flag = reliable ? ENET_PACKET_FLAG_RELIABLE : ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
         if (is_client) {
-            send_by_client();
+            send_by_client(packet, size, flag);
         } else {
-            send_by_server();
+            send_by_server(packet, size, flag);
         }
     }
 

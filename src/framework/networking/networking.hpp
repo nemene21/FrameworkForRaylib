@@ -20,8 +20,7 @@ namespace Networking {
     std::string get_local_ip();
     bool active();
 
-
     void process();
-    void send();
+    void send(Packet* packet, size_t size, bool reliable=false);
 }
 #endif

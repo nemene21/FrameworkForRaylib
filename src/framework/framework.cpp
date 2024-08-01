@@ -38,10 +38,6 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
 
     frame_timer = clock();
 
-    if (Networking::enet_initialize() != 0) {
-        std::cerr << "Error while initializing enet :(" << std::endl;
-    }
-
     BeginDrawing();
     rlImGuiSetup(true);
     rlImGuiBegin();
@@ -78,7 +74,13 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     noise_texture = TextureManager::get("post_processing/noise.png");
     paper_texture = TextureManager::get("post_processing/paper.png");
 
+    // Networking init
     local_ip = Networking::get_local_ip();
+
+    if (Networking::enet_initialize() != 0) {
+        std::cerr << "Error while initializing enet :(" << std::endl;
+    }
+    Packets::init();
 }
 
 void Framework::debug_gui() {
