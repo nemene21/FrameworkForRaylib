@@ -50,6 +50,9 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     ui_layer   = LoadRenderTexture(res.x, res.y);
     game_layer = LoadRenderTexture(res.x, res.y);
     composition_layer = LoadRenderTexture(res.x, res.y);
+    SetTextureFilter(ui_layer.texture,          TEXTURE_FILTER_POINT);
+    SetTextureFilter(game_layer.texture,        TEXTURE_FILTER_POINT);
+    SetTextureFilter(composition_layer.texture, TEXTURE_FILTER_POINT);
     SetTargetFPS(60);
 
     InitAudioDevice();
