@@ -13,6 +13,12 @@ Color Float4ToColor(float* arr) {
     };
 }
 
+int rand32() {
+    unsigned int first = rand();
+    unsigned int other = rand();
+    return (first << 16) | other;
+}
+
 const std::string roman_numbers[] = {
     "M" , "CM", "D",
     "CD", "C" , "XC", 

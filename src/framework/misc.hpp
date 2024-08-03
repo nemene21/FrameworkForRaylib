@@ -26,6 +26,8 @@ bool operator==(Color first, Color other);
 
 Color Float4ToColor(float* arr);
 
+int rand32();
+
 std::ostream& operator<<(std::ostream& str, Vector2 vec);
 std::ostream& operator<<(std::ostream& str, Color col);
 
