@@ -70,6 +70,7 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     CameraManager::init();
     ColliderManager::init();
     AreaManager::init();
+    SceneManager::init();
 
     // Loading post processing shader and it's textures
     post_processing_ptr = ShaderManager::get("post_processing.glsl"); 

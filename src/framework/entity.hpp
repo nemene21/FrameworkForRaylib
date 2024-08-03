@@ -6,8 +6,17 @@
 #include <raylib.h>
 #include <component.hpp>
 #include <unordered_set>
+#include <networking/packets.hpp>
 
 class Component;
+
+enum class SyncedEntityType {
+    PLAYER,
+    COUNT,
+};
+
+EntitySyncPacket* pack_entity();
+Entity* unpack_entity(EntitySyncPacket* packet);
 
 /// @brief Object in a scene, it has a map of components that are automatically processed and drawn
 class Entity {
@@ -22,6 +31,13 @@ public:
     Entity(std::string name);
     Entity();
     virtual ~Entity();
+
+    bool owned;
+    int id;
+    EntityType type;
+
+    /// @brief Returns true if the entity is synced over the network
+    bool is_synced();
 
     virtual void process_components(float delta);
     virtual void draw_components(float delta);
@@ -55,6 +71,8 @@ public:
     /// @retval TRUE Is queued for deletion
     /// @retval FALSE Is not queued for deletion
     virtual bool is_death_queued();
+
+    virtual size_t get_size();
 
     /// @brief Adds the component to the entity
     /// @param comp Component pointer

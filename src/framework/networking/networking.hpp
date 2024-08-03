@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <stdio.h>
+#include <scene.hpp>
 #include "packets.hpp"
 
 namespace Networking {

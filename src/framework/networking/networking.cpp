@@ -43,10 +43,29 @@ namespace Networking {
         }
     }
 
+    void sync_entities(ENetEvent& event) {
+        for (auto ent_pair: SceneManager::scene_on->get_entities_by_id()) {
+            Entity* entity = ent_pair.second;
+            ENetPeer* peer = event.peer;
+
+            auto sync_packet = EntitySyncPacket{
+                PacketType::ENTITY_SYNC,
+                false,
+                entity->type,
+                entity->id,
+                false
+            };
+
+            ENetPacket* packet = enet_packet_create(&sync_packet, sizeof(sync_packet), ENET_PACKET_FLAG_RELIABLE);
+            enet_peer_send(peer, 0, packet);
+        }
+    }
+
     void process_host_event(ENetEvent& event) {
         switch (event.type) {
             case ENET_EVENT_TYPE_CONNECT:
                 std::cout << event.peer->address.host << std::endl;
+                sync_entities(event);
                 break;
             
             case ENET_EVENT_TYPE_RECEIVE: {

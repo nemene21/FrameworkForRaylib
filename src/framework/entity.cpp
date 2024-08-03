@@ -1,12 +1,18 @@
 #include <entity.hpp>
 
+// <Serialization for networking>
+
 // <Entity>
-Entity::Entity(std::string name): death_queued {false}, name {name} {}
-Entity::Entity(): death_queued {false}, name {"Entity"} {}
+Entity::Entity(std::string name): id {-1}, death_queued {false}, owned {true}, name {name} {}
+Entity::Entity(): id {-1}, death_queued {false}, owned {true}, name {"Entity"} {}
 Entity::~Entity() {
     for (auto& comp_pair: comps) {
         delete comp_pair.second;
     }
+}
+
+bool Entity::is_synced() {
+    return id != -1;
 }
 
 std::string Entity::get_name() {
@@ -21,6 +27,9 @@ std::unordered_set<std::string>& Entity::get_groups() {
     return groups;
 }
 
+size_t Entity::get_size() {
+    std::cerr << "size_t get_size() not implemented for entity named " << name << std::endl;
+}
 
 std::vector<Component*> Entity::get_components() {
     std::vector<Component*> comp_arr {};

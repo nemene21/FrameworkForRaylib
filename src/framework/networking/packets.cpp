@@ -8,3 +8,4 @@ void Packets::init() {
         std::cout << log_packet->message << std::endl;
     };
 }
+ 

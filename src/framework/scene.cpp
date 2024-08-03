@@ -1,7 +1,7 @@
 #include <scene.hpp>
 
 // <Scene>
-Scene::Scene(std::string name): name {name}, entities {} {
+Scene::Scene(std::string name): name {name}, entities {}, entities_by_name {}, entities_by_id {} {
     SceneManager::setup_scene(this);
 }
 
@@ -31,15 +31,16 @@ void Scene::process_entities(float delta) {
 
         if (entities[i]->is_death_queued()) {
             entities_by_name.erase(entities[i]->get_name());
+            if (entities[i]->id != -1)
+                entities_by_id.erase(entities[i]->id);
+
             delete entities[i];
             entities.erase(entities.begin() + i);
         }
     }
-
 }
  
 void Scene::draw_entities(float delta) {
-
     for (Entity *entity: entities) {
         entity->draw(delta);
         entity->draw_components(delta);
@@ -54,7 +55,36 @@ void Scene::add_entity(Entity* entity) {
         i++;
     }
     entities_by_name[entity->get_name()] = entity;
+    if (entity->id != -1)
+        entities_by_id[entity->id] = entity;
+
     entities.push_back(entity);
+}
+
+int Scene::get_valid_entity_id() {
+    int id = rand32();
+    while (entities_by_id.find(id) != entities_by_id.end())
+        id = rand32();
+    return id;
+}
+
+void Scene::sync_entity(Entity* entity) {
+    auto packet = EntitySyncPacket{
+        PacketType::ENTITY_SYNC,
+        true,
+        entity->type,
+        entity->id,
+        entity->owned
+    };
+    Networking::send(&packet, sizeof(packet), true);
+}
+
+void Scene::add_synced_entity(Entity* entity, bool owned) {
+    int id = get_valid_entity_id();
+    
+    entity->id = id;
+    add_entity(entity);
+    sync_entity(entity);
 }
 
 std::vector<Entity*> Scene::query_in_group(std::string name) {
@@ -76,6 +106,8 @@ Entity *Scene::first_in_group(std::string name) {
 void Scene::unload_entities() {
     for (int i = entities.size()-1; i >= 0; i--) {
         entities_by_name.erase(entities[i]->get_name());
+        if (entities[i]->id != -1)
+                entities_by_id.erase(entities[i]->id);
 
         delete entities[i];
         entities.erase(entities.begin() + i);
@@ -85,6 +117,11 @@ void Scene::unload_entities() {
 const std::vector<Entity*>& Scene::get_entities() {
     return entities;
 }
+
+const std::unordered_map<int, Entity*>& Scene::get_entities_by_id() {
+    return entities_by_id;
+}
+
 
 void Scene::process(float delta) {}
 
@@ -113,4 +150,25 @@ void SceneManager::unload_all() {
         to_unload.push_back(scene_pair.first);
     }
     for (auto to: to_unload) unload(to);
+}
+
+Entity* type_entity(EntityType type) {
+    switch (type) {
+        case EntityType::PLAYER:
+            return new Player();
+            break;
+            
+        default:
+            std::cerr << "Entity type to sync not defined :(" << std::endl;
+            break;
+    }
+}
+
+void SceneManager::init() {
+    unpackers[(int)PacketType::ENTITY_SYNC] = [](Packet* packet) {
+        auto sync_packet = reinterpret_cast<EntitySyncPacket*>(packet);
+        Entity* entity = type_entity(sync_packet->entity_type);
+
+        SceneManager::scene_on->add_entity(entity);
+    };
 }

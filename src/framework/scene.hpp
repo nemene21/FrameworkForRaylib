@@ -7,6 +7,9 @@
 
 #include <tilemap_entity.hpp>
 #include <misc.hpp>
+#include <networking/networking.hpp>
+
+#include <entities/player.hpp>
 
 /// @brief Holds entities which are drawn and processed, offers group queries for entities and automatically removes entities queued for deletion
 /// @note To use a scene you have to initialise the scene with "new YourSceneClass()" and than set the scene with "SceneManager::set_scene("your_scene_name")"
@@ -27,6 +30,9 @@ public:
     /// @brief Adds a new entity to the scene
     /// @param entity Pointer to entity, the scene is now responsible for it
     virtual void add_entity(Entity* entity);
+    virtual void add_synced_entity(Entity* entity, bool owned);
+    virtual void sync_entity(Entity* entity);
+    virtual int  get_valid_entity_id();
     /// @brief Returns the number of entities in the scene
     /// @return Entities in the scene
     virtual int  entity_count();
@@ -44,16 +50,18 @@ public:
 
     /// @brief Unloads all entities from memory
     virtual void unload_entities();
-
     virtual void restart() = 0;
 
     virtual const std::vector<Entity*>& get_entities();
+    virtual const std::unordered_map<int, Entity*>& get_entities_by_id();
 
 protected:
     /// @warning Never add to this array yourself, always use Scene::add_entity(Entity*)
     std::vector<Entity*> entities;
     /// @warning Never add to this map yourself, always use Scene::add_entity(Entity*)
     std::unordered_map<std::string, Entity*> entities_by_name;
+    /// @warning Never add to this map yourself, always use Scene::add_synced_entity(Entity*, bool)
+    std::unordered_map<int, Entity*> entities_by_id;
 };
 
 typedef std::map<std::string, Scene*> SceneMap;
@@ -63,6 +71,8 @@ class SceneManager {
 public:
     static SceneMap scene_map;
     static Scene* scene_on;
+
+    static void init();
 
     /// @brief Sets up a scene (done automatically in the Scene::Scene(name) constructor)
     /// @param scene Pointer to scene
