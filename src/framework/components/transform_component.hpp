@@ -19,6 +19,9 @@ public:
 
     void draw_gui_info();
 
+    void network_update();
+    void recieve_update(ComponentUpdatePacket* packet);
+
     /// @brief Adds vector to position
     /// @param adding Vector to add
     void translate(Vector2 adding);

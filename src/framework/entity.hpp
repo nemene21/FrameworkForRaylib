@@ -15,9 +15,6 @@ enum class SyncedEntityType {
     COUNT,
 };
 
-EntitySyncPacket* pack_entity();
-Entity* unpack_entity(EntitySyncPacket* packet);
-
 /// @brief Object in a scene, it has a map of components that are automatically processed and drawn
 class Entity {
 protected:
@@ -35,6 +32,7 @@ public:
     bool owned;
     int id;
     EntityType type;
+    void network_update_components();
 
     /// @brief Returns true if the entity is synced over the network
     bool is_synced();

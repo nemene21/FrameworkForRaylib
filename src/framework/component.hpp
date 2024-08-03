@@ -12,28 +12,11 @@
 #include <imgui.h>
 #include <rlImGui.h>
 #include <rlImGuiColors.h>
+#include <networking/networking.hpp>
+#include <signal.hpp>
 
 class Entity;
-
-typedef std::function<void(Entity *)> SignalFunction;
-
 extern int last_component_id;
-
-/// @brief Calls callbacks when a certain event happens
-class Signal {
-protected:
-    std::vector<SignalFunction> callers;
-
-public:
-    Signal();
-    /// @brief Connect a callback function to the signal
-    /// @param func Pointer to callback
-    /// @note Callbacks return nothing and have only one parameter (Entity*)
-    void connect(SignalFunction func);
-    /// @brief Calls all the callbacks (event happened)
-    /// @param parent The entity the callbacks referance
-    void emit(Entity* parent);
-};
 
 /// @brief All component types
 enum ComponentType {
@@ -64,6 +47,9 @@ public:
 
     /// @brief Adds the component to its entity
     virtual void setup();
+
+    virtual void recieve_update(ComponentUpdatePacket* packet);
+    virtual void network_update();
 
     virtual void process(float delta);
     virtual void draw(float delta);

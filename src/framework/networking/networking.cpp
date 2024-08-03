@@ -1,6 +1,9 @@
 #include "networking.hpp"
+#include <scene.hpp>
 
 namespace Networking {
+    #include <enet/enet.h>
+    
     bool is_host = false, is_client = false;
     ENetAddress addr;
     ENetHost* server;

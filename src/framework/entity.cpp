@@ -15,6 +15,12 @@ bool Entity::is_synced() {
     return id != -1;
 }
 
+void Entity::network_update_components() {
+    for (auto comp_pair: comps) {
+        comp_pair.second->network_update();
+    }
+}
+
 std::string Entity::get_name() {
     return name;
 }

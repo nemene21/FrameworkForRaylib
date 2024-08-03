@@ -33,6 +33,8 @@ public:
     virtual void add_synced_entity(Entity* entity, bool owned);
     virtual void sync_entity(Entity* entity);
     virtual int  get_valid_entity_id();
+    virtual bool    has_entity_id(int id);
+    virtual Entity* get_entity_by_id(int id);
     /// @brief Returns the number of entities in the scene
     /// @return Entities in the scene
     virtual int  entity_count();

@@ -2,18 +2,12 @@
 #define NETWORKING_H
 #include <iostream>
 #include <vector>
-#include <stdio.h>
-#include <scene.hpp>
 #include "packets.hpp"
+#include <stdio.h>
 
 namespace Networking {
-    #include <enet/enet.h>
-
     extern bool is_host, is_client;
     extern int port;
-
-    extern ENetAddress addr;
-    extern ENetHost* server;
 
     void host();
     void join(std::string address);

@@ -20,6 +20,26 @@ void TransformComponent::translate_y(float adding) {
     position.y += adding;
 }
 
+void TransformComponent::network_update() {
+    auto packet = TransformUpdatePacket{
+        PacketType::COMPONENT_UPDATE,
+        true,
+        entity->id,
+        type,
+        position, velocity, scale, angle
+    };
+
+    Networking::send(&packet, sizeof(packet), false);
+}
+
+void TransformComponent::recieve_update(ComponentUpdatePacket* packet) {
+    auto cast_packet = reinterpret_cast<TransformUpdatePacket*>(packet);
+    position = cast_packet->position;
+    velocity = cast_packet->velocity;
+    scale = cast_packet->scale;
+    angle = cast_packet->angle;
+}
+
 void TransformComponent::draw_gui_info() {
     if (ImGui::CollapsingHeader(("Transform##" + std::to_string(id)).c_str())) {
         ImGui::Indent(25.f);

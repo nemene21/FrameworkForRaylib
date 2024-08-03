@@ -23,6 +23,10 @@ void Scene::process_entities(float delta) {
         Entity *entity = entities[i];
         entity->process(delta);
         entity->process_components(delta);
+
+        if (entity->is_synced() && entity->owned) {
+            entity->network_update_components();
+        }
         i++;
     }
 
@@ -122,6 +126,13 @@ const std::unordered_map<int, Entity*>& Scene::get_entities_by_id() {
     return entities_by_id;
 }
 
+bool Scene::has_entity_id(int id) {
+    return entities_by_id.find(id) != entities_by_id.end();
+}
+
+Entity* Scene::get_entity_by_id(int id) {
+    return entities_by_id[id];
+}
 
 void Scene::process(float delta) {}
 
@@ -169,6 +180,26 @@ void SceneManager::init() {
         auto sync_packet = reinterpret_cast<EntitySyncPacket*>(packet);
         Entity* entity = type_entity(sync_packet->entity_type);
 
+        if (!sync_packet->owned && Networking::is_host) {
+            entity->owned = true;
+        } else {
+            entity->owned = false;
+        }
+
+        entity->id = sync_packet->id;
         SceneManager::scene_on->add_entity(entity);
+    };
+    unpackers[(int)PacketType::COMPONENT_UPDATE] = [](Packet* packet) {
+        auto update_packet = reinterpret_cast<ComponentUpdatePacket*>(packet);
+
+        Scene* scene_on = SceneManager::scene_on;
+        if (!scene_on->has_entity_id(update_packet->entity_id)) {
+            return;
+        }
+
+        Entity* entity = scene_on->get_entity_by_id(update_packet->entity_id);
+        auto component = entity->get_component((ComponentType)update_packet->component_type);
+
+        component->recieve_update(update_packet);
     };
 }

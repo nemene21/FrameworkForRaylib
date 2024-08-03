@@ -1,20 +1,6 @@
 #include <component.hpp>
 #include <entity.hpp>
 
-// <Signals>
-Signal::Signal(): callers {} {}
-
-void Signal::connect(SignalFunction function) {
-    callers.push_back(function);
-}
-
-void Signal::emit(Entity *parent) {
-
-    for (SignalFunction caller: callers) {
-        caller(parent);
-    }
-}
-
 // <Component>
 Component::Component(ComponentType type, Entity *entity):
     type {type}, entity {entity}
@@ -36,6 +22,9 @@ void Component::setup() {
 
 void Component::process(float delta) {}
 void Component::draw(float delta) {}
+
+void Component::recieve_update(ComponentUpdatePacket* packet) {}
+void Component::network_update() {}
 
 // <Component manager>
 ComponentMap ComponentManager::component_map {};
