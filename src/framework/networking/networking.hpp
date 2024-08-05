@@ -4,10 +4,15 @@
 #include <vector>
 #include "packets.hpp"
 #include <stdio.h>
+#include <stdlib.h>
 
 namespace Networking {
-    extern bool is_host, is_client;
+    extern bool is_host;
+    extern bool is_client;
     extern int port;
+
+    void init();
+    void deinit();
 
     void host();
     void join(std::string address);

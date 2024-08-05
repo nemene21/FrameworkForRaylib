@@ -205,4 +205,10 @@ void SceneManager::init() {
 
         component->recieve_update(update_packet);
     };
+    unpackers[(int)PacketType::ENTITY_NUKE] = [](Packet* packet) {
+        auto nuke_packet = reinterpret_cast<EntityNukePacket*>(packet);
+        SceneManager::scene_on->get_entity_by_id(nuke_packet->id)->queue_free();
+
+        std::cout << "oughta delet entitet" << std::endl;
+    };
 }

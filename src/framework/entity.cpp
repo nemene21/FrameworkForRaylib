@@ -16,6 +16,9 @@ bool Entity::is_synced() {
 }
 
 void Entity::network_update_components() {
+    if (!Networking::active())
+        return;
+    
     for (auto comp_pair: comps) {
         comp_pair.second->network_update();
     }
@@ -64,6 +67,15 @@ void Entity::draw_components(float delta) {
 
 void Entity::queue_free() {
     death_queued = true;
+
+    if (!is_synced() || !owned) return;
+    EntityNukePacket nuke = EntityNukePacket{
+        PacketType::ENTITY_NUKE,
+        true,
+        id
+    };
+    std::cout << "Sending nuke to id " << id << std::endl;
+    Networking::send(&nuke, sizeof(nuke), true);
 }
 
 bool Entity::is_death_queued() {

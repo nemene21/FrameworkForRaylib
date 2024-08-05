@@ -13,6 +13,7 @@ enum class EntityType: uint16_t {
 enum class PacketType: uint8_t  {
     LOG,
     ENTITY_SYNC,
+    ENTITY_NUKE,
     COMPONENT_UPDATE,
     COUNT,
 };
@@ -40,6 +41,10 @@ struct EntitySyncPacket: public Packet {
     EntityType entity_type;
     uint32_t id;
     bool owned;
+};
+
+struct EntityNukePacket: public Packet {
+    uint32_t id;
 };
 
 extern std::function<void(Packet*)> unpackers[(int)PacketType::COUNT];

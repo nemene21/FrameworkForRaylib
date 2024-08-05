@@ -12,9 +12,18 @@ namespace Networking {
 
     int port = 7777;
 
+    void init() {
+        if (enet_initialize() != 0) {
+            std::cerr << "Error while initializing enet :(" << std::endl;
+        }
+    }
+    void deinit() {
+        enet_deinitialize();
+    }
+
     void receive(ENetPacket* packet) {
         auto packet_data = reinterpret_cast<Packet*>(packet->data);
-        // std::cout << "Packet of type: " << (int)packet_data->type << std::endl;
+        if (packet_data->type != PacketType::COMPONENT_UPDATE) std::cout << "Packet of type: " << (int)packet_data->type << std::endl;
         unpackers[(int)packet_data->type](packet_data);
     }
 
@@ -164,10 +173,14 @@ namespace Networking {
     }
 
     void client_disconnect() {
+        is_client = false;
+        enet_host_flush(client);
+        Sleep(100);
+
         enet_peer_disconnect(client_peer, 0);
 
         ENetEvent event;
-        while (enet_host_service(client, &event, 3000) > 0) {
+        while (enet_host_service(client, &event, 100) > 0) {
             if (event.type == ENET_EVENT_TYPE_RECEIVE) {
                 enet_packet_destroy(event.packet);
             } else if (event.type == ENET_EVENT_TYPE_DISCONNECT) {
@@ -177,7 +190,6 @@ namespace Networking {
 
         enet_peer_reset(client_peer);
         enet_host_destroy(client);
-        is_client = false;
     }
 
     void disconnect() {

@@ -79,9 +79,7 @@ void Framework::init(std::string title, Vector2 resolution, int window_scale, bo
     // Networking init
     local_ip = Networking::get_local_ip();
 
-    if (Networking::enet_initialize() != 0) {
-        std::cerr << "Error while initializing enet :(" << std::endl;
-    }
+    Networking::init();
     Packets::init();
 }
 
@@ -304,8 +302,8 @@ void Framework::deinit() {
     if (Networking::active()) {
         Networking::disconnect();
     }
-    Networking::enet_deinitialize();
-
+    Networking::deinit();
+    
     // Unload remaining assets
     TextureManager::unload_all();
     ParticleDataManager::unload_all();
