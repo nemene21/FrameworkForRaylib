@@ -75,6 +75,86 @@ bool operator==(Vector2 first, Vector2 other) {
     return first.x == other.x && first.y == other.y;
 }
 
+Vector2 operator+(Vector2 first, Vector2 other) {
+    return Vector2{first.x + other.x, first.y + other.y};
+}
+
+Vector2 operator-(Vector2 first, Vector2 other) {
+    return Vector2{first.x - other.x, first.y - other.y};
+}
+
+Vector2 operator*(Vector2 first, Vector2 other) {
+    return Vector2{first.x * other.x, first.y * other.y};
+}
+
+Vector2 operator/(Vector2 first, Vector2 other) {
+    return Vector2{first.x / other.x, first.y / other.y};
+}
+
+Vector2 operator+=(Vector2& first, Vector2 other) {
+    first.x += other.x;
+    first.y += other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator-=(Vector2& first, Vector2 other) {
+    first.x -= other.x;
+    first.y -= other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator*=(Vector2& first, Vector2 other) {
+    first.x *= other.x;
+    first.y *= other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator/=(Vector2& first, Vector2 other) {
+    first.x /= other.x;
+    first.y /= other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator+(Vector2 first, float other) {
+    return first + Vector2{other, other};
+}
+
+Vector2 operator-(Vector2 first, float other) {
+    return first + Vector2{other, other};
+}
+
+Vector2 operator*(Vector2 first, float other) {
+    return first * Vector2{other, other};
+}
+
+Vector2 operator/(Vector2 first, float other) {
+    return first / Vector2{other, other};
+}
+
+Vector2 operator+=(Vector2& first, float other) {
+    first.x += other;
+    first.y += other;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator-=(Vector2& first, float other) {
+    first.x -= other;
+    first.y -= other;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator*=(Vector2& first, float other) {
+    first.x *= other;
+    first.y *= other;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator/=(Vector2& first, float other) {
+    first.x /= other;
+    first.y /= other;
+    return Vector2{first.x, first.y};
+}
+
 // Lerps
 Color Lerp(Color a, Color b, float c) {
     Color color;

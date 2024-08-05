@@ -34,6 +34,22 @@ std::ostream& operator<<(std::ostream& str, Color col);
 bool operator>(Vector2 first, Vector2 other);
 bool operator<(Vector2 first, Vector2 other);
 bool operator==(Vector2 first, Vector2 other);
+Vector2 operator+(Vector2 first, Vector2 other);
+Vector2 operator-(Vector2 first, Vector2 other);
+Vector2 operator*(Vector2 first, Vector2 other);
+Vector2 operator/(Vector2 first, Vector2 other);
+Vector2 operator+=(Vector2 first, Vector2 other);
+Vector2 operator-=(Vector2 first, Vector2 other);
+Vector2 operator*=(Vector2 first, Vector2 other);
+Vector2 operator/=(Vector2 first, Vector2 other);
+Vector2 operator+(Vector2 first, float other);
+Vector2 operator-(Vector2 first, float other);
+Vector2 operator*(Vector2 first, float other);
+Vector2 operator/(Vector2 first, float other);
+Vector2 operator+=(Vector2 first, float other);
+Vector2 operator-=(Vector2 first, float other);
+Vector2 operator*=(Vector2 first, float other);
+Vector2 operator/=(Vector2 first, float other);
 
 /// @brief Linear interpolation between two colors
 /// @param a Color 1
