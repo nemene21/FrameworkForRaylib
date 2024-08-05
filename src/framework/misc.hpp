@@ -31,6 +31,8 @@ int rand32();
 std::ostream& operator<<(std::ostream& str, Vector2 vec);
 std::ostream& operator<<(std::ostream& str, Color col);
 
+
+// Bomboclat
 bool operator>(Vector2 first, Vector2 other);
 bool operator<(Vector2 first, Vector2 other);
 bool operator==(Vector2 first, Vector2 other);
@@ -38,18 +40,18 @@ Vector2 operator+(Vector2 first, Vector2 other);
 Vector2 operator-(Vector2 first, Vector2 other);
 Vector2 operator*(Vector2 first, Vector2 other);
 Vector2 operator/(Vector2 first, Vector2 other);
-Vector2 operator+=(Vector2 first, Vector2 other);
-Vector2 operator-=(Vector2 first, Vector2 other);
-Vector2 operator*=(Vector2 first, Vector2 other);
-Vector2 operator/=(Vector2 first, Vector2 other);
+Vector2 operator+=(Vector2& first, Vector2 other);
+Vector2 operator-=(Vector2& first, Vector2 other);
+Vector2 operator*=(Vector2& first, Vector2 other);
+Vector2 operator/=(Vector2& first, Vector2 other);
 Vector2 operator+(Vector2 first, float other);
 Vector2 operator-(Vector2 first, float other);
 Vector2 operator*(Vector2 first, float other);
 Vector2 operator/(Vector2 first, float other);
-Vector2 operator+=(Vector2 first, float other);
-Vector2 operator-=(Vector2 first, float other);
-Vector2 operator*=(Vector2 first, float other);
-Vector2 operator/=(Vector2 first, float other);
+Vector2 operator+=(Vector2& first, float other);
+Vector2 operator-=(Vector2& first, float other);
+Vector2 operator*=(Vector2& first, float other);
+Vector2 operator/=(Vector2& first, float other);
 
 /// @brief Linear interpolation between two colors
 /// @param a Color 1

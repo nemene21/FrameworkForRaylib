@@ -22,8 +22,11 @@ void Scene::process_entities(float delta) {
     while (i != entities.size()) {
         Entity *entity = entities[i];
         entity->process(delta);
-        entity->process_components(delta);
+        if (!entity->is_synced() || entity->owned) {
+            entity->private_process(delta);
+        }
 
+        entity->process_components(delta);
         if (entity->is_synced() && entity->owned) {
             entity->network_update_components();
         }

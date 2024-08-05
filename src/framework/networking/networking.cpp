@@ -14,7 +14,7 @@ namespace Networking {
 
     void receive(ENetPacket* packet) {
         auto packet_data = reinterpret_cast<Packet*>(packet->data);
-        std::cout << "Packet of type: " << (int)packet_data->type << std::endl;
+        // std::cout << "Packet of type: " << (int)packet_data->type << std::endl;
         unpackers[(int)packet_data->type](packet_data);
     }
 

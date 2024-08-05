@@ -46,6 +46,7 @@ std::vector<Component*> Entity::get_components() {
 }
 
 void Entity::process(float delta) {}
+void Entity::private_process(float delta) {}
 void Entity::draw(float delta) {}
 
 void Entity::process_components(float delta) {

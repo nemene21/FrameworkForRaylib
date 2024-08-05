@@ -89,6 +89,7 @@ public:
     virtual Component *get_component(ComponentType type);
 
     virtual void process(float delta);
+    virtual void private_process(float delta);
     virtual void draw(float delta);
 };
 
