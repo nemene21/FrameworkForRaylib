@@ -37,6 +37,13 @@ struct TransformUpdatePacket: public ComponentUpdatePacket {
     float angle;
 };
 
+struct AnimationUpdatePacket: public ComponentUpdatePacket {
+    bool paused;
+    int8_t direction;
+    float playback_speed;
+    char animation_name[16];
+};
+
 struct EntitySyncPacket: public Packet {
     EntityType entity_type;
     uint32_t id;
