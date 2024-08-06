@@ -36,6 +36,7 @@ std::ostream& operator<<(std::ostream& str, Color col);
 bool operator>(Vector2 first, Vector2 other);
 bool operator<(Vector2 first, Vector2 other);
 bool operator==(Vector2 first, Vector2 other);
+bool operator!=(Vector2 first, Vector2 other);
 Vector2 operator+(Vector2 first, Vector2 other);
 Vector2 operator-(Vector2 first, Vector2 other);
 Vector2 operator*(Vector2 first, Vector2 other);

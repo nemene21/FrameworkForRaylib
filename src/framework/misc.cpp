@@ -69,6 +69,10 @@ bool operator==(Vector2 first, Vector2 other) {
     return first.x == other.x && first.y == other.y;
 }
 
+bool operator!=(Vector2 first, Vector2 other) {
+    return first.x != other.x || first.y != other.y;
+}
+
 Vector2 operator+(Vector2 first, Vector2 other) {
     return Vector2{first.x + other.x, first.y + other.y};
 }
