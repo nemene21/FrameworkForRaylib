@@ -24,7 +24,7 @@ void AnimationComponent::make_animation(std::string name, float duration, bool r
 void AnimationComponent::draw_gui_info() {
     if (ImGui::CollapsingHeader(("Animator##" + std::to_string(id)).c_str())) {
         ImGui::Indent(25.f);
-        ImGui::Text(("Animation playing" + animation_playing).c_str());
+        ImGui::Text(("Animation playing: " + animation_playing).c_str());
         ImGui::Unindent(25.f);
     }
 }
