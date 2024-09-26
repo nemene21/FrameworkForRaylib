@@ -1,96 +1,67 @@
 #include <collider_component.hpp>
 
-ColliderComponent::ColliderComponent(Vector2 pos): Component(CompType::COLLIDER, nullptr) {
+bool DRAW_COLLIDERS = false;
+
+ColliderComponent::ColliderComponent(Vector2 pos):
+    Component(CompType::COLLIDER, nullptr), draw_debug {false}
+     {
     position = pos;
     update_shape_position();
 }
 
 bool collides(ColliderComponent *coll1, ColliderComponent *coll2) {
-    if (coll1->is_rectangle && coll2->is_rectangle) {
-        Rectangle shape1 = *(Rectangle *)coll1->shape;
-        Rectangle shape2 = *(Rectangle *)coll2->shape;
-        return CheckCollisionRecs(
-            {shape1.x - shape1.width*.5f, shape1.y - shape1.height*.5f, shape1.width, shape1.height},
-            {shape2.x - shape2.width*.5f, shape2.y - shape2.height*.5f, shape2.width, shape2.height}
-        );
-    }
-    if (coll1->is_rectangle && coll2->is_circle) {
-        Circle *circle = (Circle *)coll2->shape;
-        Rectangle rect = *(Rectangle *)coll1->shape;
-
-        return CheckCollisionCircleRec({circle->x, circle->y}, circle->radius, {
-            rect.x - rect.width*.5f, rect.y - rect.height*.5f, rect.width, rect.height
-        });
-    }
-    if (coll2->is_rectangle && coll1->is_circle) {
-        Circle *circle = (Circle *)coll1->shape;
-        Rectangle rect = *(Rectangle *)coll2->shape;
-        
-        return CheckCollisionCircleRec({circle->x, circle->y}, circle->radius, {
-            rect.x - rect.width*.5f, rect.y - rect.height*.5f, rect.width, rect.height
-        });
-    }
-    Circle *circle1 = (Circle *)coll1->shape;
-    Circle *circle2 = (Circle *)coll2->shape;
-
-    return CheckCollisionCircles({circle1->x, circle1->y}, circle1->radius, {circle2->x, circle2->y}, circle2->radius);
+    return CheckCollisionRecs({
+        coll1->shape.x - .5f*coll1->shape.width,
+        coll1->shape.y - .5f*coll1->shape.height,
+        coll1->shape.width,  coll1->shape.height
+    }, {
+        coll2->shape.x - .5f*coll2->shape.width,
+        coll2->shape.y - .5f*coll2->shape.height,
+        coll2->shape.width,  coll2->shape.height
+    });
 }
 
 // Collision resolution
 void resolve_collision(Vector2 direction, ColliderComponent *coll1, ColliderComponent *coll2) {
-    Vector2 collision_point {0, 0};
-
-    if (coll2->is_circle) {
-        // ...
-    }
-    else if (coll2->is_rectangle) {
-        // Gets the collision point by trapping the first collider's position within the second rectangle collider
-        Rectangle shape2 = *(Rectangle *)coll2->shape;
-        collision_point = coll1->position;
-
-        collision_point.x = Clamp(collision_point.x, coll2->position.x - shape2.width*.5f, coll2->position.x + shape2.width*.5f);
-        collision_point.y = Clamp(collision_point.y, coll2->position.y - shape2.height*.5f, coll2->position.y + shape2.height*.5f);
-    }
-
-    if (coll1->is_rectangle) {
-        // Solves first colliders position if it's a rectangle
-        Rectangle shape = *(Rectangle *)coll1->shape;
-
-        if (direction.x != 0) {
-            coll1->position.x = collision_point.x + (shape.width) * ((int)(direction.x < 0) * 2.f - 1.f) * .500001f - (shape.width) * .0000005f;
-        }
-        if (direction.y != 0) {
-            coll1->position.y = collision_point.y + (shape.height) * ((int)(direction.y < 0) * 2.f - 1.f) * .500001f - (shape.height) * .0000005f;
-        }
-    } else if (coll1->is_circle) {
-
+    if (direction.x != 0) {
+        float distance = (coll1->shape.width + coll2->shape.width) * .5f;
+        coll1->position.x = coll2->position.x - distance * direction.x;
+        
+    } else if (direction.y != 0) {
+        float distance = (coll1->shape.height + coll2->shape.height) * .5f;
+        coll1->position.y = coll2->position.y - distance * direction.y;
     }
 }
 // Collider rectangle init
 ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float width, float height):
     Component(CompType::COLLIDER, entity),
-    shape {nullptr},
-    is_rectangle {true},
-    is_circle {false},
+    shape {Rectangle{pos.x, pos.y, width, height}},
+    draw_debug {false},
     collision_direction {0, 0},
     position {pos}
 {
-    shape = new Rectangle{0, 0, width, height};
     update_shape_position();
 }
 
-// Collider circle init (crashes due to unimplemented circles)
-ColliderComponent::ColliderComponent(Entity *entity, Vector2 pos, float radius):
-    Component(CompType::COLLIDER, entity),
-    shape {nullptr},
-    is_rectangle {false},
-    is_circle {true}
-{
-    std::cout << "Didnt add circles yet :(" << std::endl;
-    exit(0);
+void ColliderComponent::draw_gui_info() {
+    if (ImGui::CollapsingHeader(("Collider##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
+        
+        ImGui::Text("Touching: ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_ceil()  ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Up ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_floor() ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Down ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_left_wall()  ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Left ");
+        ImGui::SameLine();
+        ImGui::TextColored(on_right_wall() ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, .5), "Right");
 
-    shape = new Circle{0, 0, radius};
+        ImGui::Unindent(25.f);
+    }
 }
+
 
 // Collider collision direction checks
 bool ColliderComponent::on_floor() {
@@ -207,22 +178,12 @@ void ColliderComponent::collide(Vector2 direction) {
 
 // Draws the shape for debugging purposes
 void ColliderComponent::debug_draw() {
+    Vector2 camera_pos = Vector2Subtract(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
+    if (Vector2Distance(camera_pos, {shape.x, shape.y}) > shape.width+shape.height + res_diagonal)
+        return;
 
-    Vector2 camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
-    if (Vector2Distance(camera_pos, position) > res.x * sqrt(2.f) + 1000) return;
-
-    if (is_circle) {
-        Circle *circle = (Circle *)shape;
-
-        DrawCircleLines(circle->x, circle->y, circle->radius, {0, 0, 255, 255});
-        DrawCircle(circle->x, circle->y, circle->radius, {0, 0, 255, 20});
-
-    } else if (is_rectangle) {
-        Rectangle *rect = (Rectangle *)shape;
-
-        DrawRectangleLines(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 0, 255, 255});
-        DrawRectangle(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 0, 255, 20});
-    }
+    DrawRectangleLines(shape.x - shape.width*.5f, shape.y - shape.height*.5f, shape.width, shape.height, {0, 0, 255, 255});
+    DrawRectangle(shape.x - shape.width*.5f, shape.y - shape.height*.5f, shape.width, shape.height, {0, 0, 255, 20});
 }
 
 // Processes collider component
@@ -232,16 +193,8 @@ void ColliderComponent::process(float delta) {
 
 // Updates position of the colliders shape
 void ColliderComponent::update_shape_position() {
-    if (is_circle) {
-        Circle *circle = (Circle *)shape;
-        circle->x = position.x;
-        circle->y = position.y;
-
-    } else if (is_rectangle) {
-        Rectangle *rect = (Rectangle *)shape;
-        rect->x = position.x;
-        rect->y = position.y;
-    }
+    shape.x = position.x;
+    shape.y = position.y;
 }
 
 // <Collider manager>
@@ -315,6 +268,6 @@ void ColliderManager::draw_debug() {
     for (auto component: ComponentManager::query_components(CompType::COLLIDER)) {
 
         ColliderComponent *collider_component = (ColliderComponent *)component;
-        if (DRAW_COLLIDERS) collider_component->debug_draw();
+        if (DRAW_COLLIDERS || collider_component->draw_debug) collider_component->debug_draw();
     }
 }

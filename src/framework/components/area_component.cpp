@@ -1,6 +1,8 @@
 #include <area_component.hpp>
 
-AreaComponent::AreaComponent(): Component(CompType::AREA, nullptr) {}
+bool DRAW_AREAS = false;
+
+AreaComponent::AreaComponent(): Component(CompType::AREA, nullptr), draw_debug {false} {}
 
 bool overlaps(AreaComponent *area1, AreaComponent *area2) {
     if (area1->is_rectangle && area2->is_rectangle) {
@@ -42,7 +44,7 @@ AreaComponent::AreaComponent(Entity *entity, float width, float height):
     mask {},
     shape {nullptr},
     is_rectangle {true},
-    is_circle {false},
+    is_circle {false}, draw_debug {false},
     areas_overlapping {}
 {
     shape = (void *)(new Rectangle{0, 0, width, height});
@@ -57,10 +59,20 @@ AreaComponent::AreaComponent(Entity *entity, float radius):
     mask {},
     shape {nullptr},
     is_rectangle {false},
-    is_circle {true},
+    is_circle {true}, draw_debug {false},
     areas_overlapping {}
 {
     shape = (void *)(new Circle{0, 0, radius});
+}
+
+void AreaComponent::draw_gui_info() {
+    if (ImGui::CollapsingHeader(("Area##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        ImGui::Checkbox(("Debug draw##" + std::to_string(id)).c_str(), &draw_debug);
+        
+        ImGui::Text(("Overlapping: " + std::to_string(areas_overlapping.size())).c_str());
+        ImGui::Unindent(25.f);
+    }
 }
 
 // Clears all areas that are currently overlapping (for DOT zones and such...)
@@ -184,18 +196,22 @@ void AreaComponent::check_overlaps() {
 
 // Draws the shape for debugging purposes
 void AreaComponent::debug_draw() {
-
-    Vector2 camera_pos = Vector2Add(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
-    if (Vector2Distance(camera_pos, position) > res.x * sqrt(2.f) + 1000) return;
+    Vector2 camera_pos = Vector2Subtract(CameraManager::get_camera()->target, CameraManager::get_camera()->offset);
 
     if (is_circle) {
         Circle *circle = (Circle *)shape;
+
+        if (Vector2Distance(camera_pos, position) > res_diagonal+circle->radius)
+            return;
 
         DrawCircleLines(circle->x, circle->y, circle->radius, {0, 255, 0, 255});
         DrawCircle(circle->x, circle->y, circle->radius, {0, 255, 0, 20});
 
     } else if (is_rectangle) {
         Rectangle *rect = (Rectangle *)shape;
+
+        if (Vector2Distance(camera_pos, position) > res_diagonal+rect->width+rect->height)
+            return;
 
         DrawRectangleLines(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 255, 0, 255});
         DrawRectangle(rect->x - rect->width*.5f, rect->y - rect->height*.5f, rect->width, rect->height, {0, 255, 0, 20});
@@ -291,6 +307,6 @@ void AreaManager::draw_debug() {
     for (auto component: ComponentManager::query_components(CompType::AREA)) {
 
         AreaComponent *area_component = (AreaComponent *)component;
-        if (DRAW_AREAS) area_component->debug_draw();
+        if (DRAW_AREAS || area_component->draw_debug) area_component->debug_draw();
     }
 }

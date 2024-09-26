@@ -1,8 +1,9 @@
 #ifndef PROGRESS_BAR_H
 #define PROGRESS_BAR_H
-#include <drawables.hpp>
+#include <ui_drawables.hpp>
 
-class ProgressBar: public Drawable {
+/// @brief Draws a progress bar on the UI layer
+class ProgressBar: public UIDrawable {
 public:
     float width, height, value, maximum, progress, ease_progress;
     Color background_clr, progress_clr, ease_clr;
@@ -10,6 +11,10 @@ public:
 
     void process(float delta);
     void draw();
+    /// @brief Sets the colors of the progress bar
+    /// @param background Background color
+    /// @param progress Color of the progress part of the bar
+    /// @param ease Color of the animated lagging part of the bar
     void set_color_scheme(Color background, Color progress, Color ease);
 };
 

@@ -3,7 +3,7 @@ import webbrowser
 
 CFLAGS   = "-g -O1 -Wall -Wno-missing-braces -I../src/game/ -I../src/framework/components/ -I../include/ -I../src/ -I../src/framework/ -I../src/framework/objects/ -I../src/framework/entities/"
 LDFLAGS  = "-L../lib/"
-LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
+LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm -lenet64 -lws2_32 -lwinmm"
 OBJ_DIR  = "object_files"
 SRC_DIR  = "../src"
 ROOT_DIR = ".."
@@ -24,21 +24,20 @@ def toggle_web_mode():
 
     WEB = not WEB
     if WEB:
-        COMPILER = "emcc"
+        COMPILER = "emcc -DWEB"
         INDEX    = " index.html"
         LDFLAGS  = "-L../libweb/"
-        LDLIBS   = "-lraylib"
+        LDLIBS   = "-lraylib -lenet64 -lws2_32 -lwinmm"
         OBJ_DIR  = "web_object_files"
     else:
         COMPILER = "g++"
         INDEX    = ""
         LDFLAGS  = "-L../lib/"
-        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm"
+        LDLIBS   = "-lraylib -lopengl32 -lgdi32 -lwinmm -ldiscord-rpc -lenet64 -lws2_32 -lwinmm"
         OBJ_DIR  = "object_files"
     
     web_button.config(text=f"Web: {WEB}")
     generate_makefile()
-
 
 def next(n=1):
     global makefile
@@ -84,19 +83,21 @@ def generate_makefile():
 
     makefile = ""
 
-    add("all: Build.exe")
+    add("all: Build.exe")   
     next(2)
 
     for source in source_files:
-        add(f"{OBJ_DIR}/{get_filename(source)}.o: {ROOT_DIR}/{source}.cpp")
-        next(); tab()
+        if not (WEB and get_filename(source) == "rich_presence"):
+            add(f"{OBJ_DIR}/{get_filename(source)}.o: {ROOT_DIR}/{source}.cpp")
+            next(); tab()
 
-        add(f"{COMPILER} {CFLAGS} -c {ROOT_DIR}/{source}.cpp -o $(@)")
-        next(2)
+            add(f"{COMPILER} {CFLAGS} -c {ROOT_DIR}/{source}.cpp -o $(@)")
+            next(2)
 
     add("Build.exe: ")
     for source in source_files:
-        add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+        if not (WEB and get_filename(source) == "rich_presence"):
+            add(OBJ_DIR + "/" + get_filename(source) + ".o ")
 
     next(); tab()
     if not WEB:
@@ -108,7 +109,9 @@ def generate_makefile():
         add(f"{COMPILER} {CFLAGS}")
         add("../src/main.cpp ")
         for source in source_files:
-            add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+            if not (WEB and get_filename(source) == "rich_presence"):
+                add(OBJ_DIR + "/" + get_filename(source) + ".o ")
+                
         add("-o web_build/index.html -s ASSERTIONS=1 -s SAFE_HEAP=1 -s USE_GLFW=3 -s ASYNCIFY -s WASM=1 -s TOTAL_MEMORY=2048MB --shell-file shell.html ")
         add("--preload-file assets ")
 
@@ -143,9 +146,9 @@ def get_filename(string):
 
 def run():
     if WEB:
-        server_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "cd /d build/web_build && python -m http.server"])
+        server_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "color 2 && cd /d build/web_build && python -m http.server"])
         time.sleep(2)
-        ngrok_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "ngrok", "http", "8000"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        ngrok_res = subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", "color 4 && ngrok http 8000"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         webbrowser.open("http://localhost:8000")
     else:
         result = subprocess.run("Build.exe", shell=True, cwd="build")
@@ -166,9 +169,12 @@ def clean():
         print("Cleanedn't :(")
     print("")
 
+def debug():
+    subprocess.run(["debug.bat"])
+
 window = tkinter.Tk()
 window.configure(bg='#333333')
-window.geometry("512x512")
+window.geometry("494x494")
 window.title("Auto Compiling and Running!")
 
 font = ("Helvetica", 24)
@@ -182,10 +188,16 @@ make_button.place(x = 16, y = 16 + 80)
 run_button = tkinter.Button(window, text="Run", command=run, font=font)
 run_button.place(x = 16, y = 16 + 160)
 
-clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
-clean_button.place(x = 16, y = 16 + 418)
+debug_button = tkinter.Button(window, text="Debug", command=debug, font=font)
+debug_button.place(x = 16, y = 16 + 240)
 
 web_button = tkinter.Button(window, text=f"Web: {WEB}", command=toggle_web_mode, font=font)
-web_button.place(x = 16, y = 16 + 418 - 80)
+web_button.place(x = 16, y = 16 + 320)
+
+clean_button = tkinter.Button(window, text="Clean", command=clean, font=font)
+clean_button.place(x = 16, y = 16 + 400)
+
+toggle_web_mode()
+toggle_web_mode()
 
 window.mainloop()

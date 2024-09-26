@@ -11,19 +11,48 @@
 
 extern Vector2 res;
 extern Vector2 half_res;
+extern float res_diagonal;
 
 typedef struct {
     float x, y, radius;
 } Circle;
 
+/// @brief Converts an integer into a roman numeral string (eg. 145 -> CXLV)
+/// @param num 
+/// @return 
+std::string roman_numeral(int num);
+
 bool operator==(Color first, Color other);
+
+Color Float4ToColor(float* arr);
+
+int rand32();
 
 std::ostream& operator<<(std::ostream& str, Vector2 vec);
 std::ostream& operator<<(std::ostream& str, Color col);
 
+
+// Bomboclat
 bool operator>(Vector2 first, Vector2 other);
 bool operator<(Vector2 first, Vector2 other);
 bool operator==(Vector2 first, Vector2 other);
+bool operator!=(Vector2 first, Vector2 other);
+Vector2 operator+(Vector2 first, Vector2 other);
+Vector2 operator-(Vector2 first, Vector2 other);
+Vector2 operator*(Vector2 first, Vector2 other);
+Vector2 operator/(Vector2 first, Vector2 other);
+Vector2 operator+=(Vector2& first, Vector2 other);
+Vector2 operator-=(Vector2& first, Vector2 other);
+Vector2 operator*=(Vector2& first, Vector2 other);
+Vector2 operator/=(Vector2& first, Vector2 other);
+Vector2 operator+(Vector2 first, float other);
+Vector2 operator-(Vector2 first, float other);
+Vector2 operator*(Vector2 first, float other);
+Vector2 operator/(Vector2 first, float other);
+Vector2 operator+=(Vector2& first, float other);
+Vector2 operator-=(Vector2& first, float other);
+Vector2 operator*=(Vector2& first, float other);
+Vector2 operator/=(Vector2& first, float other);
 
 /// @brief Linear interpolation between two colors
 /// @param a Color 1

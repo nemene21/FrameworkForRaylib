@@ -8,3 +8,4 @@
 /src/game/**
 /build/assets/**
 .gitignore
+Makefile

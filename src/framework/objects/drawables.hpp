@@ -87,6 +87,7 @@ public:
         std::string name;
     } BoundTexture;
 
+    /// @brief Used internally for buffering shader uniform updates
     typedef struct {
         std::string name; void *ptr; int type;
     } UniformUpdate;
@@ -134,7 +135,9 @@ public:
     Vector2 position, offset, scale;
     float angle;
     Color tint;
+    BlendMode blend_mode;
 
+    /// @brief If this is true on init the Drawable is going to be rendered on the UI layer
     bool is_ui;
 
     /// @brief Drawables with a lower z_coord are drawn behind one another

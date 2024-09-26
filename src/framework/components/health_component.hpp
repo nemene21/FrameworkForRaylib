@@ -17,6 +17,8 @@ public:
         hurt_signal,
         healed_signal;
 
+    virtual void draw_gui_info();
+
     /// @brief Subtracts from hp
     /// @param damage Damage to subtract
     void hurt(float damage);

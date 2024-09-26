@@ -2,6 +2,46 @@
 
 Vector2 res {320, 180};
 Vector2 half_res = Vector2Multiply(res, {.5f, .5f});
+float res_diagonal = sqrtf(res.x*res.x + res.y*res.y);
+
+Color Float4ToColor(float* arr) {
+    return Color{
+        (unsigned char)(arr[0] * 255),
+        (unsigned char)(arr[1] * 255),
+        (unsigned char)(arr[2] * 255),
+        (unsigned char)(arr[3] * 255)
+    };
+}
+
+int rand32() {
+    unsigned int first = rand();
+    unsigned int other = rand();
+    return (first << 16) | other;
+}
+
+const std::string roman_numbers[] = {
+    "M" , "CM", "D",
+    "CD", "C" , "XC", 
+    "L" , "XL", "X" ,
+    "IX", "V" , "IV",
+    "I"
+};
+const int numbers[] = {
+    1000, 900, 500,
+    400 , 100, 90 ,
+    50  , 40 , 10 ,
+    9   , 5  , 4  ,
+    1
+};
+
+std::string roman_numeral(int num) {
+    for (int i = 0; i < 13; i++) {
+        int number_on = numbers[i];
+        if (num >= number_on)
+            return roman_numbers[i] + roman_numeral(num - number_on);
+    }
+    return "";
+}
 
 bool operator==(Color first, Color other) {
     return first.r == other.r && first.g == other.g && first.b == other.b && first.a == other.a;
@@ -18,21 +58,99 @@ std::ostream& operator<<(std::ostream& str, Color col) {
 }
 
 bool operator>(Vector2 first, Vector2 other) {
-    if (first.x > other.x) return true;
-    if (first.x < other.x) return false;
-
-    return first.y > other.y;
+    return Vector2Length(first) > Vector2Length(other);
 }
 
 bool operator<(Vector2 first, Vector2 other) {
-    if (first.x < other.x) return true;
-    if (first.x > other.x) return false;
-
-    return first.y < other.y;
+    return Vector2Length(first) < Vector2Length(other);
 }
 
 bool operator==(Vector2 first, Vector2 other) {
     return first.x == other.x && first.y == other.y;
+}
+
+bool operator!=(Vector2 first, Vector2 other) {
+    return first.x != other.x || first.y != other.y;
+}
+
+Vector2 operator+(Vector2 first, Vector2 other) {
+    return Vector2{first.x + other.x, first.y + other.y};
+}
+
+Vector2 operator-(Vector2 first, Vector2 other) {
+    return Vector2{first.x - other.x, first.y - other.y};
+}
+
+Vector2 operator*(Vector2 first, Vector2 other) {
+    return Vector2{first.x * other.x, first.y * other.y};
+}
+
+Vector2 operator/(Vector2 first, Vector2 other) {
+    return Vector2{first.x / other.x, first.y / other.y};
+}
+
+Vector2 operator+=(Vector2& first, Vector2 other) {
+    first.x += other.x;
+    first.y += other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator-=(Vector2& first, Vector2 other) {
+    first.x -= other.x;
+    first.y -= other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator*=(Vector2& first, Vector2 other) {
+    first.x *= other.x;
+    first.y *= other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator/=(Vector2& first, Vector2 other) {
+    first.x /= other.x;
+    first.y /= other.y;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator+(Vector2 first, float other) {
+    return first + Vector2{other, other};
+}
+
+Vector2 operator-(Vector2 first, float other) {
+    return first + Vector2{other, other};
+}
+
+Vector2 operator*(Vector2 first, float other) {
+    return first * Vector2{other, other};
+}
+
+Vector2 operator/(Vector2 first, float other) {
+    return first / Vector2{other, other};
+}
+
+Vector2 operator+=(Vector2& first, float other) {
+    first.x += other;
+    first.y += other;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator-=(Vector2& first, float other) {
+    first.x -= other;
+    first.y -= other;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator*=(Vector2& first, float other) {
+    first.x *= other;
+    first.y *= other;
+    return Vector2{first.x, first.y};
+}
+
+Vector2 operator/=(Vector2& first, float other) {
+    first.x /= other;
+    first.y /= other;
+    return Vector2{first.x, first.y};
 }
 
 // Lerps

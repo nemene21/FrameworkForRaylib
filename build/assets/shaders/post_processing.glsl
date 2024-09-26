@@ -15,9 +15,6 @@ const float sharpness_offset = 0.005;
 uniform sampler2D texture0;
 uniform float time;
 
-uniform sampler2D paper_texture;
-const float paperness = 0.0;
-
 uniform sampler2D noise_texture;
 const float noise_zoom = 0.5;
 const float noise_strength = 0.0;
@@ -76,8 +73,6 @@ void main() {
 
     vec4 pixel = vec4(calculated.r, calculated.g, calculated.b, 1.0);
     pixel.rgb *= vignette;
-
-    pixel.rgb = mix(pixel.rgb, texture2D(paper_texture, fragTexCoord).rgb, paperness);
 
     gl_FragColor = pixel;
 

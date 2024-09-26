@@ -1,4 +1,5 @@
 #include <animation_component.hpp>
+#include <entity.hpp>
 
 AnimationComponent::AnimationComponent(Entity *entity): Component(CompType::ANIMATION, entity),
     animation_playing {"none"},
@@ -20,9 +21,43 @@ void AnimationComponent::make_animation(std::string name, float duration, bool r
     animation_map[name] = new_animation;
 }
 
+void AnimationComponent::draw_gui_info() {
+    if (ImGui::CollapsingHeader(("Animator##" + std::to_string(id)).c_str())) {
+        ImGui::Indent(25.f);
+        ImGui::Text(("Animation playing: " + animation_playing).c_str());
+        ImGui::Unindent(25.f);
+    }
+}
+
+void AnimationComponent::network_update() {
+    auto packet = AnimationUpdatePacket{
+        PacketType::COMPONENT_UPDATE,
+        true,
+        entity->id,
+        type,
+        paused,
+        direction,
+        playback_speed,
+        ""
+    };
+    auto temp = animation_playing.c_str();
+    strcpy(packet.animation_name, temp);
+
+    Networking::send(&packet, sizeof(packet), false);
+}
+
+void AnimationComponent::recieve_update(ComponentUpdatePacket* packet) {
+    auto cast_packet = reinterpret_cast<AnimationUpdatePacket*>(packet);
+
+    play(cast_packet->animation_name);
+
+    paused = cast_packet->paused;
+    playback_speed = cast_packet->playback_speed;
+    direction = cast_packet->direction;
+}
+
 // Adds a keyframe to an animation
 void AnimationComponent::add_keyframe(std::string name, float start, float end, std::function<void(float)> function) {
-
     Keyframe new_keyframe;
     new_keyframe.start = start;
     new_keyframe.end = end;
@@ -67,21 +102,29 @@ void AnimationComponent::process_animation(std::string name, float delta) {
     if (animation.progress > animation.duration) {
         animation_finished.emit(entity);
 
-        if (animation.repeating) play(animation_playing);
+        if (animation.repeating) restart_animation();
         else animation_playing = "none";
     }
 }
-// Plays animation
-void AnimationComponent::play(std::string name) {
-    animation_playing = name;
-    Animation &animation = animation_map[name];
+
+// Restarts animation
+void AnimationComponent::restart_animation() {
+    Animation &animation = animation_map[animation_playing];
     animation.progress = 0;
 
     animation_started.emit(entity);
 
-    for (auto &event: animation_map[name].events) {
+    for (auto &event: animation_map[animation_playing].events) {
         event.played = false;
     }
+}
+
+// Plays animation
+void AnimationComponent::play(std::string name) {
+    if (animation_playing == name) return;
+
+    animation_playing = name;
+    restart_animation();
 }
 
 // Calls animation processing

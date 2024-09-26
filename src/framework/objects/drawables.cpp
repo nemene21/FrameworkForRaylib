@@ -61,10 +61,11 @@ void TextureManager::reload() {
 
 // Unloads all textures
 void TextureManager::unload_all() {
+    std::vector<std::string> to_unload {};
     for (auto& texture_pair: texture_map) {
-
-        unload(texture_pair.first);
+        to_unload.push_back(texture_pair.first);
     }
+    for (auto to: to_unload) unload(to);
 }
 
 
@@ -147,10 +148,11 @@ void ShaderManager::reload() {
 
 // Unloads all shader objects
 void ShaderManager::unload_all() {
+    std::vector<std::string> to_unload {};
     for (auto& shader_pair: shader_map) {
-
-        unload(shader_pair.first);
+        to_unload.push_back(shader_pair.first);
     }
+    for (auto to: to_unload) unload(to);
 }
 
 // <Materials/ShaderBond>
@@ -221,6 +223,7 @@ Drawable::Drawable(Vector2 position, Vector2 offset, Vector2 scale, float angle,
     tint {255, 255, 255, 255},
     z_coord {0},
     shader_bond {ShaderBond(shader_path)},
+    blend_mode {BLEND_ALPHA},
     is_ui {is_ui} {
 
         DrawableManager::add(this);
@@ -258,7 +261,11 @@ void DrawableManager::render(std::set<Drawable *>& rendering) {
         drawable->process(GetFrameTime());
         drawable->shader_bond.update_uniforms();
         drawable->shader_bond.use();
+        
+        BeginBlendMode(drawable->blend_mode);
         drawable->draw();
+        EndBlendMode();
+
         EndShaderMode();
     }
 }

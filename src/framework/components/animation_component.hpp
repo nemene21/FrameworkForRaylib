@@ -54,8 +54,13 @@ public:
     /// @brief Play animation
     /// @param name Animation name
     void play(std::string name);
+    /// @brief Restarts the current animation
+    void restart_animation();
 
     void process(float delta);
+
+    void recieve_update(ComponentUpdatePacket* packet);
+    void network_update();
 
     /// @brief Initialises an animation
     /// @param name Animation name
@@ -82,6 +87,7 @@ public:
     void pause();
     /// @brief Unpauses animation
     void unpause();
+    void draw_gui_info();
 };
 
 #endif
