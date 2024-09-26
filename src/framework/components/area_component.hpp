@@ -13,6 +13,8 @@
 
 /// @brief Area layers
 enum class AreaIndex {
+    PLAYER,
+    PILLAR,
     COUNT,
 };
 

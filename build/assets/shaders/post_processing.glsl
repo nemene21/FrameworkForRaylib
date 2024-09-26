@@ -44,6 +44,8 @@ void main() {
     warped_uv.y -= 0.5; warped_uv.y *= 1.0+(dc.x*(0.4*warp));
     warped_uv.y += 0.5;
 
+    //warped_uv += texture2D(noise_texture, fragTexCoord + time).rg * 0.05;
+
     float dist = distance(vec2(.5, .5), warped_uv) * 2.0;
 
     // -- Vignette
@@ -82,4 +84,11 @@ void main() {
     if (warped_uv.y > 1.0 || warped_uv.x < 0.0 || warped_uv.x > 1.0 || warped_uv.y < 0.0) {
         gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
     }
+
+    //float adding = texture2D(noise_texture, fragTexCoord + time * 0.1).r * 3.14 * 3.0;
+    //gl_FragColor.rgb *= vec3 (
+    //    abs(sin(time*adding)),
+    //    abs(sin(time*2.0 + 3.14 * 0.33 + adding)),
+    //    abs(sin(time*2.0 + 3.14 * 0.66 + adding))
+    //);
 }
